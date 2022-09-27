@@ -1472,6 +1472,19 @@
           }
         }
       },
+      "Stripe.net/40.10.0": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "12.0.3",
+          "System.Configuration.ConfigurationManager": "6.0.0"
+        },
+        "compile": {
+          "lib/net6.0/Stripe.net.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/Stripe.net.dll": {}
+        }
+      },
       "Swashbuckle.AspNetCore/6.3.0": {
         "type": "package",
         "dependencies": {
@@ -5002,6 +5015,29 @@
         "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
         "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.nuspec",
         "runtimes/ubuntu.16.10-x64/native/System.Security.Cryptography.Native.OpenSsl.so"
+      ]
+    },
+    "Stripe.net/40.10.0": {
+      "sha512": "/eYzweFWhp/Yg2333QSkvoFWz7lnWEyuKV0gYDE9gfxcJ4DmgK8F3YY29Q+Ish/t8dyOwdWpa05z8aQmgFsk+A==",
+      "type": "package",
+      "path": "stripe.net/40.10.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "icon.png",
+        "lib/net461/Stripe.net.dll",
+        "lib/net461/Stripe.net.xml",
+        "lib/net5.0/Stripe.net.dll",
+        "lib/net5.0/Stripe.net.xml",
+        "lib/net6.0/Stripe.net.dll",
+        "lib/net6.0/Stripe.net.xml",
+        "lib/netcoreapp3.1/Stripe.net.dll",
+        "lib/netcoreapp3.1/Stripe.net.xml",
+        "lib/netstandard2.0/Stripe.net.dll",
+        "lib/netstandard2.0/Stripe.net.xml",
+        "stripe.net.40.10.0.nupkg.sha512",
+        "stripe.net.nuspec"
       ]
     },
     "Swashbuckle.AspNetCore/6.3.0": {
@@ -8839,6 +8875,7 @@
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 6.0.9",
       "Spg.TennisBooking.Application >= 1.0.0",
       "Spg.TennisBooking.Domain >= 1.0.0",
+      "Stripe.net >= 40.10.0",
       "Swashbuckle.AspNetCore >= 6.3.0"
     ]
   },
@@ -8891,6 +8928,10 @@
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
             "target": "Package",
             "version": "[6.0.9, )"
+          },
+          "Stripe.net": {
+            "target": "Package",
+            "version": "[40.10.0, )"
           },
           "Swashbuckle.AspNetCore": {
             "target": "Package",
