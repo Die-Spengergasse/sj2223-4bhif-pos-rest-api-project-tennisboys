@@ -475,6 +475,16 @@
         "build": {
           "buildTransitive/netcoreapp3.1/_._": {}
         }
+      },
+      "Spg.TennisBooking.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/Spg.TennisBooking.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Spg.TennisBooking.Domain.dll": {}
+        }
       }
     }
   },
@@ -1161,28 +1171,40 @@
         "system.text.json.nuspec",
         "useSharedDesignerContext.txt"
       ]
+    },
+    "Spg.TennisBooking.Domain/1.0.0": {
+      "type": "project",
+      "path": "../Spg.TennisBooking.Domain/Spg.TennisBooking.Domain.csproj",
+      "msbuildProject": "../Spg.TennisBooking.Domain/Spg.TennisBooking.Domain.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "Microsoft.EntityFrameworkCore >= 6.0.9",
       "Microsoft.EntityFrameworkCore.Sqlite >= 6.0.9",
-      "Microsoft.EntityFrameworkCore.Tools >= 6.0.9"
+      "Microsoft.EntityFrameworkCore.Tools >= 6.0.9",
+      "Spg.TennisBooking.Domain >= 1.0.0"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\adria\\.nuget\\packages\\": {}
+    "C:\\Users\\fabia\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\adria\\Dropbox\\Adrian_und_Mami\\Adrian\\Github\\sj2223-4bhif-pos-rest-api-project-tennisboys\\Spg.TennisBooking.Infrastructure\\Spg.TennisBooking.Infrastructure.csproj",
+      "projectUniqueName": "D:\\Schule\\4. Klasse\\POS\\1. Semester\\Tennisboys\\sj2223-4bhif-pos-rest-api-project-tennisboys\\Spg.TennisBooking.Infrastructure\\Spg.TennisBooking.Infrastructure.csproj",
       "projectName": "Spg.TennisBooking.Infrastructure",
-      "projectPath": "C:\\Users\\adria\\Dropbox\\Adrian_und_Mami\\Adrian\\Github\\sj2223-4bhif-pos-rest-api-project-tennisboys\\Spg.TennisBooking.Infrastructure\\Spg.TennisBooking.Infrastructure.csproj",
-      "packagesPath": "C:\\Users\\adria\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\adria\\Dropbox\\Adrian_und_Mami\\Adrian\\Github\\sj2223-4bhif-pos-rest-api-project-tennisboys\\Spg.TennisBooking.Infrastructure\\obj\\",
+      "projectPath": "D:\\Schule\\4. Klasse\\POS\\1. Semester\\Tennisboys\\sj2223-4bhif-pos-rest-api-project-tennisboys\\Spg.TennisBooking.Infrastructure\\Spg.TennisBooking.Infrastructure.csproj",
+      "packagesPath": "C:\\Users\\fabia\\.nuget\\packages\\",
+      "outputPath": "D:\\Schule\\4. Klasse\\POS\\1. Semester\\Tennisboys\\sj2223-4bhif-pos-rest-api-project-tennisboys\\Spg.TennisBooking.Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\adria\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\fabia\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -1195,7 +1217,11 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "D:\\Schule\\4. Klasse\\POS\\1. Semester\\Tennisboys\\sj2223-4bhif-pos-rest-api-project-tennisboys\\Spg.TennisBooking.Domain\\Spg.TennisBooking.Domain.csproj": {
+              "projectPath": "D:\\Schule\\4. Klasse\\POS\\1. Semester\\Tennisboys\\sj2223-4bhif-pos-rest-api-project-tennisboys\\Spg.TennisBooking.Domain\\Spg.TennisBooking.Domain.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -1208,6 +1234,10 @@
       "net6.0": {
         "targetAlias": "net6.0",
         "dependencies": {
+          "Microsoft.EntityFrameworkCore": {
+            "target": "Package",
+            "version": "[6.0.9, )"
+          },
           "Microsoft.EntityFrameworkCore.Sqlite": {
             "target": "Package",
             "version": "[6.0.9, )"
