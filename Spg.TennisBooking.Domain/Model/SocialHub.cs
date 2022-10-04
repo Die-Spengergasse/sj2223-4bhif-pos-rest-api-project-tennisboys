@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Spg.TennisBooking.Domain.Model
 {
-    internal class SocialHub
+    public class SocialHub
     {
         public int Id { get; set; }
         public string Facebook { get; set; } = string.Empty;
