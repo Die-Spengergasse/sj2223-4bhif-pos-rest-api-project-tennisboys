@@ -5,13 +5,15 @@ VisualStudioVersion = 17.1.32319.34
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spg.TennisBooking.Api", "Spg.TennisBooking.Api\Spg.TennisBooking.Api.csproj", "{DF41D605-18A7-42F4-8DD9-064A70798BCE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spg.TennisBooking.Infrastructure", "Spg.TennisBooking.Infrastructure\Spg.TennisBooking.Infrastructure.csproj", "{4BC4E51B-89AB-48EA-9E2F-06BBB5EA6349}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spg.TennisBooking.Infrastructure", "Spg.TennisBooking.Infrastructure\Spg.TennisBooking.Infrastructure.csproj", "{4BC4E51B-89AB-48EA-9E2F-06BBB5EA6349}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spg.TennisBooking.Application", "Spg.TennisBooking.Application\Spg.TennisBooking.Application.csproj", "{C69CE408-AC25-4F08-A45E-362D12361A5B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spg.TennisBooking.Application", "Spg.TennisBooking.Application\Spg.TennisBooking.Application.csproj", "{C69CE408-AC25-4F08-A45E-362D12361A5B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spg.TennisBooking.Domain", "Spg.TennisBooking.Domain\Spg.TennisBooking.Domain.csproj", "{C0559238-D6DE-45CF-B4F7-8D293D1BBEB8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spg.TennisBooking.Domain", "Spg.TennisBooking.Domain\Spg.TennisBooking.Domain.csproj", "{C0559238-D6DE-45CF-B4F7-8D293D1BBEB8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spg.TennisBooking.Repository", "Spg.TennisBooking.Repository\Spg.TennisBooking.Repository.csproj", "{6E4BBEB9-412F-4617-98AD-87093ACC3449}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spg.TennisBooking.Repository", "Spg.TennisBooking.Repository\Spg.TennisBooking.Repository.csproj", "{6E4BBEB9-412F-4617-98AD-87093ACC3449}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spg.TennisBooking.Domain.Test", "Spg.TennisBooking.Domain.Test\Spg.TennisBooking.Domain.Test.csproj", "{ED325376-FEFE-4683-AD9A-23FD41A2C086}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{6E4BBEB9-412F-4617-98AD-87093ACC3449}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6E4BBEB9-412F-4617-98AD-87093ACC3449}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6E4BBEB9-412F-4617-98AD-87093ACC3449}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED325376-FEFE-4683-AD9A-23FD41A2C086}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED325376-FEFE-4683-AD9A-23FD41A2C086}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED325376-FEFE-4683-AD9A-23FD41A2C086}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED325376-FEFE-4683-AD9A-23FD41A2C086}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
