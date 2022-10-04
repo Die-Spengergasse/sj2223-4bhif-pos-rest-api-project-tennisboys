@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Spg.TennisBooking.Domain.Model
 {
-    internal class Court
+    public class Court
     {
         public int Id { get; set; }
         public Boolean Occupied { get; set; }
