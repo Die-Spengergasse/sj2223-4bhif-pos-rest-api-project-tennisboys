@@ -8,5 +8,11 @@ namespace Spg.TennisBooking.Domain.Model
 {
     internal class Club
     {
+        public int Id { get; set; }
+        public string ClubName { get; set; } = string.Empty;
+        public string ClubInfo { get; set; } = string.Empty;
+        public string ImagePath { get; set; } = string.Empty;
+        
+
     }
 }

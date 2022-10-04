@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace Spg.TennisBooking.Domain.Model
 {
-    internal class Court
+    internal class ClubEvents
     {
         public int Id { get; set; }
-        public Boolean Occupied { get; set; }
-        public string Type { get; set; } = string.Empty;
-        public double Price { get; set; }
+        public string EventName { get; set; } = string.Empty;
+        public int EventTime { get; set; }
+        public string EventInfo { get; set; } = string.Empty;
+        
     }
 }
