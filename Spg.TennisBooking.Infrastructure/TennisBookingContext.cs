@@ -26,5 +26,18 @@ namespace Spg.TennisBooking.Infrastructure
         public TennisBookingContext(DbContextOptions options) : base(options)
         {
         }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlite("Data Source=TennisBooking.db");
+            }
+        }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            /*modelBuilder.Entity<Product>().HasKey(e => e.Name);*/
+            //modelBuilder.Entity<Customer>().OwnsOne(p => p.PhoneNumber);
+        }
     }
 }
