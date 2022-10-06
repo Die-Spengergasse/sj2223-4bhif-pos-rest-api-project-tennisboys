@@ -65,5 +65,28 @@ namespace Spg.TennisBooking.Domain.Model
                 }
             }
         }
+        private List<Reservation> reservations = new();
+        public IReadOnlyList<Reservation> Reservations => reservations;
+        public void AddReservation(Reservation entity)
+        {
+            if (entity is not null)
+            {
+                reservations.Add(entity);
+            }
+        }
+        public void RemoveReservation(Reservation entity)
+        {
+            if (entity is not null)
+            {
+                if (reservations.Contains(entity))
+                {
+                    reservations.Remove(entity);
+                }
+                else
+                {
+                    throw new ArgumentException("Entity not found");
+                }
+            }
+        }
     }
 }
