@@ -9,9 +9,9 @@ namespace Spg.TennisBooking.Domain.Model
     public class ClubEvent
     {
         public int Id { get; set; }
-        public string EventName { get; set; } = string.Empty;
-        public int EventTime { get; set; }
-        public string EventInfo { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
+        public int Time { get; set; }
+        public string Info { get; set; } = string.Empty;
         
     }
 }

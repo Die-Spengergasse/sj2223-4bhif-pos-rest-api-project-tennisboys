@@ -28,8 +28,8 @@ namespace Spg.TennisBooking.Domain.Test
 
             Club newClub = new Club()
             {
-                ClubName = "Tennis Club 1",
-                ClubInfo = "Tennis Club 1 Info",
+                Name = "Tennis Club 1",
+                Info = "Tennis Club 1 Info",
                 ImagePath = "TennisClub1.jpg"
             };
 
@@ -48,7 +48,7 @@ namespace Spg.TennisBooking.Domain.Test
             {
                 FirstName="TestFirstName",
                 LastName="TestLastName",
-                Gender=true,
+                Gender=Gender.Male,
                 Address = "TestAddress",
                 Email = "xy@gmail.at",
                 PhoneNumber = "123456789",
@@ -74,8 +74,8 @@ namespace Spg.TennisBooking.Domain.Test
 
             Club newClub = new Club()
             {
-                ClubName = "Tennis Club 1",
-                ClubInfo = "Tennis Club 1 Info",
+                Name = "Tennis Club 1",
+                Info = "Tennis Club 1 Info",
                 ImagePath = "TennisClub1.jpg"
             };
 
@@ -96,12 +96,12 @@ namespace Spg.TennisBooking.Domain.Test
 
             Club newClub = new Club()
             {
-                ClubName = "Tennis Club 1",
-                ClubInfo = "Tennis Club 1 Info",
+                Name = "Tennis Club 1",
+                Info = "Tennis Club 1 Info",
                 ImagePath = "TennisClub1.jpg"
             };
 
-            newClub.SocialHub.ChangeFacebook("adrian");
+            newClub.SocialHub.Facebook = "adrian";
 
             db.Clubs.Add(newClub);
             db.SaveChanges();
