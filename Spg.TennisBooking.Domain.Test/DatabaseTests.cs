@@ -22,101 +22,92 @@ namespace Spg.TennisBooking.Domain.Test
         }
 
         [Fact]
-        public void DomainModel_Create_Product_Success_Test()
+        public void DomainModel_Create_Club_Success_Test()
         {
             TennisBookingContext db = GetContext();
-            
-            /*Product newProduct = new Product()
+
+            Club newClub = new Club()
             {
-                DeliveryDate = DateTime.Now,
-                Ean13 = "132456789123",
-                ExpiaryDate = DateTime.Now,
-                Guid = Guid.NewGuid(),
-                Name = "Test Product",
-                Price = 20.90M,
-                Stock = 10
+                Name = "Tennis Club 1",
+                Info = "Tennis Club 1 Info",
+                ImagePath = "TennisClub1.jpg"
             };
 
-            db.Products.Add(newProduct);
-            db.SaveChanges();*/
+            db.Clubs.Add(newClub);
+            db.SaveChanges();
 
-            Assert.Equal(1, 1);
+            Assert.Equal(1, db.Clubs.Count());
         }
 
         [Fact]
         public void DomainModel_Create_Customer_Success_Test()
         {
             TennisBookingContext db = GetContext();
-            /*
+            
             Customer newCustomer = new Customer()
             {
-                EMail = "xy@gmail.at",
                 FirstName="TestFirstName",
                 LastName="TestLastName",
-                Gender=GenderTypes.MALE,
-                Guid=Guid.NewGuid(),
-                RegistrationDateTime=DateTime.Now,
+                Gender=Gender.Male,
+                Address = "TestAddress",
+                Email = "xy@gmail.at",
+                PhoneNumber = "123456789",
             };
 
             db.Customers.Add(newCustomer);
-            db.SaveChanges();*/
+            db.SaveChanges();
 
-            Assert.Equal(1, 1);
+            Assert.Equal(1, db.Customers.Count());
         }
 
         [Fact]
-        public void DomainModel_AddShoppingCartToCustomer_Success_Test()
+        public void DomainModel_AddCourtToClub_Success_Test()
         {
             TennisBookingContext db = GetContext();
 
-            /*Customer newCustomer = new Customer()
+            Court newCourt = new Court()
             {
-                EMail = "xy@gmail.at",
-                FirstName = "TestFirstName",
-                LastName = "TestLastName",
-                Gender = GenderTypes.MALE,
-                Guid = Guid.NewGuid(),
-                RegistrationDateTime = DateTime.Now,
-            };
-            db.Customers.Add(newCustomer);
-
-            ShoppingCart newShoppingCart = new ShoppingCart(States.ACTIVE, Guid.NewGuid())
-            {
+                Occupied = true,
+                Type = "Grass",
+                Price = 10.00
             };
 
-            newCustomer.AddShoppingCart(newShoppingCart);
+            Club newClub = new Club()
+            {
+                Name = "Tennis Club 1",
+                Info = "Tennis Club 1 Info",
+                ImagePath = "TennisClub1.jpg"
+            };
 
-            db.SaveChanges();*/
+            newClub.AddCourt(newCourt);
 
-            Assert.Equal(1, 1);
-            Assert.Equal(1, 1);
+            db.Clubs.Add(newClub);
+            db.SaveChanges();
+
+            Assert.Equal(1, db.Clubs.Count());
+            Assert.Equal(1, db.Courts.Count());
+            Assert.Single(db.Clubs.First().Courts);
         }
 
         [Fact]
-        public void DomainModel_AddShoppingCartToCustomer_Navigation_Success_Test()
+        public void DomainModel_ChangeSocialHubPrpertyOnClub_Success_Test()
         {
             TennisBookingContext db = GetContext();
 
-            /*Customer newCustomer = new Customer()
+            Club newClub = new Club()
             {
-                EMail = "xy@gmail.at",
-                FirstName = "TestFirstName",
-                LastName = "TestLastName",
-                Gender = GenderTypes.MALE,
-                Guid = Guid.NewGuid(),
-                RegistrationDateTime = DateTime.Now,
-            };
-            db.Customers.Add(newCustomer);
-
-            ShoppingCart newShoppingCart = new ShoppingCart(States.ACTIVE, Guid.NewGuid())
-            {
-                CustomerNavigation = newCustomer,
+                Name = "Tennis Club 1",
+                Info = "Tennis Club 1 Info",
+                ImagePath = "TennisClub1.jpg"
             };
 
-            db.SaveChanges();*/
+            newClub.SocialHub.Facebook = "adrian";
 
-            Assert.Equal(1, 1);
-            Assert.Equal(1, 1);
+            db.Clubs.Add(newClub);
+            db.SaveChanges();
+
+            Assert.Equal(1, db.Clubs.Count());
+            Assert.Equal("adrian", newClub.SocialHub.Facebook);
         }
     }
 }
