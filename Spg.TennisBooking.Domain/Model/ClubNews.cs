@@ -9,8 +9,8 @@ namespace Spg.TennisBooking.Domain.Model
     public class ClubNews
     {
         public int Id { get; set; }
-        public string NewsTitle { get; set; } = string.Empty;
-        public string NewsInfo { get; set; } = string.Empty;
+        public string Title { get; set; } = string.Empty;
+        public string Info { get; set; } = string.Empty;
         public int Date { get; set; }
         
     }
