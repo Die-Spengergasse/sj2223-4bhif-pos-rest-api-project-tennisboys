@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Spg.TennisBooking.Domain\Spg.TennisBooking.Domain.csproj" />
+    <ProjectReference Include="..\Spg.TennisBooking.Infrastructure\Spg.TennisBooking.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
