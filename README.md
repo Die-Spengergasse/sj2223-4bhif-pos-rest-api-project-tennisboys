@@ -37,5 +37,3 @@ A[Court] --> B[Name]
 A --> C[Type]
 A --> D[Price]
 ```
-
-##Database
