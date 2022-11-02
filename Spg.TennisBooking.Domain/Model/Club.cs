@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,9 +17,9 @@ namespace Spg.TennisBooking.Domain.Model
         public SocialHub SocialHub { get; } = new SocialHub();
         public ClubNews ClubNews { get; set; } = new ClubNews();
         public ClubEvent ClubEvent { get; set; } = new ClubEvent();
-
         private List<Court> _courts = new();
         public IReadOnlyList<Court> Courts => _courts;
+        
         public void AddCourt(Court entity)
         {
             if (entity is not null)

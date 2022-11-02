@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Spg.TennisBooking.Domain.Model;
 using Spg.TennisBooking.Infrastructure;
 using System;
