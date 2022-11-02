@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,26 +13,102 @@ namespace Spg.TennisBooking.Domain.Model
         public string Facebook
         {
             get => _facebook;
+            set
+            {
+                if (value.Length > 0)
+                {
+                    _facebook = value;
+                }
+            }
         }
-
-        public string Instagram { get; set; } = string.Empty;
-        public string Twitter { get; set; } = string.Empty;
-        public string Youtube { get; set; } = string.Empty;
-        public string LinkedIn { get; set; } = string.Empty;
-        public string Telephone { get; set; } = string.Empty;
-        public string Email { get; set; } = string.Empty;
-        public string Website { get; set; } = string.Empty;
-
+        private string _instagram { get; set; } = string.Empty;
+        public string Instagram
+        {
+            get => _instagram;
+            set
+            {
+                if (value.Length > 0)
+                {
+                    _instagram = value;
+                }
+            }
+        }
+        private string _twitter { get; set; } = string.Empty;
+        public string Twitter
+        {
+            get => _twitter;
+            set
+            {
+                if (value.Length > 0)
+                {
+                    _twitter = value;
+                }
+            }
+        }
+        private string _youtube { get; set; } = string.Empty;
+        public string Youtube
+        {
+            get => _youtube;
+            set
+            {
+                if (value.Length > 0)
+                {
+                    _youtube = value;
+                }
+            }
+        }
+        private string _linkedIn { get; set; } = string.Empty;
+        public string LinkedIn
+        {
+            get => _linkedIn;
+            set
+            {
+                if (value.Length > 0)
+                {
+                    _linkedIn = value;
+                }
+            }
+        }
+        private string _telephone { get; set; } = string.Empty;
+        public string Telephone
+        {
+            get => _telephone;
+            set
+            {
+                if (value.Length > 0)
+                {
+                    _telephone = value;
+                }
+            }
+        }
+        private string _email { get; set; } = string.Empty;
+        public string Email
+        {
+            get => _email;
+            set
+            {
+                if (value.Length > 0)
+                {
+                    _email = value;
+                }
+            }
+        }
+        private string _website { get; set; } = string.Empty;
+        public string Website
+        {
+            get => _website;
+            set
+            {
+                if (value.Length > 0)
+                {
+                    _website = value;
+                }
+            }
+        }
+        
         public SocialHub()
         {
             
-        }
-
-        //TODO: Set Methods for all properties
-
-        public void ChangeFacebook(string content)
-        {
-            _facebook = content;
         }
     }
 }

@@ -1,6 +1,17 @@
+using Microsoft.EntityFrameworkCore;
+using Spg.TennisBooking.Infrastructure;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+DbContextOptions options = new DbContextOptionsBuilder()
+    .UseSqlite("Data Source=TennisBooking.db")
+    .Options;
+
+TennisBookingContext db = new TennisBookingContext(options);
+db.Database.EnsureDeleted();
+db.Database.EnsureCreated();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
