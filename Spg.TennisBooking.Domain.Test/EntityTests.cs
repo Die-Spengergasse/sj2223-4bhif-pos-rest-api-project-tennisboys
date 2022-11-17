@@ -95,20 +95,6 @@ namespace Spg.TennisBooking.Domain.Test
             db.Database.EnsureDeleted();
         }
 
-        //PhoneNumber
-        // [Fact]
-        // public void DomainModel_Create_PhoneNumber_Success_Test()
-        // {
-        //     TennisBookingContext db = GetContext();
-
-        //     PhoneNumber newPhoneNumber = new PhoneNumber("0664", "1234567");
-
-        //     db.PhoneNumbers.Add(newPhoneNumber);
-        //     db.SaveChanges();
-
-        //     Assert.Equal(1, db.PhoneNumbers.Count());
-        // }
-
         //Reservation
         [Fact]
         public void DomainModel_Create_Reservation_Success_Test()
@@ -160,56 +146,5 @@ namespace Spg.TennisBooking.Domain.Test
 
             db.Database.EnsureDeleted();
         }
-
-        /*
-
-        [Fact]
-        public void DomainModel_AddCourtToClub_Success_Test()
-        {
-            TennisBookingContext db = GetContext();
-
-            Court newCourt = new Court()
-            {
-                
-            };
-
-            Club newClub = new Club()
-            {
-                Name = "Tennis Club 1",
-                Info = "Tennis Club 1 Info",
-                ImagePath = "TennisClub1.jpg"
-            };
-
-            newClub.AddCourt(newCourt);
-
-            db.Clubs.Add(newClub);
-            db.SaveChanges();
-
-            Assert.Equal(1, db.Clubs.Count());
-            Assert.Equal(1, db.Courts.Count());
-            Assert.Single(db.Clubs.First().Courts);
-        }
-
-        [Fact]
-        public void DomainModel_ChangeSocialHubPrpertyOnClub_Success_Test()
-        {
-            TennisBookingContext db = GetContext();
-
-            Club newClub = new Club()
-            {
-                Name = "Tennis Club 1",
-                Info = "Tennis Club 1 Info",
-                ImagePath = "TennisClub1.jpg"
-            };
-
-            newClub.SocialHub.Facebook = "adrian";
-
-            db.Clubs.Add(newClub);
-            db.SaveChanges();
-
-            Assert.Equal(1, db.Clubs.Count());
-            Assert.Equal("adrian", newClub.SocialHub.Facebook);
-        }
-        */
     }
 }

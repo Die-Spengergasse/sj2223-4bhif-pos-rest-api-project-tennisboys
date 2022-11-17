@@ -88,10 +88,147 @@ namespace Spg.TennisBooking.Domain.Test
 
             // Assert
             Assert.Empty(club.ClubEvents);
-            
+
             db.Database.EnsureDeleted();
         }
 
-        //
+        //AddCourt
+        [Fact]
+        public void DomainModel_Club_AddCourt_Test()
+        {
+            // Arrange
+            TennisBookingContext db = GetContext();
+            Club club = CreateClub();
+            Court court = new Court(CourtType.Carpet, "Court 1", club, 10, 10, 10, 10, 10);
+
+            // Act
+            club.AddCourt(court);
+
+            // Assert
+            Assert.Single(club.Courts);
+
+            db.Database.EnsureDeleted();
+        }
+
+        //RemoveCourt
+        [Fact]
+        public void DomainModel_Club_RemoveCourt_Test()
+        {
+            // Arrange
+            TennisBookingContext db = GetContext();
+            Club club = CreateClub();
+            Court court = new Court(CourtType.Carpet, "Court 1", club, 10, 10, 10, 10, 10);
+            club.AddCourt(court);
+
+            //Assert
+            Assert.Single(club.Courts);
+
+            // Act
+            club.RemoveCourt(court);
+
+            // Assert
+            Assert.Empty(club.Courts);
+
+            db.Database.EnsureDeleted();
+        }
+
+        //AddTrainer
+        [Fact]
+        public void DomainModel_Club_AddTrainer_Test()
+        {
+            // Arrange
+            TennisBookingContext db = GetContext();
+            Club club = CreateClub();
+            Trainer trainer = new Trainer(club, "Max", "Mustermann", GenderTypes.Male, "Bester Mann", 16, "img/Trainer/MaxMustermann.jpg");
+
+            // Act
+            club.AddTrainer(trainer);
+
+            // Assert
+            Assert.Single(club.Trainers);
+
+            db.Database.EnsureDeleted();
+        }
+
+        //RemoveTrainer
+        [Fact]
+        public void DomainModel_Club_RemoveTrainer_Test()
+        {
+            // Arrange
+            TennisBookingContext db = GetContext();
+            Club club = CreateClub();
+            Trainer trainer = new Trainer(club, "Max", "Mustermann", GenderTypes.Male, "Bester Mann", 16, "img/Trainer/MaxMustermann.jpg");
+
+            club.AddTrainer(trainer);
+
+            db.Clubs.Add(club);
+            db.SaveChanges();
+
+            //Assert
+            Assert.Single(club.Trainers);
+
+            // Act
+            club.RemoveTrainer(trainer);
+
+            // Assert
+            Assert.Empty(club.Trainers);
+
+            db.Database.EnsureDeleted();
+        }
+
+        //AddReservation
+        [Fact]
+        public void DomainModel_Court_AddReservation_Test()
+        {
+            // Arrange
+            TennisBookingContext db = GetContext();
+            Club club = CreateClub();
+            Court court = new Court(CourtType.Carpet, "Court 1", club, 10, 10, 10, 10, 10);
+            Customer customer = CreateCustomer();
+
+            club.AddCourt(court);
+
+            db.Clubs.Add(club);
+
+            Reservation res = new Reservation(club, DateTime.Now, 10, 12, court, customer);
+
+            // Act
+            club.AddReservation(res);
+
+            // Assert
+            Assert.Single(club.Reservations);
+
+            db.Database.EnsureDeleted();
+        }
+
+        //RemoveReservation
+        [Fact]
+        public void DomainModel_Court_RemoveReservation_Test()
+        {
+            // Arrange
+            TennisBookingContext db = GetContext();
+            Club club = CreateClub();
+            Court court = new Court(CourtType.Carpet, "Court 1", club, 10, 10, 10, 10, 10);
+            Customer customer = CreateCustomer();
+
+            club.AddCourt(court);
+
+            db.Clubs.Add(club);
+
+            Reservation res = new Reservation(club, DateTime.Now, 10, 12, court, customer);
+
+            club.AddReservation(res);
+
+            //Assert
+            Assert.Single(club.Reservations);
+
+            // Act
+            club.RemoveReservation(res);
+
+            // Assert
+            Assert.Empty(club.Reservations);
+
+            db.Database.EnsureDeleted();
+        }
     }
 }
