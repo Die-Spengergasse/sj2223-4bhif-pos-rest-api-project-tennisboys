@@ -108,7 +108,6 @@ namespace Spg.TennisBooking.Domain.Model
         
         public SocialHub()
         {
-            
         }
     }
 }
