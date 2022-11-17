@@ -26,6 +26,8 @@ namespace Spg.TennisBooking.Domain.Test
 
             // Assert
             Assert.Single(club.ClubNews);
+
+            db.Database.EnsureDeleted();
         }
 
         //RemoveClubNews
@@ -46,6 +48,8 @@ namespace Spg.TennisBooking.Domain.Test
 
             // Assert
             Assert.Empty(club.ClubNews);
+
+            db.Database.EnsureDeleted();
         }
 
         //AddClubEvent
@@ -62,6 +66,8 @@ namespace Spg.TennisBooking.Domain.Test
 
             // Assert
             Assert.Single(club.ClubEvents);
+
+            db.Database.EnsureDeleted();
         }
 
         //RemoveClubEvent
@@ -82,6 +88,8 @@ namespace Spg.TennisBooking.Domain.Test
 
             // Assert
             Assert.Empty(club.ClubEvents);
+            
+            db.Database.EnsureDeleted();
         }
 
         //

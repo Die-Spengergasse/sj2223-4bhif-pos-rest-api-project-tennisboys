@@ -13,8 +13,13 @@ namespace Spg.TennisBooking.Domain.Test
     {
         protected TennisBookingContext GetContext()
         {
+            //Generate random database name
+            string dbName = Guid.NewGuid().ToString();
+
+            string data_source = "Data Source=" + dbName + ".db";
+
             DbContextOptions options = new DbContextOptionsBuilder()
-            .UseSqlite("Data Source=TennisBookingTest.db")
+            .UseSqlite(data_source)
             .Options;
 
             TennisBookingContext db = new TennisBookingContext(options);

@@ -24,6 +24,8 @@ namespace Spg.TennisBooking.Domain.Test
             db.SaveChanges();
 
             Assert.Equal(1, db.Clubs.Count());
+
+            db.Database.EnsureDeleted();
         }
 
         //ClubEvent
@@ -40,6 +42,8 @@ namespace Spg.TennisBooking.Domain.Test
             db.SaveChanges();
 
             Assert.Equal(1, db.ClubEvents.Count());
+
+            db.Database.EnsureDeleted();
         }
 
         //ClubNews
@@ -54,6 +58,8 @@ namespace Spg.TennisBooking.Domain.Test
             db.SaveChanges();
 
             Assert.Equal(1, db.ClubNews.Count());
+            
+            db.Database.EnsureDeleted();
         }
 
         //Court
@@ -69,6 +75,8 @@ namespace Spg.TennisBooking.Domain.Test
             db.SaveChanges();
 
             Assert.Equal(1, db.Courts.Count());
+
+            db.Database.EnsureDeleted();
         }
 
         //Customer
@@ -83,6 +91,8 @@ namespace Spg.TennisBooking.Domain.Test
             db.SaveChanges();
 
             Assert.Equal(1, db.Customers.Count());
+
+            db.Database.EnsureDeleted();
         }
 
         //PhoneNumber
@@ -115,6 +125,8 @@ namespace Spg.TennisBooking.Domain.Test
             db.SaveChanges();
 
             Assert.Equal(1, db.Reservations.Count());
+
+            db.Database.EnsureDeleted();
         }
         //SocialHub
         [Fact]
@@ -128,6 +140,8 @@ namespace Spg.TennisBooking.Domain.Test
             db.SaveChanges();
 
             Assert.Equal(1, db.SocialHubs.Count());
+
+            db.Database.EnsureDeleted();
         }
 
         //Trainer        
@@ -143,6 +157,8 @@ namespace Spg.TennisBooking.Domain.Test
             db.SaveChanges();
 
             Assert.Equal(1, db.Trainers.Count());
+
+            db.Database.EnsureDeleted();
         }
 
         /*
