@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,17 +9,50 @@ namespace Spg.TennisBooking.Domain.Model
     public class Club
     {
         public int Id { get; set; }
+        public Customer? Admin { get; set; }
+        public DateTime? PaidTill { get; set; }
+        public DateTime FreeTrialTill { get; } = DateTime.Now.AddDays(30);
         public string Name { get; set; } = string.Empty;
         public string Info { get; set; } = string.Empty;
         public string Address { get; set; } = string.Empty;
         public string ZipCode { get; set; } = string.Empty;
         public string ImagePath { get; set; } = string.Empty;
         public SocialHub SocialHub { get; } = new SocialHub();
-        public ClubNews ClubNews { get; set; } = new ClubNews();
-        public ClubEvent ClubEvent { get; set; } = new ClubEvent();
+        private List<ClubNews> _clubNews = new List<ClubNews>();
+        public IReadOnlyList<ClubNews> ClubNews => _clubNews;
 
+        public void AddClubNews(ClubNews clubNews)
+        {
+            _clubNews.Add(clubNews);
+        }
+
+        public void RemoveClubNews(ClubNews clubNews)
+        {
+            if(_clubNews.Contains(clubNews))
+            {
+                _clubNews.Remove(clubNews);
+            }
+        }
+        
+        private List<ClubEvent> _clubEvents = new List<ClubEvent>();
+        public IReadOnlyList<ClubEvent> ClubEvents => _clubEvents;
+
+        public void AddClubEvent(ClubEvent clubEvent)
+        {
+            _clubEvents.Add(clubEvent);
+        }
+
+        public void RemoveClubEvent(ClubEvent clubEvent)
+        {
+            if (_clubEvents.Contains(clubEvent))
+            {
+                _clubEvents.Remove(clubEvent);
+            }
+        }
+        
         private List<Court> _courts = new();
         public IReadOnlyList<Court> Courts => _courts;
+        
         public void AddCourt(Court entity)
         {
             if (entity is not null)
@@ -65,28 +98,44 @@ namespace Spg.TennisBooking.Domain.Model
                 }
             }
         }
-        private List<Reservation> reservations = new();
-        public IReadOnlyList<Reservation> Reservations => reservations;
+        private List<Reservation> _reservations = new();
+        public IReadOnlyList<Reservation> Reservations => _reservations;
         public void AddReservation(Reservation entity)
         {
             if (entity is not null)
             {
-                reservations.Add(entity);
+                _reservations.Add(entity);
             }
         }
         public void RemoveReservation(Reservation entity)
         {
             if (entity is not null)
             {
-                if (reservations.Contains(entity))
+                if (_reservations.Contains(entity))
                 {
-                    reservations.Remove(entity);
+                    _reservations.Remove(entity);
                 }
                 else
                 {
                     throw new ArgumentException("Entity not found");
                 }
             }
+        }
+
+        //Constructor
+        public Club(Customer admin, DateTime? paidTill, string name, string info, string address, string zipCode, string imagePath)
+        {
+            this.Admin = admin;
+            this.PaidTill = paidTill;
+            this.Name = name;
+            this.Info = info;
+            this.Address = address;
+            this.ZipCode = zipCode;
+            this.ImagePath = imagePath;
+        }
+
+        protected Club()
+        {
         }
     }
 }

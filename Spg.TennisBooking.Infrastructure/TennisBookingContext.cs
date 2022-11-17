@@ -12,9 +12,11 @@ namespace Spg.TennisBooking.Infrastructure
     {
         public DbSet<Club> Clubs => Set<Club>();
         public DbSet<ClubEvent> ClubEvents => Set<ClubEvent>();
-        public DbSet<ClubNews> Club_News => Set<ClubNews>();
+        public DbSet<ClubNews> ClubNews => Set<ClubNews>();
         public DbSet<Court> Courts => Set<Court>();
         public DbSet<Customer> Customers => Set<Customer>();
+        public DbSet<Reservation> Reservations => Set<Reservation>();
+        public DbSet<PhoneNumber> PhoneNumbers => Set<PhoneNumber>();
         public DbSet<SocialHub> SocialHubs => Set<SocialHub>();
         public DbSet<Trainer> Trainers => Set<Trainer>();
 
@@ -36,8 +38,8 @@ namespace Spg.TennisBooking.Infrastructure
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            /*modelBuilder.Entity<Product>().HasKey(e => e.Name);*/
-            //modelBuilder.Entity<Customer>().OwnsOne(p => p.PhoneNumber);
+            //modelBuilder.Entity<Product>().HasKey(e => e.Name);
+            modelBuilder.Entity<Customer>().OwnsOne(p => p.PhoneNumber);
         }
     }
 }
