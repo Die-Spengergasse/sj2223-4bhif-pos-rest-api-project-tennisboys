@@ -24,6 +24,9 @@ namespace Spg.TennisBooking.Domain.Test
             // Act
             club.AddClubNews(clubNews);
 
+            db.Clubs.Add(club);
+            db.SaveChanges();
+
             // Assert
             Assert.Single(club.ClubNews);
 
@@ -40,11 +43,16 @@ namespace Spg.TennisBooking.Domain.Test
             ClubNews clubNews = new ClubNews("Club News 1", "Club News 1 Info", club);
             club.AddClubNews(clubNews);
 
+            db.Clubs.Add(club);
+            db.SaveChanges();
+
             //Assert
             Assert.Single(club.ClubNews);
 
             // Act
             club.RemoveClubNews(clubNews);
+
+            db.SaveChanges();
 
             // Assert
             Assert.Empty(club.ClubNews);
@@ -64,6 +72,9 @@ namespace Spg.TennisBooking.Domain.Test
             // Act
             club.AddClubEvent(clubEvent);
 
+            db.Clubs.Add(club);
+            db.SaveChanges();
+
             // Assert
             Assert.Single(club.ClubEvents);
 
@@ -80,11 +91,16 @@ namespace Spg.TennisBooking.Domain.Test
             ClubEvent clubEvent = new ClubEvent(club, "Club Event 1", DateTime.Now, "Club Event 1 Info");
             club.AddClubEvent(clubEvent);
 
+            db.Clubs.Add(club);
+            db.SaveChanges();
+
             //Assert
             Assert.Single(club.ClubEvents);
 
             // Act
             club.RemoveClubEvent(clubEvent);
+
+            db.SaveChanges();
 
             // Assert
             Assert.Empty(club.ClubEvents);
@@ -104,6 +120,9 @@ namespace Spg.TennisBooking.Domain.Test
             // Act
             club.AddCourt(court);
 
+            db.Clubs.Add(club);
+            db.SaveChanges();
+
             // Assert
             Assert.Single(club.Courts);
 
@@ -119,12 +138,15 @@ namespace Spg.TennisBooking.Domain.Test
             Club club = CreateClub();
             Court court = new Court(CourtType.Carpet, "Court 1", club, 10, 10, 10, 10, 10);
             club.AddCourt(court);
+            db.Clubs.Add(club);
+            db.SaveChanges();
 
             //Assert
             Assert.Single(club.Courts);
 
             // Act
             club.RemoveCourt(court);
+            db.SaveChanges();
 
             // Assert
             Assert.Empty(club.Courts);
@@ -143,6 +165,9 @@ namespace Spg.TennisBooking.Domain.Test
 
             // Act
             club.AddTrainer(trainer);
+
+            db.Clubs.Add(club);
+            db.SaveChanges();
 
             // Assert
             Assert.Single(club.Trainers);
@@ -169,6 +194,7 @@ namespace Spg.TennisBooking.Domain.Test
 
             // Act
             club.RemoveTrainer(trainer);
+            db.SaveChanges();
 
             // Assert
             Assert.Empty(club.Trainers);
@@ -188,12 +214,14 @@ namespace Spg.TennisBooking.Domain.Test
 
             club.AddCourt(court);
 
-            db.Clubs.Add(club);
 
             Reservation res = new Reservation(club, DateTime.Now, 10, 12, court, customer);
 
             // Act
             club.AddReservation(res);
+
+            db.Clubs.Add(club);
+            db.SaveChanges();
 
             // Assert
             Assert.Single(club.Reservations);
@@ -218,12 +246,14 @@ namespace Spg.TennisBooking.Domain.Test
             Reservation res = new Reservation(club, DateTime.Now, 10, 12, court, customer);
 
             club.AddReservation(res);
+            db.SaveChanges();
 
             //Assert
             Assert.Single(club.Reservations);
 
             // Act
             club.RemoveReservation(res);
+            db.SaveChanges();
 
             // Assert
             Assert.Empty(club.Reservations);
