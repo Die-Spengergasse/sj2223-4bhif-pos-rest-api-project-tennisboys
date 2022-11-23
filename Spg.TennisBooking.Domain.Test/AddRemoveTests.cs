@@ -210,12 +210,12 @@ namespace Spg.TennisBooking.Domain.Test
             TennisBookingContext db = GetContext();
             Club club = CreateClub();
             Court court = new Court(CourtType.Carpet, "Court 1", club, 10, 10, 10, 10, 10);
-            Customer customer = CreateCustomer();
+            User user = CreateUser();
 
             club.AddCourt(court);
 
 
-            Reservation res = new Reservation(club, DateTime.Now, 10, 12, court, customer);
+            Reservation res = new Reservation(club, DateTime.Now, 10, 12, court, user);
 
             // Act
             club.AddReservation(res);
@@ -237,13 +237,13 @@ namespace Spg.TennisBooking.Domain.Test
             TennisBookingContext db = GetContext();
             Club club = CreateClub();
             Court court = new Court(CourtType.Carpet, "Court 1", club, 10, 10, 10, 10, 10);
-            Customer customer = CreateCustomer();
+            User user = CreateUser();
 
             club.AddCourt(court);
-
+            
             db.Clubs.Add(club);
 
-            Reservation res = new Reservation(club, DateTime.Now, 10, 12, court, customer);
+            Reservation res = new Reservation(club, DateTime.Now, 10, 12, court, user);
 
             club.AddReservation(res);
             db.SaveChanges();

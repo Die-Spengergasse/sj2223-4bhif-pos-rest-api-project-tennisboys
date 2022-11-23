@@ -79,18 +79,18 @@ namespace Spg.TennisBooking.Domain.Test
             db.Database.EnsureDeleted();
         }
 
-        //Customer
+        //User
         [Fact]
-        public void DomainModel_Create_Customer_Success_Test()
+        public void DomainModel_Create_User_Success_Test()
         {
             TennisBookingContext db = GetContext();
 
-            Customer newCustomer = CreateCustomer();
+            User newUser = CreateUser();
 
-            db.Customers.Add(newCustomer);
+            db.Users.Add(newUser);
             db.SaveChanges();
 
-            Assert.Equal(1, db.Customers.Count());
+            Assert.Equal(1, db.Users.Count());
 
             db.Database.EnsureDeleted();
         }
@@ -105,7 +105,7 @@ namespace Spg.TennisBooking.Domain.Test
             DateTime.Now, 22, 23,
             new Court(CourtType.Hard, "Court 1", CreateClub(),
             20, 20, 5, 15, 12),
-            CreateCustomer());
+            CreateUser());
 
             db.Reservations.Add(newReservation);
             db.SaveChanges();

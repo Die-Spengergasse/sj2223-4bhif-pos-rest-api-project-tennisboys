@@ -9,7 +9,7 @@ namespace Spg.TennisBooking.Domain.Model
     public class Club
     {
         public int Id { get; set; }
-        public Customer? Admin { get; set; }
+        public User? Admin { get; set; }
         public DateTime? PaidTill { get; set; }
         public DateTime FreeTrialTill { get; } = DateTime.Now.AddDays(30);
         public string Name { get; set; } = string.Empty;
@@ -123,7 +123,7 @@ namespace Spg.TennisBooking.Domain.Model
         }
 
         //Constructor
-        public Club(Customer admin, DateTime? paidTill, string name, string info, string address, string zipCode, string imagePath)
+        public Club(User admin, DateTime? paidTill, string name, string info, string address, string zipCode, string imagePath)
         {
             this.Admin = admin;
             this.PaidTill = paidTill;

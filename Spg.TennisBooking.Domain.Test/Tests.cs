@@ -29,15 +29,15 @@ namespace Spg.TennisBooking.Domain.Test
         }
         protected Club CreateClub()
         {
-            Customer customer = CreateCustomer();
-            Club club = new Club(customer, DateTime.Now, "Tennisclub", "Tennisclub in der Nähe", "Musterstrasse 1", "1234", "imagepath");
+            User user = CreateUser();
+            Club club = new Club(user, DateTime.Now, "Tennisclub", "Tennisclub in der Nähe", "Musterstrasse 1", "1234", "imagepath");
             return club;
         }
-
-        protected Customer CreateCustomer()
+        
+        protected User CreateUser()
         {
-            Customer customer = new Customer("Max", "Mustermann", GenderTypes.Male, "Musterstrasse 1", "adrian.schauer@aon.at", new PhoneNumber("0664", "1234567"), new DateTime(1990, 1, 1));
-            return customer;
+            User user = new User("Max", "Mustermann", GenderTypes.Male, "Musterstrasse 1", "adrian.schauer@aon.at", new PhoneNumber("0664", "1234567"), new DateTime(1990, 1, 1));
+            return user;
         }
     }
 }
