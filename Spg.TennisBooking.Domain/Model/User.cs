@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Spg.TennisBooking.Domain.Model
 {
     public enum GenderTypes { Male = 0, Female = 1, Diverse = 2}
-    public class Customer
+    public class User
     {
         public int Id { get; private set; }
         public string FirstName { get; set; } = String.Empty;
@@ -19,7 +19,7 @@ namespace Spg.TennisBooking.Domain.Model
         public DateTime BirthDate { get; set; }
         public DateTime RegistrationDate { get; } = DateTime.Now;
 
-        public Customer(string firstName, string lastName, GenderTypes gender, string address, string email, PhoneNumber? phoneNumber, DateTime birthDate)
+        public User(string firstName, string lastName, GenderTypes gender, string address, string email, PhoneNumber? phoneNumber, DateTime birthDate)
         {
             FirstName = firstName;
             LastName = lastName;
@@ -29,7 +29,7 @@ namespace Spg.TennisBooking.Domain.Model
             PhoneNumber = phoneNumber;
             BirthDate = birthDate;
         }
-        protected Customer() {
+        protected User() {
 
         }
     }
