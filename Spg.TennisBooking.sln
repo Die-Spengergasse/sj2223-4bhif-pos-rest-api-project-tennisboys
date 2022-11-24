@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spg.TennisBooking.Domain", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spg.TennisBooking.Repository", "Spg.TennisBooking.Repository\Spg.TennisBooking.Repository.csproj", "{6E4BBEB9-412F-4617-98AD-87093ACC3449}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spg.TennisBooking.Domain.Test", "Spg.TennisBooking.Domain.Test\Spg.TennisBooking.Domain.Test.csproj", "{ED325376-FEFE-4683-AD9A-23FD41A2C086}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spg.TennisBooking.Domain.Test", "Spg.TennisBooking.Domain.Test\Spg.TennisBooking.Domain.Test.csproj", "{ED325376-FEFE-4683-AD9A-23FD41A2C086}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
