@@ -1,9 +1,9 @@
 using Microsoft.EntityFrameworkCore;
-using Spg.SpengerShop.Application.Services;
-using Spg.SpengerShop.DbExtensions;
-using Spg.SpengerShop.Domain.Interfaces;
-//using Spg.SpengerShop.Infrastructure;
-using Spg.SpengerShop.Repository.Repositories;
+using Spg.TennisBooking.Application.Services;
+using Spg.TennisBooking.DbExtensions;
+using Spg.TennisBooking.Domain.Interfaces;
+//using Spg.TennisBooking.Infrastructure;
+using Spg.TennisBooking.Repository.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,8 +11,8 @@ string connectionString = builder.Configuration.GetConnectionString("DefaultConn
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddTransient<IProductService, ProductService>();
-builder.Services.AddTransient<IProductRepository, ProductRepository>();
+// builder.Services.AddTransient<IProductService, ProductService>();
+// builder.Services.AddTransient<IProductRepository, ProductRepository>();
 builder.Services.ConfigureSqLite(connectionString);
 
 var app = builder.Build();

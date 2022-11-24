@@ -1,4 +1,4 @@
-namespace Spg.SpengerShop.MvcFrontEnd.Models
+namespace Spg.TennisBooking.MvcFrontEnd.Models
 {
     public class ErrorViewModel
     {

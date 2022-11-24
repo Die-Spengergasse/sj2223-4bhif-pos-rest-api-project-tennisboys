@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Spg.TennisBooking.MvcFrontEnd;
 
 namespace Spg.TennisBooking.Api.Controllers;
 
@@ -24,4 +25,11 @@ public class ClubController : ControllerBase
         })
         .ToArray();
     }
+
+    // public IActionResult Privacy()
+    // {
+    //     // Q: How does it know which view to use?
+    //     // A: It looks for a view with the same name as the action method.
+    //     return View();
+    // }
 }
