@@ -7,9 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Spg.TennisBooking.Domain\Spg.TennisBooking.Domain.csproj" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Spg.TennisBooking.Infrastructure\Spg.TennisBooking.Infrastructure.csproj" />
-    <ProjectReference Include="..\Spg.TennisBooking.Repository\Spg.TennisBooking.Repository.csproj" />
   </ItemGroup>
 
 </Project>
