@@ -29,9 +29,11 @@ jobs:
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
 
-    - name: Install dependencies
-      run: dotnet restore
+    - name: Install NPM dependencies
       run: npm install
+
+    - name: Install C# dependencies
+      run: dotnet restore
       
     - name: Build
       run: dotnet build --configuration Release --no-restore
