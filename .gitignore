@@ -41,6 +41,9 @@ Latest commit e4d4b20 on 4 May
 *.userosscache
 *.sln.docstates
 
+# Generated Tailwind File
+src/Spg.TennisBooking.MvcFrontEnd/wwwroot/css/site.css
+
 # DB Files
 *.db
 *.db-shm
