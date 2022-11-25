@@ -1,9 +1,14 @@
 name: build and test
 
-on:
+on: 
   push:
+    paths:
+      - 'src/**'
+      - '.github/workflows/dotnet.yml'
   pull_request:
-    branches: [ main, dev ]
+    paths:
+      - 'src/**'
+      - '.github/workflows/dotnet.yml'
 
 env:
   DOTNET_VERSION: '6.0.203' # The .NET SDK version to use
