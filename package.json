@@ -1,0 +1,24 @@
+{
+  "name": "sj2223-4bhif-pos-rest-api-project-tennisboys",
+  "version": "1.0.0",
+  "description": "sj2223-4bhif-pos-rest-api-project-tennisboys created by GitHub Classroom",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "input:build": "npx tailwind build -i ./src/Spg.TennisBooking.MvcFrontEnd/wwwroot/css/input.css -o ./src/Spg.TennisBooking.MvcFrontEnd/wwwroot/css/site.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Die-Spengergasse/sj2223-4bhif-pos-rest-api-project-tennisboys.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Die-Spengergasse/sj2223-4bhif-pos-rest-api-project-tennisboys/issues"
+  },
+  "homepage": "https://github.com/Die-Spengergasse/sj2223-4bhif-pos-rest-api-project-tennisboys#readme",
+  "devDependencies": {
+    "tailwindcss": "^3.2.4"
+  }
+}
