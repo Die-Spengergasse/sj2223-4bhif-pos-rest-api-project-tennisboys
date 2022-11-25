@@ -3,21 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32319.34
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spg.TennisBooking.Api", "Spg.TennisBooking.Api\Spg.TennisBooking.Api.csproj", "{DF41D605-18A7-42F4-8DD9-064A70798BCE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spg.TennisBooking.Api", "src\Spg.TennisBooking.Api\Spg.TennisBooking.Api.csproj", "{3B776257-C63A-436C-9DF9-FF9EB946004F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spg.TennisBooking.Infrastructure", "Spg.TennisBooking.Infrastructure\Spg.TennisBooking.Infrastructure.csproj", "{4BC4E51B-89AB-48EA-9E2F-06BBB5EA6349}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spg.TennisBooking.Application", "src\Spg.TennisBooking.Application\Spg.TennisBooking.Application.csproj", "{17E84702-1A00-45EF-B549-5D1D643DF163}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spg.TennisBooking.Application", "Spg.TennisBooking.Application\Spg.TennisBooking.Application.csproj", "{C69CE408-AC25-4F08-A45E-362D12361A5B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spg.TennisBooking.DbExtensions", "src\Spg.TennisBooking.DbExtensions\Spg.TennisBooking.DbExtensions.csproj", "{49632AB8-51AD-4741-9D37-82DDE8CC524F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spg.TennisBooking.Domain", "Spg.TennisBooking.Domain\Spg.TennisBooking.Domain.csproj", "{C0559238-D6DE-45CF-B4F7-8D293D1BBEB8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spg.TennisBooking.Domain", "src\Spg.TennisBooking.Domain\Spg.TennisBooking.Domain.csproj", "{23F54D72-5ECB-462A-8B9B-F52A0DAA905D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spg.TennisBooking.Repository", "Spg.TennisBooking.Repository\Spg.TennisBooking.Repository.csproj", "{6E4BBEB9-412F-4617-98AD-87093ACC3449}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spg.TennisBooking.Domain.Test", "src\Spg.TennisBooking.Domain.Test\Spg.TennisBooking.Domain.Test.csproj", "{1EA94DE3-D1D4-4B5A-BB44-57FADAC2FE2B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spg.TennisBooking.Domain.Test", "Spg.TennisBooking.Domain.Test\Spg.TennisBooking.Domain.Test.csproj", "{ED325376-FEFE-4683-AD9A-23FD41A2C086}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spg.TennisBooking.Infrastructure", "src\Spg.TennisBooking.Infrastructure\Spg.TennisBooking.Infrastructure.csproj", "{5D9906DB-FAEA-4F91-8F54-055100B9E41B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spg.TennisBooking.MvcFrontEnd", "Spg.TennisBooking.MvcFrontEnd\Spg.TennisBooking.MvcFrontEnd.csproj", "{1CB36FFA-EAD6-4052-92E5-BF5FE604F508}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spg.TennisBooking.MvcFrontEnd", "src\Spg.TennisBooking.MvcFrontEnd\Spg.TennisBooking.MvcFrontEnd.csproj", "{4C05959C-4A57-4271-BFBF-EF74C82AAF3A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spg.TennisBooking.DbExtensions", "Spg.TennisBooking.DbExtensions\Spg.TennisBooking.DbExtensions.csproj", "{23163450-FDB0-4E71-919D-483785B3319A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spg.TennisBooking.Repository", "src\Spg.TennisBooking.Repository\Spg.TennisBooking.Repository.csproj", "{800A27AA-FFAE-4C0A-A585-1F22BEED5681}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,38 +25,38 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{DF41D605-18A7-42F4-8DD9-064A70798BCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DF41D605-18A7-42F4-8DD9-064A70798BCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DF41D605-18A7-42F4-8DD9-064A70798BCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DF41D605-18A7-42F4-8DD9-064A70798BCE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4BC4E51B-89AB-48EA-9E2F-06BBB5EA6349}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4BC4E51B-89AB-48EA-9E2F-06BBB5EA6349}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4BC4E51B-89AB-48EA-9E2F-06BBB5EA6349}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4BC4E51B-89AB-48EA-9E2F-06BBB5EA6349}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C69CE408-AC25-4F08-A45E-362D12361A5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C69CE408-AC25-4F08-A45E-362D12361A5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C69CE408-AC25-4F08-A45E-362D12361A5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C69CE408-AC25-4F08-A45E-362D12361A5B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C0559238-D6DE-45CF-B4F7-8D293D1BBEB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C0559238-D6DE-45CF-B4F7-8D293D1BBEB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C0559238-D6DE-45CF-B4F7-8D293D1BBEB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C0559238-D6DE-45CF-B4F7-8D293D1BBEB8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6E4BBEB9-412F-4617-98AD-87093ACC3449}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6E4BBEB9-412F-4617-98AD-87093ACC3449}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6E4BBEB9-412F-4617-98AD-87093ACC3449}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6E4BBEB9-412F-4617-98AD-87093ACC3449}.Release|Any CPU.Build.0 = Release|Any CPU
-		{ED325376-FEFE-4683-AD9A-23FD41A2C086}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ED325376-FEFE-4683-AD9A-23FD41A2C086}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ED325376-FEFE-4683-AD9A-23FD41A2C086}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ED325376-FEFE-4683-AD9A-23FD41A2C086}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1CB36FFA-EAD6-4052-92E5-BF5FE604F508}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1CB36FFA-EAD6-4052-92E5-BF5FE604F508}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1CB36FFA-EAD6-4052-92E5-BF5FE604F508}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1CB36FFA-EAD6-4052-92E5-BF5FE604F508}.Release|Any CPU.Build.0 = Release|Any CPU
-		{23163450-FDB0-4E71-919D-483785B3319A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{23163450-FDB0-4E71-919D-483785B3319A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{23163450-FDB0-4E71-919D-483785B3319A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{23163450-FDB0-4E71-919D-483785B3319A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B776257-C63A-436C-9DF9-FF9EB946004F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B776257-C63A-436C-9DF9-FF9EB946004F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B776257-C63A-436C-9DF9-FF9EB946004F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B776257-C63A-436C-9DF9-FF9EB946004F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17E84702-1A00-45EF-B549-5D1D643DF163}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17E84702-1A00-45EF-B549-5D1D643DF163}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17E84702-1A00-45EF-B549-5D1D643DF163}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17E84702-1A00-45EF-B549-5D1D643DF163}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49632AB8-51AD-4741-9D37-82DDE8CC524F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49632AB8-51AD-4741-9D37-82DDE8CC524F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49632AB8-51AD-4741-9D37-82DDE8CC524F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49632AB8-51AD-4741-9D37-82DDE8CC524F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23F54D72-5ECB-462A-8B9B-F52A0DAA905D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23F54D72-5ECB-462A-8B9B-F52A0DAA905D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23F54D72-5ECB-462A-8B9B-F52A0DAA905D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23F54D72-5ECB-462A-8B9B-F52A0DAA905D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1EA94DE3-D1D4-4B5A-BB44-57FADAC2FE2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EA94DE3-D1D4-4B5A-BB44-57FADAC2FE2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EA94DE3-D1D4-4B5A-BB44-57FADAC2FE2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EA94DE3-D1D4-4B5A-BB44-57FADAC2FE2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D9906DB-FAEA-4F91-8F54-055100B9E41B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D9906DB-FAEA-4F91-8F54-055100B9E41B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D9906DB-FAEA-4F91-8F54-055100B9E41B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D9906DB-FAEA-4F91-8F54-055100B9E41B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C05959C-4A57-4271-BFBF-EF74C82AAF3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C05959C-4A57-4271-BFBF-EF74C82AAF3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C05959C-4A57-4271-BFBF-EF74C82AAF3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C05959C-4A57-4271-BFBF-EF74C82AAF3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{800A27AA-FFAE-4C0A-A585-1F22BEED5681}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{800A27AA-FFAE-4C0A-A585-1F22BEED5681}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{800A27AA-FFAE-4C0A-A585-1F22BEED5681}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{800A27AA-FFAE-4C0A-A585-1F22BEED5681}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
