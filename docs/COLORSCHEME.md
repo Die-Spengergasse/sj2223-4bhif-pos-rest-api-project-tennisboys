@@ -18,7 +18,8 @@ You simply use the tailwind class names that are listed below. You can also use 
 ```batch
 | Color | Tailwind class name | Hex |
 | --- | --- | --- |
-| Light Blue | custom-blue-100 | #E8F4FF |
-| Blue | custom-blue-200 | #6A8EAE |
-| Dark Blue | custom-blue-300 | #5B83AB |
+| Light Blue | custom-100 | #E8F4FF |
+| Blue | custom-200 | #6A8EAE |
+| Dark Blue | custom-300 | #5B83AB |
+| Light Gray | custom-400 | #545364 |
 ```
