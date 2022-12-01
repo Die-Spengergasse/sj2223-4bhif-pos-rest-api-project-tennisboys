@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "input:build": "npx tailwind build -i ./src/Spg.TennisBooking.MvcFrontEnd/wwwroot/css/input.css -o ./src/Spg.TennisBooking.MvcFrontEnd/wwwroot/css/site.css"
+    "input:build": "npx tailwind build -i ./src/Spg.TennisBooking.MvcFrontEnd/wwwroot/css/input.css -o ./src/Spg.TennisBooking.MvcFrontEnd/wwwroot/css/site.css --watch"
   },
   "repository": {
     "type": "git",
