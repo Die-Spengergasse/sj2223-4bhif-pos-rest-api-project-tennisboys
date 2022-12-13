@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="~/Spg.SpengerShop.MvcFrontEnd.styles.css" asp-append-version="true" />
 </head>
 
-<body class="bg-custom-100">
+<body class="bg-custom-100 flex flex-col min-h-screen">
     <header>
         <nav class="flex items-center justify-between bg-custom-300 flex-wrap">
             <div class="basis-1/4 flex h-full">
@@ -76,17 +76,27 @@
     <br />
     <br />
     <br />
-    <div class="container">
+    <div class="container flex-1">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2022 - Spg.SpengerShop.MvcFrontEnd - <a asp-area="" asp-controller="Home"
-                asp-action="Privacy">Privacy</a>
-        </div>
+    <footer class="border-top footer text-muted mb-0 mt-auto">
+        <nav class="flex items-center justify-between bg-custom-300 h-20 flex-wrap">
+            <div class="my-2 ml-10">
+                <a class="text-black text-lg">By Adrian Schauer <br/> and Fabian Lasser</a>
+            </div>
+            <div>
+                <a href="mailto:" class="text-black text-lg">Contact: info@adrian-schauer.at</a>
+            </div>
+            <div>
+                <a asp-area="" asp-controller="Home" asp-action="Imprint" class="text-black text-lg">Imprint</a>
+            </div>
+            <div>    
+                <a asp-area="" asp-controller="Home" asp-action="Privacy" class="text-black mr-10 text-lg">Privacy</a>
+            </div>
+        </nav>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
