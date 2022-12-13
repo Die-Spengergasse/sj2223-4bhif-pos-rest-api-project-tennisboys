@@ -10,8 +10,36 @@
     <link rel="stylesheet" href="~/Spg.SpengerShop.MvcFrontEnd.styles.css" asp-append-version="true" />
 </head>
 
-<body>
+<body class="bg-custom-100">
     <header>
+        <nav class="flex items-center justify-between bg-custom-300 flex-wrap">
+            <div class="basis-1/4 flex h-full">
+                <div class="w-12 my-2 ml-2">
+                <a asp-area="" asp-controller="Home" asp-action="Index">
+                    <img height="100%" width="100%" src="/icons/home.svg" class="fill-current text-white"/>
+                </a>
+                </div>
+            </div>
+            <div class="basis-1/2 flex items-center justify-center">
+                <form class=my-3>
+                    <input type="search" id="default-search" placeholder="Search Club" class="content-left rounded-l-lg font-medium py-2 pl-2 text-lg focus:ring-4 focus:outline-none text-left">
+                    <button type="submit" class="text-white right-2.5 bottom-2.5 bg-custom-400 focus:ring-4 focus:outline-none font-medium rounded-r-lg text-lg px-4 py-2">Search</button>
+                </form>
+            </div>
+            <div class="basis-1/4 flex p-2">
+            <a asp-area"" asp-controller="" asp-action="Register" class="w-11 ml-auto my-2 mr-2">
+                <img height="100%" width="100%" src="/icons/user.svg" class="fill-current text-white align-en"/>
+            </a>
+            </div>
+        </nav>
+    </header>
+
+<!--    </nav>
+    <img src="/icons/home.svg" alt="Logo" class="h-12 w-12" />
+        <br />
+        <br />
+        <br />
+        <br />
         <nav class="flex items-center justify-between flex-wrap bg-teal-500 p-6">
             <div class="flex items-center flex-shrink-0 text-white mr-6">
                 <span class="font-semibold text-xl tracking-tight">
@@ -42,7 +70,12 @@
                 </div>
             </div>
         </nav>
-    </header>
+    -->
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
