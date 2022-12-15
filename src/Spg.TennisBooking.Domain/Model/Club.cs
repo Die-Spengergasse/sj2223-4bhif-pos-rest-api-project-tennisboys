@@ -98,29 +98,6 @@ namespace Spg.TennisBooking.Domain.Model
                 }
             }
         }
-        private List<Reservation> _reservations = new();
-        public IReadOnlyList<Reservation> Reservations => _reservations;
-        public void AddReservation(Reservation entity)
-        {
-            if (entity is not null)
-            {
-                _reservations.Add(entity);
-            }
-        }
-        public void RemoveReservation(Reservation entity)
-        {
-            if (entity is not null)
-            {
-                if (_reservations.Contains(entity))
-                {
-                    _reservations.Remove(entity);
-                }
-                else
-                {
-                    throw new ArgumentException("Entity not found");
-                }
-            }
-        }
 
         //Constructor
         public Club(User admin, DateTime? paidTill, string name, string info, string address, string zipCode, string imagePath)
