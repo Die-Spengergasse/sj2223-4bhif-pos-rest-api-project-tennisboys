@@ -83,12 +83,17 @@
     </div>
 
     <footer class="border-top footer text-muted mb-0 mt-auto">
-        <nav class="flex items-center justify-between bg-custom-300 h-20 flex-wrap">
+        <script type="module">
+            let currentDateElement = document.getElementById("current-year");
+            let currentDate = new Date().getFullYear();
+            currentDateElement.innerHTML = currentDate;
+        </script>
+        <nav class="flex items-center justify-between bg-custom-300 h-22 flex-wrap">
             <div class="my-2 ml-10">
-                <a class="text-black text-lg">By Adrian Schauer <br/> and Fabian Lasser</a>
+                <a class="text-black text-lg">&copy; 2022-<span id="current-year">Loading...</span><br/> By Adrian Schauer <br/> and Fabian Lasser</a>
             </div>
             <div>
-                <a href="mailto:" class="text-black text-lg">Contact: info@adrian-schauer.at</a>
+                <a href="mailto:info@adrian-schauer.at" class="text-black text-lg">info@adrian-schauer.at</a>
             </div>
             <div>
                 <a asp-area="" asp-controller="Home" asp-action="Imprint" class="text-black text-lg">Imprint</a>

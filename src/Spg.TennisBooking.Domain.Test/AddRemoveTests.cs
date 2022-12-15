@@ -212,19 +212,19 @@ namespace Spg.TennisBooking.Domain.Test
             Court court = new Court(CourtType.Carpet, "Court 1", club, 10, 10, 10, 10, 10);
             User user = CreateUser();
 
-            club.AddCourt(court);
+            court.AddCourt(court);
 
 
             Reservation res = new Reservation(club, DateTime.Now, 10, 12, court, user);
-
+            
             // Act
-            club.AddReservation(res);
-
-            db.Clubs.Add(club);
+            court.AddReservation(res);
+            
+            db.Courts.Add(court);
             db.SaveChanges();
 
             // Assert
-            Assert.Single(club.Reservations);
+            Assert.Single(club.Courts);
 
             db.Database.EnsureDeleted();
         }
@@ -239,24 +239,24 @@ namespace Spg.TennisBooking.Domain.Test
             Court court = new Court(CourtType.Carpet, "Court 1", club, 10, 10, 10, 10, 10);
             User user = CreateUser();
 
-            club.AddCourt(court);
+            court.AddCourt(court);
             
-            db.Clubs.Add(club);
+            db.Courts.Add(court);
 
             Reservation res = new Reservation(club, DateTime.Now, 10, 12, court, user);
 
-            club.AddReservation(res);
+            court.AddCourt(res);
             db.SaveChanges();
-
+            
             //Assert
-            Assert.Single(club.Reservations);
-
+            Assert.Single(club.Courts);
+            
             // Act
-            club.RemoveReservation(res);
+            court.RemoveCourt(res);
             db.SaveChanges();
-
+            
             // Assert
-            Assert.Empty(club.Reservations);
+            Assert.Empty(club.Courts);
 
             db.Database.EnsureDeleted();
         }
