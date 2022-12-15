@@ -218,13 +218,13 @@ namespace Spg.TennisBooking.Domain.Test
             Reservation res = new Reservation(club, DateTime.Now, 10, 12, court, user);
 
             // Act
-            club.AddReservation(res);
+            court.AddReservation(res);
 
             db.Clubs.Add(club);
             db.SaveChanges();
 
             // Assert
-            Assert.Single(club.Reservations);
+            Assert.Single(court.Reservations);
 
             db.Database.EnsureDeleted();
         }
@@ -245,18 +245,18 @@ namespace Spg.TennisBooking.Domain.Test
 
             Reservation res = new Reservation(club, DateTime.Now, 10, 12, court, user);
 
-            club.AddReservation(res);
+            court.AddReservation(res);
             db.SaveChanges();
-
+            
             //Assert
-            Assert.Single(club.Reservations);
+            Assert.Single(court.Reservations);
 
             // Act
-            club.RemoveReservation(res);
+            court.RemoveReservation(res);
             db.SaveChanges();
 
             // Assert
-            Assert.Empty(club.Reservations);
+            Assert.Empty(court.Reservations);
 
             db.Database.EnsureDeleted();
         }
