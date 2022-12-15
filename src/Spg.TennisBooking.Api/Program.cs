@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Spg.TennisBooking.Infrastructure;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,5 +38,25 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+//Swagger Configuration
+builder.Services.AddSwaggerGen(s =>
+    s.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo()
+    {
+        Title = "TennisBooking",
+        Description = "Tennis Booking Website",
+        Contact = new OpenApiContact()
+        {
+            Name = "Adrian Schauer",
+            Email = "info@adrian-schauer.at",
+            Url = new Uri("http://www.spengergasse.at")
+        },
+        License = new OpenApiLicense()
+        {
+            Name = "Schauer-Licence",
+            Url = new Uri("http://www.adrian-schauer.at/license")
+        },
+        Version = "v1"
+    }));
 
 app.Run();
