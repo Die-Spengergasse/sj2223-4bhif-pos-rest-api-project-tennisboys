@@ -10,6 +10,7 @@ namespace Spg.TennisBooking.Domain.Model
     public class User
     {
         public int Id { get; private set; }
+        public string UUID { get; } = System.Guid.NewGuid().ToString();
         public string FirstName { get; set; } = String.Empty;
         public string LastName { get; set; } = String.Empty;
         public GenderTypes Gender { get; set; }
@@ -18,6 +19,7 @@ namespace Spg.TennisBooking.Domain.Model
         public PhoneNumber? PhoneNumber { get; set; }
         public DateTime BirthDate { get; set; }
         public DateTime RegistrationDate { get; } = DateTime.Now;
+        
 
         public User(string firstName, string lastName, GenderTypes gender, string address, string email, PhoneNumber? phoneNumber, DateTime birthDate)
         {
