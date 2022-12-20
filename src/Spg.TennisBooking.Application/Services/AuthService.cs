@@ -9,18 +9,18 @@ using System.Threading.Tasks;
 
 namespace Spg.TennisBooking.Application.Services
 {
-    public class ProductService : IProductService
+    public class AuthService
     {
-        private readonly IProductRepository _productRepository;
+        private readonly IAuthRepository _authRepository;
 
-        public ProductService(IProductRepository productRepository)
+        public AuthService(IAuthRepository authRepository)
         {
-            _productRepository = productRepository;
+            _authRepository = authRepository;
         }
 
         public IEnumerable<User> GetAll()
         {
-            return _productRepository.GetAll();
+            return _authRepository.GetAll();
         }
     }
 }
