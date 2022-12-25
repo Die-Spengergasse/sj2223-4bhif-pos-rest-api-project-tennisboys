@@ -1,4 +1,4 @@
-namespace ZID.Automat.Api.Dtos
+namespace Spg.TennisBooking.Api.Dtos
 {
     public record LoginDto
     {

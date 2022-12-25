@@ -9,9 +9,11 @@ using Microsoft.AspNetCore.Authorization;
 // using Spg.TennisBooking.Dto.Models;
 // using Spg.TennisBooking.Configuration.Model;
 using Spg.TennisBooking.Application;
-using ZID.Automat.Api.Dtos;
+using Spg.TennisBooking.Domain.Interfaces;
+using Spg.TennisBooking.Application.Services;
+using Spg.TennisBooking.Api.Dtos;
 
-namespace ZID.Automat.Api.Controllers
+namespace Spg.TennisBooking.Api.Controllers
 {
     /// <summary>
     /// This APIController is used to do any related Account operations
@@ -19,20 +21,25 @@ namespace ZID.Automat.Api.Controllers
     [AllowAnonymous]
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthenticationController : ControllerBase
+    public class AuthController : ControllerBase
     {
         private readonly IAuthService _auth;
-        private readonly IControllerAuthService _controllerAuthService;
-        public AuthenticationController(IAuthService auth, IControllerAuthService controllerAuthService)
+        
+        public AuthController(IAuthService auth)
         {
             _auth = auth;
-            _controllerAuthService = controllerAuthService;
         }
 
         [HttpPost("login")]
-        public string? Login([FromBody] LoginDto loginDto)
+        public string Login([FromBody] LoginDto loginDto)
         {
-            return _auth.Auth(loginDto);
+            return _auth.Login(loginDto.Username, loginDto.Password);
+        }
+
+        [HttpPost("register")]
+        public bool Register([FromBody] LoginDto loginDto)
+        {
+            return _auth.Register(loginDto.Username, loginDto.Password);
         }
     }
 }

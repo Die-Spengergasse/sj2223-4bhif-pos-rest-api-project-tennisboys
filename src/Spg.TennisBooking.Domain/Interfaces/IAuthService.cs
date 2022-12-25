@@ -7,8 +7,11 @@ using System.Threading.Tasks;
 
 namespace Spg.TennisBooking.Domain.Interfaces
 {
-    public interface IProductService
+    public interface IAuthService
     {
-        IEnumerable<User> GetAll();
+        string Login(string email, string password);
+        bool Logout();
+        bool Register(string email, string password);
+        User GetCurrentUser();
     }
 }

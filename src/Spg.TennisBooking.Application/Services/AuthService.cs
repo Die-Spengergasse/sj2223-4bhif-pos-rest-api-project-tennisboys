@@ -1,15 +1,9 @@
 ﻿using Spg.TennisBooking.Domain.Interfaces;
 using Spg.TennisBooking.Domain.Model;
-using Spg.TennisBooking.Repository.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spg.TennisBooking.Application.Services
 {
-    public class AuthService
+    public class AuthService : IAuthService
     {
         private readonly IAuthRepository _authRepository;
 
@@ -18,9 +12,25 @@ namespace Spg.TennisBooking.Application.Services
             _authRepository = authRepository;
         }
 
-        public IEnumerable<User> GetAll()
+        public User GetCurrentUser()
         {
-            return _authRepository.GetAll();
+            throw new NotImplementedException();
+        }
+        
+        public string Login(string email, string password)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Logout()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Register(string email, string password)
+        {
+            _authRepository.CreateUser(email, password);
+            return true;
         }
     }
 }
