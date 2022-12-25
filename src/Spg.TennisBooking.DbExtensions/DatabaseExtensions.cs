@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Spg.TennisBooking.Infrastructure;
 
-namespace Spg.TennisBooking.DbExtensions
+namespace Spg.TennisBooking.Extensions
 {
     public static class DatabaseExtensions
     {

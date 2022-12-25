@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.25.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Spg.TennisBooking.Domain\Spg.TennisBooking.Domain.csproj" />
     <ProjectReference Include="..\Spg.TennisBooking.Infrastructure\Spg.TennisBooking.Infrastructure.csproj" />
     <ProjectReference Include="..\Spg.TennisBooking.Repository\Spg.TennisBooking.Repository.csproj" />

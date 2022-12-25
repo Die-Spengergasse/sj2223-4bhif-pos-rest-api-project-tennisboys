@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spg.TennisBooking.Api", "sr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spg.TennisBooking.Application", "src\Spg.TennisBooking.Application\Spg.TennisBooking.Application.csproj", "{17E84702-1A00-45EF-B549-5D1D643DF163}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spg.TennisBooking.DbExtensions", "src\Spg.TennisBooking.DbExtensions\Spg.TennisBooking.DbExtensions.csproj", "{49632AB8-51AD-4741-9D37-82DDE8CC524F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spg.TennisBooking.Extensions", "src\Spg.TennisBooking.DbExtensions\Spg.TennisBooking.Extensions.csproj", "{49632AB8-51AD-4741-9D37-82DDE8CC524F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spg.TennisBooking.Domain", "src\Spg.TennisBooking.Domain\Spg.TennisBooking.Domain.csproj", "{23F54D72-5ECB-462A-8B9B-F52A0DAA905D}"
 EndProject

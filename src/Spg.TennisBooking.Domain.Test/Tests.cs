@@ -36,7 +36,7 @@ namespace Spg.TennisBooking.Domain.Test
         
         protected User CreateUser()
         {
-            User user = new User("Max", "Mustermann", GenderTypes.Male, "Musterstrasse 1", "adrian.schauer@aon.at", new PhoneNumber("0664", "1234567"), new DateTime(1990, 1, 1));
+            User user = new User("adrian.schauer@aon.at", "AdminPswd", "012345");
             return user;
         }
     }
