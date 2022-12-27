@@ -21,7 +21,7 @@ namespace Spg.TennisBooking.Domain.Model
         public string Address { get; set; } = String.Empty;
         public PhoneNumber? PhoneNumber { get; set; } = null;
         public DateTime? BirthDate { get; set; } = null;
-        public DateTime RegistrationDate { get; } = DateTime.Now;
+        public DateTime RegistrationDate { get; set; } = DateTime.Now;
         
 
         public User(string email, string password, string verificationCode)

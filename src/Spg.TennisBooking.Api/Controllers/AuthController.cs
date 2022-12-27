@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 using Spg.TennisBooking.Application;
 using Spg.TennisBooking.Domain.Interfaces;
 using Spg.TennisBooking.Application.Services;
-using Spg.TennisBooking.Api.Dtos;
+using Spg.TennisBooking.Api.Dtos.AuthDtos;
 using System.Net;
 using Spg.TennisBooking.Domain.Exceptions;
 
@@ -93,6 +93,38 @@ namespace Spg.TennisBooking.Api.Controllers
             {
                 string token = _auth.Login(loginDto.Email, loginDto.Password, _configuration.GetSection("jwtSecret").Value);
                 return Ok(new { token = token });
+            }
+            catch (HttpException e)
+            {
+                return StatusCode((int)e.StatusCode, e.Message);
+            }
+        }
+
+        //Forgot Password
+        [HttpPost("ForgotPassword")]
+        [Produces("application/json")]
+        public IActionResult ForgotPassword([FromBody] ForgotPasswordDto forgotPasswordDto)
+        {
+            try
+            {
+                bool success = _auth.ForgotPassword(forgotPasswordDto.Email);
+                return Ok(new { success = success });
+            }
+            catch (HttpException e)
+            {
+                return StatusCode((int)e.StatusCode, e.Message);
+            }
+        }
+
+        //Reset Password
+        [HttpPost("ResetPassword")]
+        [Produces("application/json")]
+        public IActionResult ResetPassword([FromBody] ResetPasswordDto resetPasswordDto)
+        {
+            try
+            {
+                bool success = _auth.ResetPassword(resetPasswordDto.Email, resetPasswordDto.Password, resetPasswordDto.ResetCode);
+                return Ok(new { success = success });
             }
             catch (HttpException e)
             {
