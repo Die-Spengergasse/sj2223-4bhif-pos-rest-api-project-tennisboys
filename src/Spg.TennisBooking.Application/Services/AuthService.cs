@@ -114,14 +114,12 @@ namespace Spg.TennisBooking.Application.Services
             //Check if user exists
             if (user == null)
             {
-                //throw error
                 throw new HttpException("User not found", HttpStatusCode.NotFound);
             }
 
             //Check if user is verified
             if (!user.Verified)
             {
-                //throw error
                 throw new HttpException("User not verified", HttpStatusCode.BadRequest);
             }
 
@@ -168,12 +166,90 @@ namespace Spg.TennisBooking.Application.Services
 
         public bool ForgotPassword(string email)
         {
-            throw new NotImplementedException();
+            //Get User
+            User? user = _authRepository.GetUserByEmail(email);
+
+            //Check if user exists
+            if (user == null)
+            {
+                throw new HttpException("User not found", HttpStatusCode.NotFound);
+            }
+
+            //Check if user is verified
+            if (!user.Verified)
+            {
+                throw new HttpException("User not verified", HttpStatusCode.BadRequest);
+            }
+
+            //Create ResetCode. 6 Numbers only
+            string resetCode = new Random().Next(100000, 999999).ToString();
+
+            //Set User resetCode
+            user.ResetCode = resetCode;
+
+            //Set till when resetCode is valid
+            user.ResetCodeExpires = DateTime.UtcNow.AddMinutes(15);
+
+            //TODO: Send Email. Code is valid for 15 minutes
+
+            //Update User
+            return _authRepository.UpdateUser(user);
         }
 
-        public bool ResetPassword(string uuid, string verificationCode, string password)
+        public bool ResetPassword(string email, string resetCode, string password)
         {
-            throw new NotImplementedException();
+            //Get User
+            User? user = _authRepository.GetUserByEmail(email);
+
+            //Check if user exists
+            if (user == null)
+            {
+                throw new HttpException("User not found", HttpStatusCode.NotFound);
+            }
+
+            //Check if user is verified
+            if (!user.Verified)
+            {
+                throw new HttpException("User not verified", HttpStatusCode.BadRequest);
+            }
+
+            //Check if resetCode is correct
+            if (user.ResetCode != resetCode)
+            {
+                throw new HttpException("ResetCode is incorrect", HttpStatusCode.BadRequest);
+            }
+
+            //Check if resetCode is still valid
+            if (user.ResetCodeExpires < DateTime.UtcNow)
+            {
+                throw new HttpException("ResetCode is expired", HttpStatusCode.BadRequest);
+            }
+
+            //Hash new password
+            //https://stackoverflow.com/questions/4181198/how-to-hash-a-password
+            byte[] salt;
+            new RNGCryptoServiceProvider().GetBytes(salt = new byte[16]);
+
+            var pbkdf2 = new Rfc2898DeriveBytes(password, salt, 100000);
+            byte[] hash = pbkdf2.GetBytes(20);
+
+            byte[] hashBytes = new byte[36];
+            Array.Copy(salt, 0, hashBytes, 0, 16);
+            Array.Copy(hash, 0, hashBytes, 16, 20);
+
+            string savedPasswordHash = Convert.ToBase64String(hashBytes);
+
+            //Set User password
+            user.Password = savedPasswordHash;
+
+            //Set User resetCode to null
+            user.ResetCode = String.Empty;
+
+            //Set User resetCodeExpires to null
+            user.ResetCodeExpires = null;
+
+            //Update User
+            return _authRepository.UpdateUser(user);
         }
 
         public User GetUser(string token)
@@ -188,8 +264,13 @@ namespace Spg.TennisBooking.Application.Services
             //Check if user exists
             if (user == null)
             {
-                //throw error
                 throw new HttpException("User not found", HttpStatusCode.NotFound);
+            }
+
+            //Check if user is verified
+            if (!user.Verified)
+            {
+                throw new HttpException("User not verified", HttpStatusCode.BadRequest);
             }
 
             //Return User
