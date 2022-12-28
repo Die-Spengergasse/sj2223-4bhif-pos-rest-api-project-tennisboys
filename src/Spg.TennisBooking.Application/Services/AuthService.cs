@@ -142,6 +142,9 @@ namespace Spg.TennisBooking.Application.Services
                 if (hashBytes[i + 16] != hash[i])
                     throw new HttpException("Password is incorrect", HttpStatusCode.Forbidden);
 
+            //lifetime
+            //TimeSpan lifetime = TimeSpan.FromDays(7);
+
             JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
             SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor
             {
@@ -153,14 +156,44 @@ namespace Spg.TennisBooking.Application.Services
                     // Rolle des Benutzer als ClaimTypes.DefaultRoleClaimType
 /*                    new Claim(ClaimsIdentity.DefaultRoleClaimType, role)
 */                }),
-                /*                Expires = DateTime.UtcNow + lifetime,
-                */
+                //Expires = DateTime.UtcNow + lifetime,
+
                 SigningCredentials = new SigningCredentials(
                     new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret)),
                     SecurityAlgorithms.HmacSha256Signature)
             };
             SecurityToken token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
+        }
+
+        public bool ForgotPassword(string email)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool ResetPassword(string uuid, string verificationCode, string password)
+        {
+            throw new NotImplementedException();
+        }
+
+        public User GetUser(string token)
+        {
+            //Decode Token
+            JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
+            JwtSecurityToken jwtToken = tokenHandler.ReadJwtToken(token);
+
+            //Get User
+            User? user = _authRepository.GetUserByUuid(jwtToken.Subject);
+
+            //Check if user exists
+            if (user == null)
+            {
+                //throw error
+                throw new HttpException("User not found", HttpStatusCode.NotFound);
+            }
+
+            //Return User
+            return user;
         }
     }
 }

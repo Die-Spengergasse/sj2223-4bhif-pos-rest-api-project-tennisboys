@@ -33,7 +33,8 @@ namespace Spg.TennisBooking.Api.Controllers
             _configuration = IConfiguration;
             _auth = auth;
         }
-
+        
+        //EmailInUse
         [HttpGet("EmailInUse")]
         [Produces("application/json")]
         public IActionResult EmailInUse(string email)
@@ -48,7 +49,8 @@ namespace Spg.TennisBooking.Api.Controllers
                 return StatusCode((int)e.StatusCode, e.Message);
             }
         }
-
+        
+        //Register
         [HttpPost("Register")]
         [Produces("application/json")]
         public IActionResult Register([FromBody] RegisterDto registerDto)
@@ -66,7 +68,8 @@ namespace Spg.TennisBooking.Api.Controllers
                 return StatusCode((int)e.StatusCode, e.Message);
             }
         }
-
+        
+        //Verify
         [HttpPost("Verify")]
         [Produces("application/json")]
         public IActionResult Verify([FromBody] VerifyDto verifyDto)
@@ -84,7 +87,8 @@ namespace Spg.TennisBooking.Api.Controllers
                 return StatusCode((int)e.StatusCode, e.Message);
             }
         }
-
+        
+        //Login
         [HttpPost("Login")]
         [Produces("application/json")]
         public IActionResult Login([FromBody] LoginDto loginDto)
