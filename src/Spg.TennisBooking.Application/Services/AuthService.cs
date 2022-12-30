@@ -9,6 +9,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Security.Cryptography;
 
+
 namespace Spg.TennisBooking.Application.Services
 {
     public class AuthService : IAuthService
@@ -45,18 +46,7 @@ namespace Spg.TennisBooking.Application.Services
             string verificationCode = new Random().Next(100000, 999999).ToString();
 
             //Hash password
-            //https://stackoverflow.com/questions/4181198/how-to-hash-a-password
-            byte[] salt;
-            new RNGCryptoServiceProvider().GetBytes(salt = new byte[16]);
-
-            var pbkdf2 = new Rfc2898DeriveBytes(password, salt, 100000);
-            byte[] hash = pbkdf2.GetBytes(20);
-
-            byte[] hashBytes = new byte[36];
-            Array.Copy(salt, 0, hashBytes, 0, 16);
-            Array.Copy(hash, 0, hashBytes, 16, 20);
-
-            string savedPasswordHash = Convert.ToBase64String(hashBytes);
+            string savedPasswordHash = HashPassword(password);
 
             //Create User
             User user = _authRepository.CreateUser(email, savedPasswordHash, verificationCode);
@@ -229,18 +219,7 @@ namespace Spg.TennisBooking.Application.Services
             }
 
             //Hash new password
-            //https://stackoverflow.com/questions/4181198/how-to-hash-a-password
-            byte[] salt;
-            new RNGCryptoServiceProvider().GetBytes(salt = new byte[16]);
-
-            var pbkdf2 = new Rfc2898DeriveBytes(password, salt, 100000);
-            byte[] hash = pbkdf2.GetBytes(20);
-
-            byte[] hashBytes = new byte[36];
-            Array.Copy(salt, 0, hashBytes, 0, 16);
-            Array.Copy(hash, 0, hashBytes, 16, 20);
-
-            string savedPasswordHash = Convert.ToBase64String(hashBytes);
+            string savedPasswordHash = HashPassword(password);
 
             //Set User password
             user.Password = savedPasswordHash;
@@ -278,6 +257,24 @@ namespace Spg.TennisBooking.Application.Services
 
             //Return User
             return user;
+        }
+
+        public string HashPassword(string password)
+        {
+            //https://stackoverflow.com/questions/4181198/how-to-hash-a-password
+            byte[] salt;
+            RandomNumberGenerator rng = RandomNumberGenerator.Create();
+            rng.GetBytes(salt = new byte[16]);
+
+            var pbkdf2 = new Rfc2898DeriveBytes(password, salt, 100000);
+            byte[] hash = pbkdf2.GetBytes(20);
+
+            byte[] hashBytes = new byte[36];
+            Array.Copy(salt, 0, hashBytes, 0, 16);
+            Array.Copy(hash, 0, hashBytes, 16, 20);
+
+            string savedPasswordHash = Convert.ToBase64String(hashBytes);
+            return savedPasswordHash;
         }
     }
 }
