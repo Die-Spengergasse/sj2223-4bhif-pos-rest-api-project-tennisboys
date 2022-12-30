@@ -6,8 +6,6 @@ using Microsoft.Net.Http.Headers;
 using Spg.TennisBooking.Infrastructure;
 using Spg.TennisBooking.Domain.Model;
 using Microsoft.AspNetCore.Authorization;
-// using Spg.TennisBooking.Dto.Models;
-// using Spg.TennisBooking.Configuration.Model;
 using Spg.TennisBooking.Application;
 using Spg.TennisBooking.Domain.Interfaces;
 using Spg.TennisBooking.Application.Services;
@@ -25,11 +23,13 @@ namespace Spg.TennisBooking.Api.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
+        private readonly IWebHostEnvironment _env;        
         private readonly IConfiguration _configuration;
         private readonly IAuthService _auth;
 
-        public AuthController(IConfiguration IConfiguration, IAuthService auth)
+        public AuthController(IWebHostEnvironment env, IConfiguration IConfiguration, IAuthService auth)
         {
+            _env = env;
             _configuration = IConfiguration;
             _auth = auth;
         }
@@ -42,11 +42,25 @@ namespace Spg.TennisBooking.Api.Controllers
             try
             {
                 bool emailInUse = _auth.EmailInUse(email);
-                return Ok(emailInUse);
+                return new ObjectResult(new { emailInUse = emailInUse }) { StatusCode = (int)HttpStatusCode.OK };
             }
-            catch (HttpException e)
+            catch (Exception e)
             {
-                return StatusCode((int)e.StatusCode, e.Message);
+                if (e is HttpException)
+                {
+                    return new ObjectResult(new { message = e.Message }) { StatusCode = (int?)((HttpException)e).StatusCode };
+                }
+                else
+                {
+                    if (_env.IsDevelopment())
+                    {
+                        return StatusCode(500, e.Message);
+                    }
+                    else
+                    {
+                        return StatusCode(500, "Internal Server Error");
+                    }
+                }
             }
         }
         
@@ -63,9 +77,23 @@ namespace Spg.TennisBooking.Api.Controllers
                 Uri uri = new Uri(url + "/verify?uuid=" + user.UUID);
                 return Created(uri.AbsoluteUri, new { uuid = user.UUID });
             }
-            catch (HttpException e)
+            catch (Exception e)
             {
-                return StatusCode((int)e.StatusCode, e.Message);
+                if (e is HttpException)
+                {
+                    return new ObjectResult(new { message = e.Message }) { StatusCode = (int?)((HttpException)e).StatusCode };
+                }
+                else
+                {
+                    if (_env.IsDevelopment())
+                    {
+                        return StatusCode(500, e.Message);
+                    }
+                    else
+                    {
+                        return StatusCode(500, "Internal Server Error");
+                    }
+                }
             }
         }
         
@@ -82,9 +110,23 @@ namespace Spg.TennisBooking.Api.Controllers
                 Uri uri = new Uri(url + "/login");
                 return Created(uri.AbsolutePath, new { verified = verified });
             }
-            catch (HttpException e)
+            catch (Exception e)
             {
-                return StatusCode((int)e.StatusCode, e.Message);
+                if (e is HttpException)
+                {
+                    return new ObjectResult(new { message = e.Message }) { StatusCode = (int?)((HttpException)e).StatusCode };
+                }
+                else
+                {
+                    if (_env.IsDevelopment())
+                    {
+                        return StatusCode(500, e.Message);
+                    }
+                    else
+                    {
+                        return StatusCode(500, "Internal Server Error");
+                    }
+                }
             }
         }
         
@@ -101,9 +143,23 @@ namespace Spg.TennisBooking.Api.Controllers
                 Uri uri = new Uri(url + "/user");
                 return Created(uri.AbsolutePath, new { token = token });
             }
-            catch (HttpException e)
+            catch (Exception e)
             {
-                return StatusCode((int)e.StatusCode, e.Message);
+                if (e is HttpException)
+                {
+                    return new ObjectResult(new { message = e.Message }) { StatusCode = (int?)((HttpException)e).StatusCode };
+                }
+                else
+                {
+                    if (_env.IsDevelopment())
+                    {
+                        return StatusCode(500, e.Message);
+                    }
+                    else
+                    {
+                        return StatusCode(500, "Internal Server Error");
+                    }
+                }
             }
         }
 
@@ -120,9 +176,23 @@ namespace Spg.TennisBooking.Api.Controllers
                 Uri uri = new Uri(url + "/resetpassword" + "?uuid=" + user.UUID);
                 return Created(uri.AbsolutePath, new { uuid = user.UUID });
             }
-            catch (HttpException e)
+            catch (Exception e)
             {
-                return StatusCode((int)e.StatusCode, e.Message);
+                if (e is HttpException)
+                {
+                    return new ObjectResult(new { message = e.Message }) { StatusCode = (int?)((HttpException)e).StatusCode };
+                }
+                else
+                {
+                    if (_env.IsDevelopment())
+                    {
+                        return StatusCode(500, e.Message);
+                    }
+                    else
+                    {
+                        return StatusCode(500, "Internal Server Error");
+                    }
+                }
             }
         }
 
@@ -139,9 +209,23 @@ namespace Spg.TennisBooking.Api.Controllers
                 Uri uri = new Uri(url + "/login");
                 return Created(uri.AbsolutePath, new { success = success });
             }
-            catch (HttpException e)
+            catch (Exception e)
             {
-                return StatusCode((int)e.StatusCode, e.Message);
+                if (e is HttpException)
+                {
+                    return new ObjectResult(new { message = e.Message }) { StatusCode = (int?)((HttpException)e).StatusCode };
+                }
+                else
+                {
+                    if (_env.IsDevelopment())
+                    {
+                        return StatusCode(500, e.Message);
+                    }
+                    else
+                    {
+                        return StatusCode(500, "Internal Server Error");
+                    }
+                }
             }
         }
     }
