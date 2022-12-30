@@ -42,6 +42,13 @@ namespace Spg.TennisBooking.Application.Services
                 throw new HttpException("Email is already in use", HttpStatusCode.Conflict);
             }
 
+            //Check if password is valid
+            if (password.Length < 8)
+            {
+                //throw error
+                throw new HttpException("Password is too short", HttpStatusCode.BadRequest);
+            }
+
             //Create VerificationCode. 6 Numbers only
             string verificationCode = new Random().Next(100000, 999999).ToString();
 
@@ -209,7 +216,7 @@ namespace Spg.TennisBooking.Application.Services
             //Check if resetCode is correct
             if (user.ResetCode != resetCode)
             {
-                throw new HttpException("ResetCode is incorrect"+user.ResetCode+" "+resetCode, HttpStatusCode.BadRequest);
+                throw new HttpException("ResetCode is incorrect" + user.ResetCode + " " + resetCode, HttpStatusCode.BadRequest);
             }
 
             //Check if resetCode is still valid
@@ -234,7 +241,7 @@ namespace Spg.TennisBooking.Application.Services
             return _authRepository.UpdateUser(user);
         }
 
-        public User GetUser(string token)
+       /* public User GetUser(string token)
         {
             //Decode Token
             JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
@@ -257,9 +264,9 @@ namespace Spg.TennisBooking.Application.Services
 
             //Return User
             return user;
-        }
+        }*/
 
-        public string HashPassword(string password)
+        public static string HashPassword(string password)
         {
             //https://stackoverflow.com/questions/4181198/how-to-hash-a-password
             byte[] salt;
@@ -275,6 +282,17 @@ namespace Spg.TennisBooking.Application.Services
 
             string savedPasswordHash = Convert.ToBase64String(hashBytes);
             return savedPasswordHash;
+        }
+
+        public static string GenerateRandom(int length = 128)
+        {
+            // Salt erzeugen.
+            byte[] salt = new byte[length / 8];
+            using (RandomNumberGenerator rnd = RandomNumberGenerator.Create())
+            {
+                rnd.GetBytes(salt);
+            }
+            return Convert.ToBase64String(salt);
         }
     }
 }

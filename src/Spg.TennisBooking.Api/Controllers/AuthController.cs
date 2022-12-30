@@ -142,12 +142,12 @@ namespace Spg.TennisBooking.Api.Controllers
         {
             try
             {
-                string token = _auth.Login(loginDto.Email, loginDto.Password, _configuration.GetSection("jwtSecret").Value);
+                string token = _auth.Login(loginDto.Email, loginDto.Password, _configuration.GetSection("JWT").GetValue<string>("JWTSecret"));
                 //Return Token and link to UserPage
                 string url = _configuration.GetSection("MvcFrontEnd").Value;
                 Uri uri = new Uri(url + "/user");
                 //Log
-                _logger.LogInformation("Login: {email}: {token}", loginDto.Email, token);
+                _logger.LogInformation("Login: {email}: {token}, secret: {secret}", loginDto.Email, token, _configuration.GetSection("JWT").GetValue<string>("JWTSecret"));
                 return Created(uri.AbsolutePath, new { token = token });
             }
             catch (Exception e)

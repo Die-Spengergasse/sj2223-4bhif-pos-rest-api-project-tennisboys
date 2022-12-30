@@ -1,11 +1,16 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Spg.TennisBooking.Application.Services;
 using Spg.TennisBooking.Domain.Interfaces;
 using Spg.TennisBooking.Infrastructure;
 using Spg.TennisBooking.Repository.Repositories;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
+
+ConfigurationManager Conf = builder.Configuration;
 
 // Add services to the container.
 
@@ -29,6 +34,34 @@ builder.Services.AddSwaggerGen();
 //Interfaces
 builder.Services.AddTransient<IAuthService, AuthService>();
 builder.Services.AddTransient<IAuthRepository, AuthRepository>();
+builder.Services.AddTransient<IUserService, UserService>();
+builder.Services.AddTransient<IUserRepository, UserRepository>();
+
+//JWT
+/*string jwtSecret = Configuration["AppSettings:Secret"] ?? AuthService.GenerateRandom(1024);
+builder.Services.AddJwtAuthentication(jwtSecret, setDefault: true);
+builder.Services.AddScoped<AuthService>(services =>
+    new AuthService(jwtSecret));*/
+string JWT = Conf.GetSection("JWT").GetValue<string>("JWTSecret");
+Console.WriteLine(JWT);
+builder.Services.AddAuthentication(auth =>
+{
+    auth.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    auth.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(auth =>
+{
+    auth.RequireHttpsMetadata = false;
+    auth.SaveToken = true;
+    auth.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(JWT)),
+        ValidateIssuer = false,
+        ValidateAudience = false
+    };
+});
+
+
 
 //Swagger Configuration
 builder.Services.AddSwaggerGen(s => s.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo() 
