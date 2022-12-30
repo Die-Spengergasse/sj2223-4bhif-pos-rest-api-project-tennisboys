@@ -30,6 +30,25 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IAuthService, AuthService>();
 builder.Services.AddTransient<IAuthRepository, AuthRepository>();
 
+//Swagger Configuration
+builder.Services.AddSwaggerGen(s => s.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo() 
+    { 
+        Title = "TennisBooking", 
+        Description = "Tennis Booking Website", 
+        Contact = new OpenApiContact() 
+        { 
+            Name = "Adrian Schauer",
+            Email = "info@adrian-schauer.at", 
+            Url = new Uri("http://www.spengergasse.at")
+        }, 
+        License = new OpenApiLicense() 
+        { 
+            Name = "Schauer-Licence", 
+            Url = new Uri("http://www.adrian-schauer.at/license") 
+        }, 
+        Version = "v1" 
+    }));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -49,12 +68,5 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-
-/*//Swagger Configuration
-builder.Services.AddSwaggerGen(s => s.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo() 
-{ Title = "TennisBooking", Description = "Tennis Booking Website", Contact = new OpenApiContact() 
-{ Name = "Adrian Schauer", Email = "info@adrian-schauer.at", Url = new Uri("http://www.spengergasse.at") }, 
-License = new OpenApiLicense() { Name = "Schauer-Licence", Url = new Uri("http://www.adrian-schauer.at/license") }, 
-Version = "v1" }));*/
 
 app.Run();
