@@ -1,17 +1,12 @@
-﻿using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Net.Http.Headers;
-using Spg.TennisBooking.Infrastructure;
-using Spg.TennisBooking.Domain.Model;
+﻿using System.Net;
+
 using Microsoft.AspNetCore.Authorization;
-using Spg.TennisBooking.Application;
-using Spg.TennisBooking.Domain.Interfaces;
-using Spg.TennisBooking.Application.Services;
+using Microsoft.AspNetCore.Mvc;
+
 using Spg.TennisBooking.Api.Dtos.AuthDtos;
-using System.Net;
 using Spg.TennisBooking.Domain.Exceptions;
+using Spg.TennisBooking.Domain.Interfaces;
+using Spg.TennisBooking.Domain.Model;
 
 namespace Spg.TennisBooking.Api.Controllers
 {
