@@ -13,15 +13,20 @@ namespace Spg.TennisBooking.Domain.Model
         public string UUID { get; set; } = Guid.NewGuid().ToString();
         public string Email { get; set;  } = String.Empty;
         public string Password { get; set; } = String.Empty;
+        //Verification
         public string VerificationCode { get; set; } = String.Empty;
         public bool Verified { get; set; } = false;
+        //Recover Password
+        public string ResetCode { get; set; } = String.Empty;
+        public DateTime? ResetCodeExpires { get; set; } = DateTime.UtcNow;
+        //Personal
         public string FirstName { get; set; } = String.Empty;
         public string LastName { get; set; } = String.Empty;
         public GenderTypes Gender { get; set; } = GenderTypes.None;
         public string Address { get; set; } = String.Empty;
         public PhoneNumber? PhoneNumber { get; set; } = null;
         public DateTime? BirthDate { get; set; } = null;
-        public DateTime RegistrationDate { get; } = DateTime.Now;
+        public DateTime RegistrationDate { get; set; } = DateTime.UtcNow;
         
 
         public User(string email, string password, string verificationCode)

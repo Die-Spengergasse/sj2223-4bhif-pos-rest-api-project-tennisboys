@@ -1,4 +1,4 @@
-namespace Spg.TennisBooking.Api.Dtos
+namespace Spg.TennisBooking.Api.Dtos.AuthDtos
 {
     public record VerifyDto
     {

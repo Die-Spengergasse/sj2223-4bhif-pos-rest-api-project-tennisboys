@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 using Spg.TennisBooking.Application;
 using Spg.TennisBooking.Domain.Interfaces;
 using Spg.TennisBooking.Application.Services;
-using Spg.TennisBooking.Api.Dtos;
+using Spg.TennisBooking.Api.Dtos.AuthDtos;
 using System.Net;
 using Spg.TennisBooking.Domain.Exceptions;
 
@@ -33,7 +33,8 @@ namespace Spg.TennisBooking.Api.Controllers
             _configuration = IConfiguration;
             _auth = auth;
         }
-
+        
+        //EmailInUse
         [HttpGet("EmailInUse")]
         [Produces("application/json")]
         public IActionResult EmailInUse(string email)
@@ -48,7 +49,8 @@ namespace Spg.TennisBooking.Api.Controllers
                 return StatusCode((int)e.StatusCode, e.Message);
             }
         }
-
+        
+        //Register
         [HttpPost("Register")]
         [Produces("application/json")]
         public IActionResult Register([FromBody] RegisterDto registerDto)
@@ -59,14 +61,15 @@ namespace Spg.TennisBooking.Api.Controllers
                 //Return 201 Created and the location of the new resource
                 string url = _configuration.GetSection("MvcFrontEnd").Value;
                 Uri uri = new Uri(url + "/verify?uuid=" + user.UUID);
-                return Created(uri.AbsoluteUri, new { user = user.UUID });
+                return Created(uri.AbsoluteUri, new { uuid = user.UUID });
             }
             catch (HttpException e)
             {
                 return StatusCode((int)e.StatusCode, e.Message);
             }
         }
-
+        
+        //Verify
         [HttpPost("Verify")]
         [Produces("application/json")]
         public IActionResult Verify([FromBody] VerifyDto verifyDto)
@@ -84,7 +87,8 @@ namespace Spg.TennisBooking.Api.Controllers
                 return StatusCode((int)e.StatusCode, e.Message);
             }
         }
-
+        
+        //Login
         [HttpPost("Login")]
         [Produces("application/json")]
         public IActionResult Login([FromBody] LoginDto loginDto)
@@ -92,7 +96,48 @@ namespace Spg.TennisBooking.Api.Controllers
             try
             {
                 string token = _auth.Login(loginDto.Email, loginDto.Password, _configuration.GetSection("jwtSecret").Value);
-                return Ok(new { token = token });
+                //Return Token and link to UserPage
+                string url = _configuration.GetSection("MvcFrontEnd").Value;
+                Uri uri = new Uri(url + "/user");
+                return Created(uri.AbsolutePath, new { token = token });
+            }
+            catch (HttpException e)
+            {
+                return StatusCode((int)e.StatusCode, e.Message);
+            }
+        }
+
+        //Forgot Password
+        [HttpPost("ForgotPassword")]
+        [Produces("application/json")]
+        public IActionResult ForgotPassword([FromBody] ForgotPasswordDto forgotPasswordDto)
+        {
+            try
+            {
+                User user = _auth.ForgotPassword(forgotPasswordDto.Email);
+                //Return uuid and link to reset password
+                string url = _configuration.GetSection("MvcFrontEnd").Value;
+                Uri uri = new Uri(url + "/resetpassword" + "?uuid=" + user.UUID);
+                return Created(uri.AbsolutePath, new { uuid = user.UUID });
+            }
+            catch (HttpException e)
+            {
+                return StatusCode((int)e.StatusCode, e.Message);
+            }
+        }
+
+        //Reset Password
+        [HttpPost("ResetPassword")]
+        [Produces("application/json")]
+        public IActionResult ResetPassword([FromBody] ResetPasswordDto resetPasswordDto)
+        {
+            try
+            {
+                bool success = _auth.ResetPassword(resetPasswordDto.UUID, resetPasswordDto.Password, resetPasswordDto.ResetCode);
+                //Return success and link to login
+                string url = _configuration.GetSection("MvcFrontEnd").Value;
+                Uri uri = new Uri(url + "/login");
+                return Created(uri.AbsolutePath, new { success = success });
             }
             catch (HttpException e)
             {

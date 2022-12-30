@@ -13,5 +13,8 @@ namespace Spg.TennisBooking.Domain.Interfaces
         User Register(string email, string password);
         bool Verify(string uuid, string verificationCode);
         string Login(string email, string password, string secret);
+        User ForgotPassword(string email);
+        bool ResetPassword(string email, string password, string resetCode);
+        User GetUser(string token);
     }
 }

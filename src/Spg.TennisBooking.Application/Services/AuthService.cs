@@ -114,14 +114,12 @@ namespace Spg.TennisBooking.Application.Services
             //Check if user exists
             if (user == null)
             {
-                //throw error
                 throw new HttpException("User not found", HttpStatusCode.NotFound);
             }
 
             //Check if user is verified
             if (!user.Verified)
             {
-                //throw error
                 throw new HttpException("User not verified", HttpStatusCode.BadRequest);
             }
 
@@ -142,6 +140,9 @@ namespace Spg.TennisBooking.Application.Services
                 if (hashBytes[i + 16] != hash[i])
                     throw new HttpException("Password is incorrect", HttpStatusCode.Forbidden);
 
+            //lifetime
+            //TimeSpan lifetime = TimeSpan.FromDays(7);
+
             JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
             SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor
             {
@@ -153,14 +154,130 @@ namespace Spg.TennisBooking.Application.Services
                     // Rolle des Benutzer als ClaimTypes.DefaultRoleClaimType
 /*                    new Claim(ClaimsIdentity.DefaultRoleClaimType, role)
 */                }),
-                /*                Expires = DateTime.UtcNow + lifetime,
-                */
+                //Expires = DateTime.UtcNow + lifetime,
+
                 SigningCredentials = new SigningCredentials(
                     new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret)),
                     SecurityAlgorithms.HmacSha256Signature)
             };
             SecurityToken token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
+        }
+
+        public User ForgotPassword(string email)
+        {
+            //Get User
+            User? user = _authRepository.GetUserByEmail(email);
+
+            //Check if user exists
+            if (user == null)
+            {
+                throw new HttpException("User not found", HttpStatusCode.NotFound);
+            }
+
+            //Check if user is verified
+            if (!user.Verified)
+            {
+                throw new HttpException("User not verified", HttpStatusCode.BadRequest);
+            }
+
+            //Create ResetCode. 6 Numbers only
+            string resetCode = new Random().Next(100000, 999999).ToString();
+
+            //Set User resetCode
+            user.ResetCode = resetCode;
+
+            //Set till when resetCode is valid
+            user.ResetCodeExpires = DateTime.UtcNow.AddMinutes(15);
+
+            //TODO: Send Email. Code is valid for 15 minutes
+
+            //Update User
+            _authRepository.UpdateUser(user);
+
+            //Return Success
+            return user;
+        }
+
+        public bool ResetPassword(string uuid, string password, string resetCode)
+        {
+            //Get User
+            User? user = _authRepository.GetUserByUuid(uuid);
+
+            //Check if user exists
+            if (user == null)
+            {
+                throw new HttpException("User not found", HttpStatusCode.NotFound);
+            }
+
+            //Check if user is verified
+            if (!user.Verified)
+            {
+                throw new HttpException("User not verified", HttpStatusCode.BadRequest);
+            }
+
+            //Check if resetCode is correct
+            if (user.ResetCode != resetCode)
+            {
+                throw new HttpException("ResetCode is incorrect"+user.ResetCode+" "+resetCode, HttpStatusCode.BadRequest);
+            }
+
+            //Check if resetCode is still valid
+            if (user.ResetCodeExpires < DateTime.UtcNow)
+            {
+                throw new HttpException("ResetCode is expired", HttpStatusCode.BadRequest);
+            }
+
+            //Hash new password
+            //https://stackoverflow.com/questions/4181198/how-to-hash-a-password
+            byte[] salt;
+            new RNGCryptoServiceProvider().GetBytes(salt = new byte[16]);
+
+            var pbkdf2 = new Rfc2898DeriveBytes(password, salt, 100000);
+            byte[] hash = pbkdf2.GetBytes(20);
+
+            byte[] hashBytes = new byte[36];
+            Array.Copy(salt, 0, hashBytes, 0, 16);
+            Array.Copy(hash, 0, hashBytes, 16, 20);
+
+            string savedPasswordHash = Convert.ToBase64String(hashBytes);
+
+            //Set User password
+            user.Password = savedPasswordHash;
+
+            //Set User resetCode to null
+            user.ResetCode = String.Empty;
+
+            //Set User resetCodeExpires to null
+            user.ResetCodeExpires = null;
+
+            //Update User
+            return _authRepository.UpdateUser(user);
+        }
+
+        public User GetUser(string token)
+        {
+            //Decode Token
+            JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
+            JwtSecurityToken jwtToken = tokenHandler.ReadJwtToken(token);
+
+            //Get User
+            User? user = _authRepository.GetUserByUuid(jwtToken.Subject);
+
+            //Check if user exists
+            if (user == null)
+            {
+                throw new HttpException("User not found", HttpStatusCode.NotFound);
+            }
+
+            //Check if user is verified
+            if (!user.Verified)
+            {
+                throw new HttpException("User not verified", HttpStatusCode.BadRequest);
+            }
+
+            //Return User
+            return user;
         }
     }
 }

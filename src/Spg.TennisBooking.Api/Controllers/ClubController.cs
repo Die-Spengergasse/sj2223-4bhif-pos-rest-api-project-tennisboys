@@ -19,7 +19,7 @@ public class ClubController : ControllerBase
     {
         return Enumerable.Range(1, 5).Select(index => new WeatherForecast
         {
-            Date = DateTime.Now.AddDays(index),
+            Date = DateTime.UtcNow.AddDays(index),
             TemperatureC = Random.Shared.Next(-20, 55),
             Summary = "Hey"
         })
