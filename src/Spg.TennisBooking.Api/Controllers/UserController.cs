@@ -1,5 +1,5 @@
 ﻿using System.Net;
-
+using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,41 +13,81 @@ namespace Spg.TennisBooking.Api.Controllers
     /// <summary>
     /// This APIController is used to do any related Account operations
     /// </summary>
-    [AllowAnonymous]
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
     {
         private readonly IWebHostEnvironment _env;        
         private readonly IConfiguration _configuration;
-        private readonly ILogger<AuthController> _logger;
+        private readonly ILogger<UserController> _logger;
         private readonly IUserService _user;
-
-        public UserController(IWebHostEnvironment env, IConfiguration configuration, ILogger<AuthController> logger, IUserService user)
+        
+        public UserController(IWebHostEnvironment env, IConfiguration configuration, ILogger<UserController> logger, IUserService user)
         {
             _env = env;
             _configuration = configuration;
             _logger = logger;
             _user = user;
         }
-        
-        //PersonalData
-        [HttpGet("PersonalData")]
-        [Produces("application/json")]
-        public IActionResult PersonalData([FromBody] PersonalDataDto personalDataDto)
+
+        //Welcomed
+        [HttpGet]
+        [Route("welcomed")]
+        [Authorize]
+        public IActionResult Welcomed()
         {
+            _logger.LogInformation("Welcomed");
+            string? uuid = User.FindFirst(ClaimTypes.Name)?.Value;
+            if (uuid == null) return BadRequest("No UUID found");
+            _logger.LogInformation("UUID: {uuid}", uuid);
             try
             {
-                bool success = _user.PersonalData(personalDataDto.UUID, personalDataDto.FirstName, personalDataDto.LastName, personalDataDto.BirthDate, personalDataDto.Gender, personalDataDto.PhoneNumber);
-                //_logger.LogInformation("EmailInUse: {email}: {emailInUse}", email, emailInUse);
+                return Ok(_user.Welcomed(uuid));
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Error while checking if user is welcomed");
+                if (e is HttpException exception)
+                {
+                    return new ObjectResult(new { message = e.Message }) { StatusCode = (int?)exception.StatusCode };
+                }
+                else
+                {
+                    if (_env.IsDevelopment())
+                    {
+                        return StatusCode(500, e.Message);
+                    }
+                    else
+                    {
+                        return StatusCode(500, "Internal Server Error");
+                    }
+                }
+            }
+        }
+
+        //PersonalData
+        [HttpPatch("PersonalData")]
+        [Produces("application/json")]
+        [Authorize]
+        public IActionResult PersonalData([FromBody] PersonalDataDto personalDataDto)
+        {
+            _logger.LogInformation("PersonalData");
+            //Give out every information about the user
+            string? uuid = User.FindFirst(ClaimTypes.Name)?.Value;
+            if (uuid == null) return BadRequest("No UUID found");
+            _logger.LogInformation("UserId: {UUID}", uuid);
+            try
+            {
+                bool success = _user.PersonalData(uuid, personalDataDto.FirstName, personalDataDto.LastName, personalDataDto.BirthDate, personalDataDto.Gender, personalDataDto.PhoneNumber);
+                _logger.LogInformation("PersonalData: {success}. UUID: {UUID}, FirstName: {FirstName}, LastName: {LastName}, BirthDate: {BirthDate}, Gender: {Gender}, PhoneNumber: {PhoneNumber}", success, uuid, personalDataDto.FirstName, personalDataDto.LastName, personalDataDto.BirthDate, personalDataDto.Gender, personalDataDto.PhoneNumber);
                 return new ObjectResult(new { }) { StatusCode = (int)HttpStatusCode.OK };
             }
             catch (Exception e)
             {
-                //_logger.LogError(e, "EmailInUse: {email}", email);
-                if (e is HttpException)
+                _logger.LogError(e, "PersonalData: {UUID}, FirstName: {FirstName}, LastName: {LastName}, BirthDate: {BirthDate}, Gender: {Gender}, PhoneNumber: {PhoneNumber}", uuid, personalDataDto.FirstName, personalDataDto.LastName, personalDataDto.BirthDate, personalDataDto.Gender, personalDataDto.PhoneNumber);
+                if (e is HttpException exception)
                 {
-                    return new ObjectResult(new { message = e.Message }) { StatusCode = (int?)((HttpException)e).StatusCode };
+                    return new ObjectResult(new { message = e.Message }) { StatusCode = (int?)exception.StatusCode };
                 }
                 else
                 {
@@ -64,22 +104,28 @@ namespace Spg.TennisBooking.Api.Controllers
         }
 
         //ChangePassword
-        [HttpGet("ChangePassword")]
+        [HttpPatch("ChangePassword")]
         [Produces("application/json")]
+        [Authorize]
         public IActionResult ChangePassword([FromBody] ChangePasswordDto changePasswordDto)
         {
+            _logger.LogInformation("ChangePassword");
+            //Change the password of the user
+            string? uuid = User.FindFirst(ClaimTypes.Name)?.Value;
+            if (uuid == null) return BadRequest("No UUID found");
+            _logger.LogInformation("UserId: {UUID}", uuid);
             try
             {
-                bool success = _user.ChangePassword(changePasswordDto.UUID, changePasswordDto.Password, changePasswordDto.NewPassword);
-                //_logger.LogInformation("EmailInUse: {email}: {emailInUse}", email, emailInUse);
+                bool success = _user.ChangePassword(uuid, changePasswordDto.Password, changePasswordDto.NewPassword);
+                _logger.LogInformation("ChangePassword: {success}. UUID: {UUID}, Password: {Password}, NewPassword: {NewPassword}", success, uuid, changePasswordDto.Password, changePasswordDto.NewPassword);
                 return new ObjectResult(new { }) { StatusCode = (int)HttpStatusCode.OK };
             }
             catch (Exception e)
             {
-                //_logger.LogError(e, "EmailInUse: {email}", email);
-                if (e is HttpException)
+                _logger.LogError(e, "ChangePassword: {UUID}, Password: {Password}, NewPassword: {NewPassword}", uuid, changePasswordDto.Password, changePasswordDto.NewPassword);
+                if (e is HttpException exception)
                 {
-                    return new ObjectResult(new { message = e.Message }) { StatusCode = (int?)((HttpException)e).StatusCode };
+                    return new ObjectResult(new { message = e.Message }) { StatusCode = (int?)exception.StatusCode };
                 }
                 else
                 {

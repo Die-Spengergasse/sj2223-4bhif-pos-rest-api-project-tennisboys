@@ -4,7 +4,6 @@ namespace Spg.TennisBooking.Api.Dtos.UserDtos
 {
     public record PersonalDataDto
     {
-        public string UUID { get; set; } = string.Empty;
         public string FirstName {get; set;} = string.Empty;
         public string LastName {get; set;} = string.Empty;
         public DateTime? BirthDate {get; set;} = null;
@@ -12,9 +11,8 @@ namespace Spg.TennisBooking.Api.Dtos.UserDtos
         public PhoneNumber? PhoneNumber {get; set;} = null;
 
         //Constructor
-        public PersonalDataDto(string uuid, string firstName, string lastName, DateTime? birthDate, GenderTypes gender, PhoneNumber? phoneNumber)
+        public PersonalDataDto(string firstName, string lastName, DateTime? birthDate, GenderTypes gender, PhoneNumber? phoneNumber)
         {
-            UUID = uuid;
             FirstName = firstName;
             LastName = lastName;
             BirthDate = birthDate;

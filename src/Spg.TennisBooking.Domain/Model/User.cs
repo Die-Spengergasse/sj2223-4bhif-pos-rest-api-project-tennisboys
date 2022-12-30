@@ -23,11 +23,12 @@ namespace Spg.TennisBooking.Domain.Model
         public string FirstName { get; set; } = String.Empty;
         public string LastName { get; set; } = String.Empty;
         public GenderTypes Gender { get; set; } = GenderTypes.NotSpecified;
-        public string Address { get; set; } = String.Empty;
         public PhoneNumber? PhoneNumber { get; set; } = null;
         public DateTime? BirthDate { get; set; } = null;
         public DateTime RegistrationDate { get; set; } = DateTime.UtcNow;
-        
+        //Welcomed
+        public bool Welcomed { get; set; } = false;
+
 
         public User(string email, string password, string verificationCode)
         {
