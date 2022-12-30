@@ -32,7 +32,8 @@ namespace Spg.TennisBooking.Api.Controllers
 
         //Welcomed
         [HttpGet]
-        [Route("welcomed")]
+        [Route("Welcomed")]
+        [Produces("application/json")]
         [Authorize]
         public IActionResult Welcomed()
         {
@@ -67,7 +68,7 @@ namespace Spg.TennisBooking.Api.Controllers
 
         //Get PersonalData
         [HttpGet("PersonalData")]
-        [Route("application/json")]
+        [Produces("application/json")]
         [Authorize]
         public IActionResult GetPersonalData()
         {
@@ -118,7 +119,7 @@ namespace Spg.TennisBooking.Api.Controllers
             {
                 bool success = _user.SetPersonalData(uuid, personalDataDto.FirstName, personalDataDto.LastName, personalDataDto.BirthDate, personalDataDto.Gender, personalDataDto.PhoneNumber);
                 _logger.LogInformation("PersonalData: {success}. UUID: {UUID}, FirstName: {FirstName}, LastName: {LastName}, BirthDate: {BirthDate}, Gender: {Gender}, PhoneNumber: {PhoneNumber}", success, uuid, personalDataDto.FirstName, personalDataDto.LastName, personalDataDto.BirthDate, personalDataDto.Gender, personalDataDto.PhoneNumber);
-                return new ObjectResult(new { }) { StatusCode = (int)HttpStatusCode.OK };
+                return new ObjectResult(new { success }) { StatusCode = (int)HttpStatusCode.OK };
             }
             catch (Exception e)
             {
@@ -156,7 +157,7 @@ namespace Spg.TennisBooking.Api.Controllers
             {
                 bool success = _user.ChangePassword(uuid, changePasswordDto.Password, changePasswordDto.NewPassword);
                 _logger.LogInformation("ChangePassword: {success}. UUID: {UUID}, Password: {Password}, NewPassword: {NewPassword}", success, uuid, changePasswordDto.Password, changePasswordDto.NewPassword);
-                return new ObjectResult(new { }) { StatusCode = (int)HttpStatusCode.OK };
+                return new ObjectResult(new { success }) { StatusCode = (int)HttpStatusCode.OK };
             }
             catch (Exception e)
             {

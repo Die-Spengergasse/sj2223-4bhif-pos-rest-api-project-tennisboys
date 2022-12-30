@@ -31,7 +31,7 @@ namespace Spg.TennisBooking.Application.Services
             return user.Welcomed;
         }
 
-        public User getPersonalData(string uuid)
+        public User GetPersonalData(string uuid)
         {
             //Get personal data
             User? user = _userRepository.GetByUuid(uuid);
