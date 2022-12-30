@@ -164,7 +164,7 @@ namespace Spg.TennisBooking.Application.Services
             return tokenHandler.WriteToken(token);
         }
 
-        public bool ForgotPassword(string email)
+        public User ForgotPassword(string email)
         {
             //Get User
             User? user = _authRepository.GetUserByEmail(email);
@@ -193,13 +193,16 @@ namespace Spg.TennisBooking.Application.Services
             //TODO: Send Email. Code is valid for 15 minutes
 
             //Update User
-            return _authRepository.UpdateUser(user);
+            _authRepository.UpdateUser(user);
+
+            //Return Success
+            return user;
         }
 
-        public bool ResetPassword(string email, string resetCode, string password)
+        public bool ResetPassword(string uuid, string password, string resetCode)
         {
             //Get User
-            User? user = _authRepository.GetUserByEmail(email);
+            User? user = _authRepository.GetUserByUuid(uuid);
 
             //Check if user exists
             if (user == null)
@@ -216,7 +219,7 @@ namespace Spg.TennisBooking.Application.Services
             //Check if resetCode is correct
             if (user.ResetCode != resetCode)
             {
-                throw new HttpException("ResetCode is incorrect", HttpStatusCode.BadRequest);
+                throw new HttpException("ResetCode is incorrect"+user.ResetCode+" "+resetCode, HttpStatusCode.BadRequest);
             }
 
             //Check if resetCode is still valid

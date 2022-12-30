@@ -61,7 +61,7 @@ namespace Spg.TennisBooking.Api.Controllers
                 //Return 201 Created and the location of the new resource
                 string url = _configuration.GetSection("MvcFrontEnd").Value;
                 Uri uri = new Uri(url + "/verify?uuid=" + user.UUID);
-                return Created(uri.AbsoluteUri, new { user = user.UUID });
+                return Created(uri.AbsoluteUri, new { uuid = user.UUID });
             }
             catch (HttpException e)
             {
@@ -96,7 +96,10 @@ namespace Spg.TennisBooking.Api.Controllers
             try
             {
                 string token = _auth.Login(loginDto.Email, loginDto.Password, _configuration.GetSection("jwtSecret").Value);
-                return Ok(new { token = token });
+                //Return Token and link to UserPage
+                string url = _configuration.GetSection("MvcFrontEnd").Value;
+                Uri uri = new Uri(url + "/user");
+                return Created(uri.AbsolutePath, new { token = token });
             }
             catch (HttpException e)
             {
@@ -111,8 +114,11 @@ namespace Spg.TennisBooking.Api.Controllers
         {
             try
             {
-                bool success = _auth.ForgotPassword(forgotPasswordDto.Email);
-                return Ok(new { success = success });
+                User user = _auth.ForgotPassword(forgotPasswordDto.Email);
+                //Return uuid and link to reset password
+                string url = _configuration.GetSection("MvcFrontEnd").Value;
+                Uri uri = new Uri(url + "/resetpassword" + "?uuid=" + user.UUID);
+                return Created(uri.AbsolutePath, new { uuid = user.UUID });
             }
             catch (HttpException e)
             {
@@ -127,8 +133,11 @@ namespace Spg.TennisBooking.Api.Controllers
         {
             try
             {
-                bool success = _auth.ResetPassword(resetPasswordDto.Email, resetPasswordDto.Password, resetPasswordDto.ResetCode);
-                return Ok(new { success = success });
+                bool success = _auth.ResetPassword(resetPasswordDto.UUID, resetPasswordDto.Password, resetPasswordDto.ResetCode);
+                //Return success and link to login
+                string url = _configuration.GetSection("MvcFrontEnd").Value;
+                Uri uri = new Uri(url + "/login");
+                return Created(uri.AbsolutePath, new { success = success });
             }
             catch (HttpException e)
             {
