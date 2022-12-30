@@ -65,11 +65,49 @@ namespace Spg.TennisBooking.Api.Controllers
             }
         }
 
-        //PersonalData
+        //Get PersonalData
+        [HttpGet("PersonalData")]
+        [Route("application/json")]
+        [Authorize]
+        public IActionResult GetPersonalData()
+        {
+            _logger.LogInformation("GetPersonalData");
+            string? uuid = User.FindFirst(ClaimTypes.Name)?.Value;
+            if (uuid == null) return BadRequest("No UUID found");
+            _logger.LogInformation("UUID: {uuid}", uuid);
+            try
+            {
+                User user = _user.GetPersonalData(uuid);
+                //Put the data into a PersonalDataDto
+                PersonalDataDto personalDataDto = new PersonalDataDto(user.FirstName, user.LastName, user.BirthDate, user.Gender, user.PhoneNumber);
+                return Ok(personalDataDto);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Error while getting personal data");
+                if (e is HttpException exception)
+                {
+                    return new ObjectResult(new { message = e.Message }) { StatusCode = (int?)exception.StatusCode };
+                }
+                else
+                {
+                    if (_env.IsDevelopment())
+                    {
+                        return StatusCode(500, e.Message);
+                    }
+                    else
+                    {
+                        return StatusCode(500, "Internal Server Error");
+                    }
+                }
+            }
+        }
+
+        //Set PersonalData
         [HttpPatch("PersonalData")]
         [Produces("application/json")]
         [Authorize]
-        public IActionResult PersonalData([FromBody] PersonalDataDto personalDataDto)
+        public IActionResult SetPersonalData([FromBody] PersonalDataDto personalDataDto)
         {
             _logger.LogInformation("PersonalData");
             //Give out every information about the user
@@ -78,7 +116,7 @@ namespace Spg.TennisBooking.Api.Controllers
             _logger.LogInformation("UserId: {UUID}", uuid);
             try
             {
-                bool success = _user.PersonalData(uuid, personalDataDto.FirstName, personalDataDto.LastName, personalDataDto.BirthDate, personalDataDto.Gender, personalDataDto.PhoneNumber);
+                bool success = _user.SetPersonalData(uuid, personalDataDto.FirstName, personalDataDto.LastName, personalDataDto.BirthDate, personalDataDto.Gender, personalDataDto.PhoneNumber);
                 _logger.LogInformation("PersonalData: {success}. UUID: {UUID}, FirstName: {FirstName}, LastName: {LastName}, BirthDate: {BirthDate}, Gender: {Gender}, PhoneNumber: {PhoneNumber}", success, uuid, personalDataDto.FirstName, personalDataDto.LastName, personalDataDto.BirthDate, personalDataDto.Gender, personalDataDto.PhoneNumber);
                 return new ObjectResult(new { }) { StatusCode = (int)HttpStatusCode.OK };
             }

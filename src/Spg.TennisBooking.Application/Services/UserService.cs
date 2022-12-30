@@ -30,8 +30,19 @@ namespace Spg.TennisBooking.Application.Services
             }
             return user.Welcomed;
         }
-        
-        public bool PersonalData(string uuid, string firstName, string lastName, DateTime? birthDate, GenderTypes gender, PhoneNumber? phoneNumber)
+
+        public User getPersonalData(string uuid)
+        {
+            //Get personal data
+            User? user = _userRepository.GetByUuid(uuid);
+            if (user == null)
+            {
+                throw new HttpException("User not found", HttpStatusCode.NotFound);
+            }
+            return user;
+        }
+
+        public bool SetPersonalData(string uuid, string firstName, string lastName, DateTime? birthDate, GenderTypes gender, PhoneNumber? phoneNumber)
         {
             User? user = _userRepository.GetByUuid(uuid);
             if (user == null)
