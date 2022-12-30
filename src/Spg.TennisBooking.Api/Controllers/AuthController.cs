@@ -20,12 +20,14 @@ namespace Spg.TennisBooking.Api.Controllers
     {
         private readonly IWebHostEnvironment _env;        
         private readonly IConfiguration _configuration;
+        private readonly ILogger<AuthController> _logger;
         private readonly IAuthService _auth;
 
-        public AuthController(IWebHostEnvironment env, IConfiguration IConfiguration, IAuthService auth)
+        public AuthController(IWebHostEnvironment env, IConfiguration configuration, ILogger<AuthController> logger, IAuthService auth)
         {
             _env = env;
-            _configuration = IConfiguration;
+            _configuration = configuration;
+            _logger = logger;
             _auth = auth;
         }
         
@@ -37,10 +39,12 @@ namespace Spg.TennisBooking.Api.Controllers
             try
             {
                 bool emailInUse = _auth.EmailInUse(email);
+                _logger.LogInformation("EmailInUse: {email}: {emailInUse}", email, emailInUse);
                 return new ObjectResult(new { emailInUse = emailInUse }) { StatusCode = (int)HttpStatusCode.OK };
             }
             catch (Exception e)
             {
+                _logger.LogError(e, "EmailInUse: {email}", email);
                 if (e is HttpException)
                 {
                     return new ObjectResult(new { message = e.Message }) { StatusCode = (int?)((HttpException)e).StatusCode };
@@ -70,10 +74,13 @@ namespace Spg.TennisBooking.Api.Controllers
                 //Return 201 Created and the location of the new resource
                 string url = _configuration.GetSection("MvcFrontEnd").Value;
                 Uri uri = new Uri(url + "/verify?uuid=" + user.UUID);
+                //Log
+                _logger.LogInformation("Register: {email}: {uuid}: {verificationCode}", user.Email, user.UUID, user.VerificationCode);
                 return Created(uri.AbsoluteUri, new { uuid = user.UUID });
             }
             catch (Exception e)
             {
+                _logger.LogError(e, "Register: {email}", registerDto.Email);
                 if (e is HttpException)
                 {
                     return new ObjectResult(new { message = e.Message }) { StatusCode = (int?)((HttpException)e).StatusCode };
@@ -103,10 +110,13 @@ namespace Spg.TennisBooking.Api.Controllers
                 //Return Verification Success and link to login
                 string url = _configuration.GetSection("MvcFrontEnd").Value;
                 Uri uri = new Uri(url + "/login");
+                //Log
+                _logger.LogInformation("Verify: {uuid}: {verified}", verifyDto.UUID, verified);
                 return Created(uri.AbsolutePath, new { verified = verified });
             }
             catch (Exception e)
             {
+                _logger.LogError(e, "Verify: {uuid}", verifyDto.UUID);
                 if (e is HttpException)
                 {
                     return new ObjectResult(new { message = e.Message }) { StatusCode = (int?)((HttpException)e).StatusCode };
@@ -136,10 +146,13 @@ namespace Spg.TennisBooking.Api.Controllers
                 //Return Token and link to UserPage
                 string url = _configuration.GetSection("MvcFrontEnd").Value;
                 Uri uri = new Uri(url + "/user");
+                //Log
+                _logger.LogInformation("Login: {email}: {token}", loginDto.Email, token);
                 return Created(uri.AbsolutePath, new { token = token });
             }
             catch (Exception e)
             {
+                _logger.LogError(e, "Login: {email}", loginDto.Email);
                 if (e is HttpException)
                 {
                     return new ObjectResult(new { message = e.Message }) { StatusCode = (int?)((HttpException)e).StatusCode };
@@ -169,10 +182,13 @@ namespace Spg.TennisBooking.Api.Controllers
                 //Return uuid and link to reset password
                 string url = _configuration.GetSection("MvcFrontEnd").Value;
                 Uri uri = new Uri(url + "/resetpassword" + "?uuid=" + user.UUID);
+                //Log
+                _logger.LogInformation("ForgotPassword: {email}: {uuid}: {resetCode}", user.Email, user.UUID, user.ResetCode);
                 return Created(uri.AbsolutePath, new { uuid = user.UUID });
             }
             catch (Exception e)
             {
+                _logger.LogError(e, "ForgotPassword: {email}", forgotPasswordDto.Email);
                 if (e is HttpException)
                 {
                     return new ObjectResult(new { message = e.Message }) { StatusCode = (int?)((HttpException)e).StatusCode };
@@ -202,10 +218,13 @@ namespace Spg.TennisBooking.Api.Controllers
                 //Return success and link to login
                 string url = _configuration.GetSection("MvcFrontEnd").Value;
                 Uri uri = new Uri(url + "/login");
+                //Log
+                _logger.LogInformation("ResetPassword: {uuid}: {success}", resetPasswordDto.UUID, success);
                 return Created(uri.AbsolutePath, new { success = success });
             }
             catch (Exception e)
             {
+                _logger.LogError(e, "ResetPassword: {uuid}", resetPasswordDto.UUID);
                 if (e is HttpException)
                 {
                     return new ObjectResult(new { message = e.Message }) { StatusCode = (int?)((HttpException)e).StatusCode };
