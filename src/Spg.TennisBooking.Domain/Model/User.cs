@@ -11,6 +11,7 @@ namespace Spg.TennisBooking.Domain.Model
     {
         public int Id { get; private set; }
         public string UUID { get; set; } = Guid.NewGuid().ToString();
+        [IsUnique = true)]
         public string Email { get; set;  } = String.Empty;
         public string Password { get; set; } = String.Empty;
         //Verification
