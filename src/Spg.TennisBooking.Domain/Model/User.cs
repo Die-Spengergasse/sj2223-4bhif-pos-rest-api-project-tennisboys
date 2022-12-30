@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Spg.TennisBooking.Domain.Model
 {
-    public enum GenderTypes { Male = 0, Female = 1, Diverse = 2, None = 3}
+    public enum GenderTypes { Male = 0, Female = 1, Diverse = 2, NotSpecified = 3}
     public class User
     {
         public int Id { get; private set; }
@@ -22,7 +22,7 @@ namespace Spg.TennisBooking.Domain.Model
         //Personal
         public string FirstName { get; set; } = String.Empty;
         public string LastName { get; set; } = String.Empty;
-        public GenderTypes Gender { get; set; } = GenderTypes.None;
+        public GenderTypes Gender { get; set; } = GenderTypes.NotSpecified;
         public string Address { get; set; } = String.Empty;
         public PhoneNumber? PhoneNumber { get; set; } = null;
         public DateTime? BirthDate { get; set; } = null;
