@@ -11,7 +11,7 @@ namespace Spg.TennisBooking.Domain.Model
         public int Id { get; set; }
         public string Title { get; set; } = string.Empty;
         public string Info { get; set; } = string.Empty;
-        public DateTime Written { get; } = DateTime.Now;
+        public DateTime Written { get; set; } = DateTime.Now;
         public virtual int ClubNavigationId { get; set; }
         public virtual Club ClubNavigation { get; set; } = default!;
 

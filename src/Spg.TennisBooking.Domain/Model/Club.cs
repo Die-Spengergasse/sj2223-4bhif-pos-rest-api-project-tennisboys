@@ -11,7 +11,7 @@ namespace Spg.TennisBooking.Domain.Model
         public int Id { get; set; }
         public User? Admin { get; set; }
         public DateTime? PaidTill { get; set; }
-        public DateTime FreeTrialTill { get; } = DateTime.Now.AddDays(30);
+        public DateTime FreeTrialTill { get; set; } = DateTime.Now.AddDays(30);
         public string Name { get; set; } = string.Empty;
         public string Info { get; set; } = string.Empty;
         public string Address { get; set; } = string.Empty;
