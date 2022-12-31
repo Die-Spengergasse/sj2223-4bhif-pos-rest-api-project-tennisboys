@@ -17,13 +17,13 @@ public class CourtController : ControllerBase
     private readonly IWebHostEnvironment _env;
     private readonly IConfiguration _configuration;
     private readonly ILogger<CourtController> _logger;
-    private readonly IClubService _club;
+    private readonly ICourtService _court;
 
-    public CourtController(IWebHostEnvironment env, IConfiguration configuration, ILogger<CourtController> logger, IClubService club)
+    public CourtController(IWebHostEnvironment env, IConfiguration configuration, ILogger<CourtController> logger, ICourtService court)
     {
         _env = env;
         _configuration = configuration;
         _logger = logger;
-        _club = club;
+        _court = court;
     }
 }

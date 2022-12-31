@@ -17,13 +17,13 @@ public class ReservationController : ControllerBase
     private readonly IWebHostEnvironment _env;
     private readonly IConfiguration _configuration;
     private readonly ILogger<ReservationController> _logger;
-    private readonly IClubService _club;
+    private readonly IReservationService _reservation;
 
-    public ReservationController(IWebHostEnvironment env, IConfiguration configuration, ILogger<ReservationController> logger, IClubService club)
+    public ReservationController(IWebHostEnvironment env, IConfiguration configuration, ILogger<ReservationController> logger, IReservationService reservation)
     {
         _env = env;
         _configuration = configuration;
         _logger = logger;
-        _club = club;
+        _reservation = reservation;
     }
 }

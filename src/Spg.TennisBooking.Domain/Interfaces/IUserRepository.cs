@@ -8,6 +8,5 @@ namespace Spg.TennisBooking.Domain.Interfaces
         User? GetByEmail(string email);
         User? GetByUuid(string uuid);
         bool Update(User user);
-        
     }
 }
