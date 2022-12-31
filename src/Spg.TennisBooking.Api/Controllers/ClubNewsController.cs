@@ -12,18 +12,18 @@ namespace Spg.TennisBooking.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class ClubController : ControllerBase
+public class ClubNewsController : ControllerBase
 {
     private readonly IWebHostEnvironment _env;
     private readonly IConfiguration _configuration;
-    private readonly ILogger<ClubController> _logger;
-    private readonly IClubService _club;
+    private readonly ILogger<ClubNewsController> _logger;
+    private readonly IClubNewsService _clubNews;
 
-    public ClubController(IWebHostEnvironment env, IConfiguration configuration, ILogger<ClubController> logger, IClubService club)
+    public ClubNewsController(IWebHostEnvironment env, IConfiguration configuration, ILogger<ClubNewsController> logger, IClubNewsService clubNews)
     {
         _env = env;
         _configuration = configuration;
         _logger = logger;
-        _club = club;
+        _clubNews = clubNews;
     }
 }

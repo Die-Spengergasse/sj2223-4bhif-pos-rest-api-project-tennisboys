@@ -15,6 +15,5 @@ namespace Spg.TennisBooking.Domain.Interfaces
         string Login(string email, string password, string secret);
         User ForgotPassword(string email);
         bool ResetPassword(string email, string password, string resetCode);
-        //User GetUser(string token);
     }
 }
