@@ -56,7 +56,19 @@ namespace Spg.TennisBooking.Application.Services
             string savedPasswordHash = HashPassword(password);
 
             //Create User
-            User user = _authRepository.CreateUser(email, savedPasswordHash, verificationCode);
+            try
+            {
+                User user = _authRepository.CreateUser(email, savedPasswordHash, verificationCode);
+            }
+
+            catch (SqlException ex)
+            {
+                // the exception alone won't tell you why it failed...
+                if (ex.Number == 2627) // <-- but this will
+                {
+                    //Violation of primary key. Handle Exception
+                }
+            }
 
             //TODO: Send verification email
             //Create MailMessage
