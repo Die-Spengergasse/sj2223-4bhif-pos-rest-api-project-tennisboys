@@ -2,13 +2,12 @@
 
 namespace Spg.TennisBooking.Application.Services
 {
-    public class ClubService : IClubService
+    public class ClubServiceTests
     {
-        private readonly IClubRepository _clubRepository;
+        private readonly IClubService _clubService;
 
-        public ClubService(IClubRepository clubRepository)
+        public ClubServiceTests(IClubService clubService)
         {
-            _clubRepository = clubRepository;
+            _clubService = clubService;
         }
-    }
 }

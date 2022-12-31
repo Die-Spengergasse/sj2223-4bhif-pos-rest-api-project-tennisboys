@@ -3,13 +3,13 @@ using Spg.TennisBooking.Domain.Interfaces;
 
 namespace Spg.TennisBooking.Application.Services
 {
-    public class ReservationService : IReservationService
+    public class ReservationServiceTests
     {
-        private readonly IReservationRepository _reservationRepository;
+        private readonly IReservationService _reservationService;
 
-        public ReservationService(IReservationRepository reservationRepository)
+        public ReservationServiceTests(IReservationService reservationService)
         {
-            _reservationRepository = reservationRepository;
+            _reservationService = reservationService;
         }
     }
 }

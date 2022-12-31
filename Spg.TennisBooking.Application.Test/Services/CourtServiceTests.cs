@@ -2,13 +2,13 @@
 
 namespace Spg.TennisBooking.Application.Services
 {
-    public class CourtService : ICourtService
+    public class CourtServiceTests
     {
-        private readonly ICourtRepository _courtRepository;
+        private readonly ICourtService _courtService;
 
-        public CourtService(ICourtRepository courtRepository)
+        public CourtServiceTests(ICourtService courtService)
         {
-            _courtRepository = courtRepository;
+            _courtService = courtService;
         }
     }
 }
