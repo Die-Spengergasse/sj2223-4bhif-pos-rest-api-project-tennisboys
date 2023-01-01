@@ -8,22 +8,37 @@ using System.Security.Claims;
 using System.Text;
 using System.Security.Cryptography;
 using Xunit;
+using Spg.TennisBooking.Repository.Repositories;
 
-namespace Spg.TennisBooking.Application.Services
+namespace Spg.TennisBooking.Application.Test.Services
 {
-    public class AuthServiceTests
+    public class AuthServiceTests : Tests
     {
-        private readonly IAuthService _authService;
-
-        public AuthServiceTests(IAuthService authService)
+        protected AuthService GetAuthService()
         {
-            _authService = authService;
+            return new AuthService(GetAuthRepository());
+        }
+
+        protected IAuthRepository GetAuthRepository()
+        {
+            return new AuthRepository(GetContext());
         }
 
         //EmailInUse
         [Fact]
         public void EmailInUse()
         {
+            //Init
+            AuthService authService = GetAuthService();
+            
+            //Arrange
+            string email = "info@adrian-schauer.at";
+
+            //Act
+            bool result = authService.EmailInUse(email);
+
+            //Assert
+            Assert.False(result);
         }
 
         //Register

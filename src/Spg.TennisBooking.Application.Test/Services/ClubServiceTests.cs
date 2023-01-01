@@ -1,6 +1,6 @@
 ﻿using Spg.TennisBooking.Domain.Interfaces;
 
-namespace Spg.TennisBooking.Application.Services
+namespace Spg.TennisBooking.Application.Test.Services
 {
     public class ClubServiceTests
     {
@@ -10,4 +10,5 @@ namespace Spg.TennisBooking.Application.Services
         {
             _clubService = clubService;
         }
+    }
 }

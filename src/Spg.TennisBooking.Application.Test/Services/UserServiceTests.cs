@@ -5,7 +5,7 @@ using System.Net;
 using System.Security.Cryptography;
 using Xunit;
 
-namespace Spg.TennisBooking.Application.Services
+namespace Spg.TennisBooking.Application.Test.Services
 {
     public class UserServiceTests
     {
