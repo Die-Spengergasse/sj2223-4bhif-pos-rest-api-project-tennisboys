@@ -101,11 +101,7 @@ namespace Spg.TennisBooking.Domain.Test
         {
             TennisBookingContext db = GetContext();
 
-            Reservation newReservation = new Reservation(CreateClub(),
-            DateTime.Now, 22, 23,
-            new Court(CourtType.Hard, "Court 1", CreateClub(),
-            20, 20, 5, 15, 12),
-            CreateUser());
+            Reservation newReservation = new Reservation(DateTime.Now, DateTime.Now);
 
             db.Reservations.Add(newReservation);
             db.SaveChanges();

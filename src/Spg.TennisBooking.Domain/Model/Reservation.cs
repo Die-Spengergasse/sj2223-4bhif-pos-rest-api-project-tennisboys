@@ -13,10 +13,10 @@ namespace Spg.TennisBooking.Domain.Model
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
 
-        public virtual int UserNavigationId { get; set; }
+        /*public virtual int UserNavigationId { get; set; }
         public virtual User UserNavigation { get; set; } = default!;
         public virtual int CourtNavigationId { get; set; }
-        public virtual Court CourtNavigation { get; set; } = default!;
+        public virtual Court CourtNavigation { get; set; } = default!;*/
 
         public Reservation(DateTime startTime, DateTime endTime)
         {
