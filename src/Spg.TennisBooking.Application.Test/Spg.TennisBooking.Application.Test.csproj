@@ -1,16 +1,14 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="coverlet.collector" Version="3.1.2">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
+    <PackageReference Include="coverlet.collector" Version="3.1.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.4.1" />
     <PackageReference Include="xunit" Version="2.4.2" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.5">
@@ -20,8 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Spg.TennisBooking.Application\Spg.TennisBooking.Application.csproj" />
+    <ProjectReference Include="..\Spg.TennisBooking.Domain.Test\Spg.TennisBooking.Domain.Test.csproj" />
     <ProjectReference Include="..\Spg.TennisBooking.Domain\Spg.TennisBooking.Domain.csproj" />
-    <ProjectReference Include="..\Spg.TennisBooking.Infrastructure\Spg.TennisBooking.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

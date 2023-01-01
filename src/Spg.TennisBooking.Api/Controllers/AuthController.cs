@@ -11,7 +11,7 @@ using Spg.TennisBooking.Domain.Model;
 namespace Spg.TennisBooking.Api.Controllers
 {
     /// <summary>
-    /// This APIController is used to do any related Account operations
+    /// This APIController is used to do any related Authorization operations.
     /// </summary>
     [AllowAnonymous]
     [Route("api/[controller]")]
