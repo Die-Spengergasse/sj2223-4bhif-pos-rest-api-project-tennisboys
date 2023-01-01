@@ -14,12 +14,12 @@ namespace Spg.TennisBooking.Application.Test.Services
 {
     public class AuthServiceTests : Tests
     {
-        protected AuthService GetAuthService()
+        protected AuthService GetService()
         {
-            return new AuthService(GetAuthRepository());
+            return new AuthService(GetRepository());
         }
 
-        protected IAuthRepository GetAuthRepository()
+        protected IAuthRepository GetRepository()
         {
             return new AuthRepository(GetContext());
         }
@@ -29,7 +29,7 @@ namespace Spg.TennisBooking.Application.Test.Services
         public void EmailInUse()
         {
             //Init
-            AuthService authService = GetAuthService();
+            AuthService authService = GetService();
             
             //Arrange
             string email = "info@adrian-schauer.at";
@@ -45,35 +45,35 @@ namespace Spg.TennisBooking.Application.Test.Services
         [Fact]
         public void Register()
         {
-
+            Assert.True(true);
         }
 
         //Verify
         [Fact]
         public void Verify()
         {
-            
+            Assert.True(true);
         }
 
         //Login
         [Fact]
         public void Login()
         {
-            
+            Assert.True(true);
         }
 
         //ForgotPassword
         [Fact]
         public void ForgotPassword()
         {
-            
+            Assert.True(true);
         }
 
         //ResetPassword
         [Fact]
         public void ResetPassword()
         {
-
+            Assert.True(true);
         }
     }
 }

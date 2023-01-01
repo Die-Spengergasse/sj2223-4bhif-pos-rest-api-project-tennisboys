@@ -4,11 +4,6 @@ namespace Spg.TennisBooking.Application.Test.Services
 {
     public class ClubNewsServiceTests
     {
-        private readonly IClubNewsService _clubNewsService;
-
-        public ClubNewsServiceTests(IClubNewsService clubNewsService)
-        {
-            _clubNewsService = clubNewsService;
-        }
+        
     }
 }

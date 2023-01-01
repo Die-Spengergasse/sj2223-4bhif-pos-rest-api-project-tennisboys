@@ -5,11 +5,6 @@ namespace Spg.TennisBooking.Application.Test.Services
 {
     public class ReservationServiceTests
     {
-        private readonly IReservationService _reservationService;
 
-        public ReservationServiceTests(IReservationService reservationService)
-        {
-            _reservationService = reservationService;
-        }
     }
 }
