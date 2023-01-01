@@ -9,22 +9,20 @@ namespace Spg.TennisBooking.Domain.Model
     public class Reservation
     {
         public int Id { get; set; }
+        public string UUID { get; set; } = Guid.NewGuid().ToString();
         public DateTime Date { get; set; }
         public int StartTime { get; set; }
         public int EndTime { get; set; }
-        public Court ?Court { get; set; }
-        public User ?User { get; set; }
-        public virtual int ClubNavigationId { get; set; }
-        public virtual Club ClubNavigation { get; set; } = default!;
+        public virtual int UserNavigationId { get; set; }
+        public virtual User UserNavigation { get; set; } = default!;
+        public virtual int CourtNavigationId { get; set; }
+        public virtual Court CourtNavigation { get; set; } = default!;
 
-        public Reservation(Club clubNavigation, DateTime date, int startTime, int endTime, Court court, User customer)
+        public Reservation(DateTime date, int startTime, int endTime)
         {
-            ClubNavigation = clubNavigation;
             Date = date;
             StartTime = startTime;
             EndTime = endTime;
-            Court = court;
-            User = User;
         }
         
         protected Reservation() {

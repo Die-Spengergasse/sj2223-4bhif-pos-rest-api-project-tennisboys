@@ -17,5 +17,40 @@ namespace Spg.TennisBooking.Repository.Repositories
         {
             _db = db;
         }
+        
+        public Reservation Add(Reservation reservation)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Delete(Reservation reservation)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Reservation> GetByClub(Club club)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Reservation> GetByCourtAndDateRange(Court court, DateTime from, DateTime to)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Reservation> GetByUser(User user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Reservation GetByUUID(string uuid)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Update(Reservation reservation)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
