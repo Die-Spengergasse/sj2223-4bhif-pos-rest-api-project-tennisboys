@@ -215,7 +215,7 @@ namespace Spg.TennisBooking.Domain.Test
             club.AddCourt(court);
 
 
-            Reservation res = new Reservation(club, DateTime.Now, 10, 12, court, user);
+            Reservation res = new Reservation(DateTime.Now, DateTime.Now);
 
             // Act
             court.AddReservation(res);
@@ -243,7 +243,7 @@ namespace Spg.TennisBooking.Domain.Test
             
             db.Clubs.Add(club);
 
-            Reservation res = new Reservation(club, DateTime.Now, 10, 12, court, user);
+            Reservation res = new Reservation(DateTime.Now, DateTime.Now);
 
             court.AddReservation(res);
             db.SaveChanges();

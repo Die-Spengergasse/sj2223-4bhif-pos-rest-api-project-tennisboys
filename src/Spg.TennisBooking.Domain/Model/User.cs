@@ -28,7 +28,9 @@ namespace Spg.TennisBooking.Domain.Model
         public DateTime RegistrationDate { get; set; } = DateTime.UtcNow;
         //Welcomed
         public bool Welcomed { get; set; } = false;
-
+        //Reservations
+        private List<Reservation> _reservations = new List<Reservation>();
+        public IReadOnlyList<Reservation> Reservations => _reservations;
 
         public User(string email, string password, string verificationCode)
         {
@@ -38,6 +40,24 @@ namespace Spg.TennisBooking.Domain.Model
         }
         protected User() {
 
+        }
+
+        //AddRemove
+        public void AddReservation(Reservation reservation)
+        {
+            if (reservation == null)
+                throw new ArgumentNullException(nameof(reservation));
+            if (_reservations.Contains(reservation))
+                throw new ArgumentException("Reservation already exists");
+            _reservations.Add(reservation);
+        }
+        public void RemoveReservation(Reservation reservation)
+        {
+            if (reservation == null)
+                throw new ArgumentNullException(nameof(reservation));
+            if (!_reservations.Contains(reservation))
+                throw new ArgumentException("Reservation does not exist");
+            _reservations.Remove(reservation);
         }
     }
 }
