@@ -19,7 +19,7 @@ namespace Spg.TennisBooking.Domain.Test
             // Arrange
             TennisBookingContext db = GetContext();
             Club club = CreateClub();
-            ClubNews clubNews = new ClubNews("Club News 1", "Club News 1 Info", club);
+            ClubNews clubNews = new("Club News 1", "Club News 1 Info", club);
 
             // Act
             club.AddClubNews(clubNews);
@@ -40,7 +40,7 @@ namespace Spg.TennisBooking.Domain.Test
             // Arrange
             TennisBookingContext db = GetContext();
             Club club = CreateClub();
-            ClubNews clubNews = new ClubNews("Club News 1", "Club News 1 Info", club);
+            ClubNews clubNews = new("Club News 1", "Club News 1 Info", club);
             club.AddClubNews(clubNews);
 
             db.Clubs.Add(club);
@@ -67,7 +67,7 @@ namespace Spg.TennisBooking.Domain.Test
             // Arrange
             TennisBookingContext db = GetContext();
             Club club = CreateClub();
-            ClubEvent clubEvent = new ClubEvent(club, "Club Event 1", DateTime.Now, "Club Event 1 Info");
+            ClubEvent clubEvent = new(club, "Club Event 1", DateTime.Now, "Club Event 1 Info");
 
             // Act
             club.AddClubEvent(clubEvent);
@@ -88,7 +88,7 @@ namespace Spg.TennisBooking.Domain.Test
             // Arrange
             TennisBookingContext db = GetContext();
             Club club = CreateClub();
-            ClubEvent clubEvent = new ClubEvent(club, "Club Event 1", DateTime.Now, "Club Event 1 Info");
+            ClubEvent clubEvent = new(club, "Club Event 1", DateTime.Now, "Club Event 1 Info");
             club.AddClubEvent(clubEvent);
 
             db.Clubs.Add(club);
@@ -115,7 +115,7 @@ namespace Spg.TennisBooking.Domain.Test
             // Arrange
             TennisBookingContext db = GetContext();
             Club club = CreateClub();
-            Court court = new Court(CourtType.Carpet, "Court 1", club, 10, 10, 10, 10, 10);
+            Court court = new (club, CourtType.Carpet, "Court 1", 10, 10, 10, 10, 10);
 
             // Act
             club.AddCourt(court);
@@ -136,7 +136,7 @@ namespace Spg.TennisBooking.Domain.Test
             // Arrange
             TennisBookingContext db = GetContext();
             Club club = CreateClub();
-            Court court = new Court(CourtType.Carpet, "Court 1", club, 10, 10, 10, 10, 10);
+            Court court = new(club, CourtType.Carpet, "Court 1", 10, 10, 10, 10, 10);
             club.AddCourt(court);
             db.Clubs.Add(club);
             db.SaveChanges();
@@ -161,7 +161,7 @@ namespace Spg.TennisBooking.Domain.Test
             // Arrange
             TennisBookingContext db = GetContext();
             Club club = CreateClub();
-            Trainer trainer = new Trainer(club, "Max", "Mustermann", GenderTypes.Male, "Bester Mann", 16, "img/Trainer/MaxMustermann.jpg");
+            Trainer trainer = new(club, "Max", "Mustermann", GenderTypes.Male, "Bester Mann", 16, "img/Trainer/MaxMustermann.jpg");
 
             // Act
             club.AddTrainer(trainer);
@@ -182,7 +182,7 @@ namespace Spg.TennisBooking.Domain.Test
             // Arrange
             TennisBookingContext db = GetContext();
             Club club = CreateClub();
-            Trainer trainer = new Trainer(club, "Max", "Mustermann", GenderTypes.Male, "Bester Mann", 16, "img/Trainer/MaxMustermann.jpg");
+            Trainer trainer = new(club, "Max", "Mustermann", GenderTypes.Male, "Bester Mann", 16, "img/Trainer/MaxMustermann.jpg");
 
             club.AddTrainer(trainer);
 
@@ -209,13 +209,13 @@ namespace Spg.TennisBooking.Domain.Test
             // Arrange
             TennisBookingContext db = GetContext();
             Club club = CreateClub();
-            Court court = new Court(CourtType.Carpet, "Court 1", club, 10, 10, 10, 10, 10);
+            Court court = new(club, CourtType.Carpet, "Court 1", 10, 10, 10, 10, 10);
             User user = CreateUser();
 
             club.AddCourt(court);
 
 
-            Reservation res = new Reservation(DateTime.Now, DateTime.Now);
+            Reservation res = new (DateTime.Now, DateTime.Now, court, user);
 
             // Act
             court.AddReservation(res);
@@ -236,14 +236,14 @@ namespace Spg.TennisBooking.Domain.Test
             // Arrange
             TennisBookingContext db = GetContext();
             Club club = CreateClub();
-            Court court = new Court(CourtType.Carpet, "Court 1", club, 10, 10, 10, 10, 10);
+            Court court = new(club, CourtType.Carpet, "Court 1", 10, 10, 10, 10, 10);
             User user = CreateUser();
 
             club.AddCourt(court);
             
             db.Clubs.Add(club);
 
-            Reservation res = new Reservation(DateTime.Now, DateTime.Now);
+            Reservation res = new(DateTime.Now, DateTime.Now, court, user);
 
             court.AddReservation(res);
             db.SaveChanges();

@@ -11,7 +11,7 @@ namespace Spg.TennisBooking.Domain.Test
 {
     public class Tests
     {
-        protected TennisBookingContext GetContext()
+        protected static TennisBookingContext GetContext()
         {
             //Generate random database name
             string dbName = Guid.NewGuid().ToString();
@@ -22,21 +22,21 @@ namespace Spg.TennisBooking.Domain.Test
             .UseSqlite(data_source)
             .Options;
 
-            TennisBookingContext db = new TennisBookingContext(options);
+            TennisBookingContext db = new(options);
             db.Database.EnsureDeleted();
             db.Database.EnsureCreated();
             return db;
         }
-        protected Club CreateClub()
+        protected static Club CreateClub()
         {
             User user = CreateUser();
-            Club club = new Club(user, DateTime.Now, "Tennisclub", "Tennisclub in der Nähe", "Musterstrasse 1", "1234", "imagepath");
+            Club club = new(user, DateTime.Now, "Tennisclub", "Tennisclub in der Nähe", "Musterstrasse 1", "1234", "imagepath");
             return club;
         }
         
-        protected User CreateUser()
+        protected static User CreateUser()
         {
-            User user = new User("adrian.schauer@aon.at", "AdminPswd", "012345");
+            User user = new("adrian.schauer@aon.at", "AdminPswd", "012345");
             return user;
         }
     }

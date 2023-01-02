@@ -4,7 +4,7 @@ namespace Spg.TennisBooking.Domain.Interfaces
 {
     public interface IReservationRepository
     {
-        Reservation GetByUUID(string uuid);
+        Reservation? GetByUUID(string uuid);
         Reservation Add(Reservation reservation);
         bool Update(Reservation reservation);
         bool Delete(Reservation reservation);
