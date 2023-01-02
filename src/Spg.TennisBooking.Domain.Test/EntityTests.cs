@@ -36,7 +36,7 @@ namespace Spg.TennisBooking.Domain.Test
 
             Club newClub = CreateClub();
 
-            ClubEvent newClubEvent = new ClubEvent(newClub, "Club Event 1", DateTime.Now, "Club Event 1 Info");
+            ClubEvent newClubEvent = new(newClub, "Club Event 1", DateTime.Now, "Club Event 1 Info");
 
             db.ClubEvents.Add(newClubEvent);
             db.SaveChanges();
@@ -52,7 +52,7 @@ namespace Spg.TennisBooking.Domain.Test
         {
             TennisBookingContext db = GetContext();
 
-            ClubNews newClubNews = new ClubNews("Club News 1", "Club News 1 Info", CreateClub());
+            ClubNews newClubNews = new("Club News 1", "Club News 1 Info", CreateClub());
 
             db.ClubNews.Add(newClubNews);
             db.SaveChanges();
@@ -68,8 +68,8 @@ namespace Spg.TennisBooking.Domain.Test
         {
             TennisBookingContext db = GetContext();
 
-            Court newCourt = new Court(CourtType.Hard, "Court 1", CreateClub(),
-            20, 20, 5, 15, 12);
+            Club club = CreateClub();
+            Court newCourt = new(club, CourtType.Hard, "Court 1", 20, 20, 5, 15, 12);
 
             db.Courts.Add(newCourt);
             db.SaveChanges();
@@ -101,11 +101,11 @@ namespace Spg.TennisBooking.Domain.Test
         {
             TennisBookingContext db = GetContext();
 
-            Reservation newReservation = new Reservation(CreateClub(),
-            DateTime.Now, 22, 23,
-            new Court(CourtType.Hard, "Court 1", CreateClub(),
-            20, 20, 5, 15, 12),
-            CreateUser());
+            Club club = CreateClub();
+            User user = CreateUser();
+            Court court = new(club, CourtType.Carpet, "Court 1", 20, 20, 5, 15, 12);
+
+            Reservation newReservation = new(DateTime.Now, DateTime.Now, court, user);
 
             db.Reservations.Add(newReservation);
             db.SaveChanges();
@@ -120,7 +120,7 @@ namespace Spg.TennisBooking.Domain.Test
         {
             TennisBookingContext db = GetContext();
 
-            SocialHub newSocialHub = new SocialHub();
+            SocialHub newSocialHub = new();
 
             db.SocialHubs.Add(newSocialHub);
             db.SaveChanges();
@@ -136,8 +136,7 @@ namespace Spg.TennisBooking.Domain.Test
         {
             TennisBookingContext db = GetContext();
 
-            Trainer newTrainer = new Trainer(
-                CreateClub(), "Trainer Firstname", "Trainer Lastname", GenderTypes.Male, "Trainer Musterstrasse 1", 1321, "SomeImage");
+            Trainer newTrainer = new(CreateClub(), "Trainer Firstname", "Trainer Lastname", GenderTypes.Male, "Trainer Musterstrasse 1", 1321, "SomeImage");
 
             db.Trainers.Add(newTrainer);
             db.SaveChanges();

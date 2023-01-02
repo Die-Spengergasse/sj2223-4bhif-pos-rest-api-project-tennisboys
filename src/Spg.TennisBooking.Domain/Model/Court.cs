@@ -70,7 +70,7 @@ namespace Spg.TennisBooking.Domain.Model
 
         public virtual int ClubNavigationId { get; set; }
         public virtual Club ClubNavigation { get; set; } = default!;
-        public Court(CourtType type, string name, Club club, double aPrice, double? bPrice, int aTimeFrom, int aTimeTill, int aWeekendTimeTill)
+        public Court(Club club, CourtType type, string name, double aPrice, double? bPrice, int aTimeFrom, int aTimeTill, int aWeekendTimeTill)
         {
             ClubNavigation = club;
             Name = name;
@@ -82,7 +82,7 @@ namespace Spg.TennisBooking.Domain.Model
             AWeekendTimeTill = aWeekendTimeTill;
         }
         
-        private List<Reservation> _reservations = new();
+        private readonly List<Reservation> _reservations = new();
         public IReadOnlyList<Reservation> Reservations => _reservations;
         public void AddReservation(Reservation entity)
         {
