@@ -17,5 +17,30 @@ namespace Spg.TennisBooking.Repository.Repositories
         {
             _db = db;
         }
+
+        public void Add(ClubEvent clubEvent)
+        {
+            _db.ClubEvents.Add(clubEvent);
+        }
+
+        public void Delete(ClubEvent clubEvent)
+        {
+            _db.ClubEvents.Remove(clubEvent);
+        }
+
+        public ClubEvent? Get(int id)
+        {
+            return _db.ClubEvents.Find(id);
+        }
+
+        public IEnumerable<ClubEvent> GetAll(Club club)
+        {
+            return _db.ClubEvents.Where(x => x.ClubNavigation == club);
+        }
+
+        public void Update(ClubEvent clubEvent)
+        {
+            _db.ClubEvents.Update(clubEvent);
+        }
     }
 }
