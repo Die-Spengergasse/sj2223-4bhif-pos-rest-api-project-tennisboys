@@ -7,21 +7,23 @@ using System.Net.Mail;
 using System.Security.Claims;
 using System.Text;
 using System.Security.Cryptography;
+using Microsoft.Extensions.Configuration;
 using Xunit;
 using Spg.TennisBooking.Repository.Repositories;
+using Spg.TennisBooking.Infrastructure;
 
 namespace Spg.TennisBooking.Application.Test.Services
 {
     public class AuthServiceTests : Tests
     {
-        protected AuthService GetService()
+        protected AuthService GetService(IAuthRepository authRepository)
         {
-            return new AuthService(GetRepository());
+            return GetAuthService(authRepository);
         }
 
-        protected IAuthRepository GetRepository()
+        protected AuthRepository GetRepository(TennisBookingContext context)
         {
-            return new AuthRepository(GetContext());
+            return GetAuthRepository(context);
         }
 
         //EmailInUse
@@ -29,7 +31,9 @@ namespace Spg.TennisBooking.Application.Test.Services
         public void EmailInUse()
         {
             //Init
-            AuthService authService = GetService();
+            TennisBookingContext context = GetContext();
+            AuthRepository authRepository = GetRepository(context);
+            AuthService authService = GetService(authRepository);
             
             //Arrange
             string email = "info@adrian-schauer.at";
@@ -39,41 +43,149 @@ namespace Spg.TennisBooking.Application.Test.Services
 
             //Assert
             Assert.False(result);
+
+            //Clean
+            context.Database.EnsureDeleted();
         }
 
         //Register
         [Fact]
         public void Register()
         {
-            Assert.True(true);
+            //Init
+            TennisBookingContext context = GetContext();
+            AuthRepository authRepository = GetRepository(context);
+            AuthService authService = GetService(authRepository);
+
+            //Arrange
+            string email = "info@adrian-schauer.at";
+            string password = "admin1234";
+
+            //Act
+            User result = authService.Register(email, password);
+
+            //Assert
+            Assert.NotNull(result);
+            
+            //Clean
+            context.Database.EnsureDeleted();
         }
+
 
         //Verify
         [Fact]
         public void Verify()
         {
-            Assert.True(true);
+            //Init
+            TennisBookingContext context = GetContext();
+            AuthRepository authRepository = GetRepository(context);
+            AuthService authService = GetService(authRepository);
+
+            //Arrange
+            string email = "info@adrian-schauer.at";
+            string password = "admin1234";
+
+            //Register
+            User user = authService.Register(email, password);
+
+            //Act
+            bool result = authService.Verify(user.UUID, user.VerificationCode);
+
+            //Assert
+            Assert.True(result);
+            
+            //Clean
+            context.Database.EnsureDeleted();
         }
 
         //Login
         [Fact]
         public void Login()
         {
-            Assert.True(true);
+            //Init
+            TennisBookingContext context = GetContext();
+            AuthRepository authRepository = GetRepository(context);
+            AuthService authService = GetService(authRepository);
+
+            //Arrange
+            string email = "info@adrian-schauer.at";
+            string password = "admin1234";
+
+            //Register
+            User user = authService.Register(email, password);
+
+            //Verify
+            authService.Verify(user.UUID, user.VerificationCode);
+
+            //Act
+            string result = authService.Login(email, password, "This is only a Test Key. Do not use in prod!");
+
+            //Assert
+            Assert.True(!string.IsNullOrEmpty(result));
+            
+            //Clean
+            context.Database.EnsureDeleted();
         }
 
         //ForgotPassword
         [Fact]
         public void ForgotPassword()
         {
-            Assert.True(true);
+            //Init
+            TennisBookingContext context = GetContext();
+            AuthRepository authRepository = GetRepository(context);
+            AuthService authService = GetService(authRepository);
+
+            //Arrange
+            string email = "info@adrian-schauer.at";
+            string password = "admin1234";
+
+            //Register
+            User user = authService.Register(email, password);
+
+            //Verify
+            authService.Verify(user.UUID, user.VerificationCode);
+
+            //Act
+            User result = authService.ForgotPassword(email);
+
+            //Assert
+            Assert.NotNull(result);
+            
+            //Clean
+            context.Database.EnsureDeleted();
         }
 
         //ResetPassword
         [Fact]
         public void ResetPassword()
         {
-            Assert.True(true);
+            //Init
+            TennisBookingContext context = GetContext();
+            AuthRepository authRepository = GetRepository(context);
+            AuthService authService = GetService(authRepository);
+
+            //Arrange
+            string email = "info@adrian-schauer.at";
+            string password = "admin1234";
+
+            //Register
+            User user = authService.Register(email, password);
+
+            //Verify
+            authService.Verify(user.UUID, user.VerificationCode);
+
+            //For
+            user = authService.ForgotPassword(email);
+
+            //Act
+            bool result = authService.ResetPassword(user.UUID, password, user.ResetCode);
+
+            //Assert
+            Assert.True(result);
+            
+            //Clean
+            context.Database.EnsureDeleted();
         }
     }
 }
