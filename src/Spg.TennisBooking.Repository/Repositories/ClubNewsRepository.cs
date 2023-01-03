@@ -17,5 +17,30 @@ namespace Spg.TennisBooking.Repository.Repositories
         {
             _db = db;
         }
+
+        public void Add(ClubNews news)
+        {
+            _db.ClubNews.Add(news);
+        }
+
+        public void Delete(ClubNews news)
+        {
+            _db.ClubNews.Remove(news);
+        }
+
+        public ClubNews? Get(int id)
+        {
+            return _db.ClubNews.Find(id);
+        }
+
+        public IEnumerable<ClubNews> GetAll()
+        {
+            return _db.ClubNews.ToList();
+        }
+
+        public void Update(ClubNews news)
+        {
+            _db.ClubNews.Update(news);
+        }
     }
 }
