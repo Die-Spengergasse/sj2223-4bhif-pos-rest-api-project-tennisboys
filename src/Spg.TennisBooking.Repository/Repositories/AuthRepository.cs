@@ -18,12 +18,10 @@ namespace Spg.TennisBooking.Repository.Repositories
             _db = db;
         }
 
-        public User CreateUser(string email, string hashedPassword, string verificationCode)
+        public User CreateUser(User user)
         {
-            User user = new(email, hashedPassword, verificationCode);
             _db.Users.Add(user);
             _db.SaveChanges();
-
             return user;
         }
 

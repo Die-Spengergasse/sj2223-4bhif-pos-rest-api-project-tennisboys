@@ -36,7 +36,8 @@ namespace Spg.TennisBooking.Application.Services
             }
 
             //Check if email is already in use
-            if (_authRepository.GetUserByEmail(email) != null)
+            User? user = _authRepository.GetUserByEmail(email);
+            if (user != null && user.Verified)
             {
                 //throw error
                 throw new HttpException("Email is already in use", HttpStatusCode.Conflict);
@@ -55,8 +56,20 @@ namespace Spg.TennisBooking.Application.Services
             //Hash password
             string savedPasswordHash = HashPassword(password);
 
-            //Create User
-            User user = _authRepository.CreateUser(email, savedPasswordHash, verificationCode);
+            //Check if user already exists
+            if (user != null)
+            {
+                //Update user
+                user.VerificationCode = verificationCode;
+                user.Password = savedPasswordHash;
+                _authRepository.UpdateUser(user);
+            }
+            else
+            {
+                //Create new user
+                user = new User(email, savedPasswordHash, verificationCode);
+                _authRepository.CreateUser(user);
+            }
 
             //TODO: Send verification email
             //Create MailMessage
