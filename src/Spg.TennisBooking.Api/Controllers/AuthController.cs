@@ -142,7 +142,7 @@ namespace Spg.TennisBooking.Api.Controllers
         {
             try
             {
-                string token = _auth.Login(loginDto.Email, loginDto.Password, _configuration.GetSection("JWT").GetValue<string>("JWTSecret"));
+                string token = _auth.Login(loginDto.Email, loginDto.Password);
                 //Return Token and link to UserPage
                 string url = _configuration.GetSection("MvcFrontEnd").Value;
                 Uri uri = new Uri(url + "/user");
