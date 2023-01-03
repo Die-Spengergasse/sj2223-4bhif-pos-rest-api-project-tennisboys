@@ -8,8 +8,8 @@ namespace Spg.TennisBooking.Domain.Model
 {
     public class Reservation
     {
-        public int Id { get; set; }
-        public string UUID { get; set; } = Guid.NewGuid().ToString();
+        public int Id { get; private set; }
+        public string UUID { get; private set; } = Guid.NewGuid().ToString();
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
 
