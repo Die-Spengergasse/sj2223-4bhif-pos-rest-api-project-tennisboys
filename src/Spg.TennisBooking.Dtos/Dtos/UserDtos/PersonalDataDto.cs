@@ -1,6 +1,6 @@
 using Spg.TennisBooking.Domain.Model;
 
-namespace Spg.TennisBooking.Api.Dtos.UserDtos
+namespace Spg.TennisBooking.Dtos.Dtos.UserDtos
 {
     public record PersonalDataDto
     {

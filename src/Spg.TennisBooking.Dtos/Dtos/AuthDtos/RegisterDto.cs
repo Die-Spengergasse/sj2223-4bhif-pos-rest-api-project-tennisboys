@@ -1,4 +1,4 @@
-namespace Spg.TennisBooking.Api.Dtos.AuthDtos
+namespace Spg.TennisBooking.Dtos.Dtos.AuthDtos
 {
     public record RegisterDto
     {
