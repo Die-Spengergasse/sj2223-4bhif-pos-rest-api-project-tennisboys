@@ -45,35 +45,93 @@ namespace Spg.TennisBooking.Application.Test.Services
         [Fact]
         public void Register()
         {
-            Assert.True(true);
+            //Init
+            AuthService authService = GetService();
+
+            //Arrange
+            string email = "info@adrian-schauer.at";
+            string password = "admin";
+
+            //Act
+            User result = authService.Register(email, password);
+
+            //Assert
+            Assert.NotNull(result);
         }
+
 
         //Verify
         [Fact]
         public void Verify()
         {
-            Assert.True(true);
+            //Init
+            AuthService authService = GetService();
+
+            //Arrange
+            string uuid = "d4f5d4f5d4f5d4f5d4f5d4f5d4f5d4f5";
+            string verificationCode = "d4f5d4f5d4f5d4f5d4f5d4f5d4f5d4f5";
+
+            //Act
+            bool result = authService.Verify(uuid, verificationCode);
+
+            //Assert
+            Assert.True(result);
         }
 
         //Login
         [Fact]
         public void Login()
         {
-            Assert.True(true);
+            //Init
+            AuthService authService = GetService();
+
+            //Arrange
+            string email = "info@adrian-schauer.at";
+            string password = "admin";
+            string secret = "1234";
+
+            //Act
+            bool result = authService.Login(email, password, secret);
+
+            //Assert
+            Assert.True(result);
         }
 
         //ForgotPassword
         [Fact]
         public void ForgotPassword()
         {
-            Assert.True(true);
+            //Init
+            AuthService authService = GetService();
+
+            //Arrange
+            string email = "info@adrian-schauer.at";
+
+            //Act
+            User result = authService.ForgotPassword(email);
+
+            //Assert
+            Assert.NotNull(result);
         }
 
         //ResetPassword
         [Fact]
         public void ResetPassword()
         {
-            Assert.True(true);
+            //Init
+            AuthService authService = GetService();
+
+            //Arrange
+            string uuid = "d4f5d4f5d4f5d4f5d4f5d4f5d4f5d4f5";
+            string password = "admin";
+            string resetCode = "hkjsfdio890";
+
+            //Act
+            bool result = authService.ResetPassword(uuid, password, resetCode);
+
+            //Assert
+            Assert.True(result);
         }
+       
     }
 }
