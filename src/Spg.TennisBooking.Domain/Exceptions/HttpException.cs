@@ -11,7 +11,7 @@ namespace Spg.TennisBooking.Domain.Exceptions
     {
         public HttpStatusCode StatusCode { get; set; }
         
-        public HttpException(string message, HttpStatusCode statusCode) : base(message)
+        public HttpException(HttpStatusCode statusCode, string message) : base(message)
         {
             StatusCode = statusCode;
         }
