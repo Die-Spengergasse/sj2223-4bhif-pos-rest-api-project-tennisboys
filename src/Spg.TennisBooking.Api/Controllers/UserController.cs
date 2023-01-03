@@ -3,7 +3,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-using Spg.TennisBooking.Api.Dtos.UserDtos;
+using Spg.TennisBooking.Dtos.Dtos.UserDtos;
 using Spg.TennisBooking.Domain.Exceptions;
 using Spg.TennisBooking.Domain.Interfaces;
 using Spg.TennisBooking.Domain.Model;
