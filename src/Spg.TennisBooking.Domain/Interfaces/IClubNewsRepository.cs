@@ -8,6 +8,6 @@ namespace Spg.TennisBooking.Domain.Interfaces
         void Delete(ClubNews news);
         void Update(ClubNews news);
         ClubNews? Get(int id);
-        IEnumerable<ClubNews> GetAll();
+        IEnumerable<ClubNews> GetAll(Club club);
     }
 }

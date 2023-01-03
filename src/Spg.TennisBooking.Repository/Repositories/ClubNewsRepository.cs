@@ -33,9 +33,9 @@ namespace Spg.TennisBooking.Repository.Repositories
             return _db.ClubNews.Find(id);
         }
 
-        public IEnumerable<ClubNews> GetAll()
+        public IEnumerable<ClubNews> GetAll(Club club)
         {
-            return _db.ClubNews.ToList();
+            return _db.ClubNews.Where(x => x.ClubNavigation == club);
         }
 
         public void Update(ClubNews news)
