@@ -10,7 +10,7 @@ namespace Spg.TennisBooking.Domain.Model
     public class User
     {
         public int Id { get; private set; }
-        public string UUID { get; set; } = Guid.NewGuid().ToString();
+        public string UUID { get; private set; } = Guid.NewGuid().ToString();
         public string Email { get; set;  } = String.Empty;
         public string Password { get; set; } = String.Empty;
         //Verification

@@ -8,7 +8,7 @@ namespace Spg.TennisBooking.Domain.Model
 {
     public class Club
     {
-        public int Id { get; set; }
+        public int Id { get; private set; }
         public string Link { get; set; } = Guid.NewGuid().ToString(); //Link to the club
         public User? Admin { get; set; }
         public DateTime? PaidTill { get; set; }

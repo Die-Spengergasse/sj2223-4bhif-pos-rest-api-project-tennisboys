@@ -10,7 +10,7 @@ namespace Spg.TennisBooking.Domain.Model
 
     public class Court
     {
-        public int Id { get; set; }
+        public int Id { get; private set; }
         /*public Boolean Occupied { get; set; }*/
         public string Name { get; set; } = string.Empty;
         public CourtType Type { get; set; } = CourtType.Sand;

@@ -8,7 +8,7 @@ namespace Spg.TennisBooking.Domain.Model
 {
     public class ClubEvent
     {
-        public int Id { get; set; }
+        public int Id { get; private set; }
         public string Name { get; set; } = string.Empty;
         public DateTime Time { get; set; }
         public string Info { get; set; } = string.Empty;
