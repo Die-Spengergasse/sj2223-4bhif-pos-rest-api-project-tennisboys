@@ -32,7 +32,7 @@ namespace Spg.TennisBooking.Repository.Repositories
             return _db.Users.FirstOrDefault(u => u.Email == email);
         }
 
-        public User? GetByUuid(string uuid)
+        public User? GetByUUID(string uuid)
         {
             return _db.Users.FirstOrDefault(u => u.UUID == uuid);
         }
