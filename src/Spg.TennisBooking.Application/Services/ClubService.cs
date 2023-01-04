@@ -8,6 +8,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Security.Cryptography;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Spg.TennisBooking.Application.Services
 {
@@ -18,6 +19,16 @@ namespace Spg.TennisBooking.Application.Services
         public ClubService(IClubRepository clubRepository)
         {
             _clubRepository = clubRepository;
+        }
+
+        public async Task<IActionResult> Get(string link)
+        {
+            Club? club = await _clubRepository.GetByLink(link);
+            if (club == null)
+            {
+                return new NotFoundObjectResult("Club not found");
+            }
+            return new OkObjectResult(club);
         }
     }
 }

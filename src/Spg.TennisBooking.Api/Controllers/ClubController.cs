@@ -26,4 +26,26 @@ public class ClubController : ControllerBase
         _logger = logger;
         _club = club;
     }
+
+    [HttpGet]
+    public async Task<IActionResult> Get(string name)
+    {
+        try
+        {
+            IActionResult result = await _club.Get(name);
+            return result;
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e, "Error while getting club");
+            if (_env.IsDevelopment())
+            {
+                return StatusCode(500, e.Message);
+            }
+            else
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+    }
 }

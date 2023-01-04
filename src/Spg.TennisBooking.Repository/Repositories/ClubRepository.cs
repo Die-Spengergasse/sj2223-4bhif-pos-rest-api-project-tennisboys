@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Spg.TennisBooking.Domain.Interfaces;
 using Spg.TennisBooking.Domain.Model;
 using Spg.TennisBooking.Infrastructure;
@@ -30,9 +31,9 @@ namespace Spg.TennisBooking.Repository.Repositories
             return _db.Clubs.Find(id);
         }
 
-        public Club? GetByLink(string link)
+        public async Task<Club?> GetByLink(string link)
         {
-            return _db.Clubs.FirstOrDefault(c => c.Link == link);
+            return await _db.Clubs.FirstOrDefaultAsync(c => c.Link == link);
         }
 
         public bool Update(Club club)
