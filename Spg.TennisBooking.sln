@@ -21,8 +21,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spg.TennisBooking.Repositor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spg.TennisBooking.Application.Test", "src\Spg.TennisBooking.Application.Test\Spg.TennisBooking.Application.Test.csproj", "{14B493E1-FD54-45CE-8DC6-A0E6CC560769}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spg.TennisBooking.Dtos", "src\Spg.TennisBooking.Dtos\Spg.TennisBooking.Dtos.csproj", "{896677C3-2DFD-4BAF-816A-A8B8A4F195E1}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -65,10 +63,6 @@ Global
 		{14B493E1-FD54-45CE-8DC6-A0E6CC560769}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14B493E1-FD54-45CE-8DC6-A0E6CC560769}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14B493E1-FD54-45CE-8DC6-A0E6CC560769}.Release|Any CPU.Build.0 = Release|Any CPU
-		{896677C3-2DFD-4BAF-816A-A8B8A4F195E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{896677C3-2DFD-4BAF-816A-A8B8A4F195E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{896677C3-2DFD-4BAF-816A-A8B8A4F195E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{896677C3-2DFD-4BAF-816A-A8B8A4F195E1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

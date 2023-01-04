@@ -103,15 +103,9 @@ namespace Spg.TennisBooking.Domain.Model
         
 
         //Constructor
-        public Club(User admin, DateTime? paidTill, string name, string info, string address, string zipCode, string imagePath)
+        public Club(string name)
         {
-            this.Admin = admin;
-            this.PaidTill = paidTill;
-            this.Name = name;
-            this.Info = info;
-            this.Address = address;
-            this.ZipCode = zipCode;
-            this.ImagePath = imagePath;
+            Name = name;
         }
 
         protected Club()

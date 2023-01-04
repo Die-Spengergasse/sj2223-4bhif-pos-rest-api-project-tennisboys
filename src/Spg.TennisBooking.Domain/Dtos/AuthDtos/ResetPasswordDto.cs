@@ -1,4 +1,4 @@
-namespace Spg.TennisBooking.Dtos.Dtos.AuthDtos
+namespace Spg.TennisBooking.Domain.Dtos.AuthDtos
 {
     public record ResetPasswordDto
     {

@@ -9,6 +9,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Security.Cryptography;
 using Microsoft.AspNetCore.Mvc;
+using Spg.TennisBooking.Domain.Dtos.ClubDtos;
 
 namespace Spg.TennisBooking.Application.Services
 {
@@ -28,7 +29,18 @@ namespace Spg.TennisBooking.Application.Services
             {
                 return new NotFoundObjectResult("Club not found");
             }
-            return new OkObjectResult(club);
+            //Create ClubDto for Club
+            GetClubDto clubDto = club;
+
+            //Check if user is admin of club
+            
+
+            return new OkObjectResult(clubDto);
+        }
+        
+        public async Task<IActionResult> Post(PostClubDto postClubDto)
+        {
+            throw new NotImplementedException();
         }
     }
 }

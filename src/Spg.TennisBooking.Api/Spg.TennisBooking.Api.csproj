@@ -20,7 +20,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Spg.TennisBooking.Application\Spg.TennisBooking.Application.csproj" />
     <ProjectReference Include="..\Spg.TennisBooking.Domain\Spg.TennisBooking.Domain.csproj" />
-    <ProjectReference Include="..\Spg.TennisBooking.Dtos\Spg.TennisBooking.Dtos.csproj" />
     <ProjectReference Include="..\Spg.TennisBooking.MvcFrontEnd\Spg.TennisBooking.MvcFrontEnd.csproj" />
   </ItemGroup>
 
