@@ -30,7 +30,7 @@ namespace Spg.TennisBooking.Domain.Test
         protected static Club CreateClub()
         {
             User user = CreateUser();
-            Club club = new("TC Eichgraben");
+            Club club = new("TC Eichgraben", user);
             return club;
         }
         
