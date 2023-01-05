@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Spg.TennisBooking.Domain.Dtos.ClubDtos;
 using Spg.TennisBooking.Domain.Model;
 using Microsoft.Extensions.Logging;
+using Stripe;
 
 namespace Spg.TennisBooking.Application.Services
 {
@@ -27,14 +28,61 @@ namespace Spg.TennisBooking.Application.Services
             _logger = logger;
         }
 
-        public Task<IActionResult> Create(string name, string uuid)
+        public async Task<IActionResult> Create(string name, string uuid)
         {
-            throw new NotImplementedException();
+            //Get user
+            User? user = await _userRepository.GetByUUID(uuid);
+
+            //Check if user exists
+            if (user == null)
+            {
+                _logger.LogWarning("User with uuid {uuid} not found", uuid);
+                return new NotFoundObjectResult("User not found");
+            }
+
+            Club club = new (name, user);
+
+            //Add club to database
+            _clubRepository.Add(club);
+
+            //Return club
+            return new CreatedResult("/c/" + club.Link, new { message = "Club created", club.Link });
         }
 
-        public Task<IActionResult> Delete(string link, string uuid)
+        public async Task<IActionResult> Delete(string link, string uuid)
         {
-            throw new NotImplementedException();
+            //Get club
+            Club? club = await _clubRepository.GetByLink(link);
+
+            //Check if club exists
+            if (club == null)
+            {
+                _logger.LogWarning("Club with link {link} not found", link);
+                return new NotFoundObjectResult("Club not found");
+            }
+
+            //Get user
+            User? user = await _userRepository.GetByUUID(uuid);
+
+            //Check if user exists
+            if (user == null)
+            {
+                _logger.LogWarning("User with uuid {uuid} not found", uuid);
+                return new NotFoundObjectResult("User not found");
+            }
+
+            //Check if user is owner
+            if (club.Admin != user)
+            {
+                _logger.LogWarning("User with uuid {uuid} is not owner of club with link {link}", uuid, link);
+                return new UnauthorizedObjectResult("User is not owner of club");
+            }
+
+            //Delete club
+            _clubRepository.Delete(club);
+
+            //Return club
+            return new OkObjectResult(new { message = "Club deleted" });
         }
 
         public async Task<IActionResult> Get(string link, string uuid)
@@ -49,14 +97,7 @@ namespace Spg.TennisBooking.Application.Services
             GetClubDto clubDto = club;
 
             //Check if user is admin of club
-            User? user = await _userRepository.GetByUUID(uuid);
-
-            if (user == null)
-            {
-                return new NotFoundObjectResult("User not found");
-            }
-
-            if (club.Admin == user)
+            if(await IsAdmin(club, uuid, _userRepository))
             {
                 clubDto.IsAdmin = true;
             }
@@ -64,19 +105,135 @@ namespace Spg.TennisBooking.Application.Services
             return new OkObjectResult(clubDto);
         }
 
-        public Task<IActionResult> GetPayementKey(string link, string uuid)
+        public async Task<IActionResult> GetPayementKey(string link, string uuid)
         {
-            throw new NotImplementedException();
+            //Get Club
+            Club? club = await _clubRepository.GetByLink(link);
+            if (club == null)
+            {
+                return new NotFoundObjectResult("Club not found");
+            }
+
+            //Check if user is admin of club
+            if (!await IsAdmin(club, uuid, _userRepository))
+            {
+                return new UnauthorizedObjectResult("User is not admin of club");
+            }
+
+            //Create Stripe instance
+            PaymentIntentService service = new PaymentIntentService();
+
+            /*
+             * PHP Example
+             * $paymentIntent = $stripe->paymentIntents->create([
+             *  'automatic_payment_methods' => ['enabled' => true],
+             *  'amount' => 1999,
+                'currency' => 'eur',
+                'metadata' => [
+                    'reservation_id' => '12345',
+                ]
+            ]);
+            */
+            //TODO: Configure intent correctly
+            PaymentIntent paymentIntent = service.Create(new PaymentIntentCreateOptions
+            {
+                AutomaticPaymentMethods = new PaymentIntentAutomaticPaymentMethodsOptions
+                {
+                    Enabled = true
+                },
+                Amount = 1999,
+                Currency = "eur",
+                Metadata = new Dictionary<string, string>
+                {
+                    { "intent", "club" },
+                    { "club_id", "12345" }
+                }
+            });
+
+            return new OkObjectResult(new { paymentKey = paymentIntent.ClientSecret });
         }
 
-        public Task<IActionResult> IsPaid(string link, string uuid)
+        public async Task<IActionResult> IsPaid(string link, string uuid)
         {
-            throw new NotImplementedException();
+            //IsPaid can be considered when the club does not have less than a month left of the subscription
+            //Get club
+            Club? club = await _clubRepository.GetByLink(link);
+
+            //Check if club exists
+            if (club == null)
+            {
+                return new NotFoundObjectResult("Club not found");
+            }
+
+            //Check if club is paid
+            if (club.PaidTill < DateTime.Now.AddMonths(1))
+            {
+                return new OkObjectResult(new { IsPaid = false });
+            }
+            else
+            {
+                return new OkObjectResult(new { IsPaid = true });
+            }
         }
 
-        public Task<IActionResult> Patch(PatchClubDto patchClubDto, string uuid)
+        public async Task<IActionResult> Patch(PatchClubDto patchClubDto, string uuid)
         {
-            throw new NotImplementedException();
+            //Get club
+            Club? club = await _clubRepository.GetByLink(patchClubDto.Link);
+
+            //Check if club exists
+            if (club == null)
+            {
+                return new NotFoundObjectResult("Club not found");
+            }
+
+            //Check if user is admin of club
+            if (!await IsAdmin(club, uuid, _userRepository))
+            {
+                return new UnauthorizedObjectResult("User is not admin of club");
+            }
+
+            //TODO: Validations
+
+            //Update club
+            /*
+                Link = v.Link,
+                Name = v.Name,
+                Info = v.Info,
+                Address = v.Address,
+                ZipCode = v.ZipCode,
+                ImagePath = v.ImagePath,
+                SocialHub = v.SocialHub
+            */
+            club.Link = patchClubDto.Link;
+            club.Name = patchClubDto.Name;
+            club.Info = patchClubDto.Info;
+            club.Address = patchClubDto.Address;
+            club.ZipCode = patchClubDto.ZipCode;
+            club.ImagePath = patchClubDto.ImagePath;
+            club.SocialHub = patchClubDto.SocialHub;
+
+            //Save changes
+            _clubRepository.Update(club);
+
+            return new OkObjectResult("Club updated");
+        }
+
+        public static async Task<bool> IsAdmin(Club club, string uuid, IUserRepository userRepository)
+        {
+            User? user = await userRepository.GetByUUID(uuid);
+
+            if (user == null)
+            {
+                return false;
+            }
+
+            if (club.Admin == user)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

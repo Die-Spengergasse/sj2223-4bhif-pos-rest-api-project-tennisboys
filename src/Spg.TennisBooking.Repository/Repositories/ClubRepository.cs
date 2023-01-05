@@ -19,11 +19,16 @@ namespace Spg.TennisBooking.Repository.Repositories
             _db = db;
         }
 
-        public bool Delete(Club club)
+        public void Add(Club club)
+        {
+            _db.Clubs.Add(club);
+            _db.SaveChanges();
+        }
+
+        public void Delete(Club club)
         {
             _db.Clubs.Remove(club);
             _db.SaveChanges();
-            return true;
         }
 
         public Club? GetById(int id)
@@ -36,11 +41,10 @@ namespace Spg.TennisBooking.Repository.Repositories
             return await _db.Clubs.FirstOrDefaultAsync(c => c.Link == link);
         }
 
-        public bool Update(Club club)
+        public void Update(Club club)
         {
             _db.Clubs.Update(club);
             _db.SaveChanges();
-            return true;
         }
     }
 }

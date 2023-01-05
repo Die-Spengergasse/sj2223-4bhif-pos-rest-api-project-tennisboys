@@ -6,7 +6,8 @@ namespace Spg.TennisBooking.Domain.Interfaces
     {
         Club? GetById(int id);
         Task<Club?> GetByLink(string link);
-        bool Update(Club club);
-        bool Delete(Club club);
+        void Update(Club club);
+        void Delete(Club club);
+        void Add(Club club);
     }
 }
