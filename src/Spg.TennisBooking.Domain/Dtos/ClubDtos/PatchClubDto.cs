@@ -4,7 +4,6 @@ namespace Spg.TennisBooking.Domain.Dtos.ClubDtos
 {
     public record PatchClubDto
     {
-        public bool IsAdmin { get; set; } = false;
         public string Link { get; set; } = string.Empty;
         public string Name { get; set; } = string.Empty;
         public string Info { get; set; } = string.Empty;
