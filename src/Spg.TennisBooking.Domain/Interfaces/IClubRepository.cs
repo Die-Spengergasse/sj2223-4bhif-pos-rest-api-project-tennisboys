@@ -5,8 +5,9 @@ namespace Spg.TennisBooking.Domain.Interfaces
     public interface IClubRepository
     {
         Club? GetById(int id);
-        Club? GetByLink(string link);
-        bool Update(Club club);
-        bool Delete(Club club);
+        Task<Club?> GetByLink(string link);
+        void Update(Club club);
+        void Delete(Club club);
+        void Add(Club club);
     }
 }

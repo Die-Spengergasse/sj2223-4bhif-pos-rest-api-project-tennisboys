@@ -3,7 +3,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-using Spg.TennisBooking.Dtos.Dtos.UserDtos;
+using Spg.TennisBooking.Domain.Dtos.ClubDtos;
 using Spg.TennisBooking.Domain.Exceptions;
 using Spg.TennisBooking.Domain.Interfaces;
 using Spg.TennisBooking.Domain.Model;
@@ -12,6 +12,7 @@ namespace Spg.TennisBooking.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 public class ClubController : ControllerBase
 {
     private readonly IWebHostEnvironment _env;
@@ -25,5 +26,143 @@ public class ClubController : ControllerBase
         _configuration = configuration;
         _logger = logger;
         _club = club;
+    }
+
+    //Get
+    //Post
+    //Patch
+    //Delete
+    //PayementKey
+    //Paid //as long it is over a month till end it counts as paid
+        
+    [HttpGet]
+    [AllowAnonymous]
+    public async Task<IActionResult> Get(string link)
+    {
+        try
+        {
+            return await _club.Get(link, Controller.GetUserId(User));
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e, "Error while getting club");
+            if (_env.IsDevelopment())
+            {
+                return StatusCode(500, e.Message);
+            }
+            else
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Create([FromBody] string name)
+    {
+        try
+        {
+            return await _club.Create(name, Controller.GetUserId(User));
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e, "Error while posting club");
+            if (_env.IsDevelopment())
+            {
+                return StatusCode(500, e.Message);
+            }
+            else
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+    }
+
+    [HttpPatch]
+    //[Authorize]
+    public async Task<IActionResult> Patch([FromBody] PatchClubDto clubDto)
+    {
+        try
+        {
+            return await _club.Patch(clubDto, Controller.GetUserId(User));
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e, "Error while patching club");
+            if (_env.IsDevelopment())
+            {
+                return StatusCode(500, e.Message);
+            }
+            else
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+    }
+
+    [HttpDelete]
+    //[Authorize]
+    public async Task<IActionResult> Delete([FromBody] string link)
+    {
+        try
+        {
+            return await _club.Delete(link, Controller.GetUserId(User));
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e, "Error while deleting club");
+            if (_env.IsDevelopment())
+            {
+                return StatusCode(500, e.Message);
+            }
+            else
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+    }
+
+    [HttpGet]
+    [Route("PayementKey")]
+    public async Task<IActionResult> GetPayementKey(string link)
+    {
+        try
+        {
+            return await _club.GetPayementKey(link, Controller.GetUserId(User));
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e, "Error while getting payement key");
+            if (_env.IsDevelopment())
+            {
+                return StatusCode(500, e.Message);
+            }
+            else
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+    }
+
+    [HttpGet]
+    [Route("IsPaid")]
+    public async Task<IActionResult> IsPaid(string link)
+    {
+        try
+        {
+            return await _club.IsPaid(link, Controller.GetUserId(User));
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e, "Error while getting paid");
+            if (_env.IsDevelopment())
+            {
+                return StatusCode(500, e.Message);
+            }
+            else
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
     }
 }

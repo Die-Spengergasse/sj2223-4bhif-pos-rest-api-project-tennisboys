@@ -78,7 +78,7 @@ builder.Services.AddAuthentication(auth =>
     };
 });
 
-
+//TODO: Stripe API Key
 
 //Swagger Configuration
 builder.Services.AddSwaggerGen(s => s.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo() 

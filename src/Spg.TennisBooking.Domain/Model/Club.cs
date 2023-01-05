@@ -11,6 +11,7 @@ namespace Spg.TennisBooking.Domain.Model
         public int Id { get; private set; }
         public string Link { get; set; } = Guid.NewGuid().ToString(); //Link to the club
         public User? Admin { get; set; }
+        public string IBAN { get; set; } = string.Empty;
         public DateTime? PaidTill { get; set; }
         public DateTime FreeTrialTill { get; set; } = DateTime.Now.AddDays(30);
         public string Name { get; set; } = string.Empty;
@@ -18,7 +19,7 @@ namespace Spg.TennisBooking.Domain.Model
         public string Address { get; set; } = string.Empty;
         public string ZipCode { get; set; } = string.Empty;
         public string ImagePath { get; set; } = string.Empty;
-        public SocialHub SocialHub { get; } = new SocialHub();
+        public SocialHub SocialHub { get; set; } = new SocialHub();
         private List<ClubNews> _clubNews = new List<ClubNews>();
         public IReadOnlyList<ClubNews> ClubNews => _clubNews;
 
@@ -100,18 +101,13 @@ namespace Spg.TennisBooking.Domain.Model
             }
         }
 
-        
+
 
         //Constructor
-        public Club(User admin, DateTime? paidTill, string name, string info, string address, string zipCode, string imagePath)
+        public Club(string name, User user)
         {
-            this.Admin = admin;
-            this.PaidTill = paidTill;
-            this.Name = name;
-            this.Info = info;
-            this.Address = address;
-            this.ZipCode = zipCode;
-            this.ImagePath = imagePath;
+            Name = name;
+            Admin = user;
         }
 
         protected Club()

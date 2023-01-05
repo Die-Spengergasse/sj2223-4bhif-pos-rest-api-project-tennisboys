@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Spg.TennisBooking.Domain.Interfaces;
 using Spg.TennisBooking.Domain.Model;
 using Spg.TennisBooking.Infrastructure;
@@ -18,11 +19,16 @@ namespace Spg.TennisBooking.Repository.Repositories
             _db = db;
         }
 
-        public bool Delete(Club club)
+        public void Add(Club club)
+        {
+            _db.Clubs.Add(club);
+            _db.SaveChanges();
+        }
+
+        public void Delete(Club club)
         {
             _db.Clubs.Remove(club);
             _db.SaveChanges();
-            return true;
         }
 
         public Club? GetById(int id)
@@ -30,16 +36,15 @@ namespace Spg.TennisBooking.Repository.Repositories
             return _db.Clubs.Find(id);
         }
 
-        public Club? GetByLink(string link)
+        public async Task<Club?> GetByLink(string link)
         {
-            return _db.Clubs.FirstOrDefault(c => c.Link == link);
+            return await _db.Clubs.FirstOrDefaultAsync(c => c.Link == link);
         }
 
-        public bool Update(Club club)
+        public void Update(Club club)
         {
             _db.Clubs.Update(club);
             _db.SaveChanges();
-            return true;
         }
     }
 }

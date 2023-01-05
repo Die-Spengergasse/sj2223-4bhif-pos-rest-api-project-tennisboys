@@ -23,7 +23,7 @@ namespace Spg.TennisBooking.Application.Services
         public bool Welcomed(string uuid)
         {
             //Check if welcomed is checked
-            User? user = _userRepository.GetByUUID(uuid);
+            User? user = _userRepository.GetByUUIDold(uuid);
             if (user == null)
             {
                 throw new HttpException("User not found", HttpStatusCode.NotFound);
@@ -34,7 +34,7 @@ namespace Spg.TennisBooking.Application.Services
         public User GetPersonalData(string uuid)
         {
             //Get personal data
-            User? user = _userRepository.GetByUUID(uuid);
+            User? user = _userRepository.GetByUUIDold(uuid);
             if (user == null)
             {
                 throw new HttpException("User not found", HttpStatusCode.NotFound);
@@ -44,7 +44,7 @@ namespace Spg.TennisBooking.Application.Services
 
         public bool SetPersonalData(string uuid, string firstName, string lastName, DateTime? birthDate, GenderTypes gender, PhoneNumber? phoneNumber)
         {
-            User? user = _userRepository.GetByUUID(uuid);
+            User? user = _userRepository.GetByUUIDold(uuid);
             if (user == null)
             {
                 throw new HttpException("User not found", HttpStatusCode.NotFound);
@@ -63,7 +63,7 @@ namespace Spg.TennisBooking.Application.Services
         public bool ChangePassword(string uuid, string password, string newPassword)
         {
             //Get user
-            User? user = _userRepository.GetByUUID(uuid);
+            User? user = _userRepository.GetByUUIDold(uuid);
 
             //Check if user exists
             if (user == null)

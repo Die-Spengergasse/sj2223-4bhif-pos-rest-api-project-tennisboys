@@ -1,4 +1,4 @@
-namespace Spg.TennisBooking.Dtos.Dtos.UserDtos
+namespace Spg.TennisBooking.Domain.Dtos.UserDtos
 {
     public record ChangePasswordDto
     {
