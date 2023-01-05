@@ -12,6 +12,7 @@ namespace Spg.TennisBooking.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 public class ClubController : ControllerBase
 {
     private readonly IWebHostEnvironment _env;
@@ -35,11 +36,12 @@ public class ClubController : ControllerBase
     //Paid //as long it is over a month till end it counts as paid
         
     [HttpGet]
-    public async Task<IActionResult> Get(string name)
+    [AllowAnonymous]
+    public async Task<IActionResult> Get(string link)
     {
         try
         {
-            return await _club.Get(name);
+            return await _club.Get(link, Controller.GetUserId(User));
         }
         catch (Exception e)
         {
@@ -56,12 +58,11 @@ public class ClubController : ControllerBase
     }
 
     [HttpPost]
-    //[Authorize]
     public async Task<IActionResult> Create([FromBody] string name)
     {
         try
         {
-            return await _club.Create(name);
+            return await _club.Create(name, Controller.GetUserId(User));
         }
         catch (Exception e)
         {
@@ -83,7 +84,7 @@ public class ClubController : ControllerBase
     {
         try
         {
-            return await _club.Patch(clubDto);
+            return await _club.Patch(clubDto, Controller.GetUserId(User));
         }
         catch (Exception e)
         {
@@ -105,7 +106,7 @@ public class ClubController : ControllerBase
     {
         try
         {
-            return await _club.Delete(link);
+            return await _club.Delete(link, Controller.GetUserId(User));
         }
         catch (Exception e)
         {
@@ -127,7 +128,7 @@ public class ClubController : ControllerBase
     {
         try
         {
-            return await _club.GetPayementKey(link);
+            return await _club.GetPayementKey(link, Controller.GetUserId(User));
         }
         catch (Exception e)
         {
@@ -144,12 +145,12 @@ public class ClubController : ControllerBase
     }
 
     [HttpGet]
-    [Route("Paid")]
-    public async Task<IActionResult> GetPaid(string link)
+    [Route("IsPaid")]
+    public async Task<IActionResult> IsPaid(string link)
     {
         try
         {
-            return await _club.GetPaid(link);
+            return await _club.IsPaid(link, Controller.GetUserId(User));
         }
         catch (Exception e)
         {

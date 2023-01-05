@@ -6,7 +6,6 @@ namespace Spg.TennisBooking.Domain.Dtos.ClubDtos
     {
         public bool IsAdmin { get; set; } = false;
         public string Link { get; set; } = string.Empty;
-        public User? Admin { get; set; } = null;
         public DateTime? PaidTill { get; set; } = null;
         public DateTime FreeTrialTill { get; set; } = DateTime.Now;
         public string Name { get; set; } = string.Empty;
@@ -26,7 +25,6 @@ namespace Spg.TennisBooking.Domain.Dtos.ClubDtos
             return new GetClubDto
             {
                 Link = v.Link,
-                Admin = v.Admin,
                 PaidTill = v.PaidTill,
                 FreeTrialTill = v.FreeTrialTill,
                 Name = v.Name,

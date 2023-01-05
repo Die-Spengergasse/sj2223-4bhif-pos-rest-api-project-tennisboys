@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Spg.TennisBooking.Domain.Interfaces;
 using Spg.TennisBooking.Domain.Model;
 using Spg.TennisBooking.Infrastructure;
@@ -32,9 +33,14 @@ namespace Spg.TennisBooking.Repository.Repositories
             return _db.Users.FirstOrDefault(u => u.Email == email);
         }
 
-        public User? GetByUUID(string uuid)
+        public User? GetByUUIDold(string uuid)
         {
             return _db.Users.FirstOrDefault(u => u.UUID == uuid);
+        }
+
+        public async Task<User?> GetByUUID(string uuid)
+        {
+            return await _db.Users.FirstOrDefaultAsync(u => u.UUID == uuid);
         }
 
         public bool Update(User user)

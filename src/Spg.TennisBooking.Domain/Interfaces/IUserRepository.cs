@@ -6,7 +6,8 @@ namespace Spg.TennisBooking.Domain.Interfaces
     {
         User Create(string email, string password, string verificationCode);
         User? GetByEmail(string email);
-        User? GetByUUID(string uuid);
+        User? GetByUUIDold(string uuid);
+        Task<User?> GetByUUID(string uuid);
         bool Update(User user);
     }
 }
