@@ -27,13 +27,19 @@ public class ClubController : ControllerBase
         _club = club;
     }
 
+    //Get
+    //Post
+    //Patch
+    //Delete
+    //PayementKey
+    //Paid //as long it is over a month till end it counts as paid
+        
     [HttpGet]
     public async Task<IActionResult> Get(string name)
     {
         try
         {
-            IActionResult result = await _club.Get(name);
-            return result;
+            return await _club.Get(name);
         }
         catch (Exception e)
         {
@@ -51,16 +57,103 @@ public class ClubController : ControllerBase
 
     [HttpPost]
     //[Authorize]
-    public async Task<IActionResult> Post([FromBody] PostClubDto clubDto)
+    public async Task<IActionResult> Create([FromBody] string name)
     {
         try
         {
-            IActionResult result = await _club.Post(clubDto);
-            return result;
+            return await _club.Create(name);
         }
         catch (Exception e)
         {
             _logger.LogError(e, "Error while posting club");
+            if (_env.IsDevelopment())
+            {
+                return StatusCode(500, e.Message);
+            }
+            else
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+    }
+
+    [HttpPatch]
+    //[Authorize]
+    public async Task<IActionResult> Patch([FromBody] PatchClubDto clubDto)
+    {
+        try
+        {
+            return await _club.Patch(clubDto);
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e, "Error while patching club");
+            if (_env.IsDevelopment())
+            {
+                return StatusCode(500, e.Message);
+            }
+            else
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+    }
+
+    [HttpDelete]
+    //[Authorize]
+    public async Task<IActionResult> Delete([FromBody] string link)
+    {
+        try
+        {
+            return await _club.Delete(link);
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e, "Error while deleting club");
+            if (_env.IsDevelopment())
+            {
+                return StatusCode(500, e.Message);
+            }
+            else
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+    }
+
+    [HttpGet]
+    [Route("PayementKey")]
+    public async Task<IActionResult> GetPayementKey(string link)
+    {
+        try
+        {
+            return await _club.GetPayementKey(link);
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e, "Error while getting payement key");
+            if (_env.IsDevelopment())
+            {
+                return StatusCode(500, e.Message);
+            }
+            else
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+    }
+
+    [HttpGet]
+    [Route("Paid")]
+    public async Task<IActionResult> GetPaid(string link)
+    {
+        try
+        {
+            return await _club.GetPaid(link);
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e, "Error while getting paid");
             if (_env.IsDevelopment())
             {
                 return StatusCode(500, e.Message);

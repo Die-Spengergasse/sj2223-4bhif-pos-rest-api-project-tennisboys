@@ -7,6 +7,6 @@ namespace Spg.TennisBooking.Domain.Interfaces
     public interface IClubService
     {
         Task<IActionResult> Get(string link);
-        Task<IActionResult> Post(PostClubDto postClubDto);
+        Task<IActionResult> Post(PatchClubDto postClubDto);
     }
 }
