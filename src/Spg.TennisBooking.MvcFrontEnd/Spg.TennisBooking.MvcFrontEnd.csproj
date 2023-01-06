@@ -13,7 +13,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Spg.TennisBooking.Application\Spg.TennisBooking.Application.csproj" />
-    <ProjectReference Include="..\Spg.TennisBooking.DbExtensions\Spg.TennisBooking.Extensions.csproj" />
     <ProjectReference Include="..\Spg.TennisBooking.Domain\Spg.TennisBooking.Domain.csproj" />
     <ProjectReference Include="..\Spg.TennisBooking.Repository\Spg.TennisBooking.Repository.csproj" />
   </ItemGroup>
