@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spg.TennisBooking.Api", "sr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spg.TennisBooking.Application", "src\Spg.TennisBooking.Application\Spg.TennisBooking.Application.csproj", "{17E84702-1A00-45EF-B549-5D1D643DF163}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spg.TennisBooking.Extensions", "src\Spg.TennisBooking.DbExtensions\Spg.TennisBooking.Extensions.csproj", "{49632AB8-51AD-4741-9D37-82DDE8CC524F}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spg.TennisBooking.Domain", "src\Spg.TennisBooking.Domain\Spg.TennisBooking.Domain.csproj", "{23F54D72-5ECB-462A-8B9B-F52A0DAA905D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spg.TennisBooking.Domain.Test", "src\Spg.TennisBooking.Domain.Test\Spg.TennisBooking.Domain.Test.csproj", "{1EA94DE3-D1D4-4B5A-BB44-57FADAC2FE2B}"
@@ -20,6 +18,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spg.TennisBooking.Repository", "src\Spg.TennisBooking.Repository\Spg.TennisBooking.Repository.csproj", "{800A27AA-FFAE-4C0A-A585-1F22BEED5681}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spg.TennisBooking.Application.Test", "src\Spg.TennisBooking.Application.Test\Spg.TennisBooking.Application.Test.csproj", "{14B493E1-FD54-45CE-8DC6-A0E6CC560769}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spg.TennisBooking.Configurations", "src\Spg.TennisBooking.Configurations\Spg.TennisBooking.Configurations.csproj", "{E12269AC-10F1-40B6-96B0-4FA3CF81F5ED}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,6 @@ Global
 		{17E84702-1A00-45EF-B549-5D1D643DF163}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{17E84702-1A00-45EF-B549-5D1D643DF163}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{17E84702-1A00-45EF-B549-5D1D643DF163}.Release|Any CPU.Build.0 = Release|Any CPU
-		{49632AB8-51AD-4741-9D37-82DDE8CC524F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{49632AB8-51AD-4741-9D37-82DDE8CC524F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{49632AB8-51AD-4741-9D37-82DDE8CC524F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{49632AB8-51AD-4741-9D37-82DDE8CC524F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{23F54D72-5ECB-462A-8B9B-F52A0DAA905D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{23F54D72-5ECB-462A-8B9B-F52A0DAA905D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{23F54D72-5ECB-462A-8B9B-F52A0DAA905D}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -63,6 +59,10 @@ Global
 		{14B493E1-FD54-45CE-8DC6-A0E6CC560769}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14B493E1-FD54-45CE-8DC6-A0E6CC560769}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14B493E1-FD54-45CE-8DC6-A0E6CC560769}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E12269AC-10F1-40B6-96B0-4FA3CF81F5ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E12269AC-10F1-40B6-96B0-4FA3CF81F5ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E12269AC-10F1-40B6-96B0-4FA3CF81F5ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E12269AC-10F1-40B6-96B0-4FA3CF81F5ED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

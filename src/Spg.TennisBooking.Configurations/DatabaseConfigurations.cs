@@ -2,9 +2,9 @@
 using Microsoft.Extensions.DependencyInjection;
 using Spg.TennisBooking.Infrastructure;
 
-namespace Spg.TennisBooking.Extensions
+namespace Spg.TennisBooking.Configurations
 {
-    public static class DatabaseExtensions
+    public static class DatabaseConfigurations
     {
         public static void ConfigureSqLite(this IServiceCollection services, string connectionString)
         {
