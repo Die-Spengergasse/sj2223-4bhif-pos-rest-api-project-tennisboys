@@ -11,7 +11,6 @@ namespace Spg.TennisBooking.Domain.Model
     public class Court
     {
         public int Id { get; private set; }
-        public string UUID { get; private set; } = Guid.NewGuid().ToString();
         public string Name { get; set; } = string.Empty;
         public CourtType Type { get; set; } = CourtType.Sand;
         public double APrice { get; set; }

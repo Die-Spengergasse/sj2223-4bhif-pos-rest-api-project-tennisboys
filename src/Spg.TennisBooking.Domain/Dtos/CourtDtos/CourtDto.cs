@@ -1,12 +1,12 @@
-namespace Spg.TennisBooking.Domain.Dtos.UserDtos
+namespace Spg.TennisBooking.Domain.Dtos.CourtDtos
 {
-    public record ChangePasswordDto
+    public record CourtDto
     {
         public string Password { get; set; } = string.Empty;
         public string NewPassword { get; set; } = string.Empty;
 
         //Constructor
-        public ChangePasswordDto(string password, string newPassword)
+        public CourtDto(string password, string newPassword)
         {
             Password = password;
             NewPassword = newPassword;
