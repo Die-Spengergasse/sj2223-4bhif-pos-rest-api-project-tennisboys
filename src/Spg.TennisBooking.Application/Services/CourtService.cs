@@ -11,6 +11,7 @@ using System.Security.Cryptography;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc;
 using Spg.TennisBooking.Domain.Dtos.CourtDtos;
+using Microsoft.Extensions.Configuration;
 
 namespace Spg.TennisBooking.Application.Services
 {
@@ -20,13 +21,15 @@ namespace Spg.TennisBooking.Application.Services
         private readonly IUserRepository _userRepository;
         private readonly IClubRepository _clubRepository;
         private readonly ILogger<CourtService> _logger;
+        private readonly IConfiguration _configuration;
 
-        public CourtService(ICourtRepository courtRepository, IUserRepository userRepository, IClubRepository clubRepository, ILogger<CourtService> logger)
+        public CourtService(ICourtRepository courtRepository, IUserRepository userRepository, IClubRepository clubRepository, ILogger<CourtService> logger, IConfiguration configuration)
         {
             _courtRepository = courtRepository;
             _userRepository = userRepository;
             _clubRepository = clubRepository;
             _logger = logger;
+            _configuration = configuration;
         }
 
         public async Task<IActionResult> Delete(int id, string uuid)
@@ -82,7 +85,7 @@ namespace Spg.TennisBooking.Application.Services
 
             //Check if user is Admin of Club
             if (!await ClubService.IsAdmin(club, uuid, _userRepository)){
-                return new UnauthorizedObjectResult("User not owner of this Club");
+                return new UnauthorizedObjectResult("User not owner of this club");
             }
 
             //Patch
@@ -97,7 +100,30 @@ namespace Spg.TennisBooking.Application.Services
         
         public async Task<IActionResult> Post(PostCourtDto postCourtDto, string uuid)
         {
-            throw new NotImplementedException();
+            //Get Club
+            Club? club = await _clubRepository.GetByLink(postCourtDto.ClubLink);
+
+            if(club == null)
+            {
+                return new NotFoundObjectResult("Club not found");
+            }
+
+            //Check if admin
+            if(!await ClubService.IsAdmin(club, uuid, _userRepository))
+            {
+                return new UnauthorizedObjectResult("User not owner of this club");
+            }
+
+            //Create new Court
+            Court court = new(postCourtDto.Name, club);
+
+            _courtRepository.Add(court);
+
+            //Create location
+            string url = _configuration.GetSection("MvcFrontEnd").Value;
+            Uri uri = new(url + "/c/" + postCourtDto.ClubLink + "/court/" + court.Id+"/edit");
+
+            return new CreatedResult(uri.AbsolutePath, "Court created");
         }
     }
 }
