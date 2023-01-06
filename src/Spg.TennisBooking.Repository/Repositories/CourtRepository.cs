@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Spg.TennisBooking.Domain.Interfaces;
 using Spg.TennisBooking.Domain.Model;
 using Spg.TennisBooking.Infrastructure;
@@ -28,14 +29,14 @@ namespace Spg.TennisBooking.Repository.Repositories
             _db.Courts.Remove(court);
         }
 
-        public IEnumerable<Court> GetAll(Club club)
+        public async Task<IEnumerable<Court>> GetAll(Club club)
         {
-            return _db.Courts.Where(c => c.ClubNavigation == club);
+            return await _db.Courts.Where(c => c.ClubNavigation == club).ToListAsync();
         }
 
-        public Court? GetByUUID(string uuid)
+        public async Task<Court?> Get(int id)
         {
-            return _db.Courts.FirstOrDefault(c => c.UUID == uuid);
+            return await _db.Courts.FindAsync(id);
         }
 
         public void Update(Court court)

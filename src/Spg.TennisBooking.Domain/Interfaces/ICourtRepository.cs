@@ -4,10 +4,10 @@ namespace Spg.TennisBooking.Domain.Interfaces
 {
     public interface ICourtRepository
     {
-        Court? GetByUUID(string uuid);
+        Task<Court?> Get(int id);
         void Add(Court court);
         void Update(Court court);
         void Delete(Court court);
-        IEnumerable<Court> GetAll(Club club);
+        Task<IEnumerable<Court>> GetAll(Club club);
     }
 }

@@ -2,8 +2,7 @@ using System.Net;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
-using Spg.TennisBooking.Domain.Dtos.UserDtos;
+using Spg.TennisBooking.Domain.Dtos.CourtDtos;
 using Spg.TennisBooking.Domain.Exceptions;
 using Spg.TennisBooking.Domain.Interfaces;
 using Spg.TennisBooking.Domain.Model;
@@ -12,6 +11,7 @@ namespace Spg.TennisBooking.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 public class CourtController : ControllerBase
 {
     private readonly IWebHostEnvironment _env;
@@ -25,5 +25,125 @@ public class CourtController : ControllerBase
         _configuration = configuration;
         _logger = logger;
         _court = court;
+    }
+
+    /*
+     * CreateCourt
+       PatchCourt
+       DeleteCourt
+       GetCourt
+       GetAllCourts
+     */
+
+    [HttpPost]
+    public async Task<IActionResult> Post([FromBody] PostCourtDto postCourtDto)
+    {
+        try
+        {
+            var court = await _court.Post(postCourtDto, Controller.GetUserId(User));
+            return Ok(court);
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e, "Error while creating court");
+            if (_env.IsDevelopment())
+            {
+                return StatusCode(500, e.Message);
+            }
+            else
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+    }
+
+    [HttpPatch]
+    public async Task<IActionResult> Patch([FromBody] PatchCourtDto courtDto)
+    {
+        try
+        {
+            var court = await _court.Patch(courtDto, Controller.GetUserId(User));
+            return Ok(court);
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e, "Error while patching court");
+            if (_env.IsDevelopment())
+            {
+                return StatusCode(500, e.Message);
+            }
+            else
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete(int id)
+    {
+        try
+        {
+            await _court.Delete(id, Controller.GetUserId(User));
+            return Ok();
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e, "Error while deleting court");
+            if (_env.IsDevelopment())
+            {
+                return StatusCode(500, e.Message);
+            }
+            else
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+    }
+
+    [HttpGet("court/{id}")]
+    [AllowAnonymous]
+    public async Task<IActionResult> Get(int id)
+    {
+        try
+        {
+            var court = await _court.Get(id);
+            return Ok(court);
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e, "Error while getting court");
+            if (_env.IsDevelopment())
+            {
+                return StatusCode(500, e.Message);
+            }
+            else
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+    }
+
+    [HttpGet("club/{clubLink}")]
+    [AllowAnonymous]
+    public async Task<IActionResult> GetAll(string clubLink)
+    {
+        try
+        {
+            var courts = await _court.GetAll(clubLink);
+            return Ok(courts);
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e, "Error while getting all courts");
+            if (_env.IsDevelopment())
+            {
+                return StatusCode(500, e.Message);
+            }
+            else
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
     }
 }

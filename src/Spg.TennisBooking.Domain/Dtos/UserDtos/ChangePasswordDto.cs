@@ -6,7 +6,7 @@ namespace Spg.TennisBooking.Domain.Dtos.UserDtos
         public string NewPassword { get; set; } = string.Empty;
 
         //Constructor
-        public ChangePasswordDto(string uuid, string password, string newPassword)
+        public ChangePasswordDto(string password, string newPassword)
         {
             Password = password;
             NewPassword = newPassword;
