@@ -41,6 +41,11 @@ namespace Spg.TennisBooking.Repository.Repositories
             return await _db.Clubs.FirstOrDefaultAsync(c => c.Link == link);
         }
 
+        public async Task<IEnumerable<Club>> GetAll(string search)
+        {
+            return await _db.Clubs.Where(c => c.Name.Contains(search)).ToListAsync();
+        }
+
         public void Update(Club club)
         {
             _db.Clubs.Update(club);

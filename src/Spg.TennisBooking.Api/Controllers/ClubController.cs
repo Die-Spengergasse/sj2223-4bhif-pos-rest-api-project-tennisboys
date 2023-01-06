@@ -29,6 +29,7 @@ public class ClubController : ControllerBase
     }
 
     //Get
+    //GetAll
     //Post
     //Patch
     //Delete
@@ -46,6 +47,29 @@ public class ClubController : ControllerBase
         catch (Exception e)
         {
             _logger.LogError(e, "Error while getting club");
+            if (_env.IsDevelopment())
+            {
+                return StatusCode(500, e.Message);
+            }
+            else
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+    }
+
+    [HttpGet]
+    [AllowAnonymous]
+    [Route("all")]
+    public async Task<IActionResult> GetAll(string search = "")
+    {
+        try
+        {
+            return await _club.GetAll(search);
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e, "Error while getting all clubs");
             if (_env.IsDevelopment())
             {
                 return StatusCode(500, e.Message);
