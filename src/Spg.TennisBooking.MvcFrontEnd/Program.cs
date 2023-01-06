@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Spg.TennisBooking.Application.Services;
-using Spg.TennisBooking.Extensions;
+using Spg.TennisBooking.Configurations;
 using Spg.TennisBooking.Domain.Interfaces;
 //using Spg.TennisBooking.Infrastructure;
 using Spg.TennisBooking.Repository.Repositories;
