@@ -6,6 +6,7 @@ namespace Spg.TennisBooking.Domain.Interfaces
     {
         Club? GetById(int id);
         Task<Club?> GetByLink(string link);
+        Task<IEnumerable<Club>> GetAll(string search);
         void Update(Club club);
         void Delete(Club club);
         void Add(Club club);
