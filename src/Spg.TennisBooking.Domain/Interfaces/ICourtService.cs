@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Spg.TennisBooking.Domain.Dtos.CourtDtos;
 using Spg.TennisBooking.Domain.Model;
 
 namespace Spg.TennisBooking.Domain.Interfaces
@@ -7,8 +8,8 @@ namespace Spg.TennisBooking.Domain.Interfaces
     {
         Task<IActionResult> Get(int id);
         Task<IActionResult> GetAll(string clubLink);
-        Task<IActionResult> Post(Court court, string uuid);
-        Task<IActionResult> Patch(Court court, string uuid);
+        Task<IActionResult> Post(CourtDto court, string uuid);
+        Task<IActionResult> Patch(CourtDto court, string uuid);
         Task<IActionResult> Delete(int id, string uuid);
     }
 }

@@ -10,4 +10,9 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Dtos\ClubEventDtos\" />
+    <Folder Include="Dtos\ClubNewsDtos\" />
+  </ItemGroup>
+
 </Project>

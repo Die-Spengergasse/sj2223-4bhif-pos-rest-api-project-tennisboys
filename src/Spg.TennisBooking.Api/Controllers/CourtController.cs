@@ -36,11 +36,11 @@ public class CourtController : ControllerBase
      */
 
     [HttpPost]
-    public async Task<IActionResult> Create([FromBody] CourtDto courtDto)
+    public async Task<IActionResult> Post([FromBody] CourtDto courtDto)
     {
         try
         {
-            var court = await _court.Create(courtDto, Controller.GetUserId(User));
+            var court = await _court.Post(courtDto, Controller.GetUserId(User));
             return Ok(court);
         }
         catch (Exception e)
@@ -106,7 +106,7 @@ public class CourtController : ControllerBase
     {
         try
         {
-            var court = await _court.Get(id, Controller.GetUserId(User));
+            var court = await _court.Get(id);
             return Ok(court);
         }
         catch (Exception e)
@@ -128,7 +128,7 @@ public class CourtController : ControllerBase
     {
         try
         {
-            var courts = await _court.GetAll(clubLink, Controller.GetUserId(User));
+            var courts = await _court.GetAll(clubLink);
             return Ok(courts);
         }
         catch (Exception e)

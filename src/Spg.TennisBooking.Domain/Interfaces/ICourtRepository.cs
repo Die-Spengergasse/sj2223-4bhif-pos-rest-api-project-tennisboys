@@ -4,7 +4,7 @@ namespace Spg.TennisBooking.Domain.Interfaces
 {
     public interface ICourtRepository
     {
-        Court? GetByUUID(string uuid);
+        Court? Get(int id);
         void Add(Court court);
         void Update(Court court);
         void Delete(Court court);

@@ -33,9 +33,9 @@ namespace Spg.TennisBooking.Repository.Repositories
             return _db.Courts.Where(c => c.ClubNavigation == club);
         }
 
-        public Court? GetByUUID(string uuid)
+        public Court? Get(int id)
         {
-            return _db.Courts.FirstOrDefault(c => c.UUID == uuid);
+            return _db.Courts.Find(id);
         }
 
         public void Update(Court court)

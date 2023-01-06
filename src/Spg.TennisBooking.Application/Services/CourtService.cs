@@ -10,6 +10,7 @@ using System.Text;
 using System.Security.Cryptography;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc;
+using Spg.TennisBooking.Domain.Dtos.CourtDtos;
 
 namespace Spg.TennisBooking.Application.Services
 {
@@ -41,12 +42,12 @@ namespace Spg.TennisBooking.Application.Services
             throw new NotImplementedException();
         }
 
-        public Task<IActionResult> Patch(Court court, string uuid)
+        public Task<IActionResult> Patch(CourtDto court, string uuid)
         {
             throw new NotImplementedException();
         }
-
-        public Task<IActionResult> Post(Court court, string uuid)
+        
+        public Task<IActionResult> Post(CourtDto court, string uuid)
         {
             throw new NotImplementedException();
         }
