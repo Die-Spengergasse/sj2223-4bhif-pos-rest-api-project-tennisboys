@@ -101,6 +101,12 @@ namespace Spg.TennisBooking.Application.Services
             {
                 clubDto.IsAdmin = true;
             }
+            else
+            {
+                //Clean out sensitive data from clubDto
+                clubDto.PaidTill = null;
+                clubDto.FreeTrialTill = DateTime.UtcNow;
+            }
 
             return new OkObjectResult(clubDto);
         }
@@ -109,7 +115,7 @@ namespace Spg.TennisBooking.Application.Services
         {
             _logger.LogInformation("Get all clubs with search {search}", search);
             IEnumerable<Club> clubs = await _clubRepository.GetAll(search);
-            List<GetClubDto> clubDtos = new();
+            List<GetAllClubDto> clubDtos = new();
             foreach (Club club in clubs)
             {
                 clubDtos.Add(club);
