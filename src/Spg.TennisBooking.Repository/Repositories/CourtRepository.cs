@@ -28,14 +28,14 @@ namespace Spg.TennisBooking.Repository.Repositories
             _db.Courts.Remove(court);
         }
 
-        public IEnumerable<Court> GetAll(Club club)
+        public async Task<IEnumerable<Court>> GetAll(Club club)
         {
             return _db.Courts.Where(c => c.ClubNavigation == club);
         }
 
-        public Court? Get(int id)
+        public async Task<Court?> Get(int id)
         {
-            return _db.Courts.Find(id);
+            return await _db.Courts.FindAsync(id);
         }
 
         public void Update(Court court)

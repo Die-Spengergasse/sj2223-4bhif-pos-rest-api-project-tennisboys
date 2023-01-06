@@ -124,9 +124,9 @@ public class ClubController : ControllerBase
         }
     }
 
-    [HttpDelete]
+    [HttpDelete("{link}")]
     //[Authorize]
-    public async Task<IActionResult> Delete([FromBody] string link)
+    public async Task<IActionResult> Delete(string link)
     {
         try
         {

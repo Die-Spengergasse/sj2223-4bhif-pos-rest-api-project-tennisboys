@@ -18,36 +18,84 @@ namespace Spg.TennisBooking.Application.Services
     {
         private readonly ICourtRepository _courtRepository;
         private readonly IUserRepository _userRepository;
+        private readonly IClubRepository _clubRepository;
         private readonly ILogger<CourtService> _logger;
 
-        public CourtService(ICourtRepository courtRepository, IUserRepository userRepository, ILogger<CourtService> logger)
+        public CourtService(ICourtRepository courtRepository, IUserRepository userRepository, IClubRepository clubRepository, ILogger<CourtService> logger)
         {
             _courtRepository = courtRepository;
             _userRepository = userRepository;
+            _clubRepository = clubRepository;
             _logger = logger;
         }
 
-        public Task<IActionResult> Delete(int id, string uuid)
+        public async Task<IActionResult> Delete(int id, string uuid)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IActionResult> Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
-            throw new NotImplementedException();
-        }
+            Court? court = await _courtRepository.Get(id);
 
-        public Task<IActionResult> GetAll(string clubLink)
-        {
-            throw new NotImplementedException();
-        }
+            if (court == null)
+            {
+                return new NotFoundObjectResult("Court not found");
+            }
 
-        public Task<IActionResult> Patch(CourtDto court, string uuid)
-        {
-            throw new NotImplementedException();
+            //Transform into CourtDto
+            GetCourtDto courtDto = court;
+
+            return new OkObjectResult(courtDto);
         }
         
-        public Task<IActionResult> Post(CourtDto court, string uuid)
+        public async Task<IActionResult> GetAll(string clubLink)
+        {
+            //Get Club
+            Club? club = await _clubRepository.GetByLink(clubLink);
+
+            if (club == null)
+            {
+                return new NotFoundObjectResult("Club not found");
+            }
+
+            //Get all courts
+            IEnumerable<Court> courts = await _courtRepository.GetAll(club);
+
+            //Transform into CourtDto
+            List<GetCourtDto> courtDtos = courts.Select(court => (GetCourtDto)court).ToList();
+
+            return new OkObjectResult(courtDtos);
+        }
+
+        public async Task<IActionResult> Patch(PatchCourtDto court, string uuid)
+        {
+            //Get Club of court by getting the court with the help of the id and accessing ClubNavigation
+            Court? oldCourt = await _courtRepository.Get(court.Id);
+
+            if(oldCourt == null)
+            {
+                return new NotFoundObjectResult("Court not found");
+            }
+
+            Club club = oldCourt.ClubNavigation;
+
+            //Check if user is Admin of Club
+            if (!await ClubService.IsAdmin(club, uuid, _userRepository)){
+                return new UnauthorizedObjectResult("User not owner of this Club");
+            }
+
+            //Patch
+            //TODO: Validations and overgive it to oldCourt
+
+
+            //Save new court
+            _courtRepository.Update(oldCourt);
+
+            return new OkObjectResult("Court updated");
+        }
+        
+        public async Task<IActionResult> Post(PostCourtDto postCourtDto, string uuid)
         {
             throw new NotImplementedException();
         }

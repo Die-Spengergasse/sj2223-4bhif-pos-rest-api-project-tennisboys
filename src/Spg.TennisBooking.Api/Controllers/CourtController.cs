@@ -36,11 +36,11 @@ public class CourtController : ControllerBase
      */
 
     [HttpPost]
-    public async Task<IActionResult> Post([FromBody] CourtDto courtDto)
+    public async Task<IActionResult> Post([FromBody] PostCourtDto postCourtDto)
     {
         try
         {
-            var court = await _court.Post(courtDto, Controller.GetUserId(User));
+            var court = await _court.Post(postCourtDto, Controller.GetUserId(User));
             return Ok(court);
         }
         catch (Exception e)
@@ -58,7 +58,7 @@ public class CourtController : ControllerBase
     }
 
     [HttpPatch]
-    public async Task<IActionResult> Patch([FromBody] CourtDto courtDto)
+    public async Task<IActionResult> Patch([FromBody] PatchCourtDto courtDto)
     {
         try
         {

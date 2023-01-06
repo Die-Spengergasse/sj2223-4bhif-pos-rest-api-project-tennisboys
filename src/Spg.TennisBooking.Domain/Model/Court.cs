@@ -12,10 +12,11 @@ namespace Spg.TennisBooking.Domain.Model
     {
         public int Id { get; private set; }
         public string Name { get; set; } = string.Empty;
+        public bool Bookable { get; set; } = false;
         public CourtType Type { get; set; } = CourtType.Sand;
-        public double APrice { get; set; }
-        public double? BPrice { get; set; }
-        private int _ATimeFrom { get; set; }
+        public double APrice { get; set; } = 0.0;
+        public double? BPrice { get; set; } = null;
+        private int _ATimeFrom { get; set; } = 0;
         public int ATimeFrom
         {
             get { return _ATimeFrom; }
@@ -28,7 +29,7 @@ namespace Spg.TennisBooking.Domain.Model
                 _ATimeFrom = value;
             }
         }
-        private int _ATimeTill { get; set; }
+        private int _ATimeTill { get; set; } = 0;
         public int ATimeTill
         {
             get
@@ -47,7 +48,7 @@ namespace Spg.TennisBooking.Domain.Model
                 }
             }
         }
-        private int _AWeekendTimeTill { get; set; }
+        private int _AWeekendTimeTill { get; set; } = 0;
         public int AWeekendTimeTill
         {
             get
@@ -110,6 +111,10 @@ namespace Spg.TennisBooking.Domain.Model
 
         }
 
-
+        public Court(string name, Club club)
+        {
+            Name = name;
+            ClubNavigation = club;
+        }
     }
 }
