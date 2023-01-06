@@ -34,7 +34,25 @@ namespace Spg.TennisBooking.Application.Services
 
         public async Task<IActionResult> Delete(int id, string uuid)
         {
-            throw new NotImplementedException();
+            Court? court = await _courtRepository.Get(id);
+
+            if (court == null)
+            {
+                return new NotFoundObjectResult("Court not found");
+            }
+
+            Club club = court.ClubNavigation;
+
+            //Check if user is Admin of Club
+            if (!await ClubService.IsAdmin(club, uuid, _userRepository))
+            {
+                return new UnauthorizedObjectResult("User not owner of this club");
+            }
+
+            //Remove
+            _courtRepository.Delete(court);
+
+            return new OkObjectResult("Court deleted");
         }
 
         public async Task<IActionResult> Get(int id)

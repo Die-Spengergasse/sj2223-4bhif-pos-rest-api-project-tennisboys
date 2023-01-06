@@ -102,6 +102,7 @@ public class CourtController : ControllerBase
     }
 
     [HttpGet("court/{id}")]
+    [AllowAnonymous]
     public async Task<IActionResult> Get(int id)
     {
         try
@@ -124,6 +125,7 @@ public class CourtController : ControllerBase
     }
 
     [HttpGet("club/{clubLink}")]
+    [AllowAnonymous]
     public async Task<IActionResult> GetAll(string clubLink)
     {
         try
