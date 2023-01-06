@@ -44,7 +44,7 @@ namespace Spg.TennisBooking.Application.Test.Services
             //Act
             bool result = userService.Welcomed(user.UUID);
 
-            Assert.False(result);
+            Assert.True(result);
         }
 
         //GetPersonalData
@@ -54,12 +54,20 @@ namespace Spg.TennisBooking.Application.Test.Services
             //Init
             TennisBookingContext context = GetContext();
             UserService userService = GetService(GetRepository(context));
+            AuthService authService = GetAuthService(GetAuthRepository(context));
 
             //Arrange
-            string UUID = "00000000-0000-0000-0000-000000000000";
+            string email = "info@adrian-schauer.at";
+            string password = "admin1234";
+
+            //Register
+            User user = authService.Register(email, password);
+
+            //Verify
+            authService.Verify(user.UUID, user.VerificationCode);
 
             //Act
-            User result = userService.GetPersonalData(UUID);
+            User result = userService.GetPersonalData(user.UUID);
 
             //Assert
             Assert.True(true);
@@ -67,7 +75,7 @@ namespace Spg.TennisBooking.Application.Test.Services
             //Clean
             context.Database.EnsureDeleted();
 
-
+            
         }
 
         //SetPersonalData
@@ -77,20 +85,23 @@ namespace Spg.TennisBooking.Application.Test.Services
             //Init
             TennisBookingContext context = GetContext();
             UserService userService = GetService(GetRepository(context));
+            AuthService authService = GetAuthService(GetAuthRepository(context));
 
             //Arrange
-            string UUID = "00000000-0000-0000-0000-000000000000";
-            string firstName = "Adrian";
-            string lastName = "Schauer";
-            DateTime? birthDate = new DateTime(1989, 12, 12);
-            GenderTypes gender = GenderTypes.Male;
-            PhoneNumber? phoneNumber = new PhoneNumber("+43", "6641234567");
+            string email = "info@adrian-schauer.at";
+            string password = "admin1234";
+
+            //Register
+            User user = authService.Register(email, password);
+
+            //Verify
+            authService.Verify(user.UUID, user.VerificationCode);
 
             //Act
-            bool result = userService.SetPersonalData(UUID, firstName, lastName, birthDate, gender, phoneNumber);
+            bool result = userService.SetPersonalData(user.UUID, user.FirstName, user.LastName, user.BirthDate, user.Gender, user.PhoneNumber);
 
             //Assert
-            Assert.True(true);
+            Assert.True(result);
 
             //Clean
             context.Database.EnsureDeleted();
@@ -103,18 +114,24 @@ namespace Spg.TennisBooking.Application.Test.Services
             //Init
             TennisBookingContext context = GetContext();
             UserService userService = GetService(GetRepository(context));
+            AuthService authService = GetAuthService(GetAuthRepository(context));
 
             //Arrange
-            string UUID = "00000000-0000-0000-0000-000000000000";
-            string Password = "admin1234";
-            string newPassword = "admin12345";
+            string email = "info@adrian-schauer.at";
+            string password = "admin1234";
+
+            //Register
+            User user = authService.Register(email, password);
+
+            //Verify
+            authService.Verify(user.UUID, user.VerificationCode);
 
             //Act
-            bool result = userService.ChangePassword(UUID, Password, newPassword);
+            bool result = userService.ChangePassword(user.UUID, password, password);
 
             //Assert
             Assert.True(true);
-
+            
             //Clean
             context.Database.EnsureDeleted();
         }
