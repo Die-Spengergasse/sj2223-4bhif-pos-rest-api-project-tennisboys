@@ -46,7 +46,7 @@ public class ClubEventController : ControllerBase
         }
         catch (Exception e)
         {
-            _logger.LogError(e, "Error while getting court");
+            _logger.LogError(e, "Error while getting event");
             if (_env.IsDevelopment())
             {
                 return StatusCode(500, e.Message);
@@ -68,7 +68,7 @@ public class ClubEventController : ControllerBase
         }
         catch (Exception e)
         {
-            _logger.LogError(e, "Error while getting court");
+            _logger.LogError(e, "Error while getting events");
             if (_env.IsDevelopment())
             {
                 return StatusCode(500, e.Message);
@@ -89,7 +89,7 @@ public class ClubEventController : ControllerBase
         }
         catch (Exception e)
         {
-            _logger.LogError(e, "Error while creating court");
+            _logger.LogError(e, "Error while creating event");
             if (_env.IsDevelopment())
             {
                 return StatusCode(500, e.Message);
@@ -110,7 +110,7 @@ public class ClubEventController : ControllerBase
         }
         catch (Exception e)
         {
-            _logger.LogError(e, "Error while patching court");
+            _logger.LogError(e, "Error while putting event");
             if (_env.IsDevelopment())
             {
                 return StatusCode(500, e.Message);
@@ -131,7 +131,7 @@ public class ClubEventController : ControllerBase
         }
         catch (Exception e)
         {
-            _logger.LogError(e, "Error while deleting court");
+            _logger.LogError(e, "Error while deleting event");
             if (_env.IsDevelopment())
             {
                 return StatusCode(500, e.Message);

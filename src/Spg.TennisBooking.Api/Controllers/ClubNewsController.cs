@@ -2,7 +2,7 @@ using System.Net;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
+using Spg.TennisBooking.Domain.Dtos.ClubNewsDtos;
 using Spg.TennisBooking.Domain.Dtos.UserDtos;
 using Spg.TennisBooking.Domain.Exceptions;
 using Spg.TennisBooking.Domain.Interfaces;
@@ -12,6 +12,7 @@ namespace Spg.TennisBooking.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 public class ClubNewsController : ControllerBase
 {
     private readonly IWebHostEnvironment _env;
@@ -27,7 +28,7 @@ public class ClubNewsController : ControllerBase
         _clubNews = clubNews;
     }
 
-    /* TODO: ClubNews
+    /* ClubNews:
      * ClubEvent and ClubNews essentielly work the same but the both give different context.
      * Get(id)
      * GetAll(Club Link)
@@ -36,5 +37,110 @@ public class ClubNewsController : ControllerBase
      * Delete(id)
      */
 
+    [HttpGet("{id}")]
+    [AllowAnonymous]
+    public async Task<IActionResult> Get(int id)
+    {
+        try
+        {
+            return await _clubNews.Get(id);
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e, "Error while getting news");
+            if (_env.IsDevelopment())
+            {
+                return StatusCode(500, e.Message);
+            }
+            else
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+    }
 
+    [HttpGet("club/{clubLink}")]
+    [AllowAnonymous]
+    public async Task<IActionResult> GetAll(string clubLink)
+    {
+        try
+        {
+            return await _clubNews.GetAll(clubLink);
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e, "Error while getting news");
+            if (_env.IsDevelopment())
+            {
+                return StatusCode(500, e.Message);
+            }
+            else
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Post([FromBody] PostClubNewsDto postClubNewsDto)
+    {
+        try
+        {
+            return await _clubNews.Post(postClubNewsDto, Controller.GetUserId(User));
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e, "Error while creating news");
+            if (_env.IsDevelopment())
+            {
+                return StatusCode(500, e.Message);
+            }
+            else
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+    }
+
+    [HttpPut]
+    public async Task<IActionResult> Put([FromBody] PutClubNewsDto putClubNewsDto)
+    {
+        try
+        {
+            return await _clubNews.Put(putClubNewsDto, Controller.GetUserId(User));
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e, "Error while putting news");
+            if (_env.IsDevelopment())
+            {
+                return StatusCode(500, e.Message);
+            }
+            else
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete(int id)
+    {
+        try
+        {
+            return await _clubNews.Delete(id, Controller.GetUserId(User));
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e, "Error while deleting news");
+            if (_env.IsDevelopment())
+            {
+                return StatusCode(500, e.Message);
+            }
+            else
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+    }
 }
