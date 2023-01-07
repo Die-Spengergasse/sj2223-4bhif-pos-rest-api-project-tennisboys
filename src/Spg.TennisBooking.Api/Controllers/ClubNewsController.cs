@@ -26,4 +26,15 @@ public class ClubNewsController : ControllerBase
         _logger = logger;
         _clubNews = clubNews;
     }
+
+    /* TODO: ClubNews
+     * ClubEvent and ClubNews essentielly work the same but the both give different context.
+     * Get(id)
+     * GetAll(Club Link)
+     * Post
+     * Patch(id)
+     * Delete(id)
+     */
+
+
 }

@@ -40,8 +40,7 @@ public class CourtController : ControllerBase
     {
         try
         {
-            var court = await _court.Post(postCourtDto, Controller.GetUserId(User));
-            return Ok(court);
+            return await _court.Post(postCourtDto, Controller.GetUserId(User));
         }
         catch (Exception e)
         {
@@ -62,8 +61,7 @@ public class CourtController : ControllerBase
     {
         try
         {
-            var court = await _court.Patch(courtDto, Controller.GetUserId(User));
-            return Ok(court);
+            return await _court.Patch(courtDto, Controller.GetUserId(User));
         }
         catch (Exception e)
         {
@@ -84,8 +82,7 @@ public class CourtController : ControllerBase
     {
         try
         {
-            await _court.Delete(id, Controller.GetUserId(User));
-            return Ok();
+            return await _court.Delete(id, Controller.GetUserId(User));
         }
         catch (Exception e)
         {
@@ -101,14 +98,13 @@ public class CourtController : ControllerBase
         }
     }
 
-    [HttpGet("court/{id}")]
+    [HttpGet("{id}")]
     [AllowAnonymous]
     public async Task<IActionResult> Get(int id)
     {
         try
         {
-            var court = await _court.Get(id);
-            return Ok(court);
+            return await _court.Get(id);
         }
         catch (Exception e)
         {
@@ -130,8 +126,7 @@ public class CourtController : ControllerBase
     {
         try
         {
-            var courts = await _court.GetAll(clubLink);
-            return Ok(courts);
+            return await _court.GetAll(clubLink);
         }
         catch (Exception e)
         {
