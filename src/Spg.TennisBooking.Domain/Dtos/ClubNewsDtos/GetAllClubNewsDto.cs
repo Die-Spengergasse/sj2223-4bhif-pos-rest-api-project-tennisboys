@@ -9,8 +9,8 @@ namespace Spg.TennisBooking.Domain.Dtos.ClubNewsDtos
     public record GetAllClubNewsDto
     {
         public int Id { get; set; }
-        public string Name { get; set; } = string.Empty;
-        public DateTime Time { get; set; }
+        public string Title { get; set; } = string.Empty;
+        public DateTime Written { get; set; }
 
         public GetAllClubNewsDto()
         {
