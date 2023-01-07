@@ -33,7 +33,7 @@ namespace Spg.TennisBooking.Api.Controllers
         //EmailInUse
         [HttpGet("EmailInUse")]
         [Produces("application/json")]
-        public IActionResult EmailInUse([FromBody] string email)
+        public IActionResult EmailInUse(string email)
         {
             try
             {
