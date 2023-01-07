@@ -15,16 +15,18 @@ ConfigurationManager Conf = builder.Configuration;
 
 // Add services to the container.
 
+
+//Add db
+string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+//Clear db
 DbContextOptions options = new DbContextOptionsBuilder()
-    .UseSqlite("Data Source=TennisBooking.db")
+    .UseSqlite(connectionString)
     .Options;
 
 TennisBookingContext db = new TennisBookingContext(options);
 db.Database.EnsureDeleted();
 db.Database.EnsureCreated();
 
-//Add db
-string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 //builder.Services.AddDbContext<TennisBookingContext>(options => options.UseSqlite("Data Source=TennisBooking.db"));
 builder.Services.ConfigureSqLite(connectionString);
 
