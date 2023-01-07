@@ -60,7 +60,7 @@ public class ClubEventController : ControllerBase
 
     [HttpGet("club/{clubLink}")]
     [AllowAnonymous]
-    public async Task<IActionResult> Get(string clubLink)
+    public async Task<IActionResult> GetAll(string clubLink)
     {
         try
         {
@@ -81,11 +81,11 @@ public class ClubEventController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Post([FromBody] ClubEventDto clubEventDto)
+    public async Task<IActionResult> Post([FromBody] PostClubEventDto postClubEventDto)
     {
         try
         {
-            return await _clubEvent.Post(clubEventDto, Controller.GetUserId(User));
+            return await _clubEvent.Post(postClubEventDto, Controller.GetUserId(User));
         }
         catch (Exception e)
         {
@@ -102,11 +102,11 @@ public class ClubEventController : ControllerBase
     }
 
     [HttpPut]
-    public async Task<IActionResult> Put([FromBody] ClubEventDto clubEventDto)
+    public async Task<IActionResult> Put([FromBody] PutClubEventDto putClubEventDto)
     {
         try
         {
-            return await _clubEvent.Put(clubEventDto, Controller.GetUserId(User));
+            return await _clubEvent.Put(putClubEventDto, Controller.GetUserId(User));
         }
         catch (Exception e)
         {

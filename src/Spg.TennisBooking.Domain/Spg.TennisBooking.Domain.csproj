@@ -11,7 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Dtos\ClubEventDtos\" />
     <Folder Include="Dtos\ClubNewsDtos\" />
   </ItemGroup>
 
