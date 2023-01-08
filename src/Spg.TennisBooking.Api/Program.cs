@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Spg.TennisBooking.Application.Services;
+using Spg.TennisBooking.Configurations;
 using Spg.TennisBooking.Domain.Interfaces;
 using Spg.TennisBooking.Infrastructure;
 using Spg.TennisBooking.Repository.Repositories;
@@ -14,16 +15,20 @@ ConfigurationManager Conf = builder.Configuration;
 
 // Add services to the container.
 
+
+//Add db
+string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+//Clear db
 DbContextOptions options = new DbContextOptionsBuilder()
-    .UseSqlite("Data Source=TennisBooking.db")
+    .UseSqlite(connectionString)
     .Options;
 
 TennisBookingContext db = new TennisBookingContext(options);
 db.Database.EnsureDeleted();
 db.Database.EnsureCreated();
 
-//Add db
-builder.Services.AddDbContext<TennisBookingContext>(options => options.UseSqlite("Data Source=TennisBooking.db"));
+//builder.Services.AddDbContext<TennisBookingContext>(options => options.UseSqlite("Data Source=TennisBooking.db"));
+builder.Services.ConfigureSqLite(connectionString);
 
 builder.Services.AddControllers();
 builder.Services.AddControllersWithViews();
@@ -32,27 +37,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 //Interfaces
-//Auth
-builder.Services.AddTransient<IAuthService, AuthService>();
-builder.Services.AddTransient<IAuthRepository, AuthRepository>();
-//Club
-builder.Services.AddTransient<IClubService, ClubService>();
-builder.Services.AddTransient<IClubRepository, ClubRepository>();
-//ClubEvent
-builder.Services.AddTransient<IClubEventService, ClubEventService>();
-builder.Services.AddTransient<IClubEventRepository, ClubEventRepository>();
-//ClubNews
-builder.Services.AddTransient<IClubNewsService, ClubNewsService>();
-builder.Services.AddTransient<IClubNewsRepository, ClubNewsRepository>();
-//Court
-builder.Services.AddTransient<ICourtService, CourtService>();
-builder.Services.AddTransient<ICourtRepository, CourtRepository>();
-//Reservation
-builder.Services.AddTransient<IReservationService, ReservationService>();
-builder.Services.AddTransient<IReservationRepository, ReservationRepository>();
-//User
-builder.Services.AddTransient<IUserService, UserService>();
-builder.Services.AddTransient<IUserRepository, UserRepository>();
+builder.Services.ConfigureInterfaces();
 
 //JWT
 /*string jwtSecret = Configuration["AppSettings:Secret"] ?? AuthService.GenerateRandom(1024);

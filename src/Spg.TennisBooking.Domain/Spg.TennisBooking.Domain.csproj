@@ -11,8 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Dtos\ClubEventDtos\" />
-    <Folder Include="Dtos\ClubNewsDtos\" />
+    <Folder Include="Dtos\ReservationDtos\" />
   </ItemGroup>
 
 </Project>

@@ -34,7 +34,7 @@ namespace Spg.TennisBooking.Repository.Repositories
 
         public IEnumerable<Reservation> GetByClub(Club club)
         {
-            return _db.Reservations.Where(r => r.CourtNavigation.ClubNavigation == club);
+            return _db.Reservations.Where(r => r.CourtNavigation != null && r.CourtNavigation.ClubNavigation == club);
         }
 
         public IEnumerable<Reservation> GetByCourtAndDateRange(Court court, DateTime from, DateTime to)
