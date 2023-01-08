@@ -2,7 +2,7 @@ using System.Net;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
+using Spg.TennisBooking.Domain.Dtos.ReservationDtos;
 using Spg.TennisBooking.Domain.Dtos.UserDtos;
 using Spg.TennisBooking.Domain.Exceptions;
 using Spg.TennisBooking.Domain.Interfaces;
@@ -12,6 +12,7 @@ namespace Spg.TennisBooking.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 public class ReservationController : ControllerBase
 {
     private readonly IWebHostEnvironment _env;
@@ -25,5 +26,145 @@ public class ReservationController : ControllerBase
         _configuration = configuration;
         _logger = logger;
         _reservation = reservation;
+    }
+
+    /*
+           GetReservationById - Admin
+           GetReservationsByClub - Admin
+           GetReservationsByCourtId - Only When (Dto as Reponse)
+           GetReservationsByUser - Only Themself
+           PostReservation
+           DeleteReservation - Admin
+         */
+
+    [HttpGet]
+    [Route("{id}")]
+    public async Task<IActionResult> GetById(int id)
+    {
+        try
+        {
+            return await _reservation.GetById(id, Controller.GetUserId(User));
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e, "Error while getting reservation");
+            if (_env.IsDevelopment())
+            {
+                return StatusCode(500, e.Message);
+            }
+            else
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+    }
+
+    [HttpGet]
+    [Route("club/{clubLink}")]
+    public async Task<IActionResult> GetByClub(string clubLink)
+    {
+        try
+        {
+            return await _reservation.GetByClub(clubLink, Controller.GetUserId(User));
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e, "Error while getting reservations");
+            if (_env.IsDevelopment())
+            {
+                return StatusCode(500, e.Message);
+            }
+            else
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+    }
+
+    [HttpGet]
+    [Route("court/{courtId}")]
+    public async Task<IActionResult> GetByCourt(int courtId)
+    {
+        try
+        {
+            return await _reservation.GetByCourt(courtId);
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e, "Error while getting reservations");
+            if (_env.IsDevelopment())
+            {
+                return StatusCode(500, e.Message);
+            }
+            else
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+    }
+
+    [HttpGet]
+    [Route("user")]
+    public async Task<IActionResult> GetByUser()
+    {
+        try
+        {
+            return await _reservation.GetByUser(Controller.GetUserId(User));
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e, "Error while getting reservations");
+            if (_env.IsDevelopment())
+            {
+                return StatusCode(500, e.Message);
+            }
+            else
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Post([FromBody] PostReservationDto reservationDto)
+    {
+        try
+        {
+            return await _reservation.Post(reservationDto, Controller.GetUserId(User));
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e, "Error while posting reservation");
+            if (_env.IsDevelopment())
+            {
+                return StatusCode(500, e.Message);
+            }
+            else
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+    }
+
+    [HttpDelete]
+    [Route("{id}")]
+    public async Task<IActionResult> Delete(int id)
+    {
+        try
+        {
+            return await _reservation.Delete(id, Controller.GetUserId(User));
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e, "Error while deleting reservation");
+            if (_env.IsDevelopment())
+            {
+                return StatusCode(500, e.Message);
+            }
+            else
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
     }
 }
