@@ -1,5 +1,6 @@
 ﻿using Spg.TennisBooking.Domain.Exceptions;
 using Spg.TennisBooking.Domain.Interfaces;
+using System.ComponentModel.DataAnnotations;
 using System.Net;
 using System.Net.Mail;
 using Microsoft.IdentityModel.Tokens;
@@ -223,6 +224,8 @@ namespace Spg.TennisBooking.Application.Services
                 ImagePath = v.ImagePath,
                 SocialHub = v.SocialHub
             */
+
+
             club.Link = patchClubDto.Link;
             club.Name = patchClubDto.Name;
             club.Info = patchClubDto.Info;

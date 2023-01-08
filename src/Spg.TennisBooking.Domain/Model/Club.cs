@@ -3,22 +3,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace Spg.TennisBooking.Domain.Model
 {
     public class Club
     {
         public int Id { get; private set; }
+        [Required(ErrorMessage = "Link is required")]
         public string Link { get; set; } = Guid.NewGuid().ToString(); //Link to the club
         public User? Admin { get; set; }
         public string IBAN { get; set; } = string.Empty;
         public DateTime? PaidTill { get; set; }
         public DateTime FreeTrialTill { get; set; } = DateTime.Now.AddDays(30);
+        [Required(ErrorMessage = "Name is required")]
         public string Name { get; set; } = string.Empty;
+        [Required(ErrorMessage = "Info is required")]
         public string Info { get; set; } = string.Empty;
+        [Required(ErrorMessage = "Address is required")]
         public string Address { get; set; } = string.Empty;
+        [Required(ErrorMessage = "ZipCode is required")]
         public string ZipCode { get; set; } = string.Empty;
+        [Required(ErrorMessage = "ImagePath is required")]
         public string ImagePath { get; set; } = string.Empty;
+        [Required(ErrorMessage = "SocialHub is required")]
         public SocialHub SocialHub { get; set; } = new SocialHub();
         private List<ClubNews> _clubNews = new List<ClubNews>();
         public IReadOnlyList<ClubNews> ClubNews => _clubNews;
