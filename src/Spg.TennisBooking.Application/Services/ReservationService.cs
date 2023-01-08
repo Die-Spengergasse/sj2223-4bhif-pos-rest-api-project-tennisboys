@@ -8,6 +8,8 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Security.Cryptography;
+using Microsoft.AspNetCore.Mvc;
+using Spg.TennisBooking.Domain.Dtos.ReservationDtos;
 
 namespace Spg.TennisBooking.Application.Services
 {
@@ -18,6 +20,35 @@ namespace Spg.TennisBooking.Application.Services
         public ReservationService(IReservationRepository reservationRepository)
         {
             _reservationRepository = reservationRepository;
+        }
+
+        public Task<IActionResult> GetById(int id, string uuid)
+        {
+            throw new NotImplementedException();
+        }
+        public Task<IActionResult> GetByClub(string clubLink, string uuid)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IActionResult> GetByCourt(int courtId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IActionResult> GetByUser(string uuid)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IActionResult> Post(PostReservationDto reservation, string uuid)
+        {
+            throw new NotImplementedException();
+        }
+        
+        public Task<IActionResult> Delete(int id, string uuid)
+        {
+            throw new NotImplementedException();
         }
     }
 }
