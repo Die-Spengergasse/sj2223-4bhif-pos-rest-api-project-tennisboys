@@ -44,7 +44,18 @@ namespace Spg.TennisBooking.Application.Test.Services
             //Act
             bool result = userService.Welcomed(user.UUID);
 
+            Assert.False(result);
+
+            //SetPersonalData
+            userService.SetPersonalData(user.UUID, user.FirstName, user.LastName, user.BirthDate, user.Gender, user.PhoneNumber);
+
+            //Act
+            result = userService.Welcomed(user.UUID);
+
             Assert.True(result);
+
+            //Clean
+            context.Database.EnsureDeleted();
         }
 
         //GetPersonalData
@@ -70,12 +81,10 @@ namespace Spg.TennisBooking.Application.Test.Services
             User result = userService.GetPersonalData(user.UUID);
 
             //Assert
-            Assert.True(true);
+            Assert.True(result.Email == email);
 
             //Clean
             context.Database.EnsureDeleted();
-
-            
         }
 
         //SetPersonalData
