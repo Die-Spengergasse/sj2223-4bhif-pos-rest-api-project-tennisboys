@@ -7,12 +7,12 @@ namespace Spg.TennisBooking.Domain.Interfaces
     public interface IReservationService
     {
         /*
-         * GetReservationsByCourtId - Only When (Dto as Reponse)
            GetReservationById - Admin
+           GetReservationsByClub - Admin
+           GetReservationsByCourtId - Only When (Dto as Reponse)
+           GetReservationsByUser - Only Themself
            PostReservation
            DeleteReservation - Admin
-           GetReservationsByUser - Only Themself
-           GetReservationsByClub - Admin
          */
         Task<IActionResult> GetById(int id, string uuid);
         Task<IActionResult> GetByClub(string clubLink, string uuid);
