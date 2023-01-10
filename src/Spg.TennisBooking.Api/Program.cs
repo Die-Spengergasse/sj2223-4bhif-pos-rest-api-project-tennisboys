@@ -66,23 +66,50 @@ builder.Services.AddAuthentication(auth =>
 //TODO: Stripe API Key
 
 //Swagger Configuration
-builder.Services.AddSwaggerGen(s => s.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo() 
-    { 
-        Title = "TennisBooking", 
-        Description = "Tennis Booking Website", 
-        Contact = new OpenApiContact() 
-        { 
+builder.Services.AddSwaggerGen(s =>
+{
+    s.SwaggerDoc("v1", new OpenApiInfo()
+    {
+        Title = "TennisBooking",
+        Description = "Tennis Booking Website",
+        Contact = new OpenApiContact()
+        {
             Name = "Adrian Schauer",
-            Email = "info@adrian-schauer.at", 
+            Email = "info@adrian-schauer.at",
             Url = new Uri("http://www.spengergasse.at")
-        }, 
-        License = new OpenApiLicense() 
-        { 
-            Name = "Schauer-Licence", 
-            Url = new Uri("http://www.adrian-schauer.at/license") 
-        }, 
-        Version = "v1" 
-    }));
+        },
+        License = new OpenApiLicense()
+        {
+            Name = "Schauer-Licence",
+            Url = new Uri("http://www.adrian-schauer.at/license")
+        },
+        Version = "v1"
+    });
+    s.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Name = "Authorization",
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Description = "Enter JWT Token here"
+    });
+    s.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference=new OpenApiReference
+                {
+                    Type=ReferenceType.SecurityScheme,
+                    Id="Bearer"
+                }
+            },
+            new string[]{}
+        }
+    });
+});
+
 
 var app = builder.Build();
 
