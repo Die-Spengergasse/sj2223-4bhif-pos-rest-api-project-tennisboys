@@ -194,7 +194,7 @@ namespace Spg.TennisBooking.Application.Services
             }
         }
 
-        public async Task<IActionResult> Patch(PatchClubDto patchClubDto, string uuid)
+        public async Task<IActionResult> Put(PatchClubDto patchClubDto, string uuid)
         {
             //Get club
             Club? club = await _clubRepository.GetByLink(patchClubDto.Link);

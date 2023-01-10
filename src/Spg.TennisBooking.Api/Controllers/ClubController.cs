@@ -108,7 +108,7 @@ public class ClubController : ControllerBase
     {
         try
         {
-            return await _club.Patch(clubDto, Controller.GetUserId(User));
+            return await _club.Put(clubDto, Controller.GetUserId(User));
         }
         catch (Exception e)
         {

@@ -16,24 +16,14 @@ namespace Spg.TennisBooking.Application.Test.Services
 {
     public class AuthServiceTests : Tests
     {
-        protected AuthService GetService(IUserRepository userRepository)
-        {
-            return GetAuthService(userRepository);
-        }
-
-        protected UserRepository GetRepository(TennisBookingContext context)
-        {
-            return GetUserRepository(context);
-        }
-
         //EmailInUse
         [Fact]
         public void EmailInUse()
         {
             //Init
             TennisBookingContext context = GetContext();
-            UserRepository userRepository = GetRepository(context);
-            AuthService authService = GetService(userRepository);
+            UserRepository userRepository = GetUserRepository(context);
+            AuthService authService = GetAuthService(userRepository);
             
             //Arrange
             string email = "info@adrian-schauer.at";
@@ -54,15 +44,15 @@ namespace Spg.TennisBooking.Application.Test.Services
         {
             //Init
             TennisBookingContext context = GetContext();
-            UserRepository userRepository = GetRepository(context);
-            AuthService userService = GetService(userRepository);
+            UserRepository userRepository = GetUserRepository(context);
+            AuthService authService = GetAuthService(userRepository);
 
             //Arrange
             string email = "info@adrian-schauer.at";
             string password = "admin1234";
 
             //Act
-            User result = userService.Register(email, password);
+            User result = authService.Register(email, password);
 
             //Assert
             Assert.NotNull(result);
@@ -78,18 +68,18 @@ namespace Spg.TennisBooking.Application.Test.Services
         {
             //Init
             TennisBookingContext context = GetContext();
-            UserRepository userRepository = GetRepository(context);
-            AuthService userService = GetService(userRepository);
+            UserRepository userRepository = GetUserRepository(context);
+            AuthService authService = GetAuthService(userRepository);
 
             //Arrange
             string email = "info@adrian-schauer.at";
             string password = "admin1234";
 
             //Register
-            User user = userService.Register(email, password);
+            User user = authService.Register(email, password);
 
             //Act
-            bool result = userService.Verify(user.UUID, user.VerificationCode);
+            bool result = authService.Verify(user.UUID, user.VerificationCode);
 
             //Assert
             Assert.True(result);
@@ -104,21 +94,21 @@ namespace Spg.TennisBooking.Application.Test.Services
         {
             //Init
             TennisBookingContext context = GetContext();
-            UserRepository userRepository = GetRepository(context);
-            AuthService userService = GetService(userRepository);
+            UserRepository userRepository = GetUserRepository(context);
+            AuthService authService = GetAuthService(userRepository);
 
             //Arrange
             string email = "info@adrian-schauer.at";
             string password = "admin1234";
 
             //Register
-            User user = userService.Register(email, password);
+            User user = authService.Register(email, password);
 
             //Verify
-            userService.Verify(user.UUID, user.VerificationCode);
+            authService.Verify(user.UUID, user.VerificationCode);
 
             //Act
-            string result = userService.Login(email, password, "This is only a Test Key. Do not use in prod!");
+            string result = authService.Login(email, password, "This is only a Test Key. Do not use in prod!");
 
             //Assert
             Assert.True(!string.IsNullOrEmpty(result));
@@ -133,8 +123,8 @@ namespace Spg.TennisBooking.Application.Test.Services
         {
             //Init
             TennisBookingContext context = GetContext();
-            UserRepository userRepository = GetRepository(context);
-            AuthService authService = GetService(userRepository);
+            UserRepository userRepository = GetUserRepository(context);
+            AuthService authService = GetAuthService(userRepository);
 
             //Arrange
             string email = "info@adrian-schauer.at";
@@ -162,24 +152,24 @@ namespace Spg.TennisBooking.Application.Test.Services
         {
             //Init
             TennisBookingContext context = GetContext();
-            UserRepository userRepository = GetRepository(context);
-            AuthService userService = GetService(userRepository);
+            UserRepository userRepository = GetUserRepository(context);
+            AuthService authService = GetAuthService(userRepository);
 
             //Arrange
             string email = "info@adrian-schauer.at";
             string password = "admin1234";
 
             //Register
-            User user = userService.Register(email, password);
+            User user = authService.Register(email, password);
 
             //Verify
-            userService.Verify(user.UUID, user.VerificationCode);
+            authService.Verify(user.UUID, user.VerificationCode);
 
             //For
-            user = userService.ForgotPassword(email);
+            user = authService.ForgotPassword(email);
 
             //Act
-            bool result = userService.ResetPassword(user.UUID, password, user.ResetCode);
+            bool result = authService.ResetPassword(user.UUID, password, user.ResetCode);
 
             //Assert
             Assert.True(result);
