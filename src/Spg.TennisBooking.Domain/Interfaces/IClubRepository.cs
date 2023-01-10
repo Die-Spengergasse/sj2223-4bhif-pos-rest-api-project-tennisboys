@@ -4,7 +4,7 @@ namespace Spg.TennisBooking.Domain.Interfaces
 {
     public interface IClubRepository
     {
-        Club? GetById(int id);
+        Club? Get(int id);
         Task<Club?> GetByLink(string link);
         Task<IEnumerable<Club>> GetAll(string search);
         void Update(Club club);
