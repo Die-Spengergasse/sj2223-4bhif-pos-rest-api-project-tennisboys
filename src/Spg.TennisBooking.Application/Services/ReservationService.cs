@@ -16,37 +16,75 @@ namespace Spg.TennisBooking.Application.Services
     public class ReservationService : IReservationService
     {
         private readonly IReservationRepository _reservationRepository;
+        private readonly IUserRepository _userRepository;
 
-        public ReservationService(IReservationRepository reservationRepository)
+        public ReservationService(IReservationRepository reservationRepository, IUserRepository userRepository)
         {
             _reservationRepository = reservationRepository;
+            _userRepository = userRepository;
         }
 
-        public Task<IActionResult> GetById(int id, string uuid)
+        public async Task<IActionResult> GetByUUID(string reservationUUID, string uuid)
+        {
+            //Get the reservation by UUID
+            Reservation? reservation = await _reservationRepository.GetByUUID(reservationUUID);
+
+            //Check if the reservation exists
+            if (reservation == null)
+            {
+                return new NotFoundObjectResult("Reservation not found");
+            }
+
+            //Get User
+            User? user = await _userRepository.GetByUUID(uuid);
+
+            //Check if the user exists
+            if (user == null)
+            {
+                return new NotFoundObjectResult("User not found");
+            }
+            
+            //Check if User is allowed to see the reservation
+            //The user is allowed when A: The user is the owner of the club, B: The user is the owner of the reservation
+            if (reservation.ClubNavigation?.Admin != user && reservation.UserNavigation != user)
+            {
+                return new UnauthorizedObjectResult("You are not allowed to see this reservation");
+            }
+
+            //Put into DTO
+            GetReservationDto getReservationDto = new GetReservationDto()
+            {
+                UUID = reservation.UUID,
+                StartTime = reservation.StartTime,
+                EndTime = reservation.EndTime,
+                CourtName = reservation.CourtNavigation?.Name,
+                ClubName = reservation.ClubNavigation?.Name,
+            };
+
+            //Return dto
+            return new OkObjectResult(getReservationDto);
+        }
+        public async Task<IActionResult> GetByClub(string clubLink, string uuid)
         {
             throw new NotImplementedException();
         }
-        public Task<IActionResult> GetByClub(string clubLink, string uuid)
+
+        public async Task<IActionResult> GetByCourt(int courtId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IActionResult> GetByCourt(int courtId)
+        public async Task<IActionResult> GetByUser(string uuid)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IActionResult> GetByUser(string uuid)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IActionResult> Post(PostReservationDto reservation, string uuid)
+        public async Task<IActionResult> Post(PostReservationDto reservation, string uuid)
         {
             throw new NotImplementedException();
         }
         
-        public Task<IActionResult> Delete(int id, string uuid)
+        public async Task<IActionResult> Delete(string reservationUUID, string uuid)
         {
             throw new NotImplementedException();
         }

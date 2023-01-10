@@ -4,12 +4,12 @@ namespace Spg.TennisBooking.Domain.Interfaces
 {
     public interface IReservationRepository
     {
-        Reservation? GetByUUID(string uuid);
-        Reservation Add(Reservation reservation);
-        bool Update(Reservation reservation);
-        bool Delete(Reservation reservation);
-        IEnumerable<Reservation> GetByCourtAndDateRange(Court court, DateTime from, DateTime to);
-        IEnumerable<Reservation> GetByUser(User user);
-        IEnumerable<Reservation> GetByClub(Club club);
+        Task<Reservation?> GetByUUID(string uuid);
+        void Add(Reservation reservation);
+        void Update(Reservation reservation);
+        void Delete(Reservation reservation);
+        Task<IEnumerable<Reservation>> GetByCourtAndDateRange(Court court, DateTime from, DateTime to);
+        Task<IEnumerable<Reservation>> GetByUser(User user);
+        Task<IEnumerable<Reservation>> GetByClub(Club club);
     }
 }

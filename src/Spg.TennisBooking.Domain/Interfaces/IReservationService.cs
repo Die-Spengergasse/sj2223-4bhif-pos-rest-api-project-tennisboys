@@ -14,11 +14,11 @@ namespace Spg.TennisBooking.Domain.Interfaces
            PostReservation
            DeleteReservation - Admin
          */
-        Task<IActionResult> GetById(int id, string uuid);
+        Task<IActionResult> GetByUUID(string reservationUUID, string uuid);
         Task<IActionResult> GetByClub(string clubLink, string uuid);
         Task<IActionResult> GetByCourt(int courtId);
         Task<IActionResult> GetByUser(string uuid);
         Task<IActionResult> Post(PostReservationDto reservation, string uuid);
-        Task<IActionResult> Delete(int id, string uuid);
+        Task<IActionResult> Delete(string reservationUUID, string uuid);
     }
 }

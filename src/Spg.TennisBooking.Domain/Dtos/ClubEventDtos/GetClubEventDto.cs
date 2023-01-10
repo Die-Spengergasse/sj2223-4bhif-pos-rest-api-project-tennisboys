@@ -20,7 +20,12 @@ namespace Spg.TennisBooking.Domain.Dtos.ClubEventDtos
 
         public static implicit operator GetClubEventDto(ClubEvent v)
         {
-            throw new NotImplementedException();
+            return new GetClubEventDto
+            {
+                Name = v.Name,
+                Time = v.Time,
+                Info = v.Info
+           };
         }
     }
 }
