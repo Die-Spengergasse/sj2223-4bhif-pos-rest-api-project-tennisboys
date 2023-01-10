@@ -19,8 +19,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Spg.TennisBooking.Application\Spg.TennisBooking.Application.csproj" />
+    <ProjectReference Include="..\Spg.TennisBooking.Configurations\Spg.TennisBooking.Configurations.csproj" />
     <ProjectReference Include="..\Spg.TennisBooking.Domain\Spg.TennisBooking.Domain.csproj" />
-    <ProjectReference Include="..\Spg.TennisBooking.MvcFrontEnd\Spg.TennisBooking.MvcFrontEnd.csproj" />
+    <ProjectReference Include="..\Spg.TennisBooking.Infrastructure\Spg.TennisBooking.Infrastructure.csproj" />
+    <ProjectReference Include="..\Spg.TennisBooking.Repository\Spg.TennisBooking.Repository.csproj" />
   </ItemGroup>
 
 </Project>
