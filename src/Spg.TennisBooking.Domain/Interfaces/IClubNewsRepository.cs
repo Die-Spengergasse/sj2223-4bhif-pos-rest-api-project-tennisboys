@@ -7,7 +7,7 @@ namespace Spg.TennisBooking.Domain.Interfaces
         void Add(ClubNews news);
         void Delete(ClubNews news);
         void Update(ClubNews news);
-        ClubNews? Get(int id);
-        IEnumerable<ClubNews> GetAll(Club club);
+        Task<ClubNews?> Get(int id);
+        Task<IEnumerable<ClubNews>> GetAll(Club club);
     }
 }
