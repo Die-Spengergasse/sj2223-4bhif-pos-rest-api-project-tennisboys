@@ -31,7 +31,7 @@ namespace Spg.TennisBooking.Repository.Repositories
             _db.SaveChanges();
         }
 
-        public Club? GetById(int id)
+        public Club? Get(int id)
         {
             return _db.Clubs.Find(id);
         }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Spg.TennisBooking.Domain.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,11 @@ namespace Spg.TennisBooking.Domain.Dtos.ClubEventDtos
 
         public GetClubEventDto()
         {
+        }
+
+        public static implicit operator GetClubEventDto(ClubEvent v)
+        {
+            throw new NotImplementedException();
         }
     }
 }
