@@ -9,9 +9,9 @@ namespace Spg.TennisBooking.Domain.Interfaces
 {
     public interface IAuthRepository
     {
-        User CreateUser(User user);
-        User? GetUserByEmail(string email);
-        User? GetUserByUuid(string uuid);
-        bool UpdateUser(User user);
+        User Create(User user);
+        User? GetByEmail(string email);
+        User? GetByUUIDold(string uuid);
+        bool Update(User user);
     }
 }
