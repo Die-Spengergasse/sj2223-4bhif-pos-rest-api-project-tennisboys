@@ -22,12 +22,13 @@ namespace Spg.TennisBooking.Domain.Model
         public virtual Club? ClubNavigation { get; set; } = default!;
 
         //Additional Info
-        public string? Comment { get; set; }
+        public string Comment { get; set; } = string.Empty;
 
-        public Reservation(DateTime startTime, DateTime endTime, Court court, User user, Club club)
+        public Reservation(DateTime startTime, DateTime endTime, string comment, Court court, User user, Club club)
         {
             StartTime = startTime;
             EndTime = endTime;
+            Comment = comment;
             CourtNavigation = court;
             UserNavigation = user;
             ClubNavigation = club;
