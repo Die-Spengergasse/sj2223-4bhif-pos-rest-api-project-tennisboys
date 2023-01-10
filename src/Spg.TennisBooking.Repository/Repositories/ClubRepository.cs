@@ -31,9 +31,9 @@ namespace Spg.TennisBooking.Repository.Repositories
             _db.SaveChanges();
         }
 
-        public Club? Get(int id)
+        public async Task<Club?> Get(int id)
         {
-            return _db.Clubs.Find(id);
+            return await _db.Clubs.FindAsync(id);
         }
 
         public async Task<Club?> GetByLink(string link)

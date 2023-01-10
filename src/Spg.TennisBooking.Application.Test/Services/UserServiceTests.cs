@@ -13,22 +13,12 @@ namespace Spg.TennisBooking.Application.Test.Services
 {
     public class UserServiceTests : Tests
     {
-        protected UserService GetService(IUserRepository userRepository)
-        {
-            return new UserService(userRepository);
-        }
-
-        protected IUserRepository GetRepository(TennisBookingContext context)
-        {
-            return GetUserRepository(context);
-        }
-
         //Welcomed
         [Fact]
         public void Welcomed()
         {
             TennisBookingContext context = GetContext();
-            UserService userService = GetService(GetRepository(context));
+            UserService userService = GetUserService(GetUserRepository(context));
             AuthService authService = GetAuthService(GetUserRepository(context));
 
             //Arrange
@@ -64,7 +54,7 @@ namespace Spg.TennisBooking.Application.Test.Services
         {
             //Init
             TennisBookingContext context = GetContext();
-            UserService userService = GetService(GetRepository(context));
+            UserService userService = GetUserService(GetUserRepository(context));
             AuthService authService = GetAuthService(GetUserRepository(context));
 
             //Arrange
@@ -93,7 +83,7 @@ namespace Spg.TennisBooking.Application.Test.Services
         {
             //Init
             TennisBookingContext context = GetContext();
-            UserService userService = GetService(GetRepository(context));
+            UserService userService = GetUserService(GetUserRepository(context));
             AuthService authService = GetAuthService(GetUserRepository(context));
 
             //Arrange
@@ -122,7 +112,7 @@ namespace Spg.TennisBooking.Application.Test.Services
         {
             //Init
             TennisBookingContext context = GetContext();
-            UserService userService = GetService(GetRepository(context));
+            UserService userService = GetUserService(GetUserRepository(context));
             AuthService authService = GetAuthService(GetUserRepository(context));
 
             //Arrange
