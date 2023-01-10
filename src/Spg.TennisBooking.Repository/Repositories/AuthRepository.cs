@@ -18,24 +18,24 @@ namespace Spg.TennisBooking.Repository.Repositories
             _db = db;
         }
 
-        public User CreateUser(User user)
+        public User Create(User user)
         {
             _db.Users.Add(user);
             _db.SaveChanges();
             return user;
         }
 
-        public User? GetUserByEmail(string email)
+        public User? GetByEmail(string email)
         {
             return _db.Users.FirstOrDefault(u => u.Email == email);
         }
 
-        public User? GetUserByUuid(string uuid)
+        public User? GetByUUIDold(string uuid)
         {
             return _db.Users.FirstOrDefault(u => u.UUID == uuid);
         }
 
-        public bool UpdateUser(User user)
+        public bool Update(User user)
         {
             _db.Users.Update(user);
             _db.SaveChanges();

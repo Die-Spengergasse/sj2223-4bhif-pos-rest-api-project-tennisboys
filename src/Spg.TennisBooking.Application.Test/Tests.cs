@@ -7,14 +7,14 @@ namespace Spg.TennisBooking.Application.Test
 {
     public class Tests : Spg.TennisBooking.Domain.Test.Tests
     {
-        protected AuthService GetAuthService(IAuthRepository authRepository)
+        protected AuthService GetAuthService(IUserRepository userRepository)
         {
-            return new AuthService(authRepository);
+            return new AuthService(userRepository);
         }
 
-        protected AuthRepository GetAuthRepository(TennisBookingContext context)
+        protected UserRepository GetUserRepository(TennisBookingContext context)
         {
-            return new AuthRepository(context);
+            return new UserRepository(context);
         }
     }
 }

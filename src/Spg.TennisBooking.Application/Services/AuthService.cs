@@ -14,16 +14,16 @@ namespace Spg.TennisBooking.Application.Services
 {
     public class AuthService : IAuthService
     {
-        private readonly IAuthRepository _authRepository;
+        private readonly IUserRepository _userRepository;
 
-        public AuthService(IAuthRepository authRepository)
+        public AuthService(IUserRepository userRepository)
         {
-            _authRepository = authRepository;
+            _userRepository = userRepository;
         }
 
         public bool EmailInUse(string email)
         {
-            return _authRepository.GetUserByEmail(email) != null;
+            return _userRepository.GetByEmail(email) != null;
         }
 
         public User Register(string email, string password)
@@ -36,7 +36,7 @@ namespace Spg.TennisBooking.Application.Services
             }
 
             //Check if email is already in use
-            User? user = _authRepository.GetUserByEmail(email);
+            User? user = _userRepository.GetByEmail(email);
             if (user != null && user.Verified)
             {
                 //throw error
@@ -62,13 +62,13 @@ namespace Spg.TennisBooking.Application.Services
                 //Update user
                 user.VerificationCode = verificationCode;
                 user.Password = savedPasswordHash;
-                _authRepository.UpdateUser(user);
+                _userRepository.Update(user);
             }
             else
             {
                 //Create new user
                 user = new User(email, savedPasswordHash, verificationCode);
-                _authRepository.CreateUser(user);
+                _userRepository.Create(user);
             }
 
             //TODO: Send verification email
@@ -82,7 +82,7 @@ namespace Spg.TennisBooking.Application.Services
         public bool Verify(string uuid, string verificationCode)
         {
             //Get User by uuid
-            User? user = _authRepository.GetUserByUuid(uuid);
+            User? user = _userRepository.GetByUUIDold(uuid);
 
             //Check if user exists
             if (user == null)
@@ -107,7 +107,7 @@ namespace Spg.TennisBooking.Application.Services
             user.Verified = true;
 
             //Update User
-            _authRepository.UpdateUser(user);
+            _userRepository.Update(user);
 
             //Return Success
             return true;
@@ -119,7 +119,7 @@ namespace Spg.TennisBooking.Application.Services
             if (role == null) { return null; }*/
 
             //Get User
-            User? user = _authRepository.GetUserByEmail(email);
+            User? user = _userRepository.GetByEmail(email);
 
             //Check if user exists
             if (user == null)
@@ -177,7 +177,7 @@ namespace Spg.TennisBooking.Application.Services
         public User ForgotPassword(string email)
         {
             //Get User
-            User? user = _authRepository.GetUserByEmail(email);
+            User? user = _userRepository.GetByEmail(email);
 
             //Check if user exists
             if (user == null)
@@ -203,7 +203,7 @@ namespace Spg.TennisBooking.Application.Services
             //TODO: Send Email. Code is valid for 15 minutes
 
             //Update User
-            _authRepository.UpdateUser(user);
+            _userRepository.Update(user);
 
             //Return Success
             return user;
@@ -212,7 +212,7 @@ namespace Spg.TennisBooking.Application.Services
         public bool ResetPassword(string uuid, string password, string resetCode)
         {
             //Get User
-            User? user = _authRepository.GetUserByUuid(uuid);
+            User? user = _userRepository.GetByUUIDold(uuid);
 
             //Check if user exists
             if (user == null)
@@ -251,7 +251,7 @@ namespace Spg.TennisBooking.Application.Services
             user.ResetCodeExpires = null;
 
             //Update User
-            return _authRepository.UpdateUser(user);
+            return _userRepository.Update(user);
         }
 
        /* public User GetUser(string token)

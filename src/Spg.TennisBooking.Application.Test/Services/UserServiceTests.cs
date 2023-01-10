@@ -20,7 +20,7 @@ namespace Spg.TennisBooking.Application.Test.Services
 
         protected IUserRepository GetRepository(TennisBookingContext context)
         {
-            return new UserRepository(context);
+            return GetUserRepository(context);
         }
 
         //Welcomed
@@ -29,7 +29,7 @@ namespace Spg.TennisBooking.Application.Test.Services
         {
             TennisBookingContext context = GetContext();
             UserService userService = GetService(GetRepository(context));
-            AuthService authService = GetAuthService(GetAuthRepository(context));
+            AuthService authService = GetAuthService(GetUserRepository(context));
 
             //Arrange
             string email = "info@adrian-schauer.at";
@@ -65,7 +65,7 @@ namespace Spg.TennisBooking.Application.Test.Services
             //Init
             TennisBookingContext context = GetContext();
             UserService userService = GetService(GetRepository(context));
-            AuthService authService = GetAuthService(GetAuthRepository(context));
+            AuthService authService = GetAuthService(GetUserRepository(context));
 
             //Arrange
             string email = "info@adrian-schauer.at";
@@ -94,7 +94,7 @@ namespace Spg.TennisBooking.Application.Test.Services
             //Init
             TennisBookingContext context = GetContext();
             UserService userService = GetService(GetRepository(context));
-            AuthService authService = GetAuthService(GetAuthRepository(context));
+            AuthService authService = GetAuthService(GetUserRepository(context));
 
             //Arrange
             string email = "info@adrian-schauer.at";
@@ -123,7 +123,7 @@ namespace Spg.TennisBooking.Application.Test.Services
             //Init
             TennisBookingContext context = GetContext();
             UserService userService = GetService(GetRepository(context));
-            AuthService authService = GetAuthService(GetAuthRepository(context));
+            AuthService authService = GetAuthService(GetUserRepository(context));
 
             //Arrange
             string email = "info@adrian-schauer.at";
