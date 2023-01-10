@@ -10,6 +10,7 @@ using System.Text;
 using System.Security.Cryptography;
 using Microsoft.AspNetCore.Mvc;
 using Spg.TennisBooking.Domain.Dtos.ClubEventDtos;
+using Microsoft.Extensions.Configuration;
 
 namespace Spg.TennisBooking.Application.Services
 {
@@ -18,12 +19,14 @@ namespace Spg.TennisBooking.Application.Services
         private readonly IClubEventRepository _clubEventRepository;
         private readonly IClubRepository _clubRepository;
         private readonly IUserRepository _userRepository;
+        private readonly IConfiguration _configuration;
 
-        public ClubEventService(IClubEventRepository clubEventRepository, IClubRepository clubRepository, IUserRepository userRepository)
+        public ClubEventService(IClubEventRepository clubEventRepository, IClubRepository clubRepository, IUserRepository userRepository, IConfiguration configuration)
         {
             _clubEventRepository = clubEventRepository;
             _clubRepository = clubRepository;
             _userRepository = userRepository;
+            _configuration = configuration;
         }
 
         public async Task<IActionResult> Get(int id)
@@ -92,7 +95,11 @@ namespace Spg.TennisBooking.Application.Services
             //Add ClubEvent
             _clubEventRepository.Add(clubEvent);
 
-            return new OkObjectResult("ClubEvent created");
+            //Create location
+            string url = _configuration.GetSection("MvcFrontEnd").Value;
+            Uri uri = new(url + "/c/" + club.Link + "/events/" + clubEvent.Id);
+
+            return new CreatedResult(uri.AbsoluteUri, clubEvent);
         }
 
         public async Task<IActionResult> Put(PutClubEventDto putClubEventDto, string uuid)
