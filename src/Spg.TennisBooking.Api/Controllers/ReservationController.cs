@@ -38,12 +38,12 @@ public class ReservationController : ControllerBase
          */
 
     [HttpGet]
-    [Route("{id}")]
-    public async Task<IActionResult> GetById(int id)
+    [Route("{uuid}")]
+    public async Task<IActionResult> GetById(string uuid)
     {
         try
         {
-            return await _reservation.GetById(id, Controller.GetUserId(User));
+            return await _reservation.GetByUUID(uuid, Controller.GetUserId(User));
         }
         catch (Exception e)
         {
@@ -147,12 +147,12 @@ public class ReservationController : ControllerBase
     }
 
     [HttpDelete]
-    [Route("{id}")]
-    public async Task<IActionResult> Delete(int id)
+    [Route("{uuid}")]
+    public async Task<IActionResult> Delete(string uuid)
     {
         try
         {
-            return await _reservation.Delete(id, Controller.GetUserId(User));
+            return await _reservation.Delete(uuid, Controller.GetUserId(User));
         }
         catch (Exception e)
         {

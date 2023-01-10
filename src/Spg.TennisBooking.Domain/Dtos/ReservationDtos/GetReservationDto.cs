@@ -6,14 +6,17 @@ using System.Threading.Tasks;
 
 namespace Spg.TennisBooking.Domain.Dtos.ReservationDtos
 {
-    public record PostReservationDto
+    public record GetReservationDto
     {
+        public string UUID { get; set; } = string.Empty;
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
         public string Comment { get; set; } = string.Empty;
-        public int CourtId{ get; set; }
+        public string? CourtName { get; set; } = string.Empty;
+        public string? ClubName { get; set; } = string.Empty;
 
-        public PostReservationDto()
+
+        public GetReservationDto()
         {
         }
     }

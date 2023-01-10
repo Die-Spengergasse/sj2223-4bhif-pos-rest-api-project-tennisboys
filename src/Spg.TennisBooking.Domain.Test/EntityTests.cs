@@ -105,7 +105,7 @@ namespace Spg.TennisBooking.Domain.Test
             User user = CreateUser();
             Court court = new(club, CourtType.Carpet, "Court 1", 20, 20, 5, 15, 12);
 
-            Reservation newReservation = new(DateTime.Now, DateTime.Now, court, user);
+            Reservation newReservation = new(DateTime.Now, DateTime.Now, "Some comment", court, user, club);
 
             db.Reservations.Add(newReservation);
             db.SaveChanges();
