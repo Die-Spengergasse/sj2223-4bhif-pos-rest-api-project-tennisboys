@@ -22,11 +22,13 @@ namespace Spg.TennisBooking.Repository.Repositories
         public void Add(ClubNews news)
         {
             _db.ClubNews.Add(news);
+            _db.SaveChanges();
         }
 
         public void Delete(ClubNews news)
         {
             _db.ClubNews.Remove(news);
+            _db.SaveChanges();
         }
 
         public async Task<ClubNews?> Get(int id)
@@ -42,6 +44,7 @@ namespace Spg.TennisBooking.Repository.Repositories
         public void Update(ClubNews news)
         {
             _db.ClubNews.Update(news);
+            _db.SaveChanges();
         }
     }
 }
