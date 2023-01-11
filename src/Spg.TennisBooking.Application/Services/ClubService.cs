@@ -223,13 +223,29 @@ namespace Spg.TennisBooking.Application.Services
                 ImagePath = v.ImagePath,
                 SocialHub = v.SocialHub
             */
+            SocialHub socialHub = new()
+            {
+                Facebook = patchClubDto.SocialHub.Facebook,
+                Instagram = patchClubDto.SocialHub.Instagram,
+                Twitter = patchClubDto.SocialHub.Twitter,
+                Youtube = patchClubDto.SocialHub.Youtube
+            };
+            
             club.Link = patchClubDto.Link;
             club.Name = patchClubDto.Name;
             club.Info = patchClubDto.Info;
             club.Address = patchClubDto.Address;
             club.ZipCode = patchClubDto.ZipCode;
             club.ImagePath = patchClubDto.ImagePath;
-            club.SocialHub = patchClubDto.SocialHub;
+            
+            club.SocialHub.Facebook = patchClubDto.SocialHub.Facebook;
+            club.SocialHub.Instagram = patchClubDto.SocialHub.Instagram;
+            club.SocialHub.Twitter = patchClubDto.SocialHub.Twitter;
+            club.SocialHub.Youtube = patchClubDto.SocialHub.Youtube;
+            club.SocialHub.LinkedIn = patchClubDto.SocialHub.LinkedIn;
+            club.SocialHub.Telephone = patchClubDto.SocialHub.Telephone;
+            club.SocialHub.Email = patchClubDto.SocialHub.Email;
+            club.SocialHub.Website = patchClubDto.SocialHub.Website;
 
             //Save changes
             _clubRepository.Update(club);
