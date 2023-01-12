@@ -9,7 +9,7 @@ namespace Spg.TennisBooking.Domain.Interfaces
         Task<IActionResult> Get(int id);
         Task<IActionResult> GetAll(string clubLink);
         Task<IActionResult> Post(PostCourtDto court, string uuid);
-        Task<IActionResult> Patch(PatchCourtDto court, string uuid);
+        Task<IActionResult> Put(PutCourtDto court, string uuid);
         Task<IActionResult> Delete(int id, string uuid);
     }
 }

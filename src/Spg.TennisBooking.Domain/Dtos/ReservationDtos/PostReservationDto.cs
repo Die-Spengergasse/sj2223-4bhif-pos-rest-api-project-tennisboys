@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Spg.TennisBooking.Domain.Dtos.ReservationDtos
 {
-    public record PostReservationDto
+    public class PostReservationDto
     {
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }

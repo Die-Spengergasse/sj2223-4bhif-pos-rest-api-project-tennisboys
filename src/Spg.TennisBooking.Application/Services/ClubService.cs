@@ -19,12 +19,14 @@ namespace Spg.TennisBooking.Application.Services
     {
         private readonly IClubRepository _clubRepository;
         private readonly IUserRepository _userRepository;
+        private readonly ISocialHubRepository _socialHubRepository;
         private readonly ILogger<ClubService> _logger;
 
-        public ClubService(IClubRepository clubRepository, IUserRepository userRepository, ILogger<ClubService> logger)
+        public ClubService(IClubRepository clubRepository, IUserRepository userRepository, ISocialHubRepository socialHubRepository, ILogger<ClubService> logger)
         {
             _clubRepository = clubRepository;
             _userRepository = userRepository;
+            _socialHubRepository = socialHubRepository;
             _logger = logger;
         }
 
@@ -111,9 +113,12 @@ namespace Spg.TennisBooking.Application.Services
             return new OkObjectResult(clubDto);
         }
 
-        public async Task<IActionResult> GetAll(string search)
+        public async Task<IActionResult> GetAll(string? search)
         {
             _logger.LogInformation("Get all clubs with search {search}", search);
+
+            if (search == null) search = "";
+
             IEnumerable<Club> clubs = await _clubRepository.GetAll(search);
             List<GetAllClubDto> clubDtos = new();
             foreach (Club club in clubs)
@@ -184,7 +189,11 @@ namespace Spg.TennisBooking.Application.Services
             }
 
             //Check if club is paid
-            if (club.PaidTill < DateTime.Now.AddMonths(1))
+            if (club.PaidTill == null)
+            {
+                return new OkObjectResult(new { isPaid = false });
+            }
+            else if (club.PaidTill < DateTime.Now.AddMonths(1))
             {
                 return new OkObjectResult(new { IsPaid = false });
             }
@@ -194,10 +203,10 @@ namespace Spg.TennisBooking.Application.Services
             }
         }
 
-        public async Task<IActionResult> Put(PatchClubDto patchClubDto, string uuid)
+        public async Task<IActionResult> Put(PutClubDto putClubDto, string uuid)
         {
             //Get club
-            Club? club = await _clubRepository.GetByLink(patchClubDto.Link);
+            Club? club = await _clubRepository.GetByLink(putClubDto.Link);
 
             //Check if club exists
             if (club == null)
@@ -223,31 +232,27 @@ namespace Spg.TennisBooking.Application.Services
                 ImagePath = v.ImagePath,
                 SocialHub = v.SocialHub
             */
-            SocialHub socialHub = new()
-            {
-                Facebook = patchClubDto.SocialHub.Facebook,
-                Instagram = patchClubDto.SocialHub.Instagram,
-                Twitter = patchClubDto.SocialHub.Twitter,
-                Youtube = patchClubDto.SocialHub.Youtube
-            };
             
-            club.Link = patchClubDto.Link;
-            club.Name = patchClubDto.Name;
-            club.Info = patchClubDto.Info;
-            club.Address = patchClubDto.Address;
-            club.ZipCode = patchClubDto.ZipCode;
-            club.ImagePath = patchClubDto.ImagePath;
+            club.Link = putClubDto.Link;
+            club.Name = putClubDto.Name;
+            club.Info = putClubDto.Info;
+            club.Address = putClubDto.Address;
+            club.ZipCode = putClubDto.ZipCode;
+            club.ImagePath = putClubDto.ImagePath;
             
-            club.SocialHub.Facebook = patchClubDto.SocialHub.Facebook;
-            club.SocialHub.Instagram = patchClubDto.SocialHub.Instagram;
-            club.SocialHub.Twitter = patchClubDto.SocialHub.Twitter;
-            club.SocialHub.Youtube = patchClubDto.SocialHub.Youtube;
-            club.SocialHub.LinkedIn = patchClubDto.SocialHub.LinkedIn;
-            club.SocialHub.Telephone = patchClubDto.SocialHub.Telephone;
-            club.SocialHub.Email = patchClubDto.SocialHub.Email;
-            club.SocialHub.Website = patchClubDto.SocialHub.Website;
+            club.SocialHub.Facebook = putClubDto.SocialHubDto.Facebook;
+            club.SocialHub.Instagram = putClubDto.SocialHubDto.Instagram;
+            club.SocialHub.Twitter = putClubDto.SocialHubDto.Twitter;
+            club.SocialHub.Youtube = putClubDto.SocialHubDto.Youtube;
+            club.SocialHub.LinkedIn = putClubDto.SocialHubDto.LinkedIn;
+            club.SocialHub.Telephone = putClubDto.SocialHubDto.Telephone;
+            club.SocialHub.Email = putClubDto.SocialHubDto.Email;
+            club.SocialHub.Website = putClubDto.SocialHubDto.Website;
+
+            SocialHub socialHub = club.SocialHub;
 
             //Save changes
+            _socialHubRepository.Update(socialHub);
             _clubRepository.Update(club);
 
             return new OkObjectResult("Club updated");

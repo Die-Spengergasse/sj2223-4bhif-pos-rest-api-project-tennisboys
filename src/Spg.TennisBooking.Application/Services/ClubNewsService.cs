@@ -82,7 +82,8 @@ namespace Spg.TennisBooking.Application.Services
             ClubNews clubNews = new ClubNews(postClubEventDto.Title, postClubEventDto.Info, club);
 
             //Add ClubNews
-            _clubNewsRepository.Add(clubNews);
+            club.AddClubNews(clubNews);
+            _clubRepository.Update(club);
 
             //Create location
             string url = _configuration.GetSection("MvcFrontEnd").Value;

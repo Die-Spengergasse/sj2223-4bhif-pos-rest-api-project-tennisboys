@@ -238,6 +238,12 @@ namespace Spg.TennisBooking.Application.Services
                 throw new HttpException("ResetCode is expired", HttpStatusCode.BadRequest);
             }
 
+            //Validate password
+            if (password.Length < 8)
+            {
+                throw new HttpException("Password is too short", HttpStatusCode.BadRequest);
+            }
+
             //Hash new password
             string savedPasswordHash = HashPassword(password);
 
@@ -295,8 +301,9 @@ namespace Spg.TennisBooking.Application.Services
 
             string savedPasswordHash = Convert.ToBase64String(hashBytes);
             return savedPasswordHash;
-        }
+        }   
 
+        //Not used
         public static string GenerateRandom(int length = 128)
         {
             // Salt erzeugen.

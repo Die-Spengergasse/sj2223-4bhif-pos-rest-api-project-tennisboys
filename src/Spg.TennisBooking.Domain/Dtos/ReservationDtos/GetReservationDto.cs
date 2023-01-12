@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Spg.TennisBooking.Domain.Dtos.ReservationDtos
 {
-    public record GetReservationDto
+    public class GetReservationDto
     {
         public string UUID { get; set; } = string.Empty;
         public DateTime StartTime { get; set; }

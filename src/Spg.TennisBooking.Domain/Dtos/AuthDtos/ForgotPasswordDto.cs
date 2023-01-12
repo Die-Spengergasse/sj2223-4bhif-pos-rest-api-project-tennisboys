@@ -1,6 +1,6 @@
 namespace Spg.TennisBooking.Domain.Dtos.AuthDtos
 {
-    public record ForgotPasswordDto
+    public class ForgotPasswordDto
     {
         public string Email { get; set; } = String.Empty;
 

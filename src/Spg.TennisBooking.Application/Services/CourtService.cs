@@ -89,7 +89,7 @@ namespace Spg.TennisBooking.Application.Services
             return new OkObjectResult(courtDtos);
         }
 
-        public async Task<IActionResult> Patch(PatchCourtDto court, string uuid)
+        public async Task<IActionResult> Put(PutCourtDto court, string uuid)
         {
             //Get Club of court by getting the court with the help of the id and accessing ClubNavigation
             Court? oldCourt = await _courtRepository.Get(court.Id);

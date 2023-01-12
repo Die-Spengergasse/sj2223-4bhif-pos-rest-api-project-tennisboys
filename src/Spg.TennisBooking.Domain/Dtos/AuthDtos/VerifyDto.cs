@@ -1,6 +1,6 @@
 namespace Spg.TennisBooking.Domain.Dtos.AuthDtos
 {
-    public record VerifyDto
+    public class VerifyDto
     {
         public string UUID { get; set; } = string.Empty;
         public string VerificationCode { get; set; } = string.Empty;

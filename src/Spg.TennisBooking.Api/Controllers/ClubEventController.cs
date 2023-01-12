@@ -58,7 +58,7 @@ public class ClubEventController : ControllerBase
         }
     }
 
-    [HttpGet("club/{clubLink}")]
+    [HttpGet]
     [AllowAnonymous]
     public async Task<IActionResult> GetAll(string clubLink)
     {

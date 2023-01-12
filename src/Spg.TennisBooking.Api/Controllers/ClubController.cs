@@ -35,8 +35,8 @@ public class ClubController : ControllerBase
     //Delete
     //PayementKey
     //Paid //as long it is over a month till end it counts as paid
-        
-    [HttpGet]
+
+    [HttpGet("{link}")]
     [AllowAnonymous]
     public async Task<IActionResult> Get(string link)
     {
@@ -60,8 +60,7 @@ public class ClubController : ControllerBase
 
     [HttpGet]
     [AllowAnonymous]
-    [Route("all")]
-    public async Task<IActionResult> GetAll(string search = "")
+    public async Task<IActionResult> GetAll(string? search)
     {
         try
         {
@@ -102,9 +101,9 @@ public class ClubController : ControllerBase
         }
     }
 
-    [HttpPatch]
+    [HttpPut]
     //[Authorize]
-    public async Task<IActionResult> Patch([FromBody] PatchClubDto clubDto)
+    public async Task<IActionResult> Put([FromBody] PutClubDto clubDto)
     {
         try
         {
@@ -147,7 +146,7 @@ public class ClubController : ControllerBase
     }
 
     [HttpGet]
-    [Route("PayementKey")]
+    [Route("{link}/PayementKey")]
     public async Task<IActionResult> GetPayementKey(string link)
     {
         try
@@ -169,7 +168,7 @@ public class ClubController : ControllerBase
     }
 
     [HttpGet]
-    [Route("IsPaid")]
+    [Route("{link}/IsPaid")]
     public async Task<IActionResult> IsPaid(string link)
     {
         try

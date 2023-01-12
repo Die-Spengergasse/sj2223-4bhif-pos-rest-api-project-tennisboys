@@ -2,7 +2,7 @@ using Spg.TennisBooking.Domain.Model;
 
 namespace Spg.TennisBooking.Domain.Dtos.ClubDtos
 {
-    public class GetAllClubDto
+    public class PutClubDto
     {
         public string Link { get; set; } = string.Empty;
         public string Name { get; set; } = string.Empty;
@@ -10,23 +10,11 @@ namespace Spg.TennisBooking.Domain.Dtos.ClubDtos
         public string Address { get; set; } = string.Empty;
         public string ZipCode { get; set; } = string.Empty;
         public string ImagePath { get; set; } = string.Empty;
+        public SocialHubDto SocialHubDto { get; set; } = new SocialHubDto();
 
         //Constructor
-        public GetAllClubDto()
+        public PutClubDto()
         {
-        }
-
-        public static implicit operator GetAllClubDto(Club v)
-        {
-            return new GetAllClubDto
-            {
-                Link = v.Link,
-                Name = v.Name,
-                Info = v.Info,
-                Address = v.Address,
-                ZipCode = v.ZipCode,
-                ImagePath = v.ImagePath,
-            };
         }
     }
 }

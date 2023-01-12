@@ -1,6 +1,6 @@
 namespace Spg.TennisBooking.Domain.Dtos.AuthDtos
 {
-    public record ResetPasswordDto
+    public class ResetPasswordDto
     {
         public string UUID { get; set; }
         public string Password { get; set; }

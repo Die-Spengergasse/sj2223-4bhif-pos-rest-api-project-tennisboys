@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Spg.TennisBooking.Domain.Dtos.ClubNewsDtos
 {
-    public record PutClubNewsDto
+    public class PutClubNewsDto
     {
         public int Id { get; set; }
         public string Title { get; set; } = string.Empty;

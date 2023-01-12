@@ -235,7 +235,7 @@ namespace Spg.TennisBooking.Application.Test.Services
             Assert.NotNull(club);
 
             //Create Dto
-            PatchClubDto patchClubDto = new PatchClubDto(){
+            PutClubDto patchClubDto = new PutClubDto(){
                 Link = club.Link,
                 Name = "TC Eichgraben",
                 Info = "Some Info",

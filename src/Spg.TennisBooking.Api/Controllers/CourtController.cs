@@ -56,12 +56,12 @@ public class CourtController : ControllerBase
         }
     }
 
-    [HttpPatch]
-    public async Task<IActionResult> Patch([FromBody] PatchCourtDto courtDto)
+    [HttpPut]
+    public async Task<IActionResult> Put([FromBody] PutCourtDto courtDto)
     {
         try
         {
-            return await _court.Patch(courtDto, Controller.GetUserId(User));
+            return await _court.Put(courtDto, Controller.GetUserId(User));
         }
         catch (Exception e)
         {
@@ -120,7 +120,7 @@ public class CourtController : ControllerBase
         }
     }
 
-    [HttpGet("club/{clubLink}")]
+    [HttpGet]
     [AllowAnonymous]
     public async Task<IActionResult> GetAll(string clubLink)
     {

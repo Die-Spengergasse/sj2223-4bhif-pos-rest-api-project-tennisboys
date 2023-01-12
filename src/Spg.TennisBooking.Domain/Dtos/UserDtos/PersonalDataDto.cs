@@ -2,7 +2,7 @@ using Spg.TennisBooking.Domain.Model;
 
 namespace Spg.TennisBooking.Domain.Dtos.UserDtos
 {
-    public record PersonalDataDto
+    public class PersonalDataDto
     {
         public string FirstName {get; set;} = string.Empty;
         public string LastName {get; set;} = string.Empty;

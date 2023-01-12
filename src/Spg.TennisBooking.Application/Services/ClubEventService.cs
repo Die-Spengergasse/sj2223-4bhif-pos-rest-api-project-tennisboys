@@ -93,7 +93,8 @@ namespace Spg.TennisBooking.Application.Services
             ClubEvent clubEvent = new ClubEvent(club, postClubEventDto.Name, postClubEventDto.Time, postClubEventDto.Info);
 
             //Add ClubEvent
-            _clubEventRepository.Add(clubEvent);
+            club.AddClubEvent(clubEvent);
+            _clubRepository.Update(club);
 
             //Create location
             string url = _configuration.GetSection("MvcFrontEnd").Value;

@@ -31,8 +31,7 @@ namespace Spg.TennisBooking.Api.Controllers
         }
 
         //Welcomed
-        [HttpGet]
-        [Route("Welcomed")]
+        [HttpGet("Welcomed")]
         [Produces("application/json")]
         [Authorize]
         public IActionResult Welcomed()
@@ -67,7 +66,7 @@ namespace Spg.TennisBooking.Api.Controllers
         }
 
         //Get PersonalData
-        [HttpGet("PersonalData")]
+        [HttpGet]
         [Produces("application/json")]
         [Authorize]
         public IActionResult GetPersonalData()
@@ -105,7 +104,7 @@ namespace Spg.TennisBooking.Api.Controllers
         }
 
         //Set PersonalData
-        [HttpPatch("PersonalData")]
+        [HttpPut]
         [Produces("application/json")]
         [Authorize]
         public IActionResult SetPersonalData([FromBody] PersonalDataDto personalDataDto)

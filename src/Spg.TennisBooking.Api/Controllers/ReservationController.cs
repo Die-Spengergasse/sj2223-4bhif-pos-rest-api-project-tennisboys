@@ -37,9 +37,8 @@ public class ReservationController : ControllerBase
            DeleteReservation - Admin
          */
 
-    [HttpGet]
-    [Route("{uuid}")]
-    public async Task<IActionResult> GetById(string uuid)
+    [HttpGet("{uuid}")]
+    public async Task<IActionResult> Get(string uuid)
     {
         try
         {
@@ -60,7 +59,6 @@ public class ReservationController : ControllerBase
     }
 
     [HttpGet]
-    [Route("club/{clubLink}")]
     public async Task<IActionResult> GetByClub(string clubLink)
     {
         try
@@ -82,7 +80,6 @@ public class ReservationController : ControllerBase
     }
 
     [HttpGet]
-    [Route("court/{courtId}")]
     public async Task<IActionResult> GetByCourt(int courtId)
     {
         try
@@ -104,7 +101,6 @@ public class ReservationController : ControllerBase
     }
 
     [HttpGet]
-    [Route("user")]
     public async Task<IActionResult> GetByUser()
     {
         try
@@ -146,8 +142,7 @@ public class ReservationController : ControllerBase
         }
     }
 
-    [HttpDelete]
-    [Route("{uuid}")]
+    [HttpDelete("{uuid}")]
     public async Task<IActionResult> Delete(string uuid)
     {
         try

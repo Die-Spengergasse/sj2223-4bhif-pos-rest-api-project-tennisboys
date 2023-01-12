@@ -2,7 +2,7 @@ using Spg.TennisBooking.Domain.Model;
 
 namespace Spg.TennisBooking.Domain.Dtos.ClubDtos
 {
-    public record GetClubDto
+    public class GetClubDto
     {
         public bool IsAdmin { get; set; } = false;
         public string Link { get; set; } = string.Empty;
