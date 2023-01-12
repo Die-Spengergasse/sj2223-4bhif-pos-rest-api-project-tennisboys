@@ -27,8 +27,9 @@ namespace Spg.TennisBooking.Application.Test.Services
             UserRepository userRepository = GetUserRepository(context);
             AuthService authService = GetAuthService(userRepository);
             ILogger<ClubService> logger = new Logger<ClubService>(new LoggerFactory());
-            ClubService clubService = GetClubService(GetClubRepository(context), userRepository, logger);
-
+            SocialHubRepository socialHubRepository = GetSocialHubRepository(context);
+            ClubRepository clubRepository = GetClubRepository(context);
+            ClubService clubService = GetClubService(clubRepository, userRepository, logger, socialHubRepository);
             // Arrange
             string email = "info@adrian-schauer.at";
             string password = "admin1234";
@@ -53,7 +54,8 @@ namespace Spg.TennisBooking.Application.Test.Services
             AuthService authService = GetAuthService(userRepository);
             ILogger<ClubService> logger = new Logger<ClubService>(new LoggerFactory());
             ClubRepository clubRepository = GetClubRepository(context);
-            ClubService clubService = GetClubService(clubRepository, userRepository, logger);
+            SocialHubRepository socialHubRepository = GetSocialHubRepository(context);
+            ClubService clubService = GetClubService(clubRepository, userRepository, logger, socialHubRepository);
 
             // Arrange
             string email = "info@adrian-schauer.at";
@@ -85,8 +87,8 @@ namespace Spg.TennisBooking.Application.Test.Services
             AuthService authService = GetAuthService(userRepository);
             ILogger<ClubService> logger = new Logger<ClubService>(new LoggerFactory());
             ClubRepository clubRepository = GetClubRepository(context);
-            ClubService clubService = GetClubService(GetClubRepository(context), userRepository, logger);
-
+            SocialHubRepository socialHubRepository = GetSocialHubRepository(context);
+            ClubService clubService = GetClubService(clubRepository, userRepository, logger, socialHubRepository);
             // Arrange
             string email = "adrian@schauer.at";
             string password = "admin1234";
@@ -117,8 +119,9 @@ namespace Spg.TennisBooking.Application.Test.Services
             AuthService authService = GetAuthService(userRepository);
             ILogger<ClubService> logger = new Logger<ClubService>(new LoggerFactory());
             ClubRepository clubRepository = GetClubRepository(context);
-            ClubService clubService = GetClubService(GetClubRepository(context), userRepository, logger);
-
+            SocialHubRepository socialHubRepository = GetSocialHubRepository(context);
+            ClubService clubService = GetClubService(clubRepository, userRepository, logger, socialHubRepository);
+            
             // Arrange
             string email = "adrian@schauer.at";
             string password = "admin1234";
@@ -150,8 +153,8 @@ namespace Spg.TennisBooking.Application.Test.Services
             AuthService authService = GetAuthService(userRepository);
             ILogger<ClubService> logger = new Logger<ClubService>(new LoggerFactory());
             ClubRepository clubRepository = GetClubRepository(context);
-            ClubService clubService = GetClubService(GetClubRepository(context), userRepository, logger);
-
+            SocialHubRepository socialHubRepository = GetSocialHubRepository(context);
+            ClubService clubService = GetClubService(clubRepository, userRepository, logger, socialHubRepository);
             // Arrange
             string email = "adrian@schauer.at";
             string password ="admin1234";
@@ -184,8 +187,8 @@ namespace Spg.TennisBooking.Application.Test.Services
             AuthService authService = GetAuthService(userRepository);
             ILogger<ClubService> logger = new Logger<ClubService>(new LoggerFactory());
             ClubRepository clubRepository = GetClubRepository(context);
-            ClubService clubService = GetClubService(GetClubRepository(context), userRepository, logger);
-
+            SocialHubRepository socialHubRepository = GetSocialHubRepository(context);
+            ClubService clubService = GetClubService(clubRepository, userRepository, logger, socialHubRepository);
             // Arrange
             string email = "adrian@schauer.at";
             string password = "admin1234";
@@ -216,8 +219,8 @@ namespace Spg.TennisBooking.Application.Test.Services
             AuthService authService = GetAuthService(userRepository);
             ILogger<ClubService> logger = new Logger<ClubService>(new LoggerFactory());
             ClubRepository clubRepository = GetClubRepository(context);
-            ClubService clubService = GetClubService(GetClubRepository(context), userRepository, logger);
-
+            SocialHubRepository socialHubRepository = GetSocialHubRepository(context);
+            ClubService clubService = GetClubService(clubRepository, userRepository, logger, socialHubRepository);
             // Arrange
             string email = "adrian@schauer.at";
             string password = "admin1234";
@@ -242,7 +245,6 @@ namespace Spg.TennisBooking.Application.Test.Services
                 Address = "Eichgraben 1",
                 ZipCode = "Eichgraben",
                 ImagePath = "https://www.tc-eichgraben.at",
-                SocialHub = new SocialHub()
             };
 
             //Act

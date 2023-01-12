@@ -17,9 +17,9 @@ namespace Spg.TennisBooking.Application.Test
         {
             return new UserService(userRepository);
         }
-        protected ClubService GetClubService(IClubRepository clubRepository, IUserRepository userRepository, ILogger<ClubService> logger)
+        protected ClubService GetClubService(IClubRepository clubRepository, IUserRepository userRepository, ILogger<ClubService> logger, ISocialHubRepository socialHubRepository)
         {
-            return new ClubService(clubRepository, userRepository, logger);
+            return new ClubService(clubRepository, userRepository, socialHubRepository, logger);
         }
 
         //Repositories
@@ -30,6 +30,11 @@ namespace Spg.TennisBooking.Application.Test
         protected ClubRepository GetClubRepository(TennisBookingContext context)
         {
             return new ClubRepository(context);
+        }
+
+        protected SocialHubRepository GetSocialHubRepository(TennisBookingContext context)
+        {
+            return new SocialHubRepository(context);
         }
     }
 }
