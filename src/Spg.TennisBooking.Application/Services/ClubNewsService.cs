@@ -59,7 +59,16 @@ namespace Spg.TennisBooking.Application.Services
                 return new NotFoundObjectResult("ClubNews not found");
             }
 
-            return new OkObjectResult(clubNews);
+            List<GetClubNewsDto> clubNewsDtos = new List<GetClubNewsDto>();
+
+            foreach (ClubNews news in clubNews)
+            {
+                GetClubNewsDto clubNewsDto = news;
+                clubNewsDtos.Add(clubNewsDto);
+            }
+
+
+            return new OkObjectResult(clubNewsDtos);
         }
 
         public async Task<IActionResult> Post(PostClubNewsDto postClubEventDto, string uuid)
