@@ -82,14 +82,18 @@ namespace Spg.TennisBooking.Application.Services
             ClubNews clubNews = new ClubNews(postClubEventDto.Title, postClubEventDto.Info, club);
 
             //Add ClubNews
-            club.AddClubNews(clubNews);
-            _clubRepository.Update(club);
+            //club.AddClubNews(clubNews);
+            //_clubRepository.Update(club);
+            _clubNewsRepository.Add(clubNews);
 
             //Create location
             string url = _configuration.GetSection("MvcFrontEnd").Value;
             Uri uri = new(url + "/c/" + club.Link + "/news/" + clubNews.Id);
 
-            return new CreatedResult(uri.AbsoluteUri, clubNews);
+            //Create DTO
+            GetClubNewsDto getClubNewsDto = clubNews;
+
+            return new CreatedResult(uri.AbsoluteUri, getClubNewsDto);
         }
 
         public async Task<IActionResult> Put(PutClubNewsDto putClubEventDto, string uuid)

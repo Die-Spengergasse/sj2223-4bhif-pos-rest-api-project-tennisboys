@@ -24,8 +24,9 @@ namespace Spg.TennisBooking.Domain.Dtos.ClubEventDtos
             {
                 Name = v.Name,
                 Time = v.Time,
-                Info = v.Info
-           };
+                Info = v.Info,
+                ClubLink = v.ClubNavigation.Link
+            };
         }
     }
 }

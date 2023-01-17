@@ -30,7 +30,9 @@ db.Database.EnsureCreated();
 //builder.Services.AddDbContext<TennisBookingContext>(options => options.UseSqlite("Data Source=TennisBooking.db"));
 builder.Services.ConfigureSqLite(connectionString);
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddNewtonsoftJson(options =>
+    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+);
 builder.Services.AddControllersWithViews();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -109,7 +111,6 @@ builder.Services.AddSwaggerGen(s =>
         }
     });
 });
-
 
 var app = builder.Build();
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Spg.TennisBooking.Domain.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,17 @@ namespace Spg.TennisBooking.Domain.Dtos.ClubNewsDtos
 
         public GetClubNewsDto()
         {
+        }
+
+        public static implicit operator GetClubNewsDto(ClubNews v)
+        {
+            return new GetClubNewsDto
+            {
+                Title = v.Title,
+                Info = v.Info,
+                Written = v.Written,
+                ClubLink = v.ClubNavigation.Link
+            };
         }
     }
 }

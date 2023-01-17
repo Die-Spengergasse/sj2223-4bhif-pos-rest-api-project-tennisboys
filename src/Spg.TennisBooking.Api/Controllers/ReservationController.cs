@@ -58,23 +58,47 @@ public class ReservationController : ControllerBase
         }
     }
 
-    [HttpGet]
-    public async Task<IActionResult> GetAll([FromQuery] string? clubLink, [FromQuery] int? courtId)
+    //[HttpGet]
+    //public async Task<IActionResult> GetAll([FromQuery] string? clubLink, [FromQuery] int? courtId)
+    //{
+    //    try
+    //    {
+    //        if(clubLink!=null)
+    //        {
+    //            _logger.LogInformation("Getting all reservations for club {clubLink}", clubLink);
+    //            return await _reservation.GetByClub(clubLink, Controller.GetUserId(User));
+    //        }
+    //        else if (courtId != null)
+    //        {
+    //            _logger.LogInformation("Getting all reservations for court {courtId}", courtId);
+    //            return await _reservation.GetByCourt((int)courtId);
+    //        }
+    //        else
+    //        {
+    //            _logger.LogInformation("Getting all reservations for user {userId}", Controller.GetUserId(User));
+    //            return await _reservation.GetByUser(Controller.GetUserId(User));
+    //        }
+    //    }
+    //    catch (Exception e)
+    //    {
+    //        _logger.LogError(e, "Error while getting reservations");
+    //        if (_env.IsDevelopment())
+    //        {
+    //            return StatusCode(500, e.Message);
+    //        }
+    //        else
+    //        {
+    //            return StatusCode(500, "Internal Server Error");
+    //        }
+    //    }
+    //}
+
+    [HttpGet("club/{clubLink}")]
+    public async Task<IActionResult> GetByClub(string clubLink)
     {
         try
         {
-            if(clubLink!=null)
-            {
-                return await _reservation.GetByClub(clubLink, Controller.GetUserId(User));
-            }
-            else if (courtId != null)
-            {
-                return await _reservation.GetByCourt((int)courtId);
-            }
-            else
-            {
-                return await _reservation.GetByUser(Controller.GetUserId(User));
-            }
+            return await _reservation.GetByClub(clubLink, Controller.GetUserId(User));
         }
         catch (Exception e)
         {
@@ -89,69 +113,49 @@ public class ReservationController : ControllerBase
             }
         }
     }
-    
-    //[HttpGet]
-    //public async Task<IActionResult> GetByClub([FromQuery] string clubLink)
-    //{
-    //    try
-    //    {
-    //        return await _reservation.GetByClub(clubLink, Controller.GetUserId(User));
-    //    }
-    //    catch (Exception e)
-    //    {
-    //        _logger.LogError(e, "Error while getting reservations");
-    //        if (_env.IsDevelopment())
-    //        {
-    //            return StatusCode(500, e.Message);
-    //        }
-    //        else
-    //        {
-    //            return StatusCode(500, "Internal Server Error");
-    //        }
-    //    }
-    //}
 
-    //[HttpGet]
-    //public async Task<IActionResult> GetByCourt([FromQuery] int courtId)
-    //{
-    //    try
-    //    {
-    //        return await _reservation.GetByCourt(courtId);
-    //    }
-    //    catch (Exception e)
-    //    {
-    //        _logger.LogError(e, "Error while getting reservations");
-    //        if (_env.IsDevelopment())
-    //        {
-    //            return StatusCode(500, e.Message);
-    //        }
-    //        else
-    //        {
-    //            return StatusCode(500, "Internal Server Error");
-    //        }
-    //    }
-    //}
+    [HttpGet("court/{courtId}")]
+    [AllowAnonymous]
+    public async Task<IActionResult> GetByCourt(int courtId)
+    {
+        try
+        {
+            return await _reservation.GetByCourt(courtId);
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e, "Error while getting reservations");
+            if (_env.IsDevelopment())
+            {
+                return StatusCode(500, e.Message);
+            }
+            else
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+    }
 
-    //[HttpGet]
-    //public async Task<IActionResult> GetByUser()
-    //{
-    //    try
-    //    {
-    //        return await _reservation.GetByUser(Controller.GetUserId(User));
-    //    }
-    //    catch (Exception e)
-    //    {
-    //        _logger.LogError(e, "Error while getting reservations");
-    //        if (_env.IsDevelopment())
-    //        {
-    //            return StatusCode(500, e.Message);
-    //        }
-    //        else
-    //        {
-    //            return StatusCode(500, "Internal Server Error");
-    //        }
-    //    }
-    //}
+    [HttpGet]
+    public async Task<IActionResult> GetByUser()
+    {
+        try
+        {
+            return await _reservation.GetByUser(Controller.GetUserId(User));
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e, "Error while getting reservations");
+            if (_env.IsDevelopment())
+            {
+                return StatusCode(500, e.Message);
+            }
+            else
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+    }
 
     [HttpPost]
     public async Task<IActionResult> Post([FromBody] PostReservationDto reservationDto)
