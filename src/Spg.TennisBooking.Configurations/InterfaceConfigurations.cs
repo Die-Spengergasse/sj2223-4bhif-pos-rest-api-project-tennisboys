@@ -30,6 +30,8 @@ namespace Spg.TennisBooking.Configurations
             //User
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IUserRepository, UserRepository>();
+            //SocialHub
+            services.AddTransient<ISocialHubRepository, SocialHubRepository>();
         }
     }
 }
