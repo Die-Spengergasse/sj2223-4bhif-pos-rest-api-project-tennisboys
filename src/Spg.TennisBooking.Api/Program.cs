@@ -112,6 +112,9 @@ builder.Services.AddSwaggerGen(s =>
     });
 });
 
+//API Versioning
+builder.Services.ConfigureAPI();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -9,7 +9,6 @@ using Spg.TennisBooking.Domain.Interfaces;
 using Spg.TennisBooking.Domain.Model;
 
 namespace Spg.TennisBooking.Api.Controllers;
-
 public static class Controller
 {
     public static string GetUserId(ClaimsPrincipal user)
