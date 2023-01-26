@@ -15,6 +15,7 @@ namespace Spg.TennisBooking.Api.Controllers
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
+    [ApiVersion("1.0")]
     public class UserController : ControllerBase
     {
         private readonly IWebHostEnvironment _env;        

@@ -10,7 +10,7 @@ namespace Spg.TennisBooking.Configurations
 {
     public static class ApiVersioning
     {
-    public static void ConfigureAPI(this IServiceCollection services, string connectionString) 
+    public static void ConfigureAPI(this IServiceCollection services) 
         {
             services.AddApiVersioning(o =>
             {

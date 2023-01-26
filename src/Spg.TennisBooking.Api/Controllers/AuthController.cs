@@ -14,6 +14,7 @@ namespace Spg.TennisBooking.Api.Controllers
     /// </summary>
     [AllowAnonymous]
     [Route("api/[controller]")]
+    [ApiVersion("1.0")]
     [ApiController]
     public class AuthController : ControllerBase
     {

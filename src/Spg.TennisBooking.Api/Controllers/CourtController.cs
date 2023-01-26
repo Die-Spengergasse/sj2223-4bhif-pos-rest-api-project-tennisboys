@@ -11,6 +11,7 @@ namespace Spg.TennisBooking.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[ApiVersion("1.0")]
 [Authorize]
 public class CourtController : ControllerBase
 {

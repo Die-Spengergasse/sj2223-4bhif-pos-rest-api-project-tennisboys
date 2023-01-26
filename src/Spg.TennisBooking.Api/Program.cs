@@ -112,6 +112,9 @@ builder.Services.AddSwaggerGen(s =>
     });
 });
 
+//API Versioning
+builder.Services.ConfigureAPI();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -131,8 +134,5 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-
-//API Versioning
-builder.Services.AddApiVersioning();
 
 app.Run();
