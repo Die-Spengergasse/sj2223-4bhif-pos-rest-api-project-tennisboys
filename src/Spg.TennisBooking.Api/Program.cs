@@ -132,4 +132,7 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+//API Versioning
+builder.Services.AddApiVersioning();
+
 app.Run();
