@@ -4,20 +4,20 @@ using System.Diagnostics;
 
 namespace Spg.TennisBooking.MvcFrontEnd.Controllers
 {
-    public class HomeController : Controller
+    public class ClubsController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<ClubsController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public ClubsController(ILogger<ClubsController> logger)
         {
             _logger = logger;
         }
 
-        [HttpGet("")]
-        public IActionResult Index()
+        [HttpGet("clubs")]
+        public IActionResult Index([FromQuery] string search)
         {
-            _logger.LogInformation("Home");
-            return View();
+            _logger.LogInformation("Getting clubs {search}", search);
+            return View(new { search });
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
