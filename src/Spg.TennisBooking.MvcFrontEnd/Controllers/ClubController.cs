@@ -41,11 +41,11 @@ namespace Spg.TennisBooking.MvcFrontEnd.Controllers
             return View(new { link });
         }
 
-        [HttpGet("c/{link}/events/{event}")]
-        public IActionResult Event(string link, string @event)
+        [HttpGet("c/{link}/events/{eventItem}")]
+        public IActionResult EventItem(string link, string eventItem)
         {
-            _logger.LogInformation("Event {event} Club {link}", @event, link);
-            return View(new { link, @event });
+            _logger.LogInformation("Event {eventItem} Club {link}", eventItem, link);
+            return View(new { link, eventItem });
         }
 
         [HttpGet("c/{link}/news")]
