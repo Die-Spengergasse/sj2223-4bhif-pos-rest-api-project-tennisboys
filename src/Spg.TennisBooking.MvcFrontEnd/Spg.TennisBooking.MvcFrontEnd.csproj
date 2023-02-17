@@ -8,9 +8,13 @@
 
   <ItemGroup>
     <Compile Remove="Dtos\**" />
+    <Compile Remove="wwwroot\lib\bootstrap\**" />
     <Content Remove="Dtos\**" />
+    <Content Remove="wwwroot\lib\bootstrap\**" />
     <EmbeddedResource Remove="Dtos\**" />
+    <EmbeddedResource Remove="wwwroot\lib\bootstrap\**" />
     <None Remove="Dtos\**" />
+    <None Remove="wwwroot\lib\bootstrap\**" />
   </ItemGroup>
 
   <ItemGroup>
