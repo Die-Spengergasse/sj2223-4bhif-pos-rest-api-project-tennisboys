@@ -1,22 +1,22 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Spg.TennisBooking.MvcFrontEnd.Models;
 using System.Diagnostics;
 
 namespace Spg.TennisBooking.MvcFrontEnd.Controllers
 {
-    public class HomeController : Controller
+    public class PrivacyController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<PrivacyController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public PrivacyController(ILogger<PrivacyController> logger)
         {
             _logger = logger;
         }
 
-        [HttpGet("")]
+        [HttpGet("privacy")]
         public IActionResult Index()
         {
-            _logger.LogInformation("Home");
+            _logger.LogInformation("Privacy");
             return View();
         }
 

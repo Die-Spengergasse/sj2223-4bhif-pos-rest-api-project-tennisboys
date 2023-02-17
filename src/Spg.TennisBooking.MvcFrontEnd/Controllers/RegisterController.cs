@@ -1,22 +1,21 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Spg.TennisBooking.MvcFrontEnd.Models;
 using System.Diagnostics;
 
 namespace Spg.TennisBooking.MvcFrontEnd.Controllers
 {
-    public class HomeController : Controller
+    public class RegisterController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<RegisterController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public RegisterController(ILogger<RegisterController> logger)
         {
             _logger = logger;
         }
 
-        [HttpGet("")]
+        [HttpGet("register")]
         public IActionResult Index()
         {
-            _logger.LogInformation("Home");
             return View();
         }
 
