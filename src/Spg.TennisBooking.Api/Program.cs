@@ -115,6 +115,16 @@ builder.Services.AddSwaggerGen(s =>
 //API Versioning
 builder.Services.ConfigureAPI();
 
+// CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "myAllowSpecificOrigins", policy =>
+    {
+        policy.WithOrigins("https://localhost:3002");
+        policy.WithHeaders("ACCESS-CONTROL-ALLOW-ORIGIN", "CONTENT-TYPE");
+    });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -123,6 +133,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors("myAllowSpecificOrigins");
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

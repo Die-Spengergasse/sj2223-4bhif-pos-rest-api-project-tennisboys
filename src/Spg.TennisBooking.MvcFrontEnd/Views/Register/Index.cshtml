@@ -1,42 +1,76 @@
-﻿@{
-    ViewData["Title"] = "Register";
-}
+﻿@{ ViewData["Title"] = "Register"; }
 <script type="module" src="/js/Register/index.js"></script>
 
-<h1>@ViewData["Title"]</h1>
+<div id="registerView">
+  <h2>Register</h2>
 
-<p>Use this page to detail your site's register.</p>
+  <form id="register_form">
+    <div class="">
+      <label for="InputEmail">Email address</label>
+      <input
+        type="email"
+        class=""
+        id="InputEmail"
+        aria-describedby="emailHelp"
+        placeholder="Enter email"
+      />
+      <p>We'll never share your email with anyone else.</p>
+    </div>
+    <div class="">
+      <label for="InputPassword">Password</label>
+      <input
+        type="password"
+        class=""
+        id="InputPassword"
+        placeholder="Password"
+      />
+    </div>
+    <div class="">
+      <label for="InputPasswordConfirm">Confirm Password</label>
+      <input
+        type="password"
+        class=""
+        id="InputPasswordConfirm"
+        placeholder="Confirm Password"
+      />
+    </div>
+    <p id="register_err" class="hidden text-red-600"></p>
+    <button id="register_btn" type="submit" class="">Register</button>
+  </form>
+  <p>
+    Already have an account?
+    <button type="button" id="loginView_btn">Login</button>
+  </p>
+</div>
 
-<form>
-	<div class="form-group">
-		<label for="InputEmail">Email address</label>
-		<input type="email" class="form-control" id="InputEmail" aria-describedby="emailHelp" placeholder="Enter email">
-		<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-	</div>
-	<div class="form-group">
-		<label for="InputPassword">Password</label>
-		<input type="password" class="form-control" id="InputPassword" placeholder="Password">
-	</div>
-	<div class="form-group">
-		<label for="InputPasswordConfirm">Confirm Password</label>
-		<input type="password" class="form-control" id="InputPasswordConfirm" placeholder="Confirm Password">
-	</div>
-	<button id="register_btn" type="button" class="btn btn-primary" >Submit</button>
-</form>
+<div id="loginView" class="hidden">
+  <h2>Login</h2>
 
-<h2>Login</h2>
-
-<form>
-	<div class="form-group">
-		<label for="InputEmailLogin">Email address</label>
-		<input type="email" class="form-control" id="InputEmailLogin" aria-describedby="emailHelp" placeholder="Enter email">
-		<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-	</div>
-	<div class="form-group">
-		<label for="InputPasswordLogin">Password</label>
-		<input type="password" class="form-control" id="InputPasswordLogin" placeholder="Password">
-	</div>
-	<button id="login_btn" type="button" class="btn btn-primary" >Login</button>
-</form>
-
-
+  <form id="login_form">
+    <div class="">
+      <label for="InputEmailLogin">Email address</label>
+      <input
+        type="email"
+        class=""
+        id="InputEmailLogin"
+        aria-describedby="emailHelp"
+        placeholder="Enter email"
+      />
+    </div>
+    <div class="">
+      <label for="InputPasswordLogin">Password</label>
+      <input
+        type="password"
+        class=""
+        id="InputPasswordLogin"
+        placeholder="Password"
+      />
+    </div>
+    <p id="login_err" class="hidden text-red-600"></p>
+    <button id="login_btn" type="submit" class="">Login</button>
+  </form>
+  <p>
+    Don't have an account?
+    <button type="button" id="registerView_btn">Register</button>
+  </p>
+</div>
