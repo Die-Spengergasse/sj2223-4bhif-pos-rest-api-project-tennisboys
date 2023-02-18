@@ -5,9 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Spg.SpengerShop.MvcFrontEnd</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Spg.SpengerShop.MvcFrontEnd.styles.css" asp-append-version="true" />
 </head>
 
 <body class="bg-custom-100 flex flex-col min-h-screen">
@@ -21,8 +19,7 @@
                 <form class=my-3 action="/clubs">
                     <input type="search" id="search" name="search" placeholder="Search Club"
                         class="content-left rounded-l-lg font-medium py-2 pl-2 text-lg focus:ring-4 focus:outline-none text-left">
-                    <button
-                        type="submit"
+                    <button type="submit"
                         class="text-white right-2.5 bottom-2.5 bg-custom-400 focus:ring-4 focus:outline-none font-medium rounded-r-lg text-lg px-4 py-2">Search</button>
                 </form>
             </div>
@@ -31,7 +28,7 @@
                         class="fill-current text-white align-en" /></a></div>
         </nav>
     </header>
-    <!-- </nav><img src="/icons/home.svg" alt="Logo" class="h-12 w-12" /><br /><br /><br /><br /><nav class="flex items-center justify-between flex-wrap bg-teal-500 p-6"><div class="flex items-center flex-shrink-0 text-white mr-6"><span class="font-semibold text-xl tracking-tight"><a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Tailwind CSS 3.0</a></span></div><div class="block lg:hidden"><buttonclass="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white"><svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" /></svg></button></div><div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto"><div class="text-sm lg:flex-grow"><a class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4" asp-area=""asp-controller="Home" asp-action="Index">Home</a><a class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4" asp-area=""asp-controller="Home" asp-action="Privacy">Privacy</a></div></div></nav>--><br /><br /><br /><br /><br />
+    <!-- </nav><img src="/icons/home.svg" alt="Logo" class="h-12 w-12" /><br /><br /><br /><br /><nav class="flex items-center justify-between flex-wrap bg-teal-500 p-6"><div class="flex items-center flex-shrink-0 text-white mr-6"><span class="font-semibold text-xl tracking-tight"><a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Tailwind CSS 3.0</a></span></div><div class="block lg:hidden"><buttonclass="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white"><svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" /></svg></button></div><div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto"><div class="text-sm lg:flex-grow"><a class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4" asp-area=""asp-controller="Home" asp-action="Index">Home</a><a class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4" asp-area=""asp-controller="Home" asp-action="Privacy">Privacy</a></div></div></nav>-->
     <div class="container flex-1">
         <main role="main" class="pb-3">@RenderBody()</main>
     </div>
@@ -47,8 +44,10 @@
             </div>
         </nav>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @*
+    <script src="~/lib/jquery/dist/jquery.min.js"></script> *@
+    @*
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script> *@
     <script src="~/js/site.js" asp-append-version="true"></script>@await RenderSectionAsync("Scripts", required: false)
 </body>
 

@@ -19,6 +19,12 @@ namespace Spg.TennisBooking.MvcFrontEnd.Controllers
             return View();
         }
 
+        [HttpGet("verify")]
+        public IActionResult Verify([FromQuery] string uuid)
+        {
+            return View(new { uuid });
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
