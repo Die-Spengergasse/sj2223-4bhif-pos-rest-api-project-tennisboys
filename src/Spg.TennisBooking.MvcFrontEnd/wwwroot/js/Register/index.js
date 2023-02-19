@@ -31,7 +31,7 @@ async function register() {
 
     //Arrange UI
     let registerButton = document.getElementById("register_btn");
-    registerButton.innerHTML = "Loading...";
+    registerButton.textContent = "Loading...";
     registerButton.disabled = true;
     let registerErr = document.getElementById("register_err");
     registerErr.classList.add("hidden");
@@ -43,11 +43,11 @@ async function register() {
 
     //Check if passwords match
     if (password != confirmPassword) {
-        registerErr.innerHTML = "Passwords do not match";
+        registerErr.textContent = "Passwords do not match";
         registerErr.classList.remove("hidden");
 
         //Set to finished
-        registerButton.innerHTML = "Register";
+        registerButton.textContent = "Register";
         registerButton.disabled = false;
         return;
     }
@@ -80,11 +80,11 @@ async function register() {
         console.error('There was an error!', error);
 
         //Show error
-        registerErr.innerHTML = error;
+        registerErr.textContent = error;
         registerErr.classList.remove("hidden");
 
         //Set to finished
-        registerButton.innerHTML = "Register";
+        registerButton.textContent = "Register";
         registerButton.disabled = false;
     });
 }
@@ -94,7 +94,7 @@ async function login() {
 
     //Arrange UI
     let loginButton = document.getElementById("login_btn");
-    loginButton.innerHTML = "Loading...";
+    loginButton.textContent = "Loading...";
     loginButton.disabled = true;
     let loginErr = document.getElementById("login_err");
     loginErr.classList.add("hidden");
@@ -133,11 +133,11 @@ async function login() {
         console.error('There was an error!', error);
 
         //Show error
-        loginErr.innerHTML = error;
+        loginErr.textContent = error;
         loginErr.classList.remove("hidden");
 
         //Set to finished
-        loginButton.innerHTML = "Login";
+        loginButton.textContent = "Login";
         loginButton.disabled = false;
     });
 }
