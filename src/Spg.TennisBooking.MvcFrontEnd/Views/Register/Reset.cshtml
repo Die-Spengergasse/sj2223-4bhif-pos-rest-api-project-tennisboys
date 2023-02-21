@@ -3,3 +3,78 @@
   const resetUUID = "@Model.uuid";
 </script>
 <script type="module" src="/js/Register/reset.js"></script>
+
+<h2>Reset Password</h2>
+
+<form>
+  <div>
+    <label for="password">New Password</label>
+    <input type="password" id="password" placeholder="Enter password" />
+  </div>
+  <div>
+    <label for="confirmPassword">Confirm New Password</label>
+    <input
+      type="password"
+      id="confirmPassword"
+      placeholder="Confirm password"
+    />
+  </div>
+  <div>
+    <input
+      type="number"
+      name="verify-0"
+      id="verify-0"
+      step="1"
+      min="0"
+      max="9"
+      maxlength="1"
+    />
+    <input
+      type="number"
+      name="verify-1"
+      id="verify-1"
+      step="1"
+      min="0"
+      max="9"
+      maxlength="1"
+    />
+    <input
+      type="number"
+      name="verify-2"
+      id="verify-2"
+      step="1"
+      min="0"
+      max="9"
+      maxlength="1"
+    />
+    <input
+      type="number"
+      name="verify-3"
+      id="verify-3"
+      step="1"
+      min="0"
+      max="9"
+      maxlength="1"
+    />
+    <input
+      type="number"
+      name="verify-4"
+      id="verify-4"
+      step="1"
+      min="0"
+      max="9"
+      maxlength="1"
+    />
+    <input
+      type="number"
+      name="verify-5"
+      id="verify-5"
+      step="1"
+      min="0"
+      max="9"
+      maxlength="1"
+    />
+  </div>
+  <button type="submit">Submit</button>
+  <p id="reset_err" class="hidden text-red-600"></p>
+</form>
