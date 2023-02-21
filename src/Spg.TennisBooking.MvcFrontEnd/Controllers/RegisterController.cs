@@ -25,6 +25,18 @@ namespace Spg.TennisBooking.MvcFrontEnd.Controllers
             return View(new { uuid });
         }
 
+        [HttpGet("forgot")]
+        public IActionResult Forgot()
+        {
+            return View();
+        }
+
+        [HttpGet("reset")]
+        public IActionResult Reset([FromQuery] string uuid)
+        {
+            return View(new { uuid });
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
