@@ -1,23 +1,21 @@
 ﻿@{ ViewData["Title"] = "Register"; }
 <script type="module" src="/js/Register/index.js"></script>
 
-<div id="registerView">
-  <h2>Register</h2>
-
+<div class="flex flex-col justify-center items-center registerView" id="registerView">
+  <h2 class="text-5xl font-medium mb-6 text-white">Register</h2>
   <form id="register_form">
-    <div class="">
-      <label for="InputEmail">Email address</label>
+    <div class="text-xl mb-2">
+      <label for="InputEmail"></label>
       <input
         type="email"
-        class=""
+        class="flex"
         id="InputEmail"
         aria-describedby="emailHelp"
-        placeholder="Enter email"
+        placeholder="Email Address"
       />
-      <p>We'll never share your email with anyone else.</p>
     </div>
-    <div class="">
-      <label for="InputPassword">Password</label>
+    <div class="text-xl mb-2">
+      <label for="InputPassword"></label>
       <input
         type="password"
         class=""
@@ -25,8 +23,8 @@
         placeholder="Password"
       />
     </div>
-    <div class="">
-      <label for="InputPasswordConfirm">Confirm Password</label>
+    <div class="text-xl mb-2">
+      <label for="InputPasswordConfirm"></label>
       <input
         type="password"
         class=""
@@ -35,9 +33,9 @@
       />
     </div>
     <p id="register_err" class="hidden text-red-600"></p>
-    <button id="register_btn" type="submit" class="">Register</button>
+    <button id="register_btn" type="submit" class="register_btn mb-2">Register</button>
   </form>
-  <p>
+  <p class="text-white">
     Already have an account?
     <button type="button" id="loginView_btn">Login</button>
   </p>
@@ -74,3 +72,56 @@
     <button type="button" id="registerView_btn">Register</button>
   </p>
 </div>
+
+<style>
+input[type=email], select {
+  width: 120%;
+  height: 110%;
+  padding: 8px 20px;
+  padding-top: 8px;
+  margin-bottom: 5px;
+  border-radius: 40px;
+  box-sizing: border-box;
+}
+
+input[type=email]:focus {
+  outline: none;
+}
+
+input[type=password], select {
+  width: 120%;
+  height: 110%;
+  padding: 8px 20px;
+  padding-top: 8px;
+  border-radius: 40px;
+  box-sizing: border-box;
+}
+
+input[type=password]:focus {
+  outline: none;
+}
+
+#register_btn {
+  width: 120%;
+  height: 110%;
+  padding: 8px 20px;
+  padding-top: 8px;
+  border-radius: 40px;
+  box-sizing: border-box;
+  background-color: #041729;
+  color: white;
+}
+
+#registerView {
+  height: 100%;
+  margin-left: 35%;
+  margin-right: 35%;
+  margin-top: 10%;
+  padding-top: 50px;
+  padding-bottom: 40px;
+  box-sizing: border-box;
+  background-color: #5B83AB;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+</style>
