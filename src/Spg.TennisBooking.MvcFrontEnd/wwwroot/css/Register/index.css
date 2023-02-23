@@ -1,0 +1,58 @@
+input[type="email"],
+select {
+  padding: 8px 20px;
+  padding-top: 8px;
+  border-radius: 40px;
+  box-sizing: border-box;
+}
+
+input[type="email"]:focus {
+  outline: none;
+}
+
+input[type="password"],
+select {
+  padding: 8px 20px;
+  padding-top: 8px;
+  border-radius: 40px;
+  box-sizing: border-box;
+}
+
+input[type="password"]:focus {
+  outline: none;
+}
+
+#register_btn,
+#login_btn {
+  width: 100%;
+  padding: 8px 20px;
+  padding-top: 8px;
+  border-radius: 40px;
+  box-sizing: border-box;
+  background-color: #041729;
+  color: white;
+}
+
+@media (min-width: 640px) {
+  #registerView,
+  #loginView {
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+}
+
+#registerView,
+#loginView {
+  height: 100%;
+  margin-left: 35%;
+  margin-right: 35%;
+  margin-top: 10%;
+  padding-top: 50px;
+  padding-bottom: 40px;
+  padding-left: 10px;
+  padding-right: 10px;
+  box-sizing: border-box;
+  background-color: #5b83ab;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}

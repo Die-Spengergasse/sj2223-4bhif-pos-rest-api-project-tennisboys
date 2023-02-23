@@ -1,8 +1,9 @@
 ﻿@{ ViewData["Title"] = "Register"; }
 <script type="module" src="/js/Register/index.js"></script>
+<link rel="stylesheet" href="/css/Register/index.css"/>
 
 <div class="flex flex-col justify-center items-center registerView" id="registerView">
-  <h2 class="text-5xl font-medium mb-6 text-white">Register</h2>
+  <h2 class="text-5xl font-medium mb-6 text-white ueberschrift">Register</h2>
   <form id="register_form">
     <div class="text-xl mb-2">
       <label for="InputEmail"></label>
@@ -41,12 +42,11 @@
   </p>
 </div>
 
-<div id="loginView" class="hidden">
-  <h2>Login</h2>
-
+<div id="loginView" class="hidden flex flex-col justify-center items-center registerView">
+  <h2 class="text-5xl font-medium mb-6 text-white">Login</h2>
   <form id="login_form">
-    <div class="">
-      <label for="InputEmailLogin">Email address</label>
+    <div class="text-xl mb-2">
+      <label for="InputEmailLogin"></label>
       <input
         type="email"
         class=""
@@ -55,8 +55,8 @@
         placeholder="Enter email"
       />
     </div>
-    <div class="">
-      <label for="InputPasswordLogin">Password</label>
+    <div class="text-xl mb-2">
+      <label for="InputPasswordLogin"></label>
       <input
         type="password"
         class=""
@@ -65,63 +65,10 @@
       />
     </div>
     <p id="login_err" class="hidden text-red-600"></p>
-    <button id="login_btn" type="submit" class="">Login</button>
+    <button id="login_btn" type="submit" class="login_btn">Login</button>
   </form>
-  <p>
+  <p class="text-white">
     Don't have an account?
     <button type="button" id="registerView_btn">Register</button>
   </p>
 </div>
-
-<style>
-input[type=email], select {
-  width: 120%;
-  height: 110%;
-  padding: 8px 20px;
-  padding-top: 8px;
-  margin-bottom: 5px;
-  border-radius: 40px;
-  box-sizing: border-box;
-}
-
-input[type=email]:focus {
-  outline: none;
-}
-
-input[type=password], select {
-  width: 120%;
-  height: 110%;
-  padding: 8px 20px;
-  padding-top: 8px;
-  border-radius: 40px;
-  box-sizing: border-box;
-}
-
-input[type=password]:focus {
-  outline: none;
-}
-
-#register_btn {
-  width: 120%;
-  height: 110%;
-  padding: 8px 20px;
-  padding-top: 8px;
-  border-radius: 40px;
-  box-sizing: border-box;
-  background-color: #041729;
-  color: white;
-}
-
-#registerView {
-  height: 100%;
-  margin-left: 35%;
-  margin-right: 35%;
-  margin-top: 10%;
-  padding-top: 50px;
-  padding-bottom: 40px;
-  box-sizing: border-box;
-  background-color: #5B83AB;
-  border-radius: 20px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-</style>
