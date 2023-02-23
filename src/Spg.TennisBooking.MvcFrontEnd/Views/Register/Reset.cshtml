@@ -1,0 +1,80 @@
+@{ ViewData["Title"] = "Reset"; }
+<script>
+  const resetUUID = "@Model.uuid";
+</script>
+<script type="module" src="/js/Register/reset.js"></script>
+
+<h2>Reset Password</h2>
+
+<form id="reset_form">
+  <div>
+    <label for="InputNewPassword">New Password</label>
+    <input type="password" id="InputNewPassword" placeholder="Enter password" />
+  </div>
+  <div>
+    <label for="InputNewPasswordConfirm">Confirm New Password</label>
+    <input
+      type="password"
+      id="InputNewPasswordConfirm"
+      placeholder="Confirm password"
+    />
+  </div>
+  <div>
+    <input
+      type="number"
+      name="reset-0"
+      id="reset-0"
+      step="1"
+      min="0"
+      max="9"
+      maxlength="1"
+    />
+    <input
+      type="number"
+      name="reset-1"
+      id="reset-1"
+      step="1"
+      min="0"
+      max="9"
+      maxlength="1"
+    />
+    <input
+      type="number"
+      name="reset-2"
+      id="reset-2"
+      step="1"
+      min="0"
+      max="9"
+      maxlength="1"
+    />
+    <input
+      type="number"
+      name="reset-3"
+      id="reset-3"
+      step="1"
+      min="0"
+      max="9"
+      maxlength="1"
+    />
+    <input
+      type="number"
+      name="reset-4"
+      id="reset-4"
+      step="1"
+      min="0"
+      max="9"
+      maxlength="1"
+    />
+    <input
+      type="number"
+      name="reset-5"
+      id="reset-5"
+      step="1"
+      min="0"
+      max="9"
+      maxlength="1"
+    />
+  </div>
+  <button type="submit" id="reset_btn">Submit</button>
+  <p id="reset_err" class="hidden text-red-600"></p>
+</form>
