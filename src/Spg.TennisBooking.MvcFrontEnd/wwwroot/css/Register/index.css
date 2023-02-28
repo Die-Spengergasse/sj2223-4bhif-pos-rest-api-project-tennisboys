@@ -33,19 +33,11 @@ input[type="password"]:focus {
   color: white;
 }
 
-@media (min-width: 640px) {
-  #registerView,
-  #loginView {
-    margin-left: 10%;
-    margin-right: 10%;
-  }
-}
-
 #registerView,
 #loginView {
   height: 100%;
-  margin-left: 35%;
-  margin-right: 35%;
+  margin-left: 10%;
+  margin-right: 10%;
   margin-top: 10%;
   padding-top: 50px;
   padding-bottom: 40px;
@@ -55,4 +47,20 @@ input[type="password"]:focus {
   background-color: #5b83ab;
   border-radius: 20px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+@media (min-width: 640px) {
+  #registerView,
+  #loginView {
+    margin-left: 20%;
+    margin-right: 20%;
+  }
+}
+
+@media (min-width: 1024px) {
+  #registerView,
+  #loginView {
+    margin-left: 35%;
+    margin-right: 35%;
+  }
 }
