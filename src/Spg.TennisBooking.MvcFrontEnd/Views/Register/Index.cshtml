@@ -1,23 +1,20 @@
 ﻿@{ ViewData["Title"] = "Register"; }
 <script type="module" src="/js/Register/index.js"></script>
+<link rel="stylesheet" href="/css/Register/index.css"/>
 
-<div id="registerView">
-  <h2>Register</h2>
-
+<div class="flex flex-col justify-center items-center registerView" id="registerView">
+  <h2 class="text-5xl font-medium mb-6 text-white ueberschrift">Register</h2>
   <form id="register_form">
-    <div class="">
-      <label for="InputEmail">Email address</label>
+    <div class="text-xl mb-2">
       <input
         type="email"
-        class=""
+        class="flex"
         id="InputEmail"
         aria-describedby="emailHelp"
-        placeholder="Enter email"
+        placeholder="Email Address"
       />
-      <p>We'll never share your email with anyone else.</p>
     </div>
-    <div class="">
-      <label for="InputPassword">Password</label>
+    <div class="text-xl mb-2">
       <input
         type="password"
         class=""
@@ -25,8 +22,7 @@
         placeholder="Password"
       />
     </div>
-    <div class="">
-      <label for="InputPasswordConfirm">Confirm Password</label>
+    <div class="text-xl mb-2">
       <input
         type="password"
         class=""
@@ -34,21 +30,19 @@
         placeholder="Confirm Password"
       />
     </div>
-    <p id="register_err" class="hidden text-red-600"></p>
-    <button id="register_btn" type="submit" class="">Register</button>
+    <p id="register_err" class="hidden text-red-600 font-bold text-center"></p>
+    <button id="register_btn" type="submit" class="register_btn mb-2">Register</button>
   </form>
-  <p>
+  <p class="text-white">
     Already have an account?
     <button type="button" id="loginView_btn">Login</button>
   </p>
 </div>
 
-<div id="loginView" class="hidden">
-  <h2>Login</h2>
-
+<div id="loginView" class="hidden flex flex-col justify-center items-center registerView">
+  <h2 class="text-5xl font-medium mb-6 text-white">Login</h2>
   <form id="login_form">
-    <div class="">
-      <label for="InputEmailLogin">Email address</label>
+    <div class="text-xl mb-2">
       <input
         type="email"
         class=""
@@ -57,8 +51,7 @@
         placeholder="Enter email"
       />
     </div>
-    <div class="">
-      <label for="InputPasswordLogin">Password</label>
+    <div class="text-xl mb-2">
       <input
         type="password"
         class=""
@@ -66,10 +59,10 @@
         placeholder="Password"
       />
     </div>
-    <p id="login_err" class="hidden text-red-600"></p>
-    <button id="login_btn" type="submit" class="">Login</button>
+    <p id="login_err" class="hidden text-red-600 font-bold text-center"></p>
+    <button id="login_btn" type="submit" class="login_btn">Login</button>
   </form>
-  <p>
+  <p class="text-white">
     Don't have an account?
     <button type="button" id="registerView_btn">Register</button>
   </p>
