@@ -8,7 +8,7 @@ using Spg.TennisBooking.Domain.Exceptions;
 using Spg.TennisBooking.Domain.Interfaces;
 using Spg.TennisBooking.Domain.Model;
 
-namespace Spg.TennisBooking.Api.Controllers
+namespace Spg.TennisBooking.Api.Controllers.v1
 {
     /// <summary>
     /// This APIController is used to do any related Account operations
