@@ -12,7 +12,7 @@ using Xunit;
 using Spg.TennisBooking.Repository.Repositories;
 using Spg.TennisBooking.Infrastructure;
 
-namespace Spg.TennisBooking.Application.Test.Services
+namespace Spg.TennisBooking.Application.Test.Services.v1
 {
     public class AuthServiceTests : Tests
     {

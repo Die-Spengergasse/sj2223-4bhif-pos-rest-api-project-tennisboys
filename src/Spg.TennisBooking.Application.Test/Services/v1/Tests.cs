@@ -4,7 +4,7 @@ using Spg.TennisBooking.Domain.Interfaces;
 using Spg.TennisBooking.Infrastructure;
 using Spg.TennisBooking.Repository.Repositories;
 
-namespace Spg.TennisBooking.Application.Test
+namespace Spg.TennisBooking.Application.Test.Services.v1
 {
     public class Tests : Spg.TennisBooking.Domain.Test.Tests
     {
