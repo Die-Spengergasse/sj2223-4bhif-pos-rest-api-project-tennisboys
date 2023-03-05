@@ -1,4 +1,4 @@
-﻿using Spg.TennisBooking.Application.Services;
+﻿using Spg.TennisBooking.Application.Services.v1;
 using Spg.TennisBooking.Domain.Exceptions;
 using Spg.TennisBooking.Domain.Interfaces;
 using Spg.TennisBooking.Domain.Model;

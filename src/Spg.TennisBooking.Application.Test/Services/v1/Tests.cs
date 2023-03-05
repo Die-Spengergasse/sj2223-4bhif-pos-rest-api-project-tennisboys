@@ -1,5 +1,5 @@
 using Microsoft.Extensions.Logging;
-using Spg.TennisBooking.Application.Services;
+using Spg.TennisBooking.Application.Services.v1;
 using Spg.TennisBooking.Domain.Interfaces;
 using Spg.TennisBooking.Infrastructure;
 using Spg.TennisBooking.Repository.Repositories;
