@@ -13,7 +13,7 @@ namespace Spg.TennisBooking.Api.Controllers.v1
     /// This APIController is used to do any related Authorization operations.
     /// </summary>
     [AllowAnonymous]
-    [Route("api/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiVersion("1.0")]
     [ApiController]
     public class AuthController : ControllerBase

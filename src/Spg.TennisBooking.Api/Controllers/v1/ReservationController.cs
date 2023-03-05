@@ -11,7 +11,7 @@ using Spg.TennisBooking.Domain.Model;
 namespace Spg.TennisBooking.Api.Controllers.v1;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/v{version:apiVersion}/[controller]")]
 [ApiVersion("1.0")]
 [Authorize]
 public class ReservationController : ControllerBase

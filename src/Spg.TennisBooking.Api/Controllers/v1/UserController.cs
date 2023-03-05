@@ -13,7 +13,7 @@ namespace Spg.TennisBooking.Api.Controllers.v1
     /// <summary>
     /// This APIController is used to do any related Account operations
     /// </summary>
-    [Route("api/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     [ApiVersion("1.0")]
     public class UserController : ControllerBase
