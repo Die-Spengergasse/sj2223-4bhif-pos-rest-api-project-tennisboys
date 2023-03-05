@@ -13,7 +13,7 @@ using Spg.TennisBooking.Domain.Dtos.ReservationDtos;
 using System;
 using Microsoft.Extensions.Configuration;
 
-namespace Spg.TennisBooking.Application.Services
+namespace Spg.TennisBooking.Application.Services.v1
 {
     public class ReservationService : IReservationService
     {

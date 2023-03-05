@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Spg.TennisBooking.Domain.Dtos.ClubNewsDtos;
 using Microsoft.Extensions.Configuration;
 
-namespace Spg.TennisBooking.Application.Services
+namespace Spg.TennisBooking.Application.Services.v1
 {
     public class ClubNewsService : IClubNewsService
     {

@@ -9,7 +9,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Security.Cryptography;
 
-namespace Spg.TennisBooking.Application.Services
+namespace Spg.TennisBooking.Application.Services.v1
 {
     public class UserService : IUserService
     {

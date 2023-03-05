@@ -13,7 +13,7 @@ using Spg.TennisBooking.Domain.Model;
 using Microsoft.Extensions.Logging;
 using Stripe;
 
-namespace Spg.TennisBooking.Application.Services
+namespace Spg.TennisBooking.Application.Services.v1
 {
     public class ClubService : IClubService
     {

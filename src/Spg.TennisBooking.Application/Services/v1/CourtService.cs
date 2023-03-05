@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 using Spg.TennisBooking.Domain.Dtos.CourtDtos;
 using Microsoft.Extensions.Configuration;
 
-namespace Spg.TennisBooking.Application.Services
+namespace Spg.TennisBooking.Application.Services.v1
 {
     public class CourtService : ICourtService
     {
