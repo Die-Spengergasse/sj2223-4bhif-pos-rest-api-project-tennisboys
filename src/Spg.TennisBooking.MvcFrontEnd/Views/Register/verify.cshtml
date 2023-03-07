@@ -4,8 +4,9 @@
 </script>
 <script type="module" src="/js/Register/verify.js"></script>
 
-<div class="flex verify">
-    <div>
+<div>
+    <h1 class="text-center text-5xl" id="ue1">Verify Code</h1>
+    <div id="verify">
       <input
         type="number"
         name="verify-0"
@@ -63,15 +64,19 @@
     </div>
 </div>
 
-<div>
+<div id="verify">
   <button id="verify_btn">Verify</button>
-  <p id="verify_err" class="hidden text-red-600"></p>
+</div>
+
+<div class="text-center">
+    <p id="verify_err" class="hidden text-red-600"></p>
 </div>
 
 <style>
 #verify_btn {
-  width: 30%;
-  padding: 8px 20px;
+  width: 268px;
+  justify-content:center;
+  padding-bottom: 8px;
   padding-top: 8px;
   border-radius: 40px;
   box-sizing: border-box;
@@ -80,6 +85,39 @@
 }
 
 #verify {
-    margin-left:30%;
+ justify-content:center;
+ display:flex;
+ margin-bottom:15px;
 }
+
+#ue1{
+    margin-top:7%;
+    margin-bottom:15px;
+}
+
+input[type=number] {
+    border: 1px solid;
+    border-radius: 4px;
+    margin: 5px 0;
+    width: 40px;
+    height: 60px;
+    font-size:xx-large;
+    text-align:center;
+    overflow-x: auto;
+    overflow-y: auto;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input [type=number]::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    }
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+
 </style>
