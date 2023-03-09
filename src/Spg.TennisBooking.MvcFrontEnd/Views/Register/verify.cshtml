@@ -3,64 +3,72 @@
   const verifyUUID = "@Model.uuid";
 </script>
 <script type="module" src="/js/Register/verify.js"></script>
+<link rel="stylesheet" href="/css/Register/verify.css"/>
 
 <div>
-  <input
-    type="number"
-    name="verify-0"
-    id="verify-0"
-    step="1"
-    min="0"
-    max="9"
-    maxlength="1"
-  />
-  <input
-    type="number"
-    name="verify-1"
-    id="verify-1"
-    step="1"
-    min="0"
-    max="9"
-    maxlength="1"
-  />
-  <input
-    type="number"
-    name="verify-2"
-    id="verify-2"
-    step="1"
-    min="0"
-    max="9"
-    maxlength="1"
-  />
-  <input
-    type="number"
-    name="verify-3"
-    id="verify-3"
-    step="1"
-    min="0"
-    max="9"
-    maxlength="1"
-  />
-  <input
-    type="number"
-    name="verify-4"
-    id="verify-4"
-    step="1"
-    min="0"
-    max="9"
-    maxlength="1"
-  />
-  <input
-    type="number"
-    name="verify-5"
-    id="verify-5"
-    step="1"
-    min="0"
-    max="9"
-    maxlength="1"
-  />
+    <h1 class="text-center text-5xl" id="ue1">Verify Code</h1>
+    <div id="verify">
+      <input
+        type="number"
+        name="verify-0"
+        id="verify-0"
+        step="1"
+        min="0"
+        max="9"
+        maxlength="1"
+      />
+      <input
+        type="number"
+        name="verify-1"
+        id="verify-1"
+        step="1"
+        min="0"
+        max="9"
+        maxlength="1"
+      />
+      <input
+        type="number"
+        name="verify-2"
+        id="verify-2"
+        step="1"
+        min="0"
+        max="9"
+        maxlength="1"
+      />
+      <input
+        type="number"
+        name="verify-3"
+        id="verify-3"
+        step="1"
+        min="0"
+        max="9"
+        maxlength="1"
+      />
+      <input
+        type="number"
+        name="verify-4"
+        id="verify-4"
+        step="1"
+        min="0"
+        max="9"
+        maxlength="1"
+      />
+      <input
+        type="number"
+        name="verify-5"
+        id="verify-5"
+        step="1"
+        min="0"
+        max="9"
+        maxlength="1"
+      />
+    </div>
 </div>
-<div>
+
+<div id="verify">
   <button id="verify_btn">Verify</button>
-  <p id="verify_err" class="hidden text-red-600"></p>
+</div>
+
+<div class="text-center">
+    <p id="verify_err" class="hidden text-red-600"></p>
 </div>
