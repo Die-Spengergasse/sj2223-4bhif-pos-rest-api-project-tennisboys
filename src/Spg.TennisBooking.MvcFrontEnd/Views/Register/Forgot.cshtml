@@ -1,18 +1,16 @@
 @{ ViewData["Title"] = "Forgot"; }
 <script type="module" src="/js/Register/forgot.js"></script>
+<link rel="stylesheet" href="/css/Register/forgot.css"/>
 
-<h2>Forgot Password</h2>
+<h2 class="text-center text-5xl" id="ue1">Forgot Password</h2>
 
 <form id="forgot_form">
-  <div>
-    <label for="email">Email address</label>
     <input
       type="email"
       id="InputEmail"
       aria-describedby="emailHelp"
-      placeholder="Enter email"
+      placeholder="Enter Email"
     />
-  </div>
   <button type="submit" id="forgot_btn">Submit</button>
   <p id="forgot_err" class="hidden text-red-600"></p>
 </form>
