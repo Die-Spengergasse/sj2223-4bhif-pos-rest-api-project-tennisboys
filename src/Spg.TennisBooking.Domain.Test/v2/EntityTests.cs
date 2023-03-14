@@ -5,7 +5,7 @@ using System;
 using System.Linq;
 using Xunit;
 
-namespace Spg.TennisBooking.Domain.Test
+namespace Spg.TennisBooking.Domain.Test.v2
 {
     public class EntityTests : Tests
     {

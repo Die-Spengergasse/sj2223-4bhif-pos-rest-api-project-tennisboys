@@ -7,7 +7,7 @@ using Spg.TennisBooking.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Spg.TennisBooking.Domain.Model;
 
-namespace Spg.TennisBooking.Domain.Test
+namespace Spg.TennisBooking.Domain.Test.v1
 {
     public class Tests
     {
