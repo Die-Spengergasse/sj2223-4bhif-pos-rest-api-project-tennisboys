@@ -4,22 +4,18 @@
 </script>
 <script type="module" src="/js/Register/reset.js"></script>
 
-<h2>Reset Password</h2>
+<h2 class="text-center text-5xl" id="ue1">Reset Password</h2>
 
 <form id="reset_form">
-  <div>
-    <label for="InputNewPassword">New Password</label>
+  <div id="center">
+    <label for="InputNewPassword"></label>
     <input type="password" id="InputNewPassword" placeholder="Enter password" />
   </div>
-  <div>
-    <label for="InputNewPasswordConfirm">Confirm New Password</label>
-    <input
-      type="password"
-      id="InputNewPasswordConfirm"
-      placeholder="Confirm password"
-    />
+  <div id="center">
+    <label for="InputNewPasswordConfirm"></label>
+    <input type="password" id="InputNewPasswordConfirm" placeholder="Confirm password"/>
   </div>
-  <div>
+  <div id="center">
     <input
       type="number"
       name="reset-0"
@@ -75,6 +71,78 @@
       maxlength="1"
     />
   </div>
-  <button type="submit" id="reset_btn">Submit</button>
+  <button type="submit" id="reset_btn" class="mx-auto">Submit</button>
   <p id="reset_err" class="hidden text-red-600"></p>
 </form>
+
+<style>
+     
+    #ue1{
+      margin-top:7%;
+      margin-bottom:15px;
+     }
+
+     #reset_form{
+         padding-top:45px;
+         padding-bottom:20px;
+         background-color:#5B83AB;
+         margin-left:35%;
+         margin-right:35%;
+         border-radius:20px;
+         display: flex;
+         flex-direction: column;
+         justify-content: center;
+         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      }
+    #InputNewPassword, InputNewPasswordConfirmed{
+    }
+
+    #reset_btn{
+    width: 50%;
+    justify-content:center;
+    padding-bottom: 8px;
+    padding-top: 8px;
+    border-radius: 40px;
+    box-sizing: border-box;
+    background-color: #041729;
+    color: white;
+    }
+
+    input[type=number] {
+      border-radius: 5px;
+      margin-left:2px;
+      margin-right:2px;
+      margin-top:20px;
+      margin-bottom:20px;
+      width: 40px;
+      height: 60px;
+      font-size:xx-large;
+      text-align:center;
+      overflow-x: auto;
+      overflow-y: auto;
+  }
+
+  #center{
+      justify-content:center;
+      display:flex;
+  }
+     
+   /* Chrome, Safari, Edge, Opera */
+  input [type=number]::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+      }
+  /* Firefox */
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
+
+  input[type=password] {
+      border-radius:30px;
+      height:40px;
+      width:50%;
+      margin-bottom:10px;
+      padding-left:20px;
+  }
+</style>
