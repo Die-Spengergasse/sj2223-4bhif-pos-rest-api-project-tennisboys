@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Spg.TennisBooking.Infrastructure
+namespace Spg.TennisBooking.Infrastructure.v1
 {
     public class TennisBookingContext : DbContext
     {
