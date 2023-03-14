@@ -1,0 +1,30 @@
+﻿#forgot_form {
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+#ue1 {
+    margin-top: 7%;
+    margin-bottom: 15px;
+}
+
+#inputEmail {
+    margin-top: 30px;
+    margin-left: 42%;
+    margin-right: 42%;
+    height: 45px;
+    border-radius: 20px;
+    padding-left: 12px;
+}
+
+#forgot_btn {
+    margin-top: 10px;
+    margin-left: 42%;
+    margin-right: 42%;
+    height: 45px;
+    border-radius: 20px;
+    background-color: #041729;
+    color: white;
+}

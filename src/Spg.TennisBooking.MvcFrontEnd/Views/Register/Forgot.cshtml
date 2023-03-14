@@ -1,5 +1,6 @@
 @{ ViewData["Title"] = "Forgot"; }
 <script type="module" src="/js/Register/forgot.js"></script>
+<link rel="stylesheet" href="/css/Register/forgot.css"/>
 
 <h2 class="text-center text-5xl" id="ue1">Forgot Password</h2>
 
@@ -13,36 +14,3 @@
   <button type="submit" id="forgot_btn">Submit</button>
   <p id="forgot_err" class="hidden text-red-600"></p>
 </form>
-
-<style>
-    #forgot_form{
-       justify-content:center;
-       display:flex;
-       flex-direction:column;
-       margin-bottom:15px;
-    }
-
-    #ue1{
-      margin-top:7%;
-      margin-bottom:15px;
-  }
-
-    #inputEmail{
-        margin-top:30px;
-        margin-left:42%;
-        margin-right:42%;
-        height:45px;
-        border-radius:20px;
-        padding-left:12px;
-    }
-
-    #forgot_btn{
-        margin-top:10px;
-        margin-left:42%;
-        margin-right:42%;
-        height:45px;
-        border-radius:20px;
-        background-color: #041729;
-        color: white;
-    }
-</style>
