@@ -20,6 +20,13 @@ namespace Spg.TennisBooking.MvcFrontEnd.Controllers
             return View();
         }
 
+        [HttpGet("/Imprint")]
+        public IActionResult Imprint()
+        {
+            _logger.LogInformation("Imprint");
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
