@@ -1,9 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Spg.TennisBooking.Application.Services;
+using Spg.TennisBooking.Application.Services.v1;
 using Spg.TennisBooking.Domain.Interfaces;
-using Spg.TennisBooking.Repository.Repositories;
+using Spg.TennisBooking.Repository.Repositories.v1;
 
-namespace Spg.TennisBooking.Configurations
+namespace Spg.TennisBooking.Configurations.v1
 {
     public static class InterfaceConfigurations
     {
