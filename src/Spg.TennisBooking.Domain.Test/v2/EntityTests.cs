@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Spg.TennisBooking.Domain.Model;
-using Spg.TennisBooking.Infrastructure;
+using Spg.TennisBooking.Infrastructure.v2;
 using System;
 using System.Linq;
 using Xunit;

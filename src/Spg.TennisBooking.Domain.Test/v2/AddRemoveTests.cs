@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
-using Spg.TennisBooking.Infrastructure;
+using Spg.TennisBooking.Infrastructure.v2;
 using Microsoft.EntityFrameworkCore;
 using Spg.TennisBooking.Domain.Model;
 
