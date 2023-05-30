@@ -9,6 +9,7 @@ using Spg.TennisBooking.Infrastructure.v2;
 using Spg.TennisBooking.Infrastructure.v1;
 using Spg.TennisBooking.Repository.Repositories;
 using System.Text;
+using Spg.TennisBooking.Configurations.v2;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,9 +25,9 @@ DbContextOptions options = new DbContextOptionsBuilder()
     .UseSqlite(connectionString)
     .Options;
 
-Spg.TennisBooking.Infrastructure.v1.TennisBookingContext dbv1 = new Spg.TennisBooking.Infrastructure.v1.TennisBookingContext(options);
-dbv1.Database.EnsureDeleted();
-dbv1.Database.EnsureCreated();
+//Spg.TennisBooking.Infrastructure.v1.TennisBookingContext dbv1 = new Spg.TennisBooking.Infrastructure.v1.TennisBookingContext(options);
+//dbv1.Database.EnsureDeleted();
+//dbv1.Database.EnsureCreated();
 
 Spg.TennisBooking.Infrastructure.v2.TennisBookingContext dbv2 = new Spg.TennisBooking.Infrastructure.v2.TennisBookingContext(options);
 dbv2.Database.EnsureDeleted();
