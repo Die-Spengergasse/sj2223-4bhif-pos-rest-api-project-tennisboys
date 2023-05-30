@@ -1,9 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using Spg.TennisBooking.Application.Services;
-using Spg.TennisBooking.Configurations;
+using Spg.TennisBooking.Configurations.v2;
 using Spg.TennisBooking.Domain.Interfaces;
 //using Spg.TennisBooking.Infrastructure;
-using Spg.TennisBooking.Repository.Repositories;
+using Spg.TennisBooking.Repository.Repositories.v1;
 
 var builder = WebApplication.CreateBuilder(args);
 

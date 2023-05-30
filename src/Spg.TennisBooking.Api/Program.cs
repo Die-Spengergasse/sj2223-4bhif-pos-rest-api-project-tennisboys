@@ -5,9 +5,11 @@ using Microsoft.OpenApi.Models;
 using Spg.TennisBooking.Application.Services;
 using Spg.TennisBooking.Configurations;
 using Spg.TennisBooking.Domain.Interfaces;
-using Spg.TennisBooking.Infrastructure;
+using Spg.TennisBooking.Infrastructure.v2;
+using Spg.TennisBooking.Infrastructure.v1;
 using Spg.TennisBooking.Repository.Repositories;
 using System.Text;
+using Spg.TennisBooking.Configurations.v2;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,9 +25,13 @@ DbContextOptions options = new DbContextOptionsBuilder()
     .UseSqlite(connectionString)
     .Options;
 
-TennisBookingContext db = new TennisBookingContext(options);
-db.Database.EnsureDeleted();
-db.Database.EnsureCreated();
+//Spg.TennisBooking.Infrastructure.v1.TennisBookingContext dbv1 = new Spg.TennisBooking.Infrastructure.v1.TennisBookingContext(options);
+//dbv1.Database.EnsureDeleted();
+//dbv1.Database.EnsureCreated();
+
+Spg.TennisBooking.Infrastructure.v2.TennisBookingContext dbv2 = new Spg.TennisBooking.Infrastructure.v2.TennisBookingContext(options);
+dbv2.Database.EnsureDeleted();
+dbv2.Database.EnsureCreated();
 
 //builder.Services.AddDbContext<TennisBookingContext>(options => options.UseSqlite("Data Source=TennisBooking.db"));
 builder.Services.ConfigureSqLite(connectionString);
