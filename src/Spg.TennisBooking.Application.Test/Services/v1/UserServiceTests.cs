@@ -2,8 +2,8 @@
 using Spg.TennisBooking.Domain.Exceptions;
 using Spg.TennisBooking.Domain.Interfaces;
 using Spg.TennisBooking.Domain.Model;
-using Spg.TennisBooking.Infrastructure;
-using Spg.TennisBooking.Repository.Repositories;
+using Spg.TennisBooking.Infrastructure.v1;
+using Spg.TennisBooking.Repository.Repositories.v1;
 using System;
 using System.Net;
 using System.Security.Cryptography;

@@ -1,7 +1,7 @@
 ﻿using Spg.TennisBooking.Domain.Exceptions;
 using Spg.TennisBooking.Domain.Interfaces;
 using Spg.TennisBooking.Domain.Model;
-using Spg.TennisBooking.Application.Services.v1;
+using Spg.TennisBooking.Application.Services.v2;
 using System.Net;
 using System.Net.Mail;
 using System.Security.Claims;
@@ -9,10 +9,10 @@ using System.Text;
 using System.Security.Cryptography;
 using Microsoft.Extensions.Configuration;
 using Xunit;
-using Spg.TennisBooking.Repository.Repositories;
-using Spg.TennisBooking.Infrastructure;
+using Spg.TennisBooking.Repository.Repositories.v2;
+using Spg.TennisBooking.Infrastructure.v2;
 
-namespace Spg.TennisBooking.Application.Test.Services.v1
+namespace Spg.TennisBooking.Application.Test.Services.v2
 {
     public class AuthServiceTests : Tests
     {

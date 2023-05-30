@@ -1,12 +1,12 @@
 using Microsoft.Extensions.Logging;
-using Spg.TennisBooking.Application.Services.v1;
+using Spg.TennisBooking.Application.Services.v2;
 using Spg.TennisBooking.Domain.Interfaces;
-using Spg.TennisBooking.Infrastructure;
-using Spg.TennisBooking.Repository.Repositories;
+using Spg.TennisBooking.Infrastructure.v2;
+using Spg.TennisBooking.Repository.Repositories.v2;
 
-namespace Spg.TennisBooking.Application.Test.Services.v1
+namespace Spg.TennisBooking.Application.Test.Services.v2
 {
-    public class Tests : Spg.TennisBooking.Domain.Test.Tests
+    public class Tests : Spg.TennisBooking.Domain.Test.v2.Tests
     {
         //Services
         protected AuthService GetAuthService(IUserRepository userRepository)

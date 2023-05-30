@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Spg.TennisBooking.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Spg.TennisBooking.Domain.Model;
+using Spg.TennisBooking.Infrastructure.v1;
 
 namespace Spg.TennisBooking.Domain.Test.v1
 {

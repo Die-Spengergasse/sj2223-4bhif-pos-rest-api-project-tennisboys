@@ -8,7 +8,7 @@ using Spg.TennisBooking.Infrastructure;
 using Spg.TennisBooking.Repository.Repositories;
 using Xunit;
 
-namespace Spg.TennisBooking.Application.Test.Services.v1
+namespace Spg.TennisBooking.Application.Test.Services.v2
 {
     public class ClubServiceTests : Tests
     {
