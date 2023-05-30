@@ -1,14 +1,14 @@
 using Microsoft.EntityFrameworkCore;
 using Spg.TennisBooking.Domain.Interfaces;
 using Spg.TennisBooking.Domain.Model;
-using Spg.TennisBooking.Infrastructure;
+using Spg.TennisBooking.Infrastructure.v2;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Spg.TennisBooking.Repository.Repositories
+namespace Spg.TennisBooking.Repository.Repositories.v2
 {
     public class CourtRepository : ICourtRepository
     {
