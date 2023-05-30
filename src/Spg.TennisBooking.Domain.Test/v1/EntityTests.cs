@@ -17,7 +17,7 @@ namespace Spg.TennisBooking.Domain.Test.v1
         public void DomainModel_Create_Club_Success_Test()
         {
             TennisBookingContext db = GetContext();
-
+            
             Club newClub = CreateClub();
 
             db.Clubs.Add(newClub);

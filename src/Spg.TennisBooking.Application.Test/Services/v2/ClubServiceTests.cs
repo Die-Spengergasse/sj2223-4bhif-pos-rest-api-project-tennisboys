@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Spg.TennisBooking.Application.Services.v1;
+using Spg.TennisBooking.Application.Services.v2;
 using Spg.TennisBooking.Domain.Dtos.ClubDtos;
 using Spg.TennisBooking.Domain.Interfaces;
 using Spg.TennisBooking.Domain.Model;
-using Spg.TennisBooking.Infrastructure;
-using Spg.TennisBooking.Repository.Repositories;
+using Spg.TennisBooking.Infrastructure.v2;
+using Spg.TennisBooking.Repository.Repositories.v2;
 using Xunit;
 
 namespace Spg.TennisBooking.Application.Test.Services.v2

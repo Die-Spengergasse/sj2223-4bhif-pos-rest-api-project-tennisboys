@@ -11,6 +11,8 @@ using Microsoft.Extensions.Configuration;
 using Xunit;
 using Spg.TennisBooking.Repository.Repositories;
 using Spg.TennisBooking.Infrastructure;
+using Spg.TennisBooking.Infrastructure.v1;
+using Spg.TennisBooking.Repository.Repositories.v1;
 
 namespace Spg.TennisBooking.Application.Test.Services.v1
 {
