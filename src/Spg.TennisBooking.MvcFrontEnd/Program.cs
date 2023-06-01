@@ -7,13 +7,16 @@ using Spg.TennisBooking.Repository.Repositories.v1;
 
 var builder = WebApplication.CreateBuilder(args);
 
+ConfigurationManager Conf = builder.Configuration;
+
 string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+string useDb = Conf.GetSection("ConnectionStrings").GetValue<string>("UseDb");
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 // builder.Services.AddTransient<IProductService, ProductService>();
 // builder.Services.AddTransient<IProductRepository, ProductRepository>();
-builder.Services.ConfigureSqLite(connectionString);
+builder.Services.ConfigureDB(connectionString, useDb);
 
 var app = builder.Build();
 
