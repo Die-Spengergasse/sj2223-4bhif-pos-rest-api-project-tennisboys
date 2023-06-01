@@ -31,7 +31,10 @@ namespace Spg.TennisBooking.Api.Controllers.v2
             _user = user;
         }
 
-        //Welcomed
+        /// <summary>
+        /// Outputs, if the User got Welcomed or not.
+        /// </summary>
+        /// <returns>return Ok(_user.Welcomed(uuid));</returns>
         [HttpGet("Welcomed")]
         [Produces("application/json")]
         [Authorize]
@@ -66,7 +69,10 @@ namespace Spg.TennisBooking.Api.Controllers.v2
             }
         }
 
-        //Get PersonalData
+        /// <summary>
+        /// Outputs the Personal Data of a User
+        /// </summary>
+        /// <returns>return Ok(personalDataDto);</returns>
         [HttpGet]
         [Produces("application/json")]
         [Authorize]
@@ -104,7 +110,11 @@ namespace Spg.TennisBooking.Api.Controllers.v2
             }
         }
 
-        //Set PersonalData
+        /// <summary>
+        /// Sets the Personal Data of a User
+        /// </summary>
+        /// <param name="personalDataDto">Personal Data</param>
+        /// <returns>return new ObjectResult(new { success }) { StatusCode = (int)HttpStatusCode.OK };</returns>
         [HttpPut]
         [Produces("application/json")]
         [Authorize]
@@ -142,7 +152,11 @@ namespace Spg.TennisBooking.Api.Controllers.v2
             }
         }
 
-        //ChangePassword
+        /// <summary>
+        /// Changes the Password of a User
+        /// </summary>
+        /// <param name="changePasswordDto">Change Password</param>
+        /// <returns>return new ObjectResult(new { success }) { StatusCode = (int)HttpStatusCode.OK };</returns>
         [HttpPatch("ChangePassword")]
         [Produces("application/json")]
         [Authorize]
