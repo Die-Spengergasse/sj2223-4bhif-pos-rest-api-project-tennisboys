@@ -16,6 +16,9 @@ namespace Spg.TennisBooking.Api.Controllers.v2;
 [Authorize]
 public class ReservationController : ControllerBase
 {
+    /// <summary>
+    /// This APIController is used to do any related Reservation operations
+    /// </summary>
     private readonly IWebHostEnvironment _env;
     private readonly IConfiguration _configuration;
     private readonly ILogger<ReservationController> _logger;
@@ -38,6 +41,11 @@ public class ReservationController : ControllerBase
            DeleteReservation - Admin
          */
 
+    /// <summary>
+    /// Outputs the UUID of a User
+    /// </summary>
+    /// <param name="uuid"></param>
+    /// <returns>return await _reservation.GetByUUID(uuid, Controller.GetUserId(User));</returns>
     [HttpGet("{uuid}")]
     public async Task<IActionResult> Get(string uuid)
     {
@@ -94,6 +102,11 @@ public class ReservationController : ControllerBase
     //    }
     //}
 
+    /// <summary>
+    /// Outputs the Club of the Reservation.
+    /// </summary>
+    /// <param name="clubLink"></param>
+    /// <returns>return await _reservation.GetByClub(clubLink, Controller.GetUserId(User));</returns>
     [HttpGet("club/{clubLink}")]
     public async Task<IActionResult> GetByClub(string clubLink)
     {
@@ -115,6 +128,11 @@ public class ReservationController : ControllerBase
         }
     }
 
+    /// <summary>
+    /// Outputs the CourtId of the Reservation.
+    /// </summary>
+    /// <param name="courtId"></param>
+    /// <returns>return await _reservation.GetByCourt(courtId);</returns>
     [HttpGet("court/{courtId}")]
     [AllowAnonymous]
     public async Task<IActionResult> GetByCourt(int courtId)
@@ -137,6 +155,10 @@ public class ReservationController : ControllerBase
         }
     }
 
+    /// <summary>
+    /// Outputs the User who made the Reservation.
+    /// </summary>
+    /// <returns>return await _reservation.GetByUser(Controller.GetUserId(User));</returns>
     [HttpGet]
     public async Task<IActionResult> GetByUser()
     {
@@ -158,6 +180,11 @@ public class ReservationController : ControllerBase
         }
     }
 
+    /// <summary>
+    /// Post a Reservation
+    /// </summary>
+    /// <param name="reservationDto"></param>
+    /// <returns>return await _reservation.Post(reservationDto, Controller.GetUserId(User));</returns>
     [HttpPost]
     public async Task<IActionResult> Post([FromBody] PostReservationDto reservationDto)
     {
@@ -179,6 +206,11 @@ public class ReservationController : ControllerBase
         }
     }
 
+    /// <summary>
+    /// Deletes a Reservation.
+    /// </summary>
+    /// <param name="uuid"></param>
+    /// <returns>return await _reservation.Delete(uuid, Controller.GetUserId(User));</returns>
     [HttpDelete("{uuid}")]
     public async Task<IActionResult> Delete(string uuid)
     {
