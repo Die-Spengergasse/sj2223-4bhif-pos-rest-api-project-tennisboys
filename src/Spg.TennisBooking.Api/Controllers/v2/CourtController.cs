@@ -15,6 +15,9 @@ namespace Spg.TennisBooking.Api.Controllers.v2;
 [Authorize]
 public class CourtController : ControllerBase
 {
+    /// <summary>
+    /// This APIController is used to do any related Court operations
+    /// </summary>
     private readonly IWebHostEnvironment _env;
     private readonly IConfiguration _configuration;
     private readonly ILogger<CourtController> _logger;
@@ -36,6 +39,11 @@ public class CourtController : ControllerBase
        GetAllCourts
      */
 
+    /// <summary>
+    /// Post a Court
+    /// </summary>
+    /// <param name="postCourtDto"></param>
+    /// <returns>return await _court.Post(postCourtDto, Controller.GetUserId(User));</returns>
     [HttpPost]
     public async Task<IActionResult> Post([FromBody] PostCourtDto postCourtDto)
     {
@@ -57,6 +65,11 @@ public class CourtController : ControllerBase
         }
     }
 
+    /// <summary>
+    /// Put a Court
+    /// </summary>
+    /// <param name="courtDto"></param>
+    /// <returns>return await _court.Put(courtDto, Controller.GetUserId(User));</returns>
     [HttpPut]
     public async Task<IActionResult> Put([FromBody] PutCourtDto courtDto)
     {
@@ -78,6 +91,11 @@ public class CourtController : ControllerBase
         }
     }
 
+    /// <summary>
+    /// Delete a Court
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns>return await _court.Delete(id, Controller.GetUserId(User));</returns>
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
@@ -99,6 +117,11 @@ public class CourtController : ControllerBase
         }
     }
 
+    /// <summary>
+    /// Get a Court
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns>return await _court.Get(id);</returns>
     [HttpGet("{id}")]
     [AllowAnonymous]
     public async Task<IActionResult> Get(int id)
@@ -121,6 +144,11 @@ public class CourtController : ControllerBase
         }
     }
 
+    /// <summary>
+    /// Get all Courts
+    /// </summary>
+    /// <param name="clubLink"></param>
+    /// <returns>return await _court.GetAll(clubLink);</returns>
     [HttpGet]
     [AllowAnonymous]
     public async Task<IActionResult> GetAll(string clubLink)
