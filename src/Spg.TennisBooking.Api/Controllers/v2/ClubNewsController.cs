@@ -16,6 +16,9 @@ namespace Spg.TennisBooking.Api.Controllers.v2;
 [Authorize]
 public class ClubNewsController : ControllerBase
 {
+    /// <summary>
+    /// This APIController is used to do any related ClubNews operations
+    /// </summary>
     private readonly IWebHostEnvironment _env;
     private readonly IConfiguration _configuration;
     private readonly ILogger<ClubNewsController> _logger;
@@ -38,6 +41,11 @@ public class ClubNewsController : ControllerBase
      * Delete(id)
      */
 
+    /// <summary>
+    /// Gets the News of a Club.
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns>return await _clubNews.Get(id);</returns>
     [HttpGet("{id}")]
     [AllowAnonymous]
     public async Task<IActionResult> Get(int id)
@@ -60,6 +68,11 @@ public class ClubNewsController : ControllerBase
         }
     }
 
+    /// <summary>
+    /// Gets all News of a Club.
+    /// </summary>
+    /// <param name="clubLink"></param>
+    /// <returns>return await _clubNews.GetAll(clubLink);</returns>
     [HttpGet]
     [AllowAnonymous]
     public async Task<IActionResult> GetAll(string clubLink)
@@ -82,6 +95,11 @@ public class ClubNewsController : ControllerBase
         }
     }
 
+    /// <summary>
+    /// Post ClubNews.
+    /// </summary>
+    /// <param name="postClubNewsDto"></param>
+    /// <returns>return await _clubNews.Post(postClubNewsDto, Controller.GetUserId(User));</returns>
     [HttpPost]
     public async Task<IActionResult> Post([FromBody] PostClubNewsDto postClubNewsDto)
     {
@@ -103,6 +121,11 @@ public class ClubNewsController : ControllerBase
         }
     }
 
+    /// <summary>
+    /// Put ClubNews
+    /// </summary>
+    /// <param name="putClubNewsDto"></param>
+    /// <returns>return await _clubNews.Put(putClubNewsDto, Controller.GetUserId(User));</returns>
     [HttpPut]
     public async Task<IActionResult> Put([FromBody] PutClubNewsDto putClubNewsDto)
     {
@@ -124,6 +147,11 @@ public class ClubNewsController : ControllerBase
         }
     }
 
+    /// <summary>
+    /// Delete ClubNews
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns>return await _clubNews.Delete(id, Controller.GetUserId(User));</returns>
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
