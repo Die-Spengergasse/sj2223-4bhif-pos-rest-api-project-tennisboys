@@ -6,13 +6,25 @@ namespace Spg.TennisBooking.Configurations.v2
 {
     public static class DatabaseConfigurations
     {
-        public static void ConfigureSqLite(this IServiceCollection services, string connectionString)
+        public static void ConfigureDB(this IServiceCollection services, string connectionString, string useDb)
         {
             services.AddDbContext<TennisBookingContext>(options => 
             {
                 if (!options.IsConfigured)
                 {
-                    options.UseSqlite(connectionString);
+                    if (useDb == "MySQL")
+                    {
+                        options.UseMySQL(connectionString);
+                    }
+                    else if (useDb == "SQLite")
+                    {
+                        options.UseSqlite(connectionString);
+                    }
+                    else
+                    {
+                        throw new Exception("No Database selected");
+                    }
+                    //options.UseLazyLoadingProxies();
                 }
             });
         }

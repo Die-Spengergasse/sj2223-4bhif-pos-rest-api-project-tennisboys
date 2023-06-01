@@ -20,21 +20,21 @@ ConfigurationManager Conf = builder.Configuration;
 
 //Add db
 string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+string useDb = Conf.GetSection("ConnectionStrings").GetValue<string>("UseDb");
+Console.WriteLine(useDb);
+
 //Clear db
-DbContextOptions options = new DbContextOptionsBuilder()
-    .UseSqlite(connectionString)
-    .Options;
+//DbContextOptions options = new DbContextOptionsBuilder()
+//    .UseSqlite(connectionString)
+//    .Options;
 
 //Spg.TennisBooking.Infrastructure.v1.TennisBookingContext dbv1 = new Spg.TennisBooking.Infrastructure.v1.TennisBookingContext(options);
 //dbv1.Database.EnsureDeleted();
 //dbv1.Database.EnsureCreated();
 
-Spg.TennisBooking.Infrastructure.v2.TennisBookingContext dbv2 = new Spg.TennisBooking.Infrastructure.v2.TennisBookingContext(options);
-dbv2.Database.EnsureDeleted();
-dbv2.Database.EnsureCreated();
 
 //builder.Services.AddDbContext<TennisBookingContext>(options => options.UseSqlite("Data Source=TennisBooking.db"));
-builder.Services.ConfigureSqLite(connectionString);
+builder.Services.ConfigureDB(connectionString, useDb);
 
 builder.Services.AddControllers().AddNewtonsoftJson(options =>
     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
