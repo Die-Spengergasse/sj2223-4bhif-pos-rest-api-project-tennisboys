@@ -16,6 +16,9 @@ namespace Spg.TennisBooking.Api.Controllers.v2;
 [Authorize]
 public class ClubController : ControllerBase
 {
+    /// <summary>
+    /// This APIController is used to do any related Club operations
+    /// </summary>
     private readonly IWebHostEnvironment _env;
     private readonly IConfiguration _configuration;
     private readonly ILogger<ClubController> _logger;
@@ -37,6 +40,11 @@ public class ClubController : ControllerBase
     //PayementKey
     //Paid //as long it is over a month till end it counts as paid
 
+    /// <summary>
+    /// Gets a Club.
+    /// </summary>
+    /// <param name="link"></param>
+    /// <returns>return await _club.Get(link, Controller.GetUserId(User));</returns>
     [HttpGet("{link}")]
     [AllowAnonymous]
     public async Task<IActionResult> Get(string link)
@@ -59,6 +67,11 @@ public class ClubController : ControllerBase
         }
     }
 
+    /// <summary>
+    /// Gets all Clubs.
+    /// </summary>
+    /// <param name="search"></param>
+    /// <returns>return await _club.GetAll(search);</returns>
     [HttpGet]
     [AllowAnonymous]
     public async Task<IActionResult> GetAll(string? search)
@@ -81,6 +94,11 @@ public class ClubController : ControllerBase
         }
     }
 
+    /// <summary>
+    /// Creates a Club.
+    /// </summary>
+    /// <param name="name"></param>
+    /// <returns>return await _club.Create(name, Controller.GetUserId(User));</returns>
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] string name)
     {
@@ -102,6 +120,11 @@ public class ClubController : ControllerBase
         }
     }
 
+    /// <summary>
+    /// Put a Club.
+    /// </summary>
+    /// <param name="clubDto"></param>
+    /// <returns>return await _club.Put(clubDto, Controller.GetUserId(User));</returns>
     [HttpPut]
     //[Authorize]
     public async Task<IActionResult> Put([FromBody] PutClubDto clubDto)
@@ -124,6 +147,11 @@ public class ClubController : ControllerBase
         }
     }
 
+    /// <summary>
+    /// Patches a Club.
+    /// </summary>
+    /// <param name="link"></param>
+    /// <returns>return await _club.Delete(link, Controller.GetUserId(User));</returns>
     [HttpDelete("{link}")]
     //[Authorize]
     public async Task<IActionResult> Delete(string link)
@@ -146,6 +174,11 @@ public class ClubController : ControllerBase
         }
     }
 
+    /// <summary>
+    /// Gets the Payment Key
+    /// </summary>
+    /// <param name="link"></param>
+    /// <returns>return await _club.GetPayementKey(link, Controller.GetUserId(User));</returns>
     [HttpGet]
     [Route("{link}/PayementKey")]
     public async Task<IActionResult> GetPayementKey(string link)
@@ -168,6 +201,11 @@ public class ClubController : ControllerBase
         }
     }
 
+    /// <summary>
+    /// Outputs, if the Club is paid.
+    /// </summary>
+    /// <param name="link"></param>
+    /// <returns>return await _club.IsPaid(link, Controller.GetUserId(User));</returns>
     [HttpGet]
     [Route("{link}/IsPaid")]
     public async Task<IActionResult> IsPaid(string link)
