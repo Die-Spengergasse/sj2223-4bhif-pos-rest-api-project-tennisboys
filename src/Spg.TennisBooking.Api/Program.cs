@@ -37,7 +37,7 @@ DbContextOptions options = new DbContextOptionsBuilder()
 TennisBookingContext db = new TennisBookingContext(options);
 db.Database.EnsureDeleted();
 db.Database.EnsureCreated();
-//db.Seed();
+db.Seed();
 
 
 //builder.Services.AddDbContext<TennisBookingContext>(options => options.UseSqlite("Data Source=TennisBooking.db"));
