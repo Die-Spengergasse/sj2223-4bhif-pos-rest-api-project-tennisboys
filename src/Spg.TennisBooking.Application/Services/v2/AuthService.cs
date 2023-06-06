@@ -301,7 +301,7 @@ namespace Spg.TennisBooking.Application.Services.v2
 
             string savedPasswordHash = Convert.ToBase64String(hashBytes);
             return savedPasswordHash;
-        }   
+        }
 
         //Not used
         public static string GenerateRandom(int length = 128)

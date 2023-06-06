@@ -6,7 +6,6 @@ using Spg.TennisBooking.Application.Services;
 using Spg.TennisBooking.Configurations;
 using Spg.TennisBooking.Domain.Interfaces;
 using Spg.TennisBooking.Infrastructure.v2;
-using Spg.TennisBooking.Infrastructure.v1;
 using Spg.TennisBooking.Repository.Repositories;
 using System.Text;
 using Spg.TennisBooking.Configurations.v2;
@@ -16,7 +15,6 @@ var builder = WebApplication.CreateBuilder(args);
 ConfigurationManager Conf = builder.Configuration;
 
 // Add services to the container.
-
 
 //Add db
 string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -31,6 +29,15 @@ Console.WriteLine(useDb);
 //Spg.TennisBooking.Infrastructure.v1.TennisBookingContext dbv1 = new Spg.TennisBooking.Infrastructure.v1.TennisBookingContext(options);
 //dbv1.Database.EnsureDeleted();
 //dbv1.Database.EnsureCreated();
+
+// Create DB (JUST FOR TEST PURPOSE!!!!!)
+DbContextOptions options = new DbContextOptionsBuilder()
+.UseSqlite(connectionString)
+.Options;
+TennisBookingContext db = new TennisBookingContext(options);
+db.Database.EnsureDeleted();
+db.Database.EnsureCreated();
+//db.Seed();
 
 
 //builder.Services.AddDbContext<TennisBookingContext>(options => options.UseSqlite("Data Source=TennisBooking.db"));

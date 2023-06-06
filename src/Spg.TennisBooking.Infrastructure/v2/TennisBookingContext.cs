@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Bogus;
+using System.Security.Cryptography;
 
 namespace Spg.TennisBooking.Infrastructure.v2
 {
@@ -40,6 +42,158 @@ namespace Spg.TennisBooking.Infrastructure.v2
         {
             //modelBuilder.Entity<Product>().HasKey(e => e.Name);
             modelBuilder.Entity<User>().OwnsOne(p => p.PhoneNumber);
+        }
+        public void Seed()
+        {
+            // db.Database.EnsureCreated();
+
+            //User
+            Users.AddRange(GetSeedingUsers());
+            SaveChanges();
+
+            //Club
+            Clubs.AddRange(GetSeedingClubs());
+            SaveChanges();
+
+            //ClubEvent
+            ClubEvents.AddRange(GetSeedingClubEvents());
+            SaveChanges();
+
+            //ClubNews
+            ClubNews.AddRange(GetSeedingClubNews());
+            SaveChanges();
+
+            //Court
+            Courts.AddRange(GetSeedingCourts());
+            SaveChanges();
+
+            //Reservation
+            Reservations.AddRange(GetSeedingReservations());
+            SaveChanges();
+
+            //Trainer
+            Trainers.AddRange(GetSeedingTrainers());
+            SaveChanges();
+        }
+
+        public static string HashPassword(string password)
+        {
+            //https://stackoverflow.com/questions/4181198/how-to-hash-a-password
+            byte[] salt;
+            RandomNumberGenerator rng = RandomNumberGenerator.Create();
+            rng.GetBytes(salt = new byte[16]);
+
+            var pbkdf2 = new Rfc2898DeriveBytes(password, salt, 100000);
+            byte[] hash = pbkdf2.GetBytes(20);
+
+            byte[] hashBytes = new byte[36];
+            Array.Copy(salt, 0, hashBytes, 0, 16);
+            Array.Copy(hash, 0, hashBytes, 16, 20);
+
+            string savedPasswordHash = Convert.ToBase64String(hashBytes);
+            return savedPasswordHash;
+        }
+
+        private List<User> GetSeedingUsers()
+        {
+            List<User> users = new Faker<User>("de").CustomInstantiator(f =>
+                new User(
+                    f.Internet.Email(),
+                    HashPassword("123456"),
+                    "654321"))
+                .Generate(30)
+                .ToList();
+            return users;
+        }
+
+        private List<Club> GetSeedingClubs()
+        {
+            List<Club> clubs = new Faker<Club>("de").CustomInstantiator(f =>
+                new Club(
+                    f.Company.CompanyName(),
+                    Users.FirstOrDefault(s => s.Id == f.Random.Int(0, 10))
+                ))
+                .Generate(30)
+                .ToList();
+            return clubs;
+        }
+
+        private List<ClubEvent> GetSeedingClubEvents()
+        {
+            List<ClubEvent> clubevents = new Faker<ClubEvent>("de").CustomInstantiator(f =>
+                new ClubEvent(
+                    Clubs.FirstOrDefault(s => s.Id == f.Random.Int(0, 30)),
+                    f.Company.Bs(),
+                    f.Date.Recent(),
+                    f.Lorem.Word()
+                ))
+                .Generate(100)
+                .ToList();
+            return clubevents;
+        }
+
+        private List<ClubNews> GetSeedingClubNews()
+        {
+             List<ClubNews> clubnews = new Faker<ClubNews>("de").CustomInstantiator(f =>
+                new ClubNews(
+                    f.Company.CatchPhrase(),
+                    f.Lorem.Word(),
+                    Clubs.Single(s => s.Id == f.Random.Int(0,30))
+                ))
+                .Generate(100)
+                .ToList();
+            return clubnews;
+        }
+
+        private List<Court> GetSeedingCourts()
+        {
+            List<Court> courts = new Faker<Court>("de").CustomInstantiator(f =>
+                new Court(
+                    Clubs.FirstOrDefault(s => s.Id == f.Random.Int(0,30)),
+                    (CourtType)f.Random.Int(0, 3),
+                    f.Random.Int(1, 30).ToString(),
+                    f.Random.Double(10.0, 15.0),
+                    f.Random.Double(15.0, 20.0),
+                    f.Random.Int(1, 30),
+                    f.Random.Int(1, 30),
+                    f.Random.Int(1, 30)
+                ))
+                .Generate(100)
+                .ToList();
+            return courts;
+        }
+
+        private List<Reservation> GetSeedingReservations()
+        {
+            List<Reservation> reservations = new Faker<Reservation>("de").CustomInstantiator(f =>
+                new Reservation(
+                    f.Date.Recent(),
+                    f.Date.Soon(),
+                    f.Lorem.Word(),
+                    Courts.FirstOrDefault(s => s.Id == f.Random.Int(0, 30)),
+                    Users.FirstOrDefault(s => s.Id == f.Random.Int(0, 30)),
+                    Clubs.FirstOrDefault(s => s.Id == f.Random.Int(0, 30))
+                ))
+                .Generate(100)
+                .ToList();
+            return reservations;
+        }
+
+        private List<Trainer> GetSeedingTrainers()
+        {
+            List<Trainer> trainers = new Faker<Trainer>("de").CustomInstantiator(f =>
+                new Trainer(
+                    Clubs.FirstOrDefault(s => s.Id == f.Random.Int(0, 30)),
+                    f.Name.FirstName(),
+                    f.Name.LastName(),
+                    (GenderTypes)f.Random.Int(1, 3),
+                    f.Lorem.Word(),
+                    f.Random.Int(0, 23),
+                    f.System.FilePath()
+                ))
+                .Generate(100)
+                .ToList();
+            return trainers;
         }
     }
 }
