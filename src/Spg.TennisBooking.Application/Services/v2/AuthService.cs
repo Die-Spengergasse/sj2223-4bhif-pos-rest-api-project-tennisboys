@@ -296,31 +296,6 @@ namespace Spg.TennisBooking.Application.Services.v2
             return _userRepository.Update(user);
         }
 
-        /* public User GetUser(string token)
-         {
-             //Decode Token
-             JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
-             JwtSecurityToken jwtToken = tokenHandler.ReadJwtToken(token);
-
-             //Get User
-             User? user = _authRepository.GetUserByUuid(jwtToken.Subject);
-
-             //Check if user exists
-             if (user == null)
-             {
-                 throw new HttpException("User not found", HttpStatusCode.NotFound);
-             }
-
-             //Check if user is verified
-             if (!user.Verified)
-             {
-                 throw new HttpException("User not verified", HttpStatusCode.BadRequest);
-             }
-
-             //Return User
-             return user;
-         }*/
-
         /// <summary>
         /// Hashes a Password.
         /// </summary>
