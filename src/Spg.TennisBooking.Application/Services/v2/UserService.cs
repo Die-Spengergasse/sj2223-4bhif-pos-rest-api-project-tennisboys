@@ -20,6 +20,12 @@ namespace Spg.TennisBooking.Application.Services.v2
             _userRepository = userRepository;
         }
 
+        /// <summary>
+        /// Checks if the user is Welcomed.
+        /// </summary>
+        /// <param name="uuid"></param>
+        /// <returns>return user.Welcomed;</returns>
+        /// <exception cref="HttpException"></exception>
         public bool Welcomed(string uuid)
         {
             //Check if welcomed is checked
@@ -31,6 +37,12 @@ namespace Spg.TennisBooking.Application.Services.v2
             return user.Welcomed;
         }
 
+        /// <summary>
+        /// Gets the Personal Data of a User.
+        /// </summary>
+        /// <param name="uuid"></param>
+        /// <returns>return user;</returns>
+        /// <exception cref="HttpException"></exception>
         public User GetPersonalData(string uuid)
         {
             //Get personal data
@@ -42,6 +54,17 @@ namespace Spg.TennisBooking.Application.Services.v2
             return user;
         }
 
+        /// <summary>
+        /// Sets the Personal Data of a User.
+        /// </summary>
+        /// <param name="uuid"></param>
+        /// <param name="firstName"></param>
+        /// <param name="lastName"></param>
+        /// <param name="birthDate"></param>
+        /// <param name="gender"></param>
+        /// <param name="phoneNumber"></param>
+        /// <returns>return _userRepository.Update(user);</returns>
+        /// <exception cref="HttpException"></exception>
         public bool SetPersonalData(string uuid, string firstName, string lastName, DateTime? birthDate, GenderTypes gender, PhoneNumber? phoneNumber)
         {
             User? user = _userRepository.GetByUUIDold(uuid);
@@ -60,6 +83,14 @@ namespace Spg.TennisBooking.Application.Services.v2
             return _userRepository.Update(user);
         }
 
+        /// <summary>
+        /// Changes the Password of the User.
+        /// </summary>
+        /// <param name="uuid"></param>
+        /// <param name="password"></param>
+        /// <param name="newPassword"></param>
+        /// <returns>return _userRepository.Update(user);</returns>
+        /// <exception cref="HttpException"></exception>
         public bool ChangePassword(string uuid, string password, string newPassword)
         {
             //Get user
