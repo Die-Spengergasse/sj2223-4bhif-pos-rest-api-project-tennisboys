@@ -29,6 +29,11 @@ namespace Spg.TennisBooking.Application.Services.v2
             _configuration = configuration;
         }
 
+        /// <summary>
+        /// Gives back a ClubEvent.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>return new OkObjectResult(getClubEventDto);</returns>
         public async Task<IActionResult> Get(int id)
         {
             ClubEvent? clubEvent = await _clubEventRepository.Get(id);
@@ -44,6 +49,11 @@ namespace Spg.TennisBooking.Application.Services.v2
             return new OkObjectResult(getClubEventDto);
         }
 
+        /// <summary>
+        /// Gives back all ClubEvents of a Club.
+        /// </summary>
+        /// <param name="clubLink"></param>
+        /// <returns>return new OkObjectResult(getClubEventDtos);</returns>
         public async Task<IActionResult> GetAll(string clubLink)
         {
             //Get Club
@@ -73,6 +83,12 @@ namespace Spg.TennisBooking.Application.Services.v2
             return new OkObjectResult(getClubEventDtos);
         }
 
+        /// <summary>
+        /// Posts ClubEvents.
+        /// </summary>
+        /// <param name="postClubEventDto"></param>
+        /// <param name="uuid"></param>
+        /// <returns>return new CreatedResult(uri.AbsoluteUri, getClubEventDto);</returns>
         public async Task<IActionResult> Post(PostClubEventDto postClubEventDto, string uuid)
         {
             //Get Club
@@ -107,6 +123,12 @@ namespace Spg.TennisBooking.Application.Services.v2
             return new CreatedResult(uri.AbsoluteUri, getClubEventDto);
         }
 
+        /// <summary>
+        /// Puts ClubEvents.
+        /// </summary>
+        /// <param name="putClubEventDto"></param>
+        /// <param name="uuid"></param>
+        /// <returns>return new OkObjectResult("ClubEvent updated");</returns>
         public async Task<IActionResult> Put(PutClubEventDto putClubEventDto, string uuid)
         {
             //Get ClubEvent
@@ -137,6 +159,12 @@ namespace Spg.TennisBooking.Application.Services.v2
             return new OkObjectResult("ClubEvent updated");
         }
 
+        /// <summary>
+        /// Deletes a ClubEvent.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="uuid"></param>
+        /// <returns>return new OkObjectResult("ClubEvent deleted");</returns>
         public async Task<IActionResult> Delete(int id, string uuid)
         {
             //Get ClubEvent
