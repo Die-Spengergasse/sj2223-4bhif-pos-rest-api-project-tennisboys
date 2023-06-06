@@ -32,6 +32,12 @@ namespace Spg.TennisBooking.Application.Services.v2
             _configuration = configuration;
         }
 
+        /// <summary>
+        /// Gives Back the UUID.
+        /// </summary>
+        /// <param name="reservationUUID"></param>
+        /// <param name="uuid"></param>
+        /// <returns>return new OkObjectResult(getReservationDto);</returns>
         public async Task<IActionResult> GetByUUID(string reservationUUID, string uuid)
         {
             //Get the reservation by UUID
@@ -74,6 +80,12 @@ namespace Spg.TennisBooking.Application.Services.v2
             return new OkObjectResult(getReservationDto);
         }
 
+        /// <summary>
+        /// Gives back the Reservation per Club.
+        /// </summary>
+        /// <param name="clubLink"></param>
+        /// <param name="uuid"></param>
+        /// <returns>return new OkObjectResult(getReservationDtos);</returns>
         public async Task<IActionResult> GetByClub(string clubLink, string uuid)
         {
             //Get the club by link
@@ -122,6 +134,11 @@ namespace Spg.TennisBooking.Application.Services.v2
             return new OkObjectResult(getReservationDtos);
         }
 
+        /// <summary>
+        /// Gives back the Reservations of a Court.
+        /// </summary>
+        /// <param name="courtId"></param>
+        /// <returns>return new OkObjectResult(getByCourtReservationDtos);</returns>
         public async Task<IActionResult> GetByCourt(int courtId)
         {
             //Get the court by id
@@ -152,6 +169,11 @@ namespace Spg.TennisBooking.Application.Services.v2
 
         }
 
+        /// <summary>
+        /// Gives back the User of the Reservation.
+        /// </summary>
+        /// <param name="uuid"></param>
+        /// <returns>return new OkObjectResult(getReservationDtos);</returns>
         public async Task<IActionResult> GetByUser(string uuid)
         {
             //Get User
@@ -185,6 +207,12 @@ namespace Spg.TennisBooking.Application.Services.v2
             return new OkObjectResult(getReservationDtos);
         }
 
+        /// <summary>
+        /// Posts the Reservation.
+        /// </summary>
+        /// <param name="reservation"></param>
+        /// <param name="uuid"></param>
+        /// <returns>return new CreatedResult(uri.AbsoluteUri, newReservation);</returns>
         public async Task<IActionResult> Post(PostReservationDto reservation, string uuid)
         {
             //Get User
@@ -248,6 +276,12 @@ namespace Spg.TennisBooking.Application.Services.v2
             return new CreatedResult(uri.AbsoluteUri, newReservation);
         }
 
+        /// <summary>
+        /// Deletes the Reservation.
+        /// </summary>
+        /// <param name="reservationUUID"></param>
+        /// <param name="uuid"></param>
+        /// <returns>return new NoContentResult();</returns>
         public async Task<IActionResult> Delete(string reservationUUID, string uuid)
         {
             //Get User

@@ -32,6 +32,12 @@ namespace Spg.TennisBooking.Application.Services.v2
             _configuration = configuration;
         }
 
+        /// <summary>
+        /// Deletes a Court.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="uuid"></param>
+        /// <returns>return new OkObjectResult("Court deleted");</returns>
         public async Task<IActionResult> Delete(int id, string uuid)
         {
             Court? court = await _courtRepository.Get(id);
@@ -55,6 +61,11 @@ namespace Spg.TennisBooking.Application.Services.v2
             return new OkObjectResult("Court deleted");
         }
 
+        /// <summary>
+        /// Gives a Court back.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>return new OkObjectResult(courtDto);</returns>
         public async Task<IActionResult> Get(int id)
         {
             Court? court = await _courtRepository.Get(id);
@@ -69,7 +80,12 @@ namespace Spg.TennisBooking.Application.Services.v2
 
             return new OkObjectResult(courtDto);
         }
-        
+
+        /// <summary>
+        /// Gives all Courts of a Club back.
+        /// </summary>
+        /// <param name="clubLink"></param>
+        /// <returns>return new OkObjectResult(courtDtos);</returns>
         public async Task<IActionResult> GetAll(string clubLink)
         {
             //Get Club
@@ -89,6 +105,12 @@ namespace Spg.TennisBooking.Application.Services.v2
             return new OkObjectResult(courtDtos);
         }
 
+        /// <summary>
+        /// Puts the Court.
+        /// </summary>
+        /// <param name="court"></param>
+        /// <param name="uuid"></param>
+        /// <returns>return new OkObjectResult("Court updated");</returns>
         public async Task<IActionResult> Put(PutCourtDto court, string uuid)
         {
             //Get Club of court by getting the court with the help of the id and accessing ClubNavigation
@@ -115,7 +137,13 @@ namespace Spg.TennisBooking.Application.Services.v2
 
             return new OkObjectResult("Court updated");
         }
-        
+
+        /// <summary>
+        /// Posts a Court.
+        /// </summary>
+        /// <param name="postCourtDto"></param>
+        /// <param name="uuid"></param>
+        /// <returns>return new CreatedResult(uri.AbsolutePath, "Court created");</returns>
         public async Task<IActionResult> Post(PostCourtDto postCourtDto, string uuid)
         {
             //Get Club

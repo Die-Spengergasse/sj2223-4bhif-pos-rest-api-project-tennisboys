@@ -26,6 +26,13 @@ namespace Spg.TennisBooking.Application.Services.v2
             return _userRepository.GetByEmail(email) != null;
         }
 
+        /// <summary>
+        /// Creates a User
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="password"></param>
+        /// <returns>return user;</returns>
+        /// <exception cref="HttpException"></exception>
         public User Register(string email, string password)
         {
             //Email valid
@@ -79,6 +86,13 @@ namespace Spg.TennisBooking.Application.Services.v2
             return user;
         }
 
+        /// <summary>
+        /// Verifies the User.
+        /// </summary>
+        /// <param name="uuid"></param>
+        /// <param name="verificationCode"></param>
+        /// <returns>return true;</returns>
+        /// <exception cref="HttpException"></exception>
         public bool Verify(string uuid, string verificationCode)
         {
             //Get User by uuid
@@ -113,6 +127,14 @@ namespace Spg.TennisBooking.Application.Services.v2
             return true;
         }
 
+        /// <summary>
+        /// Logs a User In.
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="password"></param>
+        /// <param name="secret"></param>
+        /// <returns>return tokenHandler.WriteToken(token);</returns>
+        /// <exception cref="HttpException"></exception>
         public string Login(string email, string password, string secret)
         {
             /*string role = await CheckUserAndGetRole(credentials);
@@ -174,6 +196,12 @@ namespace Spg.TennisBooking.Application.Services.v2
             return tokenHandler.WriteToken(token);
         }
 
+        /// <summary>
+        /// Sends User a ResetCode.
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns>return user;</returns>
+        /// <exception cref="HttpException"></exception>
         public User ForgotPassword(string email)
         {
             //Get User
@@ -209,6 +237,14 @@ namespace Spg.TennisBooking.Application.Services.v2
             return user;
         }
 
+        /// <summary>
+        /// Resets the Password of a User
+        /// </summary>
+        /// <param name="uuid"></param>
+        /// <param name="password"></param>
+        /// <param name="resetCode"></param>
+        /// <returns>return _userRepository.Update(user);</returns>
+        /// <exception cref="HttpException"></exception>
         public bool ResetPassword(string uuid, string password, string resetCode)
         {
             //Get User
@@ -260,31 +296,11 @@ namespace Spg.TennisBooking.Application.Services.v2
             return _userRepository.Update(user);
         }
 
-       /* public User GetUser(string token)
-        {
-            //Decode Token
-            JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
-            JwtSecurityToken jwtToken = tokenHandler.ReadJwtToken(token);
-
-            //Get User
-            User? user = _authRepository.GetUserByUuid(jwtToken.Subject);
-
-            //Check if user exists
-            if (user == null)
-            {
-                throw new HttpException("User not found", HttpStatusCode.NotFound);
-            }
-
-            //Check if user is verified
-            if (!user.Verified)
-            {
-                throw new HttpException("User not verified", HttpStatusCode.BadRequest);
-            }
-
-            //Return User
-            return user;
-        }*/
-
+        /// <summary>
+        /// Hashes a Password.
+        /// </summary>
+        /// <param name="password"></param>
+        /// <returns>return Convert.ToBase64String(salt);</returns>
         public static string HashPassword(string password)
         {
             //https://stackoverflow.com/questions/4181198/how-to-hash-a-password

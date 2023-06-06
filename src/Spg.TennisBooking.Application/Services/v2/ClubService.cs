@@ -30,6 +30,12 @@ namespace Spg.TennisBooking.Application.Services.v2
             _logger = logger;
         }
 
+        /// <summary>
+        /// Creates a Club.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="uuid"></param>
+        /// <returns>return new CreatedResult("/c/" + club.Link, new { message = "Club created", club.Link });</returns>
         public async Task<IActionResult> Create(string name, string uuid)
         {
             //Get user
@@ -51,6 +57,12 @@ namespace Spg.TennisBooking.Application.Services.v2
             return new CreatedResult("/c/" + club.Link, new { message = "Club created", club.Link });
         }
 
+        /// <summary>
+        /// Deletes a Club.
+        /// </summary>
+        /// <param name="link"></param>
+        /// <param name="uuid"></param>
+        /// <returns>return new OkObjectResult(new { message = "Club deleted" });</returns>
         public async Task<IActionResult> Delete(string link, string uuid)
         {
             //Get club
@@ -87,6 +99,12 @@ namespace Spg.TennisBooking.Application.Services.v2
             return new OkObjectResult(new { message = "Club deleted" });
         }
 
+        /// <summary>
+        /// Gives back a Club.
+        /// </summary>
+        /// <param name="link"></param>
+        /// <param name="uuid"></param>
+        /// <returns>return new OkObjectResult(clubDto);</returns>
         public async Task<IActionResult> Get(string link, string uuid)
         {
             _logger.LogInformation("Get club with link {link} and uuid {uuid}", link, uuid);
@@ -113,6 +131,11 @@ namespace Spg.TennisBooking.Application.Services.v2
             return new OkObjectResult(clubDto);
         }
 
+        /// <summary>
+        /// Gives back all Clubs.
+        /// </summary>
+        /// <param name="search"></param>
+        /// <returns>return new OkObjectResult(clubDtos);</returns>
         public async Task<IActionResult> GetAll(string? search)
         {
             _logger.LogInformation("Get all clubs with search {search}", search);
@@ -127,7 +150,13 @@ namespace Spg.TennisBooking.Application.Services.v2
             }
             return new OkObjectResult(clubDtos);
         }
-        
+
+        /// <summary>
+        /// GIves back the PaymentKey
+        /// </summary>
+        /// <param name="link"></param>
+        /// <param name="uuid"></param>
+        /// <returns>return new OkObjectResult(new { paymentKey = paymentIntent.ClientSecret });</returns>
         public async Task<IActionResult> GetPayementKey(string link, string uuid)
         {
             //Get Club
@@ -176,6 +205,12 @@ namespace Spg.TennisBooking.Application.Services.v2
             return new OkObjectResult(new { paymentKey = paymentIntent.ClientSecret });
         }
 
+        /// <summary>
+        /// Returns, if the Club is paid.
+        /// </summary>
+        /// <param name="link"></param>
+        /// <param name="uuid"></param>
+        /// <returns>return new OkObjectResult(new { IsPaid = true });</returns>
         public async Task<IActionResult> IsPaid(string link, string uuid)
         {
             //IsPaid can be considered when the club does not have less than a month left of the subscription
@@ -203,6 +238,12 @@ namespace Spg.TennisBooking.Application.Services.v2
             }
         }
 
+        /// <summary>
+        /// Puts the Club.
+        /// </summary>
+        /// <param name="putClubDto"></param>
+        /// <param name="uuid"></param>
+        /// <returns>return new OkObjectResult("Club updated");</returns>
         public async Task<IActionResult> Put(PutClubDto putClubDto, string uuid)
         {
             //Get club
@@ -258,6 +299,13 @@ namespace Spg.TennisBooking.Application.Services.v2
             return new OkObjectResult("Club updated");
         }
 
+        /// <summary>
+        /// Checks, if User is Admin of the Club.
+        /// </summary>
+        /// <param name="club"></param>
+        /// <param name="uuid"></param>
+        /// <param name="userRepository"></param>
+        /// <returns>Boolean</returns>
         public static async Task<bool> IsAdmin(Club club, string uuid, IUserRepository userRepository)
         {
             User? user = await userRepository.GetByUUID(uuid);
