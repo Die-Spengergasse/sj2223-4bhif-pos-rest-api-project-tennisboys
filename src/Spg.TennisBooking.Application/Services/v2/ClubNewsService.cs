@@ -30,6 +30,11 @@ namespace Spg.TennisBooking.Application.Services.v2
             _configuration = configuration;
         }
 
+        /// <summary>
+        /// Gives back a ClubNews of a Club.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>return new OkObjectResult(clubNews);</returns>
         public async Task<IActionResult> Get(int id)
         {
             ClubNews? clubNews = await _clubNewsRepository.Get(id);
@@ -42,6 +47,11 @@ namespace Spg.TennisBooking.Application.Services.v2
             return new OkObjectResult(clubNews);
         }
         
+        /// <summary>
+        /// Gives back all ClubNews of a Club.
+        /// </summary>
+        /// <param name="clubLink"></param>
+        /// <returns></returns>
         public async Task<IActionResult> GetAll(string clubLink)
         {
             //Get Club
@@ -71,6 +81,12 @@ namespace Spg.TennisBooking.Application.Services.v2
             return new OkObjectResult(clubNewsDtos);
         }
 
+        /// <summary>
+        /// Posts ClubNews.
+        /// </summary>
+        /// <param name="postClubEventDto"></param>
+        /// <param name="uuid"></param>
+        /// <returns>return new CreatedResult(uri.AbsoluteUri, getClubNewsDto);</returns>
         public async Task<IActionResult> Post(PostClubNewsDto postClubEventDto, string uuid)
         {
             //Get Club
@@ -105,6 +121,12 @@ namespace Spg.TennisBooking.Application.Services.v2
             return new CreatedResult(uri.AbsoluteUri, getClubNewsDto);
         }
 
+        /// <summary>
+        /// Puts ClubNews.
+        /// </summary>
+        /// <param name="putClubEventDto"></param>
+        /// <param name="uuid"></param>
+        /// <returns>return new OkObjectResult(clubNews);</returns>
         public async Task<IActionResult> Put(PutClubNewsDto putClubEventDto, string uuid)
         {
             //Get ClubNews
@@ -139,6 +161,12 @@ namespace Spg.TennisBooking.Application.Services.v2
             return new OkObjectResult(clubNews);
         }
 
+        /// <summary>
+        /// Deletes ClubNews.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="uuid"></param>
+        /// <returns>return new OkObjectResult("ClubNews deleted");</returns>
         public async Task<IActionResult> Delete(int id, string uuid)
         {
             //Get ClubNews
