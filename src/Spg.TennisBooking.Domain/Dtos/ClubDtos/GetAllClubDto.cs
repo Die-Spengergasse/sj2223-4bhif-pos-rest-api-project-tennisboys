@@ -25,6 +25,7 @@ namespace Spg.TennisBooking.Domain.Dtos.ClubDtos
         {
             return new GetAllClubDto
             {
+                Id = v.Id,
                 Link = v.Link,
                 Name = v.Name,
                 Info = v.Info,

@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Spg.TennisBooking.Domain.Dtos.ReservationDtos;
 using System;
 using Microsoft.Extensions.Configuration;
+using Spg.TennisBooking.Domain.Dtos.HaeteosDtos;
 
 namespace Spg.TennisBooking.Application.Services.v2
 {
@@ -66,18 +67,10 @@ namespace Spg.TennisBooking.Application.Services.v2
             }
 
             //Put into DTO
-            GetReservationDto getReservationDto = new GetReservationDto()
-            {
-                UUID = reservation.UUID,
-                StartTime = reservation.StartTime,
-                EndTime = reservation.EndTime,
-                Comment = reservation.Comment,
-                CourtName = reservation.CourtNavigation?.Name,
-                ClubName = reservation.ClubNavigation?.Name,
-            };
+            GetReservationDto getReservationDto = reservation;
 
             //Return dto
-            return new OkObjectResult(getReservationDto);
+            return new OkObjectResult(CreateLinksForReservation(getReservationDto));
         }
 
         /// <summary>
@@ -120,14 +113,8 @@ namespace Spg.TennisBooking.Application.Services.v2
             List<GetReservationDto> getReservationDtos = new List<GetReservationDto>();
             foreach (Reservation reservation in reservations)
             {
-                getReservationDtos.Add(new GetReservationDto()
-                {
-                    UUID = reservation.UUID,
-                    StartTime = reservation.StartTime,
-                    EndTime = reservation.EndTime,
-                    CourtName = reservation.CourtNavigation?.Name,
-                    ClubName = reservation.ClubNavigation?.Name,
-                });
+                GetReservationDto reservationDto = reservation;
+                getReservationDtos.Add(CreateLinksForReservation(reservationDto));
             }
 
             //Return dto
@@ -192,15 +179,8 @@ namespace Spg.TennisBooking.Application.Services.v2
             List<GetReservationDto> getReservationDtos = new List<GetReservationDto>();
             foreach (Reservation reservation in reservations)
             {
-                getReservationDtos.Add(new GetReservationDto()
-                {
-                    UUID = reservation.UUID,
-                    StartTime = reservation.StartTime,
-                    EndTime = reservation.EndTime,
-                    Comment = reservation.Comment,
-                    CourtName = reservation.CourtNavigation?.Name,
-                    ClubName = reservation.ClubNavigation?.Name,
-                });
+                GetReservationDto reservationDto = reservation;
+                getReservationDtos.Add(CreateLinksForReservation(reservationDto));
             }
 
             //Return dto
@@ -272,8 +252,10 @@ namespace Spg.TennisBooking.Application.Services.v2
             string url = _configuration.GetSection("MvcFrontEnd").Value;
             Uri uri = new(url + "/c/" + club.Link + "/court/" + court.Id + "/reservation/" + newReservation.UUID);
 
+            GetReservationDto reservationDto = newReservation;
+
             //Return created
-            return new CreatedResult(uri.AbsoluteUri, newReservation);
+            return new CreatedResult(uri.AbsoluteUri, CreateLinksForReservation(newReservation));
         }
 
         /// <summary>
@@ -322,6 +304,26 @@ namespace Spg.TennisBooking.Application.Services.v2
 
             //Return no content
             return new NoContentResult();
+        }
+
+        private GetReservationDto CreateLinksForReservation(GetReservationDto reservationDto)
+        {
+            reservationDto.Links.Add(new LinkDto(
+                href: "/api/v2/Court/" + reservationDto.UUID,
+                rel: "self",
+                method: "GET"));
+
+            reservationDto.Links.Add(new LinkDto(
+                href: "/api/v2/Court/" + reservationDto.UUID,
+                rel: "put_court",
+                method: "PUT"));
+
+            reservationDto.Links.Add(new LinkDto(
+                href: "/api/v2/Court/" + reservationDto.UUID,
+                rel: "delete_court",
+                method: "DELETE"));
+
+            return reservationDto;
         }
     }
 }

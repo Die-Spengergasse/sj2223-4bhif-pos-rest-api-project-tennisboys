@@ -45,7 +45,7 @@ namespace Spg.TennisBooking.Application.Services.v2
                 return new NotFoundObjectResult("ClubNews not found");
             }
 
-            return new OkObjectResult(clubNews);
+            return new OkObjectResult(CreateLinksForClubNews(clubNews));
         }
         
         /// <summary>
@@ -75,9 +75,8 @@ namespace Spg.TennisBooking.Application.Services.v2
             foreach (ClubNews news in clubNews)
             {
                 GetClubNewsDto clubNewsDto = news;
-                clubNewsDtos.Add(clubNewsDto);
+                clubNewsDtos.Add(CreateLinksForClubNews(clubNewsDto));
             }
-
 
             return new OkObjectResult(clubNewsDtos);
         }
@@ -119,7 +118,7 @@ namespace Spg.TennisBooking.Application.Services.v2
             //Create DTO
             GetClubNewsDto getClubNewsDto = clubNews;
 
-            return new CreatedResult(uri.AbsoluteUri, getClubNewsDto);
+            return new CreatedResult(uri.AbsoluteUri, CreateLinksForClubNews(getClubNewsDto));
         }
 
         /// <summary>
@@ -159,7 +158,9 @@ namespace Spg.TennisBooking.Application.Services.v2
             //Update ClubNews
             _clubNewsRepository.Update(clubNews);
 
-            return new OkObjectResult(clubNews);
+            GetClubNewsDto getClubNewsDto = clubNews;
+
+            return new OkObjectResult(CreateLinksForClubNews(getClubNewsDto));
         }
 
         /// <summary>

@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc;
 using Spg.TennisBooking.Domain.Dtos.CourtDtos;
 using Microsoft.Extensions.Configuration;
+using Spg.TennisBooking.Domain.Dtos.HaeteosDtos;
 
 namespace Spg.TennisBooking.Application.Services.v2
 {
@@ -78,7 +79,7 @@ namespace Spg.TennisBooking.Application.Services.v2
             //Transform into CourtDto
             GetCourtDto courtDto = court;
 
-            return new OkObjectResult(courtDto);
+            return new OkObjectResult(CreateLinksForCourt(courtDto));
         }
 
         /// <summary>
@@ -100,7 +101,7 @@ namespace Spg.TennisBooking.Application.Services.v2
             IEnumerable<Court> courts = await _courtRepository.GetAll(club);
 
             //Transform into CourtDto
-            List<GetCourtDto> courtDtos = courts.Select(court => (GetCourtDto)court).ToList();
+            List<GetCourtDto> courtDtos = courts.Select(court => CreateLinksForCourt((GetCourtDto)court)).ToList();
 
             return new OkObjectResult(courtDtos);
         }
@@ -135,7 +136,10 @@ namespace Spg.TennisBooking.Application.Services.v2
             //Save new court
             _courtRepository.Update(oldCourt);
 
-            return new OkObjectResult("Court updated");
+            //Dto
+            GetCourtDto courtDto = oldCourt;
+
+            return new OkObjectResult(CreateLinksForCourt(courtDto));
         }
 
         /// <summary>
@@ -169,7 +173,30 @@ namespace Spg.TennisBooking.Application.Services.v2
             string url = _configuration.GetSection("MvcFrontEnd").Value;
             Uri uri = new(url + "/c/" + postCourtDto.ClubLink + "/court/" + court.Id+"/edit");
 
-            return new CreatedResult(uri.AbsolutePath, "Court created");
+            //Dto
+            GetCourtDto courtDto = court;
+
+            return new CreatedResult(uri.AbsolutePath, CreateLinksForCourt(courtDto));
+        }
+
+        private GetCourtDto CreateLinksForCourt(GetCourtDto courtDto)
+        {
+            courtDto.Links.Add(new LinkDto(
+                href: "/api/v2/Court/" + courtDto.Id,
+                rel: "self",
+                method: "GET"));
+
+            courtDto.Links.Add(new LinkDto(
+                href: "/api/v2/Court/" + courtDto.Id,
+                rel: "put_court",
+                method: "PUT"));
+
+            courtDto.Links.Add(new LinkDto(
+                href: "/api/v2/Court/" + courtDto.Id,
+                rel: "delete_court",
+                method: "DELETE"));
+
+            return courtDto;
         }
     }
 }

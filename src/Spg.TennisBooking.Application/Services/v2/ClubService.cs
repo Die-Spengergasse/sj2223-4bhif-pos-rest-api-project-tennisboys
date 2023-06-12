@@ -347,7 +347,7 @@ namespace Spg.TennisBooking.Application.Services.v2
             //    "PATCH"));
             
             club.Links.Add(
-                new LinkDto("/api/v2/ClubController/Delete/"+idObj,
+                new LinkDto("/api/v2/ClubController/Delete/"+idObj.id,
                 "delete_club",
                 "DELETE"));
 
@@ -367,7 +367,7 @@ namespace Spg.TennisBooking.Application.Services.v2
                 "PUT"));
             
             club.Links.Add(
-                new LinkDto("/api/v2/ClubController/Delete/"+idObj,
+                new LinkDto("/api/v2/ClubController/Delete/"+idObj.id,
                 "delete_club",
                 "DELETE"));
 

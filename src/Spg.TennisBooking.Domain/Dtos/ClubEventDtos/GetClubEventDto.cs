@@ -27,6 +27,7 @@ namespace Spg.TennisBooking.Domain.Dtos.ClubEventDtos
         {
             return new GetClubEventDto
             {
+                Id = v.Id,
                 Name = v.Name,
                 Time = v.Time,
                 Info = v.Info,
