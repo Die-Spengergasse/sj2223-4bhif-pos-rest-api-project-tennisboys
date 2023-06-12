@@ -12,5 +12,10 @@ namespace Spg.TennisBooking.Domain.Dtos.ClubDtos
         public string Telephone { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
         public string Website { get; set; } = string.Empty;
+
+        //Constructor
+        public SocialHubDto()
+        {
+        }
     }
 }

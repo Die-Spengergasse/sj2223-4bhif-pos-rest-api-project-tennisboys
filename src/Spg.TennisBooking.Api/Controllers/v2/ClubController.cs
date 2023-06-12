@@ -23,7 +23,7 @@ public class ClubController : ControllerBase
     private readonly IConfiguration _configuration;
     private readonly ILogger<ClubController> _logger;
     private readonly IClubService _club;
-
+    
     public ClubController(IWebHostEnvironment env, IConfiguration configuration, ILogger<ClubController> logger, IClubService club)
     {
         _env = env;

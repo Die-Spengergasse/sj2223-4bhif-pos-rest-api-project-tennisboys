@@ -1,3 +1,4 @@
+using Spg.TennisBooking.Domain.Dtos.HaeteosDtos;
 using Spg.TennisBooking.Domain.Model;
 
 namespace Spg.TennisBooking.Domain.Dtos.CourtDtos
@@ -12,6 +13,9 @@ namespace Spg.TennisBooking.Domain.Dtos.CourtDtos
         public int ATimeFrom { get; set; }
         public int ATimeTill { get; set; }
         public int AWeekendTimeTill { get; set; }
+
+        //HATEOS Links
+        public List<LinkDto> Links = new List<LinkDto>();
 
         //Constructor
         public GetCourtDto()

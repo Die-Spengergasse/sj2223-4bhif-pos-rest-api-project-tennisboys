@@ -12,6 +12,7 @@ using Spg.TennisBooking.Domain.Dtos.ClubDtos;
 using Spg.TennisBooking.Domain.Model;
 using Microsoft.Extensions.Logging;
 using Stripe;
+using Spg.TennisBooking.Domain.Dtos.HaeteosDtos;
 
 namespace Spg.TennisBooking.Application.Services.v2
 {
@@ -21,6 +22,7 @@ namespace Spg.TennisBooking.Application.Services.v2
         private readonly IUserRepository _userRepository;
         private readonly ISocialHubRepository _socialHubRepository;
         private readonly ILogger<ClubService> _logger;
+        private readonly IUrlHelper _urlHelper;
 
         public ClubService(IClubRepository clubRepository, IUserRepository userRepository, ISocialHubRepository socialHubRepository, ILogger<ClubService> logger)
         {
@@ -127,8 +129,8 @@ namespace Spg.TennisBooking.Application.Services.v2
                 clubDto.PaidTill = null;
                 clubDto.FreeTrialTill = DateTime.UtcNow;
             }
-
-            return new OkObjectResult(clubDto);
+            
+            return new OkObjectResult(CreateLinksForGetClub(clubDto));
         }
 
         /// <summary>
@@ -146,7 +148,8 @@ namespace Spg.TennisBooking.Application.Services.v2
             List<GetAllClubDto> clubDtos = new();
             foreach (Club club in clubs)
             {
-                clubDtos.Add(club);
+                GetAllClubDto clubDto = club;
+                clubDtos.Add(CreateLinksForGetAllClubs(clubDto));
             }
             return new OkObjectResult(clubDtos);
         }
@@ -296,7 +299,9 @@ namespace Spg.TennisBooking.Application.Services.v2
             _socialHubRepository.Update(socialHub);
             _clubRepository.Update(club);
 
-            return new OkObjectResult("Club updated");
+            GetClubDto clubDto = club;
+
+            return new OkObjectResult(CreateLinksForGetClub(clubDto));
         }
 
         /// <summary>
@@ -321,6 +326,52 @@ namespace Spg.TennisBooking.Application.Services.v2
             }
 
             return false;
+        }
+
+        private GetClubDto CreateLinksForGetClub(GetClubDto club)
+        {
+            var idObj = new { id = club.Id };
+            club.Links.Add(
+                new LinkDto("/api/v2/ClubController/"+club.Link,
+                "self",
+                "GET"));
+
+            club.Links.Add(
+                new LinkDto("/api/v2/ClubController/Put",
+                "update_club",
+                "PUT"));
+
+            //club.Links.Add(
+            //    new LinkDto(this._urlHelper.Link(nameof(this.), idObj),
+            //    "partially_update_user",
+            //    "PATCH"));
+            
+            club.Links.Add(
+                new LinkDto("/api/v2/ClubController/Delete/"+idObj.id,
+                "delete_club",
+                "DELETE"));
+
+            return club;
+        }
+        private GetAllClubDto CreateLinksForGetAllClubs(GetAllClubDto club)
+        {
+            var idObj = new { id = club.Id };
+            club.Links.Add(
+                new LinkDto("/api/v2/ClubController/"+club.Link,
+                "self",
+                "GET"));
+
+            club.Links.Add(
+                new LinkDto("/api/v2/ClubController/Put",
+                "update_club",
+                "PUT"));
+            
+            club.Links.Add(
+                new LinkDto("/api/v2/ClubController/Delete/"+idObj.id,
+                "delete_club",
+                "DELETE"));
+
+            return club;
         }
     }
 }

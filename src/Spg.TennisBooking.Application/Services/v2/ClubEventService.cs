@@ -11,6 +11,7 @@ using System.Security.Cryptography;
 using Microsoft.AspNetCore.Mvc;
 using Spg.TennisBooking.Domain.Dtos.ClubEventDtos;
 using Microsoft.Extensions.Configuration;
+using Spg.TennisBooking.Domain.Dtos.HaeteosDtos;
 
 namespace Spg.TennisBooking.Application.Services.v2
 {
@@ -77,7 +78,7 @@ namespace Spg.TennisBooking.Application.Services.v2
             {
                 GetClubEventDto getClubEventDto = clubEvent;
                 getClubEventDto.ClubLink = clubEvent.ClubNavigation.Link;
-                getClubEventDtos.Add(getClubEventDto);
+                getClubEventDtos.Add(CreateLinksForClubEvent(getClubEventDto));
             }
 
             return new OkObjectResult(getClubEventDtos);
@@ -120,7 +121,7 @@ namespace Spg.TennisBooking.Application.Services.v2
             //Create DTO
             GetClubEventDto getClubEventDto = clubEvent;
 
-            return new CreatedResult(uri.AbsoluteUri, getClubEventDto);
+            return new CreatedResult(uri.AbsoluteUri, CreateLinksForClubEvent(getClubEventDto));
         }
 
         /// <summary>
@@ -156,7 +157,9 @@ namespace Spg.TennisBooking.Application.Services.v2
             //Update ClubEvent
             _clubEventRepository.Update(clubEvent);
 
-            return new OkObjectResult("ClubEvent updated");
+            GetClubEventDto getClubEventDto = clubEvent;
+
+            return new OkObjectResult(CreateLinksForClubEvent(getClubEventDto));
         }
 
         /// <summary>
@@ -188,6 +191,29 @@ namespace Spg.TennisBooking.Application.Services.v2
             _clubEventRepository.Delete(clubEvent);
 
             return new OkObjectResult("ClubEvent deleted");
+        }
+
+        private GetClubEventDto CreateLinksForClubEvent(GetClubEventDto clubEventDto)
+        {
+            clubEventDto.Links.Add(new LinkDto(
+                "/api/v2/ClubEventController/" + clubEventDto.Id,
+                "self",
+                "GET"
+            ));
+
+            clubEventDto.Links.Add(new LinkDto(
+                "/api/v2/ClubEventController/" + clubEventDto.Id,
+                "update",
+                "PUT"
+            ));
+
+            clubEventDto.Links.Add(new LinkDto(
+                "/api/v2/ClubEventController/" + clubEventDto.Id,
+                "delete",
+                "DELETE"
+            ));
+
+            return clubEventDto;
         }
     }
 }

@@ -1,9 +1,11 @@
+using Spg.TennisBooking.Domain.Dtos.HaeteosDtos;
 using Spg.TennisBooking.Domain.Model;
 
 namespace Spg.TennisBooking.Domain.Dtos.ClubDtos
 {
     public class GetClubDto
     {
+        public int Id { get; set; }
         public bool IsAdmin { get; set; } = false;
         public string Link { get; set; } = string.Empty;
         public DateTime? PaidTill { get; set; } = null;
@@ -15,6 +17,9 @@ namespace Spg.TennisBooking.Domain.Dtos.ClubDtos
         public string ImagePath { get; set; } = string.Empty;
         public SocialHub SocialHub { get; set; } = new SocialHub();
 
+        //HATEOS Links
+        public List<LinkDto> Links = new List<LinkDto>();
+
         //Constructor
         public GetClubDto()
         {
@@ -24,6 +29,7 @@ namespace Spg.TennisBooking.Domain.Dtos.ClubDtos
         {
             return new GetClubDto
             {
+                Id = v.Id,
                 Link = v.Link,
                 PaidTill = v.PaidTill,
                 FreeTrialTill = v.FreeTrialTill,
