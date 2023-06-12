@@ -11,6 +11,7 @@ using System.Security.Cryptography;
 using Microsoft.AspNetCore.Mvc;
 using Spg.TennisBooking.Domain.Dtos.ClubNewsDtos;
 using Microsoft.Extensions.Configuration;
+using Spg.TennisBooking.Domain.Dtos.HaeteosDtos;
 
 namespace Spg.TennisBooking.Application.Services.v2
 {
@@ -195,6 +196,29 @@ namespace Spg.TennisBooking.Application.Services.v2
             _clubNewsRepository.Delete(clubNews);
 
             return new OkObjectResult("ClubNews deleted");
+        }
+
+        private GetClubNewsDto CreateLinksForClubNews(GetClubNewsDto clubNewsDto)
+        {
+            clubNewsDto.Links.Add(new LinkDto(
+                "/api/v2/ClubNewsController/" + clubNewsDto.Id,
+                "self",
+                "GET"
+            ));
+
+            clubNewsDto.Links.Add(new LinkDto(
+                "/api/v2/ClubNewsController/" + clubNewsDto.Id,
+                "update",
+                "PUT"
+            ));
+
+            clubNewsDto.Links.Add(new LinkDto(
+                "/api/v2/ClubNewsController/" + clubNewsDto.Id,
+                "delete",
+                "DELETE"
+            ));
+            
+            return clubNewsDto;
         }
     }
 }

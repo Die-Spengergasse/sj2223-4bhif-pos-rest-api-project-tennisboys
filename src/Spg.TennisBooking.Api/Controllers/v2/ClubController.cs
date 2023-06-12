@@ -23,15 +23,13 @@ public class ClubController : ControllerBase
     private readonly IConfiguration _configuration;
     private readonly ILogger<ClubController> _logger;
     private readonly IClubService _club;
-    private readonly IEnumerable<EndpointDataSource> _endpointDataSource;
     
-    public ClubController(IWebHostEnvironment env, IConfiguration configuration, ILogger<ClubController> logger, IClubService club, IEnumerable<EndpointDataSource> endpointDataSources)
+    public ClubController(IWebHostEnvironment env, IConfiguration configuration, ILogger<ClubController> logger, IClubService club)
     {
         _env = env;
         _configuration = configuration;
         _logger = logger;
         _club = club;
-        _endpointDataSource = endpointDataSources;
     }
 
     //Get

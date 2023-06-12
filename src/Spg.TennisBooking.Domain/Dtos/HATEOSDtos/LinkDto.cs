@@ -1,6 +1,6 @@
 using Spg.TennisBooking.Domain.Model;
 
-namespace Spg.TennisBooking.Domain.Dtos.UserDtos
+namespace Spg.TennisBooking.Domain.Dtos.HaeteosDtos
 {
     public class LinkDto
     {
