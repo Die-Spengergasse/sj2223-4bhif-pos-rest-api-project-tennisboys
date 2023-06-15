@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Spg.TennisBooking.Api\Spg.TennisBooking.Api.csproj" />
+    <ProjectReference Include="..\Spg.TennisBooking.Application\Spg.TennisBooking.Application.csproj" />
+    <ProjectReference Include="..\Spg.TennisBooking.Domain\Spg.TennisBooking.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controller\v2\" />
+  </ItemGroup>
+
+</Project>
