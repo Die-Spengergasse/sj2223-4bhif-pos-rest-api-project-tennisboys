@@ -64,3 +64,7 @@ input[type="password"]:focus {
     margin-right: 35%;
   }
 }
+
+#forgotPwd_btn {
+    color: #041729;
+}
