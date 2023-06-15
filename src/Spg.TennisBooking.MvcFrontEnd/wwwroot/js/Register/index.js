@@ -53,7 +53,7 @@ async function register() {
     }
 
     //Create User
-    await fetch("https://localhost:3001/api/Auth/Register", {
+    await fetch("https://localhost:3001/api/v2/Auth/Register", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -104,7 +104,7 @@ async function login() {
     let password = document.getElementById("InputPasswordLogin").value;
 
     //Login User
-    await fetch("https://localhost:3001/api/Auth/Login", {
+    await fetch("https://localhost:3001/api/v2/Auth/Login", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

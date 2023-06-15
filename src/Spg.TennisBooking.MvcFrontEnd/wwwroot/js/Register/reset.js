@@ -98,7 +98,7 @@ async function reset() {
         code += document.getElementById(`reset-${i}`).value;
     }
 
-    await fetch("https://localhost:3001/api/Auth/ResetPassword", {
+    await fetch("https://localhost:3001/api/v2/Auth/ResetPassword", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

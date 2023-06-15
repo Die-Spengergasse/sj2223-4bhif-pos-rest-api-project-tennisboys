@@ -90,7 +90,7 @@ async function verify() {
     }
 
     //Create User
-    await fetch("https://localhost:3001/api/Auth/Verify", {
+    await fetch("https://localhost:3001/api/v2/Auth/Verify", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

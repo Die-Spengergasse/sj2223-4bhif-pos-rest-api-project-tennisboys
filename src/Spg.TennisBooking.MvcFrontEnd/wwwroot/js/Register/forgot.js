@@ -27,7 +27,7 @@ async function forgot() {
     let email = document.getElementById("InputEmail").value;
 
     //Create User
-    await fetch("https://localhost:3001/api/Auth/ForgotPassword", {
+    await fetch("https://localhost:3001/api/v2/Auth/ForgotPassword", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
