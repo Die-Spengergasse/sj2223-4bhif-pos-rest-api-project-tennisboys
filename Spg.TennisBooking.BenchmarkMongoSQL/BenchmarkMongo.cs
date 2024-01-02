@@ -8,6 +8,7 @@ using Spg.TennisBooking.Domain.ModelMongo;
 using Spg.TennisBooking.Infrastructure.v2;
 using System.Diagnostics;
 using System.Text.Json;
+using System;
 
 namespace Spg.TennisBooking.BenchmarkMongoSQL
 {
@@ -36,8 +37,6 @@ namespace Spg.TennisBooking.BenchmarkMongoSQL
             //CourtRequest
             Console.WriteLine("CourtRequest");
             CourtRequestDto courtRequestDto = CourtRequest(mongoDB);
-            //Print out result as JSON
-            Console.WriteLine("CourtRequest: " + JsonSerializer.Serialize(courtRequestDto));
             //Time for CourtRequest
             Console.WriteLine("Time for CourtRequest: " + stopwatch.ElapsedMilliseconds);
 
@@ -48,7 +47,6 @@ namespace Spg.TennisBooking.BenchmarkMongoSQL
             //Delete Database
             // MongoDB doesn't have a direct equivalent to 'EnsureDeleted'. You'll need to drop each collection manually or drop the whole database.
             mongoDB.DropCollection("Clubs");
-            mongoDB.DropCollection("Courts");
             mongoDB.DropCollection("Users");
             mongoDB.DropCollection("Reservations");
 
@@ -76,49 +74,72 @@ namespace Spg.TennisBooking.BenchmarkMongoSQL
                 courtDto.Name = court.Name;
                 courtDto.Days = new();
                 List<string> days = new() { "Mo", "Di", "Mi", "Do", "Fr", "Sa", "So" };
-                for (int i = 0; i < 7; i++)
+                foreach (var dayOfWeek in days)
                 {
-                    CourtDayDto dayDto = new();
-                    dayDto.Name = days[i];
-                    dayDto.Reservations = new();
+                    var dayDto = new CourtDayDto { Name = dayOfWeek, Reservations = new List<ReservationDto>() };
 
-                    var pipeline = new BsonDocument[]
-{
-                        BsonDocument.Parse(@"
-                        {
-                            $unwind: '$Courts'
-                        }"),
-                        BsonDocument.Parse(@"
-                        {
-                            $match: {
-                                'Courts._id': ObjectId('" + court.Id + @"')
-                            }
-                        }"),
-                        BsonDocument.Parse(@"
-                        {
-                            $project: {
-                                _id: 1,
-                                StartTime: 1,
-                                EndTime: 1,
-                                Comment: 1,
-                                // Include other fields as needed
-                            }
-                        }"),
-                    };
+                    var filter = Builders<Reservation>.Filter
+                        .Where(r => r.CourtNavigation.Id == court.Id && r.StartTime.DayOfWeek.ToString().Substring(0, 2) == dayOfWeek &&
+                                    r.StartTime >= dayFrom && r.StartTime <= dayTo);
 
-                    List<Reservation> reservations = reservationsCollection.Aggregate<Reservation>(pipeline).ToList();
+                    var reservations = reservationsCollection.Find(filter).ToList();
 
-                    //reservationsCollection.Find(r => r.CourtNavigation == court && ((int)r.StartTime.DayOfWeek) == i && r.StartTime >= dayFrom && r.StartTime <= dayTo).ToList();
-                    for (int j = 0; j < reservations.Count; j++)
+                    foreach (var reservation in reservations)
                     {
-                        ReservationDto reservationDto = new();
-                        reservationDto.From = reservations[j].StartTime.ToString("HH:mm");
-                        reservationDto.To = reservations[j].EndTime.ToString("HH:mm");
+                        var reservationDto = new ReservationDto
+                        {
+                            From = reservation.StartTime.ToString("HH:mm"),
+                            To = reservation.EndTime.ToString("HH:mm")
+                        };
 
                         dayDto.Reservations.Add(reservationDto);
                     }
+
                     courtDto.Days.Add(dayDto);
                 }
+                //                for (int i = 0; i < 7; i++)
+                //                {
+                //                    CourtDayDto dayDto = new();
+                //                    dayDto.Name = days[i];
+                //                    dayDto.Reservations = new();
+
+                //                    var pipeline = new BsonDocument[]
+                //{
+                //                        BsonDocument.Parse(@"
+                //                        {
+                //                            $unwind: '$Courts'
+                //                        }"),
+                //                        BsonDocument.Parse(@"
+                //                        {
+                //                            $match: {
+                //                                'Courts._id': ObjectId('" + court.Id + @"')
+                //                            }
+                //                        }"),
+                //                        BsonDocument.Parse(@"
+                //                        {
+                //                            $project: {
+                //                                _id: 1,
+                //                                StartTime: 1,
+                //                                EndTime: 1,
+                //                                Comment: 1,
+                //                                // Include other fields as needed
+                //                            }
+                //                        }"),
+                //                    };
+
+                //                    List<Reservation> reservations = reservationsCollection.Aggregate<Reservation>(pipeline).ToList();
+
+                //                    //reservationsCollection.Find(r => r.CourtNavigation == court && ((int)r.StartTime.DayOfWeek) == i && r.StartTime >= dayFrom && r.StartTime <= dayTo).ToList();
+                //                    for (int j = 0; j < reservations.Count; j++)
+                //                    {
+                //                        ReservationDto reservationDto = new();
+                //                        reservationDto.From = reservations[j].StartTime.ToString("HH:mm");
+                //                        reservationDto.To = reservations[j].EndTime.ToString("HH:mm");
+
+                //                        dayDto.Reservations.Add(reservationDto);
+                //                    }
+                //                    courtDto.Days.Add(dayDto);
+                //                }
                 courtRequestDto.Courts.Add(courtDto);
             }
 
