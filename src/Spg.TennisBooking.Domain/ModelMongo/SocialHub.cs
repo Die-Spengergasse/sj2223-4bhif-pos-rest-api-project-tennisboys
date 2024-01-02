@@ -10,10 +10,7 @@ namespace Spg.TennisBooking.Domain.ModelMongo
 {
     public class SocialHub
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        [BsonElement("_id")]
-        public string Id { get; set; }
+        public ObjectId Id { get; set; }
         private string _facebook { get; set; } = string.Empty;
         public string Facebook
         {

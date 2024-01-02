@@ -10,10 +10,7 @@ namespace Spg.TennisBooking.Domain.ModelMongo
 {
     public class Reservation
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        [BsonElement("_id")]
-        public string Id { get; private set; }
+        public ObjectId Id { get; private set; }
         public string UUID { get; private set; } = Guid.NewGuid().ToString();
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }

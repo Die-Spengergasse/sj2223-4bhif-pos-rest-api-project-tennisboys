@@ -10,10 +10,7 @@ namespace Spg.TennisBooking.Domain.ModelMongo
 {
     public class ClubEvent
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        [BsonElement("_id")]
-        public string Id { get; private set; }
+        public ObjectId Id { get; private set; }
         public string Name { get; set; } = string.Empty;
         public DateTime Time { get; set; }
         public string Info { get; set; } = string.Empty;

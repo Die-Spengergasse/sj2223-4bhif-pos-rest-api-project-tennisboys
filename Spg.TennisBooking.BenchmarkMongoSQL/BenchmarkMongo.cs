@@ -143,6 +143,11 @@ namespace Spg.TennisBooking.BenchmarkMongoSQL
             var usersCollection = database.GetCollection<User>("Users");
             var reservationsCollection = database.GetCollection<Reservation>("Reservations");
 
+            clubsCollection.DeleteMany(_ => true);
+            courtsCollection.DeleteMany(_ => true);
+            usersCollection.DeleteMany(_ => true);
+            reservationsCollection.DeleteMany(_ => true);
+
             Club club = CreateClub();
             clubsCollection.InsertOne(club);
 
