@@ -216,7 +216,7 @@ namespace Spg.TennisBooking.BenchmarkMongoSQL
             }
 
             //Find reservation
-            var filter = Builders<Reservation>.Filter.Eq("CourtNavigation", new MongoDBRef("Court", club.Courts.FirstOrDefault().Id););
+            var filter = Builders<Reservation>.Filter.Eq("CourtNavigation", new MongoDBRef("Court", club.Courts.FirstOrDefault().Id));
             var result = reservationsCollection.Find(filter).ToList();
             Console.WriteLine("Reservations: " + result.Count);
 
