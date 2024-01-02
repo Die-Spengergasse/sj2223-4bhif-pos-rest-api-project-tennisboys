@@ -14,6 +14,7 @@ namespace Spg.TennisBooking.Domain.ModelMongo
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
+        [BsonElement("_id")]
         public string Id { get; private set; }
         public string Name { get; set; } = string.Empty;
         public bool Bookable { get; set; } = false;

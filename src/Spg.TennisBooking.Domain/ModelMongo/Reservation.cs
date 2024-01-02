@@ -12,6 +12,7 @@ namespace Spg.TennisBooking.Domain.ModelMongo
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
+        [BsonElement("_id")]
         public string Id { get; private set; }
         public string UUID { get; private set; } = Guid.NewGuid().ToString();
         public DateTime StartTime { get; set; }
