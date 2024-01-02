@@ -21,25 +21,25 @@ namespace Spg.TennisBooking.BenchmarkMongoSQL
             //Get Context
             TennisBookingContext db = GetContext();
             //Time for creating the context
-            Console.WriteLine("Time for creating the context: "+stopwatch.ElapsedMilliseconds);
+            Console.WriteLine("Time for creating the context: " + stopwatch.ElapsedMilliseconds);
 
             //Mocking
             Console.WriteLine("Mocking");
             db = Mocking(db);
             //Time for mocking
-            Console.WriteLine("Time for mocking: "+stopwatch.ElapsedMilliseconds);
-            
+            Console.WriteLine("Time for mocking: " + stopwatch.ElapsedMilliseconds);
+
             //CourtRequest
             Console.WriteLine("CourtRequest");
             CourtRequestDto courtRequestDto = CourtRequest(db);
             //Print out result as JSON
-            Console.WriteLine("CourtRequest: "+JsonSerializer.Serialize(courtRequestDto));
+            Console.WriteLine("CourtRequest: " + JsonSerializer.Serialize(courtRequestDto));
             //Time for CourtRequest
-            Console.WriteLine("Time for CourtRequest: "+stopwatch.ElapsedMilliseconds);
+            Console.WriteLine("Time for CourtRequest: " + stopwatch.ElapsedMilliseconds);
 
             //End Benchmark
             stopwatch.Stop();
-            Console.WriteLine("End Benchmark: "+stopwatch.ElapsedMilliseconds);
+            Console.WriteLine("End Benchmark: " + stopwatch.ElapsedMilliseconds);
 
             //Delete Database
             db.Database.EnsureDeleted();
@@ -85,7 +85,7 @@ namespace Spg.TennisBooking.BenchmarkMongoSQL
                     courtDto.Days.Add(dayDto);
                 }
                 courtRequestDto.Courts.Add(courtDto);
-            }   
+            }
 
             return courtRequestDto;
         }
@@ -115,7 +115,7 @@ namespace Spg.TennisBooking.BenchmarkMongoSQL
             //Create 10 courts
             for (int i = 0; i < 10; i++)
             {
-                Court court = new("Court " + (i+1), club);
+                Court court = new("Court " + (i + 1), club);
                 db.Courts.Add(court);
             }
 
@@ -138,11 +138,112 @@ namespace Spg.TennisBooking.BenchmarkMongoSQL
                 DateTime from = new DateTime(2023, 1, 1).AddDays(ranDate).AddHours(ranHour);
                 DateTime to = from.AddHours(1);
                 //Console.WriteLine(from.ToString("dd.MM.yyyy HH:mm") + " - " + to.ToString("dd.MM.yyyy HH:mm"));
-                Reservation reservation = new(from, to, "", club.Courts.FirstOrDefault(), db.Users.FirstOrDefault() ,club);
+                Reservation reservation = new(from, to, "", club.Courts.FirstOrDefault(), db.Users.FirstOrDefault(), club);
                 db.Reservations.Add(reservation);
+            }
+            db.SaveChanges();
+
+            //Timing
+            Stopwatch stopwatch = new();
+            stopwatch.Start();
+
+            //100 Clubs
+            for (int i = 0; i < 100; i++)
+            {
+                Club club1 = CreateClub();
+                db.Clubs.Add(club1);
             }
 
             db.SaveChanges();
+
+            stopwatch.Stop();
+            Console.WriteLine("Time for creating 100 Clubs: " + stopwatch.ElapsedMilliseconds);
+
+            stopwatch.Reset();
+            stopwatch.Start();
+
+            //1000 Clubs
+            for (int i = 0; i < 1000; i++)
+            {
+                Club club1 = CreateClub();
+                db.Clubs.Add(club1);
+            }
+
+            db.SaveChanges();
+
+            stopwatch.Stop();
+            Console.WriteLine("Time for creating 1000 Clubs: " + stopwatch.ElapsedMilliseconds);
+
+            stopwatch.Reset();
+            stopwatch.Start();
+
+            //100000 Clubs
+            for (int i = 0; i < 100000; i++)
+            {
+                Club club1 = CreateClub();
+                db.Clubs.Add(club1);
+            }
+
+            db.SaveChanges();
+            stopwatch.Stop();
+            Console.WriteLine("Time for creating 100000 Clubs: " + stopwatch.ElapsedMilliseconds);
+
+            //Finds
+            var allClubs = db.Clubs.ToList();
+            Console.WriteLine("All Clubs: " + allClubs.Count);
+
+            var filteredClubs = db.Clubs.Where(c => c.Id == 10).ToList();
+            Console.WriteLine("Filtered Clubs: " + filteredClubs.Count);
+
+            var filteredAndProjectedClubs = db.Clubs
+                .Where(c => c.Id == 10)
+                .Select(c => new { c.Name, c.SocialHub })
+                .ToList();
+            Console.WriteLine("Filtered and projected Clubs: " + filteredAndProjectedClubs.Count);
+
+            var filteredAndSortedClubs = db.Clubs
+            .Where(c => c.Id == 10)
+            .OrderBy(c => c.Name)
+            .Select(c => new { c.Name }) // Hier kannst du die Projektion anpassen
+            .ToList();
+            Console.WriteLine("Filtered and sorted Clubs: " + filteredAndSortedClubs.Count);
+
+            //Update
+            int clubIdToUpdate = 1;
+
+            var clubToUpdate = db.Clubs.Find(clubIdToUpdate);
+
+            if (clubToUpdate != null)
+            {
+                // Aktualisieren der Eigenschaft(en)
+                clubToUpdate.Name = "Neuer Clubname";
+                clubToUpdate.Address = "Neue Adresse";
+
+                // Speichern der Änderungen in der Datenbank
+                db.SaveChanges();
+            }
+            else
+            {
+                Console.WriteLine($"Club mit der Id {clubIdToUpdate} wurde nicht gefunden.");
+            }
+
+            //Delete
+            int clubIdToDelete = 10;
+
+            var clubToDelete = db.Clubs.Find(clubIdToDelete);
+
+            if (clubToDelete != null)
+            {
+                // Löschen des Clubs
+                db.Clubs.Remove(clubToDelete);
+
+                // Speichern der Änderungen in der Datenbank
+                db.SaveChanges();
+            }
+            else
+            {
+                Console.WriteLine($"Club mit der Id {clubIdToDelete} wurde nicht gefunden.");
+            }
 
             return db;
         }
