@@ -10,7 +10,7 @@ namespace Spg.TennisBooking.Domain.ModelMongo
 {
     public class Club
     {
-        public ObjectId Id { get; private set; }
+        public ObjectId Id { get; private set; } = ObjectId.GenerateNewId();
         public string Link { get; set; } = Guid.NewGuid().ToString(); //Link to the club
         public User? Admin { get; set; }
         public string IBAN { get; set; } = string.Empty;

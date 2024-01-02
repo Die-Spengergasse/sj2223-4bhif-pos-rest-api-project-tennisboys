@@ -12,7 +12,7 @@ namespace Spg.TennisBooking.Domain.ModelMongo
 
     public class Court
     {
-        public ObjectId Id { get; private set; }
+        public ObjectId Id { get; private set; } = ObjectId.GenerateNewId();
         public string Name { get; set; } = string.Empty;
         public bool Bookable { get; set; } = false;
         public CourtType Type { get; set; } = CourtType.Sand;

@@ -11,7 +11,7 @@ namespace Spg.TennisBooking.Domain.ModelMongo
     public enum GenderTypes { Male = 0, Female = 1, Diverse = 2, NotSpecified = 3}
     public class User
     {
-        public ObjectId Id { get; private set; }
+        public ObjectId Id { get; private set; } = ObjectId.GenerateNewId();
         public string UUID { get; private set; } = Guid.NewGuid().ToString();
         public string Email { get; set;  } = String.Empty;
         public string Password { get; set; } = String.Empty;

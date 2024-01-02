@@ -10,7 +10,7 @@ namespace Spg.TennisBooking.Domain.ModelMongo
 {
     public class ClubNews
     {
-        public ObjectId Id { get; private set; }
+        public ObjectId Id { get; private set; } = ObjectId.GenerateNewId();
         public string Title { get; set; } = string.Empty;
         public string Info { get; set; } = string.Empty;
         public DateTime Written { get; set; } = DateTime.UtcNow;

@@ -10,7 +10,7 @@ namespace Spg.TennisBooking.Domain.ModelMongo
 {
     public class SocialHub
     {
-        public ObjectId Id { get; set; }
+        public ObjectId Id { get; set; } = ObjectId.GenerateNewId();
         private string _facebook { get; set; } = string.Empty;
         public string Facebook
         {
