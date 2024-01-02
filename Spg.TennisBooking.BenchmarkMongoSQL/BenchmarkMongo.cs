@@ -82,7 +82,42 @@ namespace Spg.TennisBooking.BenchmarkMongoSQL
                     dayDto.Name = days[i];
                     dayDto.Reservations = new();
 
-                    List<Reservation> reservations = reservationsCollection.Find(r => r.CourtNavigation == court && ((int)r.StartTime.DayOfWeek) == i && r.StartTime >= dayFrom && r.StartTime <= dayTo).ToList();
+                    var pipeline = new BsonDocument[]
+                    {
+                        BsonDocument.Parse(@"
+                        {
+                            $lookup: {
+                                from: 'courts',
+                                localField: 'CourtNavigation.$id',
+                                foreignField: '_id',
+                                as: 'courtReservations'
+                            }
+                        }"),
+                        BsonDocument.Parse(@"
+                        {
+                            $unwind: '$courtReservations'
+                        }"),
+                        BsonDocument.Parse(@"
+                        {
+                            $match: {
+                                'courtReservations._id': ObjectId('" + court.Id + @"')
+                            }
+                        }"),
+                        BsonDocument.Parse(@"
+                        {
+                            $project: {
+                                _id: 1,
+                                StartTime: 1,
+                                EndTime: 1,
+                                Comment: 1,
+                                // Include other fields as needed
+                            }
+                        }"),
+                    };
+
+                    List<Reservation> reservations = reservationsCollection.Aggregate<Reservation>(pipeline).ToList();
+
+                    //reservationsCollection.Find(r => r.CourtNavigation == court && ((int)r.StartTime.DayOfWeek) == i && r.StartTime >= dayFrom && r.StartTime <= dayTo).ToList();
                     for (int j = 0; j < reservations.Count; j++)
                     {
                         ReservationDto reservationDto = new();
@@ -139,24 +174,24 @@ namespace Spg.TennisBooking.BenchmarkMongoSQL
         {
             var database = db;
             var clubsCollection = database.GetCollection<Club>("Clubs");
-            var courtsCollection = database.GetCollection<Court>("Courts");
             var usersCollection = database.GetCollection<User>("Users");
             var reservationsCollection = database.GetCollection<Reservation>("Reservations");
 
             clubsCollection.DeleteMany(_ => true);
-            courtsCollection.DeleteMany(_ => true);
             usersCollection.DeleteMany(_ => true);
             reservationsCollection.DeleteMany(_ => true);
 
             Club club = CreateClub();
-            clubsCollection.InsertOne(club);
 
             //Create 10 courts
             for (int i = 0; i < 10; i++)
             {
                 Court court = new("Court " + i, club);
-                courtsCollection.InsertOne(court);
+                club.AddCourt(court);
             }
+
+            clubsCollection.InsertOne(club);
+
 
             //Create 100 users
             for (int i = 0; i < 100; i++)
@@ -165,10 +200,15 @@ namespace Spg.TennisBooking.BenchmarkMongoSQL
                 usersCollection.InsertOne(user);
             }
 
+            User user1 = CreateUser();
+            usersCollection.InsertOne(user1);
+
             //Create 1000 reservations
             for (int i = 0; i < 1000; i++)
             {
-                Reservation reservation = new(DateTime.Now, DateTime.Now.AddHours(1), "", club.Courts.FirstOrDefault(), usersCollection.Find(_ => true).FirstOrDefault(), club);
+                var user = new MongoDBRef("User", user1.Id);
+                var court = new MongoDBRef("Court", club.Courts.FirstOrDefault().Id);
+                Reservation reservation = new(DateTime.Now, DateTime.Now.AddHours(1), "", court, user);
                 reservationsCollection.InsertOne(reservation);
             }
 
