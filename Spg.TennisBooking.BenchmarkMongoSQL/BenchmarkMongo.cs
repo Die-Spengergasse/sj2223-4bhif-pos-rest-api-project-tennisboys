@@ -192,6 +192,9 @@ namespace Spg.TennisBooking.BenchmarkMongoSQL
 
             clubsCollection.InsertOne(club);
 
+            //Get Club
+            club = clubsCollection.Find(_ => true).FirstOrDefault();
+            Console.WriteLine(club.Name);
 
             //Create 100 users
             for (int i = 0; i < 100; i++)
@@ -211,6 +214,11 @@ namespace Spg.TennisBooking.BenchmarkMongoSQL
                 Reservation reservation = new(DateTime.Now, DateTime.Now.AddHours(1), "", court, user);
                 reservationsCollection.InsertOne(reservation);
             }
+
+            //Find reservation
+            var filter = Builders<Reservation>.Filter.Eq("CourtNavigation", new MongoDBRef("Court", club.Courts.FirstOrDefault().Id););
+            var result = reservationsCollection.Find(filter).ToList();
+            Console.WriteLine("Reservations: " + result.Count);
 
             return database;
         }
