@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Spg.TennisBooking.BenchmarkMongoSQL
 {
-    public class BenchmarkStatic
+    public class BenchmarkStaticSQL
     {
         protected static Club CreateClub()
         {

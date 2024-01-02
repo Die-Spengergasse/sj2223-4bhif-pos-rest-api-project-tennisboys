@@ -4,7 +4,7 @@ using MongoDB.Driver;
 using MongoDB.Bson;
 //using MongoDB.Driver;
 using Spg.TennisBooking.BenchmarkMongoSQL.Dtos;
-using Spg.TennisBooking.Domain.Model;
+using Spg.TennisBooking.Domain.ModelMongo;
 using Spg.TennisBooking.Infrastructure.v2;
 using System.Diagnostics;
 using System.Text.Json;
@@ -12,7 +12,7 @@ using System.Text.Json;
 namespace Spg.TennisBooking.BenchmarkMongoSQL
 {
     //https://www.mongodb.com/docs/entity-framework/current/quick-start/
-    public class BenchmarkMongo : BenchmarkStatic
+    public class BenchmarkMongo : BenchmarkStaticMongo
     {
         public IActionResult Benching()
         {

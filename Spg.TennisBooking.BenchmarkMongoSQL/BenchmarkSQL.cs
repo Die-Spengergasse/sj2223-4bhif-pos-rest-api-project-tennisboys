@@ -9,7 +9,7 @@ using System.Text.Json;
 
 namespace Spg.TennisBooking.BenchmarkMongoSQL
 {
-    public class BenchmarkSQL : BenchmarkStatic
+    public class BenchmarkSQL : BenchmarkStaticSQL
     {
         public IActionResult Benching()
         {
