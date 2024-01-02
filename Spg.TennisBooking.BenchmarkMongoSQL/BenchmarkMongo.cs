@@ -186,7 +186,7 @@ namespace Spg.TennisBooking.BenchmarkMongoSQL
             //Create 10 courts
             for (int i = 0; i < 10; i++)
             {
-                Court court = new("Court " + i, club);
+                Court court = new("Court " + i);
                 club.AddCourt(court);
             }
 

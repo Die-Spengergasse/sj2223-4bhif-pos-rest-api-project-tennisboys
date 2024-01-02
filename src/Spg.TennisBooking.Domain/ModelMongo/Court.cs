@@ -70,11 +70,8 @@ namespace Spg.TennisBooking.Domain.ModelMongo
             }
         }
 
-        public virtual int ClubNavigationId { get; set; }
-        public virtual Club ClubNavigation { get; set; } = default!;
-        public Court(Club club, CourtType type, string name, double aPrice, double? bPrice, int aTimeFrom, int aTimeTill, int aWeekendTimeTill)
+        public Court(CourtType type, string name, double aPrice, double? bPrice, int aTimeFrom, int aTimeTill, int aWeekendTimeTill)
         {
-            ClubNavigation = club;
             Name = name;
             Type = type;
             APrice = aPrice;
@@ -113,10 +110,9 @@ namespace Spg.TennisBooking.Domain.ModelMongo
 
         }
 
-        public Court(string name, Club club)
+        public Court(string name)
         {
             Name = name;
-            ClubNavigation = club;
         }
     }
 }
