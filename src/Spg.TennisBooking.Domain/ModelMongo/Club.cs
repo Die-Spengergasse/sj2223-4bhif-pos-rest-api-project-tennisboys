@@ -53,25 +53,24 @@ namespace Spg.TennisBooking.Domain.ModelMongo
                 _clubEvents.Remove(clubEvent);
             }
         }
-        
-        private List<Court> _courts = new();
+
         [BsonElement("Courts")]
-        public IReadOnlyList<Court> Courts => _courts;
-        
+        public List<Court> Courts { get; set; } = new List<Court>();
+
         public void AddCourt(Court entity)
         {
             if (entity is not null)
             {
-                _courts.Add(entity);
+                Courts.Add(entity);
             }
         }
         public void RemoveCourt(Court entity)
         {
             if (entity is not null)
             {
-                if (_courts.Contains(entity))
+                if (Courts.Contains(entity))
                 {
-                    _courts.Remove(entity);
+                    Courts.Remove(entity);
                 }
                 else
                 {
