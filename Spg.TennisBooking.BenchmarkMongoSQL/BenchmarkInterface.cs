@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc;
 using Spg.TennisBooking.BenchmarkMongoSQL.Dtos;
 using Spg.TennisBooking.Infrastructure.v2;
 
@@ -7,7 +8,7 @@ namespace Spg.TennisBooking.BenchmarkMongoSQL
     {
         //Benchmark Mongo
         //Benchmark SQL
-        public void Benching();
+        public IActionResult Benching();
 
         //Connection Aufbau Mongo
         //Connection Aufbau SQL

@@ -24,6 +24,10 @@
     <ProjectReference Include="..\Spg.TennisBooking.Repository\Spg.TennisBooking.Repository.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\js\Benchmark\" />
+  </ItemGroup>
+
   <Target Name="Tailwind" BeforeTargets="Build">
     <Exec Command="npm run input:build" />
   </Target>

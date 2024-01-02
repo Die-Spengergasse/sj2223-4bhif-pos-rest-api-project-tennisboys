@@ -1,16 +1,20 @@
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-//using MongoDB.Bson;
+using MongoDB.Driver;
+using MongoDB.Bson;
 //using MongoDB.Driver;
 using Spg.TennisBooking.BenchmarkMongoSQL.Dtos;
 using Spg.TennisBooking.Domain.Model;
 using Spg.TennisBooking.Infrastructure.v2;
+using System.Diagnostics;
+using System.Text.Json;
 
 namespace Spg.TennisBooking.BenchmarkMongoSQL
 {
     //https://www.mongodb.com/docs/entity-framework/current/quick-start/
-    public class BenchmarkMongo : BenchmarkStatic, Benchmark
+    public class BenchmarkMongo : BenchmarkStatic
     {
-        public void Benching()
+        public IActionResult Benching()
         {
             //Start Benchmark
             Console.WriteLine("Start Benchmark");
@@ -18,44 +22,43 @@ namespace Spg.TennisBooking.BenchmarkMongoSQL
             stopwatch.Start();
 
             //Get MongoDB client and database
-            var client = new MongoClient("mongodb://localhost:27017");
-            var database = client.GetDatabase("TennisBooking");
+            var mongoDB = GetContext();
+
             //Time for creating the client and getting the database
-            Console.WriteLine("Time for creating the client and getting the database: "+stopwatch.ElapsedMilliseconds);
+            Console.WriteLine("Time for creating the client and getting the database: " + stopwatch.ElapsedMilliseconds);
 
             //Mocking
             Console.WriteLine("Mocking");
-            Mocking();
+            mongoDB = Mocking(mongoDB);
             //Time for mocking
-            Console.WriteLine("Time for mocking: "+stopwatch.ElapsedMilliseconds);
-            
+            Console.WriteLine("Time for mocking: " + stopwatch.ElapsedMilliseconds);
+
             //CourtRequest
             Console.WriteLine("CourtRequest");
-            CourtRequestDto courtRequestDto = CourtRequest();
+            CourtRequestDto courtRequestDto = CourtRequest(mongoDB);
             //Print out result as JSON
-            Console.WriteLine("CourtRequest: "+JsonSerializer.Serialize(courtRequestDto));
+            Console.WriteLine("CourtRequest: " + JsonSerializer.Serialize(courtRequestDto));
             //Time for CourtRequest
-            Console.WriteLine("Time for CourtRequest: "+stopwatch.ElapsedMilliseconds);
+            Console.WriteLine("Time for CourtRequest: " + stopwatch.ElapsedMilliseconds);
 
             //End Benchmark
             stopwatch.Stop();
-            Console.WriteLine("End Benchmark: "+stopwatch.ElapsedMilliseconds);
+            Console.WriteLine("End Benchmark: " + stopwatch.ElapsedMilliseconds);
 
             //Delete Database
             // MongoDB doesn't have a direct equivalent to 'EnsureDeleted'. You'll need to drop each collection manually or drop the whole database.
-            database.DropCollection("Clubs");
-            database.DropCollection("Courts");
-            database.DropCollection("Users");
-            database.DropCollection("Reservations");
+            mongoDB.DropCollection("Clubs");
+            mongoDB.DropCollection("Courts");
+            mongoDB.DropCollection("Users");
+            mongoDB.DropCollection("Reservations");
+
+            return new OkObjectResult(JsonSerializer.Serialize(courtRequestDto));
         }
 
-        public CourtRequestDto CourtRequest()
+        public CourtRequestDto CourtRequest(IMongoDatabase db)
         {
-            var client = new MongoClient("mongodb://localhost:27017");
-            var database = client.GetDatabase("TennisBooking");
-
-            var clubsCollection = database.GetCollection<Club>("Clubs");
-            var reservationsCollection = database.GetCollection<Reservation>("Reservations");
+            var clubsCollection = db.GetCollection<Club>("Clubs");
+            var reservationsCollection = db.GetCollection<Reservation>("Reservations");
 
             //Make a request to get all courts of a club
             Club club = clubsCollection.Find(_ => true).FirstOrDefault();
@@ -91,42 +94,50 @@ namespace Spg.TennisBooking.BenchmarkMongoSQL
                     courtDto.Days.Add(dayDto);
                 }
                 courtRequestDto.Courts.Add(courtDto);
-            }   
+            }
 
             return courtRequestDto;
         }
 
-        public TennisBookingContext GetContext()
+        public IMongoDatabase GetContext()
         {
-            var dbClient = new MongoClient("mongodb://root:1234@localhost:27017");
-            IMongoDatabase db = dbClient.GetDatabase("TennisBooking");
-            var np = db.GetCollection<BsonDocument>("np");
-            Generate random database name
-            export MONGODB_URI='mongodb+srv://root:1234@cluster0.abc.mongodb.net/?retryWrites=true&w=majority'
 
-            var connectionString = Environment.GetEnvironmentVariable("MONGODB_URI");
-            if (connectionString == null)
-            {
-                Console.WriteLine("You must set your 'MONGODB_URI' environment variable. To learn how to set it, see https://www.mongodb.com/docs/drivers/csharp/current/quick-start/#set-your-connection-string");
-                Environment.Exit(0);
-            }
-            var client = new MongoClient(connectionString);
-            IMongoDatabase database = client.GetDatabase("TennisBooking");
-            DbContextOptions options = new DbContextOptionsBuilder()
-            .UseMongoDB(database.Client, database.DatabaseNamespace.DatabaseName)
-            .Options;
+            var mongoClient = new MongoClient("mongodb://root:1234@localhost:27017");
 
-            TennisBookingContext db = new(options);
+            var mongoDatabase = mongoClient.GetDatabase("TennisBooking");
 
-            db.Database.EnsureDeleted();
-            db.Database.EnsureCreated();
-            return db;
-            return null;
+            //_clubCollection = mongoDatabase.GetCollection<Club>();
+
+
+            //var dbClient = new MongoClient("mongodb://root:1234@localhost:27017");
+            //IMongoDatabase db = dbClient.GetDatabase("TennisBooking");
+            //var np = db.GetCollection<BsonDocument>("np");
+            ////Generate random database name
+            //export MONGODB_URI = 'mongodb+srv://root:1234@cluster0.abc.mongodb.net/?retryWrites=true&w=majority'
+
+            //var connectionString = Environment.GetEnvironmentVariable("MONGODB_URI");
+            //if (connectionString == null)
+            //{
+            //    Console.WriteLine("You must set your 'MONGODB_URI' environment variable. To learn how to set it, see https://www.mongodb.com/docs/drivers/csharp/current/quick-start/#set-your-connection-string");
+            //    Environment.Exit(0);
+            //}
+            //var client = new MongoClient(connectionString);
+            //IMongoDatabase database = client.GetDatabase("TennisBooking");
+            //DbContextOptions options = new DbContextOptionsBuilder()
+            //.UseMongoDB(database.Client, database.DatabaseNamespace.DatabaseName)
+            //.Options;
+
+            //TennisBookingContext db = new(options);
+
+            //db.Database.EnsureDeleted();
+            //db.Database.EnsureCreated();
+            //return db;
+            return mongoDatabase;
         }
 
-        public TennisBookingContext Mocking(TennisBookingContext db)
+        public IMongoDatabase Mocking(IMongoDatabase db)
         {
-            var database = client.GetDatabase("TennisBooking");
+            var database = db;
             var clubsCollection = database.GetCollection<Club>("Clubs");
             var courtsCollection = database.GetCollection<Court>("Courts");
             var usersCollection = database.GetCollection<User>("Users");
@@ -135,27 +146,28 @@ namespace Spg.TennisBooking.BenchmarkMongoSQL
             Club club = CreateClub();
             clubsCollection.InsertOne(club);
 
-        //Create 10 courts
-        for (int i = 0; i < 10; i++)
-        {
-            Court court = new("Court " + i, club);
-            courtsCollection.InsertOne(court);
-        }
+            //Create 10 courts
+            for (int i = 0; i < 10; i++)
+            {
+                Court court = new("Court " + i, club);
+                courtsCollection.InsertOne(court);
+            }
 
-        //Create 100 users
-        for (int i = 0; i < 100; i++)
-        {
-            User user = CreateUser();
-            usersCollection.InsertOne(user);
-        }
+            //Create 100 users
+            for (int i = 0; i < 100; i++)
+            {
+                User user = CreateUser();
+                usersCollection.InsertOne(user);
+            }
 
-        //Create 1000 reservations
-        for (int i = 0; i < 1000; i++)
-        {
-            Reservation reservation = new(DateTime.Now, DateTime.Now.AddHours(1), "", club.Courts.FirstOrDefault(), usersCollection.Find(_ => true).FirstOrDefault(), club);
-            reservationsCollection.InsertOne(reservation);
-        }
+            //Create 1000 reservations
+            for (int i = 0; i < 1000; i++)
+            {
+                Reservation reservation = new(DateTime.Now, DateTime.Now.AddHours(1), "", club.Courts.FirstOrDefault(), usersCollection.Find(_ => true).FirstOrDefault(), club);
+                reservationsCollection.InsertOne(reservation);
+            }
 
+            return database;
         }
     }
 }

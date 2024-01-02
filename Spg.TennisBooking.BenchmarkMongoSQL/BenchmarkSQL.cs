@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 //using MongoDB.Driver.Linq;
 using Spg.TennisBooking.BenchmarkMongoSQL.Dtos;
@@ -8,9 +9,9 @@ using System.Text.Json;
 
 namespace Spg.TennisBooking.BenchmarkMongoSQL
 {
-    public class BenchmarkSQL : BenchmarkStatic, Benchmark
+    public class BenchmarkSQL : BenchmarkStatic
     {
-        public void Benching()
+        public IActionResult Benching()
         {
             //Start Benchmark
             Console.WriteLine("Start Benchmark");
@@ -42,6 +43,8 @@ namespace Spg.TennisBooking.BenchmarkMongoSQL
 
             //Delete Database
             db.Database.EnsureDeleted();
+
+            return new OkObjectResult(JsonSerializer.Serialize(courtRequestDto));
         }
 
         public CourtRequestDto CourtRequest(TennisBookingContext db)

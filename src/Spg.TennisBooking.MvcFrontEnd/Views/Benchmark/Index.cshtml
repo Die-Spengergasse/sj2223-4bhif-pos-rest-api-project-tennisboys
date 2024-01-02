@@ -1,0 +1,35 @@
+﻿@{ ViewData["Title"] = "Benchmark"; }
+<script type="module" src="/js/Benchmark/index.js"></script>
+<h1>@ViewData["Title"]</h1>
+
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    td.reserved {
+        background-color: red;
+        color: white;
+    }
+</style>
+
+<h2>SQL</h2>
+<div id="sql" style="display: flex; overflow-x: auto">
+
+</div>
+
+<h2>Mongo</h2>
+<div id="mongo" style="display: flex">
+
+</div>
