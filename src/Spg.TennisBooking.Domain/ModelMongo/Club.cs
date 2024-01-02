@@ -55,6 +55,7 @@ namespace Spg.TennisBooking.Domain.ModelMongo
         }
         
         private List<Court> _courts = new();
+        [BsonElement("Courts")]
         public IReadOnlyList<Court> Courts => _courts;
         
         public void AddCourt(Court entity)
