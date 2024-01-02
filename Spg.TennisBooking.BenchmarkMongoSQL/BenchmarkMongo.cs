@@ -193,8 +193,9 @@ namespace Spg.TennisBooking.BenchmarkMongoSQL
             clubsCollection.InsertOne(club);
 
             //Get Club
-            club = clubsCollection.Find(_ => true).FirstOrDefault();
-            Console.WriteLine(club.Name);
+            Club club1 = clubsCollection.Find(_ => true).FirstOrDefault();
+            Console.WriteLine(club1.Name);
+            Console.WriteLine(club1.Courts.Count);
 
             //Create 100 users
             for (int i = 0; i < 100; i++)
