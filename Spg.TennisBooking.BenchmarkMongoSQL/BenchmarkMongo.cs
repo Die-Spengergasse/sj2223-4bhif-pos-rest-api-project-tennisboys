@@ -83,24 +83,15 @@ namespace Spg.TennisBooking.BenchmarkMongoSQL
                     dayDto.Reservations = new();
 
                     var pipeline = new BsonDocument[]
-                    {
+{
                         BsonDocument.Parse(@"
                         {
-                            $lookup: {
-                                from: 'courts',
-                                localField: 'CourtNavigation.$id',
-                                foreignField: '_id',
-                                as: 'courtReservations'
-                            }
-                        }"),
-                        BsonDocument.Parse(@"
-                        {
-                            $unwind: '$courtReservations'
+                            $unwind: '$Courts'
                         }"),
                         BsonDocument.Parse(@"
                         {
                             $match: {
-                                'courtReservations._id': ObjectId('" + court.Id + @"')
+                                'Courts._id': ObjectId('" + court.Id + @"')
                             }
                         }"),
                         BsonDocument.Parse(@"
