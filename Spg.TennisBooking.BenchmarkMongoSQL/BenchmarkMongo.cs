@@ -96,7 +96,10 @@ namespace Spg.TennisBooking.BenchmarkMongoSQL
             var reservationsCollection = db.GetCollection<Reservation>("Reservations");
 
             //Make a request to get all courts of a club
-            Club club = clubsCollection.Find(_ => true).FirstOrDefault();
+            Club club = clubsCollection.Find(_ => _.Link == "tceichgraben").FirstOrDefault();
+
+            Console.WriteLine("Club: " + JsonSerializer.Serialize(club));
+
             CourtRequestDto courtRequestDto = new();
 
             //Map the courts to the CourtRequestDto
@@ -266,6 +269,7 @@ namespace Spg.TennisBooking.BenchmarkMongoSQL
             reservationsCollection.DeleteMany(_ => true);
 
             Club club = CreateClub();
+            club.Link = "tceichgraben";
 
             //Create 10 courts
             for (int i = 0; i < 10; i++)

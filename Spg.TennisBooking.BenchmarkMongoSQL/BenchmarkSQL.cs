@@ -50,10 +50,7 @@ namespace Spg.TennisBooking.BenchmarkMongoSQL
         public CourtRequestDto CourtRequest(TennisBookingContext db)
         {
             //Make a request to get all courts of a club
-            Club club = db.Clubs.Include(c => c.Courts).Where(c => c.Link == "tceichgraben").FirstOrDefault();
-
-            Console.WriteLine(JsonSerializer.Serialize(club));
-
+            Club club = db.Clubs.Include(c => c.Courts).FirstOrDefault();
             CourtRequestDto courtRequestDto = new();
 
             //Map the courts to the CourtRequestDto
@@ -113,7 +110,6 @@ namespace Spg.TennisBooking.BenchmarkMongoSQL
         public TennisBookingContext Mocking(TennisBookingContext db)
         {
             Club club = CreateClub();
-            club.Link = "tceichgraben";
             db.Clubs.Add(club);
 
             //Create 10 courts
