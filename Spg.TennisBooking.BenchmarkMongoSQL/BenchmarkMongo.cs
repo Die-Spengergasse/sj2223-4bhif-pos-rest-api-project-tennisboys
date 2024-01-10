@@ -95,6 +95,8 @@ namespace Spg.TennisBooking.BenchmarkMongoSQL
             var clubsCollection = db.GetCollection<Club>("Clubs");
             var reservationsCollection = db.GetCollection<Reservation>("Reservations");
 
+            Console.WriteLine("Clubs: " + clubsCollection.CountDocuments(_ => true));
+
             //Make a request to get all courts of a club
             Club club = clubsCollection.Find(_ => _.Link == "tceichgraben").FirstOrDefault();
 
