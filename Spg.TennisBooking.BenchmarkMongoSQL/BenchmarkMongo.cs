@@ -11,6 +11,7 @@ using System.Text.Json;
 using System;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Options;
+using Bogus.DataSets;
 
 namespace Spg.TennisBooking.BenchmarkMongoSQL
 {
@@ -199,16 +200,16 @@ namespace Spg.TennisBooking.BenchmarkMongoSQL
             //    courtRequestDto.Courts.Add(courtDto);
             //}
 
-            foreach (Court court1 in club.Courts)
-            {
-                Console.WriteLine("Court: " + court1.Id);
-            }
+            //foreach (Court court1 in club.Courts)
+            //{
+            //    Console.WriteLine("Court: " + court1.Id);
+            //}
 
-            List<Reservation> reservationss = reservationsCollection.Find(_ => true).ToList();
-            foreach (var reservation in reservationss)
-            {
-                Console.WriteLine("Reservation: " + reservation.CourtNavigation.Id);
-            }
+            //List<Reservation> reservationss = reservationsCollection.Find(_ => true).ToList();
+            //foreach (var reservation in reservationss)
+            //{
+            //    Console.WriteLine("Reservation: " + reservation.CourtNavigation.Id);
+            //}
 
             foreach (Court court in club.Courts)
             {
@@ -329,12 +330,23 @@ namespace Spg.TennisBooking.BenchmarkMongoSQL
             User user1 = CreateUser();
             usersCollection.InsertOne(user1);
 
+            Random rand = new();
             //Create 1000 reservations
             for (int i = 0; i < 1000; i++)
             {
                 var user = new MongoDBRef("User", user1.Id);
                 var court = new MongoDBRef("Court", club.Courts.FirstOrDefault().Id);
-                Reservation reservation = new(DateTime.Now, DateTime.Now.AddHours(1), "", court, user);
+
+                //All dates of 2023, from and to have to be same day with one hour apart full hour 6-22 foreach reservation random days
+                //randomize it
+                int ranDate = rand.Next(0, 364);
+                int ranHour = rand.Next(6, 20);
+                //Console.WriteLine(ranDate + " " + ranHour);
+                DateTime from = new DateTime(2023, 1, 1).AddDays(ranDate).AddHours(ranHour);
+                DateTime to = from.AddHours(1);
+
+                Reservation reservation = new(from, to, "", court, user);
+
                 reservationsCollection.InsertOne(reservation);
             }
 
