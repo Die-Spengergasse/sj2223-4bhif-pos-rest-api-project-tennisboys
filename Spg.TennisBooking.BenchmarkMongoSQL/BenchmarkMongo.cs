@@ -223,6 +223,7 @@ namespace Spg.TennisBooking.BenchmarkMongoSQL
                     dayDto.Reservations = new();
 
                     List<Reservation> reservations = reservationsCollection.Find(r => r.CourtNavigation.Id == court.Id && ((int)r.StartTime.DayOfWeek) == i && r.StartTime >= dayFrom && r.StartTime <= dayTo).ToList();
+                    Console.WriteLine("Reservations: " + reservations.Count);
                     for (int j = 0; j < reservations.Count; j++)
                     {
                         ReservationDto reservationDto = new();
