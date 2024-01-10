@@ -24,6 +24,18 @@ Testen der CRUD-Operations sowohl auf json-DB als auch auf relationale DB mit La
 
 ## Screenshot vom Laufzeitvergleich (Consolen-print)
 
+### SQL
+
+![sql](sql.png)
+
+### MongoDB
+
+![mongodb](mongodb.png)
+
+### Notiz
+
+SQLite wurde verwendet, daher ist es hier um einiges schneller als bei der MongoDB, da diese keine "echte" Datenbank ist, sondern nur eine Datei und auch somit keine Abfrage auf den localhost gemacht werden muss.
+
 ## Bonus
 
 Änderung der Abfrage, sodass eine Aggregation notwendig wird --> Vergleich der Read-Laufzeiten zum selben Query auf der Relationalen. 0.5 Punkte
@@ -34,7 +46,7 @@ veränderte Version des Modells, bei dem mit referencing gearbeitet wird und Ver
 
 Umsetzung auf Atlas-Cloud (inkl. Laufzeitvergleiche, also beide DBs auf einer Cloud laufen lassen) 1Punkt
 
-- Kein Geld dafür
+- **Kein Geld dafür**
 
 funktionales Frontend mit Auswahlmöglichkeit der Anzeige (=Filter auf Abfrage) 1.5 Punkte
 
@@ -42,4 +54,8 @@ funktionales Frontend mit Auswahlmöglichkeit der Anzeige (=Filter auf Abfrage) 
 
 Vergleich der Laufzeiten beim Setzen eines Index auf die Mongo-Struktur 1.0 Punkte
 
+- Index wurde gesetzt auf Attribut "Link"
+
 Irgendwas cooles, das ich hier nicht aufzähle 1 Punkt
+
+- Streams, usefull when working on sockets to detect changes on the mongoDB

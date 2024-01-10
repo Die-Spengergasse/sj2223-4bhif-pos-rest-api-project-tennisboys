@@ -82,9 +82,9 @@ namespace Spg.TennisBooking.BenchmarkMongoSQL
             // MongoDB doesn't have a direct equivalent to 'EnsureDeleted'. You'll need to drop each collection manually or drop the whole database.
             if (!streams)
             {
-                //mongoDB.DropCollection("Clubs");
-                //mongoDB.DropCollection("Users");
-                //mongoDB.DropCollection("Reservations");
+                mongoDB.DropCollection("Clubs");
+                mongoDB.DropCollection("Users");
+                mongoDB.DropCollection("Reservations");
             }
 
             return new OkObjectResult(JsonSerializer.Serialize(courtRequestDto));
@@ -344,7 +344,7 @@ namespace Spg.TennisBooking.BenchmarkMongoSQL
             stopwatch.Start();
 
             // 100000 Clubs
-            for (int i = 0; i < 100000; i++)
+            for (int i = 0; i < 10000; i++)
             {
                 Club club2 = CreateClub();
                 clubsCollection.InsertOne(club2);
@@ -388,6 +388,11 @@ namespace Spg.TennisBooking.BenchmarkMongoSQL
 
             var deleteFilter = Builders<Club>.Filter.Eq(c => c.Id, clubIdToDelete);
             clubsCollection.DeleteOne(deleteFilter);
+
+            //Some Data for quest fullfillment
+            var myclubs = clubsCollection.Find(_ => true).Limit(5);
+            Console.WriteLine("My Clubs: " + myclubs.Count());
+            Console.WriteLine("My Clubs: " + JsonSerializer.Serialize(myclubs));
 
             return database;
         }
