@@ -98,7 +98,19 @@ namespace Spg.TennisBooking.BenchmarkMongoSQL
             Console.WriteLine("Clubs: " + clubsCollection.CountDocuments(_ => true));
 
             //Make a request to get all courts of a club
-            Club club = clubsCollection.Find(_ => _.Link == "tceichgraben").FirstOrDefault();
+
+            var filter = Builders<Club>.Filter.Eq(club => club.Link, "tceichgraben");
+            var club = clubsCollection.Find(filter).FirstOrDefault();
+
+            if (club != null)
+            {
+                Console.WriteLine("Found Club: " + club.Name);
+            }
+            else
+            {
+                Console.WriteLine("Club with link 'tceichgraben' not found.");
+            }
+            //Club club = clubsCollection.Find(_ => _.Link == "tceichgraben").FirstOrDefault();
 
             Console.WriteLine("Club: " + JsonSerializer.Serialize(club));
 
