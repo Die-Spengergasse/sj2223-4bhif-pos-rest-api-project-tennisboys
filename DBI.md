@@ -59,6 +59,8 @@ funktionales Frontend mit Auswahlmöglichkeit der Anzeige (=Filter auf Abfrage) 
 - Extrem schönes Frontend aber ohne Filter die sind hardcoded bereits mitgegeben und können nur im code geändert werden, da es bereits ein eigenes Projekt war und der MongoDB Teil nur zusätzlich implementiert wurde und im nachhinein deppert das alles mit schönen Filtern zu versehen.
 - Frontend ist im Ordner "src\Spg.TennisBooking.MvcFrontend" zu finden unter link /benchmark
 
+![frontend](frontend.png)
+
 Vergleich der Laufzeiten beim Setzen eines Index auf die Mongo-Struktur 1.0 Punkte
 
 - Index wurde gesetzt auf Attribut "Link"
