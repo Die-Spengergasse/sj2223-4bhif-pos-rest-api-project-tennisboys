@@ -9,6 +9,8 @@ using Spg.TennisBooking.Infrastructure.v2;
 using System.Diagnostics;
 using System.Text.Json;
 using System;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.Extensions.Options;
 
 namespace Spg.TennisBooking.BenchmarkMongoSQL
 {
@@ -24,6 +26,38 @@ namespace Spg.TennisBooking.BenchmarkMongoSQL
 
             //Get MongoDB client and database
             var mongoDB = GetContext();
+
+            //streams
+            bool streams = true;
+
+            if (streams)
+            {
+                Task.Run(async () =>
+                {
+                    var collection = mongoDB.GetCollection<Club>("Club");
+                    var pipeline = new EmptyPipelineDefinition<ChangeStreamDocument<Club>>().Match("{ operationType: { $in: ['insert', 'update', 'delete'] } }");
+
+                    var options = new ChangeStreamOptions { FullDocument = ChangeStreamFullDocumentOption.UpdateLookup };
+
+                    var cursor = await collection.WatchAsync(pipeline, options);
+
+                    using (cursor)
+                    {
+                        while (await cursor.MoveNextAsync())
+                        {
+                            foreach (var change in cursor.Current)
+                            {
+                                // Handle change event
+                                var club = change.FullDocument; // Access the changed Club object
+
+                                // Print out the Club object
+                                Console.WriteLine($"Change detected in Club: {club}");
+                            }
+                        }
+                    }
+                });
+            }
+
 
             //Time for creating the client and getting the database
             Console.WriteLine("Time for creating the client and getting the database: " + stopwatch.ElapsedMilliseconds);
@@ -46,9 +80,12 @@ namespace Spg.TennisBooking.BenchmarkMongoSQL
 
             //Delete Database
             // MongoDB doesn't have a direct equivalent to 'EnsureDeleted'. You'll need to drop each collection manually or drop the whole database.
-            mongoDB.DropCollection("Clubs");
-            mongoDB.DropCollection("Users");
-            mongoDB.DropCollection("Reservations");
+            if (!streams)
+            {
+                mongoDB.DropCollection("Clubs");
+                mongoDB.DropCollection("Users");
+                mongoDB.DropCollection("Reservations");
+            }
 
             return new OkObjectResult(JsonSerializer.Serialize(courtRequestDto));
         }
@@ -183,6 +220,7 @@ namespace Spg.TennisBooking.BenchmarkMongoSQL
 
             var mongoDatabase = mongoClient.GetDatabase("TennisBooking");
 
+
             //_clubCollection = mongoDatabase.GetCollection<Club>();
 
 
@@ -216,6 +254,10 @@ namespace Spg.TennisBooking.BenchmarkMongoSQL
         {
             var database = db;
             var clubsCollection = database.GetCollection<Club>("Clubs");
+
+            var options = new CreateIndexOptions { Unique = true };
+            clubsCollection.Indexes.CreateOne("{ Link : 1 }", options);
+
             var usersCollection = database.GetCollection<User>("Users");
             var reservationsCollection = database.GetCollection<Reservation>("Reservations");
 
@@ -270,6 +312,82 @@ namespace Spg.TennisBooking.BenchmarkMongoSQL
             var filter = Builders<Reservation>.Filter.Eq("CourtNavigation", new MongoDBRef("Court", club.Courts.FirstOrDefault().Id));
             var result = reservationsCollection.Find(filter).ToList();
             Console.WriteLine("Reservations: " + result.Count);
+
+            // Timing
+            Stopwatch stopwatch = new();
+            stopwatch.Start();
+
+            // 100 Clubs
+            for (int i = 0; i < 100; i++)
+            {
+                Club club2 = CreateClub();
+                clubsCollection.InsertOne(club2);
+            }
+
+            stopwatch.Stop();
+            Console.WriteLine("Time for creating 100 Clubs: " + stopwatch.ElapsedMilliseconds);
+
+            stopwatch.Reset();
+            stopwatch.Start();
+
+            // 1000 Clubs
+            for (int i = 0; i < 1000; i++)
+            {
+                Club club2 = CreateClub();
+                clubsCollection.InsertOne(club1);
+            }
+
+            stopwatch.Stop();
+            Console.WriteLine("Time for creating 1000 Clubs: " + stopwatch.ElapsedMilliseconds);
+
+            stopwatch.Reset();
+            stopwatch.Start();
+
+            // 100000 Clubs
+            for (int i = 0; i < 100000; i++)
+            {
+                Club club2 = CreateClub();
+                clubsCollection.InsertOne(club2);
+            }
+
+            stopwatch.Stop();
+            Console.WriteLine("Time for creating 100000 Clubs: " + stopwatch.ElapsedMilliseconds);
+
+            // Finds
+            var allClubs = clubsCollection.Find(_ => true).ToList();
+            Console.WriteLine("All Clubs: " + allClubs.Count);
+
+            var filteredClubs = clubsCollection.Find(c => c.Name == "TC Eichgraben").ToList();
+            Console.WriteLine("Filtered Clubs: " + filteredClubs.Count);
+
+            var filteredAndProjectedClubs = clubsCollection
+                .Find(c => c.Name == "TC Eichgraben")
+                .Project(c => new { c.Name, c.SocialHub })
+                .ToList();
+            Console.WriteLine("Filtered and projected Clubs: " + filteredAndProjectedClubs.Count);
+
+            var filteredAndSortedClubs = clubsCollection
+                .Find(c => c.Name == "TC Eichgraben")
+                .SortBy(c => c.Name)
+                .Project(c => new { c.Name })
+                .ToList();
+            Console.WriteLine("Filtered and sorted Clubs: " + filteredAndSortedClubs.Count);
+
+            // Update
+            int clubIdToUpdate = 1;
+
+            var filter1 = Builders<Club>.Filter.Eq(c => c.Name, "TC Eichgraben");
+            var update = Builders<Club>.Update
+                .Set(c => c.Name, "Neuer Clubname")
+                .Set(c => c.Address, "Neue Adresse");
+
+            clubsCollection.UpdateOne(filter1, update);
+
+            // Delete
+            var clubIdToDelete = clubsCollection.Find(_ => true).FirstOrDefault().Id;
+
+            var deleteFilter = Builders<Club>.Filter.Eq(c => c.Id, clubIdToDelete);
+            clubsCollection.DeleteOne(deleteFilter);
 
             return database;
         }
