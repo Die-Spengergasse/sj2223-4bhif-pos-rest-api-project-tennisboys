@@ -98,7 +98,7 @@ async function getBenchmarkDataMongo() {
             return tableBody;
         }
 
-        var sqlDiv = document.getElementById("sql");
+        var sqlDiv = document.getElementById("mongo");
 
         // Append a table for each court to the HTML body
         for (var i = 0; i < myData.Courts.length; i++) {
