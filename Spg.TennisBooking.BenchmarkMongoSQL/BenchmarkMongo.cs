@@ -199,6 +199,12 @@ namespace Spg.TennisBooking.BenchmarkMongoSQL
             //    courtRequestDto.Courts.Add(courtDto);
             //}
 
+            List<Reservation> reservationss = reservationsCollection.Find(_ => true).ToList();
+            foreach (var reservation in reservationss)
+            {
+                Console.WriteLine("Reservation: " + reservation.CourtNavigation.Id);
+            }
+
             foreach (Court court in club.Courts)
             {
                 CourtDto courtDto = new();
