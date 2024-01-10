@@ -402,7 +402,7 @@ namespace Spg.TennisBooking.BenchmarkMongoSQL
             clubsCollection.UpdateOne(filter1, update);
 
             // Delete
-            var clubIdToDelete = clubsCollection.Find(_ => true).FirstOrDefault().Id;
+            var clubIdToDelete = clubsCollection.Find(_ => _.Link != "tceichgraben").FirstOrDefault().Id;
 
             var deleteFilter = Builders<Club>.Filter.Eq(c => c.Id, clubIdToDelete);
             clubsCollection.DeleteOne(deleteFilter);
