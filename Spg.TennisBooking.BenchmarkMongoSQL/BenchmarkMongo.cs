@@ -28,8 +28,8 @@ namespace Spg.TennisBooking.BenchmarkMongoSQL
             var mongoDB = GetContext();
 
             //streams
-            bool streams = true;
-
+            bool streams = false;
+            
             if (streams)
             {
                 Task.Run(async () =>
@@ -82,9 +82,9 @@ namespace Spg.TennisBooking.BenchmarkMongoSQL
             // MongoDB doesn't have a direct equivalent to 'EnsureDeleted'. You'll need to drop each collection manually or drop the whole database.
             if (!streams)
             {
-                mongoDB.DropCollection("Clubs");
-                mongoDB.DropCollection("Users");
-                mongoDB.DropCollection("Reservations");
+                //mongoDB.DropCollection("Clubs");
+                //mongoDB.DropCollection("Users");
+                //mongoDB.DropCollection("Reservations");
             }
 
             return new OkObjectResult(JsonSerializer.Serialize(courtRequestDto));
@@ -256,7 +256,7 @@ namespace Spg.TennisBooking.BenchmarkMongoSQL
             var clubsCollection = database.GetCollection<Club>("Clubs");
 
             var options = new CreateIndexOptions { Unique = true };
-            clubsCollection.Indexes.CreateOne("{ Link : 1 }", options);
+            //clubsCollection.Indexes.CreateOne("{ Link : 1 }", options);
 
             var usersCollection = database.GetCollection<User>("Users");
             var reservationsCollection = database.GetCollection<Reservation>("Reservations");
@@ -334,7 +334,7 @@ namespace Spg.TennisBooking.BenchmarkMongoSQL
             for (int i = 0; i < 1000; i++)
             {
                 Club club2 = CreateClub();
-                clubsCollection.InsertOne(club1);
+                clubsCollection.InsertOne(club2);
             }
 
             stopwatch.Stop();
